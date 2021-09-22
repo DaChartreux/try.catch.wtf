@@ -5,6 +5,7 @@ import Document, {
   Main,
   NextScript,
 } from "next/document";
+import { ServerStyleSheet } from "styled-components";
 
 const initialTheme = `
 !function() {
@@ -16,21 +17,34 @@ const initialTheme = `
     return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
   }
   const theme = getTheme();
-  document.documentElement.classList.remove(
-    theme === "light" ? "dark" : "light"
-  );
-  document.documentElement.classList.add(theme);
+  document.documentElement.dataset.theme = theme;
 }()`;
 
 export default class MyDocument extends Document {
   static async getInitialProps(ctx: DocumentContext) {
-    const initialProps = await Document.getInitialProps(ctx);
-    return { ...initialProps };
+    const sheet = new ServerStyleSheet();
+    const originalRenderPage = ctx.renderPage;
+
+    try {
+      ctx.renderPage = () =>
+        originalRenderPage({
+          enhanceApp: function (App) {
+            return function enhance(props) {
+              return sheet.collectStyles(<App {...props} />);
+            };
+          },
+        });
+
+      const initialProps = await Document.getInitialProps(ctx);
+      return { ...initialProps };
+    } finally {
+      sheet.seal();
+    }
   }
 
   render() {
     return (
-      <Html className="duration-200 ease-in-out">
+      <Html>
         <Head>
           <link rel="preconnect" href="https://fonts.googleapis.com" />
           <link

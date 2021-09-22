@@ -1,8 +1,7 @@
 import React from "react";
+import styled from "styled-components";
 
-import { classNames } from "@lib/classNames";
-
-type ButtonStyleProps = {
+type ButtonStyledProps = {
   bgColor: string;
   hoverBgColor: string;
   activeBgColor: string;
@@ -14,28 +13,20 @@ type ButtonProps = {
   onClick: () => void;
 };
 
-const Button = ({
-  children,
-  onClick,
-  bgColor,
-  hoverBgColor,
-  activeBgColor,
-  fgColor,
-}: ButtonProps & ButtonStyleProps) => {
-  return (
-    <button
-      onClick={onClick}
-      className={classNames(
-        bgColor,
-        hoverBgColor,
-        activeBgColor,
-        fgColor,
-        "p-2 rounded-md duration-200 ease-in-out"
-      )}
-    >
-      {children}
-    </button>
-  );
-};
+const Button = styled.button<ButtonStyledProps>`
+  padding: 0.75rem;
+  border-radius: 0.375rem;
+  background-color: ${(props) => props.bgColor};
+  color: ${(props) => props.fgColor};
+  transition: all 200ms ease-in-out;
+
+  &:hover {
+    background-color: ${(props) => props.hoverBgColor};
+  }
+
+  &:active {
+    background-color: ${(props) => props.activeBgColor};
+  }
+`;
 
 export default Button;

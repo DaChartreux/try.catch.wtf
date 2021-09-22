@@ -1,5 +1,9 @@
-import type { AppProps } from "next/app";
+import React from "react";
 import dynamic from "next/dynamic";
+import type { AppProps } from "next/app";
+import { ThemeProvider } from "styled-components";
+
+import { theme } from "@styles/theme";
 
 import "../styles/globals.css";
 
@@ -11,7 +15,9 @@ const AppThemeProvider = dynamic(
 const App = ({ Component, pageProps }: AppProps) => {
   return (
     <AppThemeProvider>
-      <Component {...pageProps} />
+      <ThemeProvider theme={theme}>
+        <Component {...pageProps} />
+      </ThemeProvider>
     </AppThemeProvider>
   );
 };
