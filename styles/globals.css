@@ -1,25 +1,22 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
 html,
 body {
   padding: 0;
   margin: 0;
-  font-family: 'Roboto Mono';
+  font-family: "Roboto Mono";
 }
 
-html.light {
+:root {
   --color-bg-primary: #ffffff;
   color-scheme: light;
 }
 
-html.dark {
+[data-theme="dark"] {
   --color-bg-primary: #000000;
   color-scheme: dark;
 }
 
 * {
+  border: 0;
   box-sizing: border-box;
 }
 
@@ -27,4 +24,15 @@ html {
   padding: 0;
   margin: 0;
   background: var(--color-bg-primary);
+}
+
+::-webkit-scrollbar {
+  width: 0.5rem;
+  background-color: #27272a;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 0.5rem;
+  background-color: #ff006a;
+  border: 2px solid #27272a;
 }

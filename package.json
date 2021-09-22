@@ -13,10 +13,12 @@
     "@heroicons/react": "^1.0.4",
     "next": "11.1.2",
     "react": "17.0.2",
-    "react-dom": "17.0.2"
+    "react-dom": "17.0.2",
+    "styled-components": "^5.3.1"
   },
   "devDependencies": {
     "@types/react": "17.0.21",
+    "@types/styled-components": "^5.1.14",
     "autoprefixer": "^10.3.4",
     "classnames": "^2.3.1",
     "eslint": "7.32.0",
