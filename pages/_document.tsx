@@ -8,7 +8,7 @@ import Document, {
 import { ServerStyleSheet } from "styled-components";
 
 const initialTheme = `
-!function() {
+!(function() {
   function getTheme() {
     const theme = window.localStorage.getItem('__APP_THEME__');
     if (theme) {
@@ -18,7 +18,7 @@ const initialTheme = `
   }
   const theme = getTheme();
   document.documentElement.dataset.theme = theme;
-}()`;
+}())`;
 
 export default class MyDocument extends Document {
   static async getInitialProps(ctx: DocumentContext) {
@@ -53,7 +53,7 @@ export default class MyDocument extends Document {
             crossOrigin="crossorigin"
           />
           <link
-            href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;600;700&display=swap"
+            href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;700&display=swap"
             rel="stylesheet"
           />
         </Head>
