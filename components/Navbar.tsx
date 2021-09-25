@@ -1,12 +1,12 @@
 import React from "react";
 import Link from "next/link";
-import Button from "@components/Button";
 import MoonIcon from "@components/icons/MoonIcon";
 import SunIcon from "@components/icons/SunIcon";
 import { useAppTheme } from "@components/ui/AppThemeProvider";
 import { useAppThemeValue } from "@hooks/useAppThemeValue";
 import styled from "styled-components";
 import Spacer from "@components/Spacer";
+import ButtonIcon from "@components/ButtonIcon";
 
 type NavContainerStyles = {
   bgColor: string;
@@ -38,7 +38,7 @@ const NavStyled = styled.nav`
 
 const HomeLinkStyled = styled.div`
   font-size: 1.5rem;
-  font-weight: 800;
+  font-weight: 600;
   position: relative;
   height: fit-content;
 
@@ -53,11 +53,13 @@ const HomeLinkStyled = styled.div`
   }
 `;
 
-const LinkStyled = styled.div`
+const LinkStyled = styled.a`
   font-weight: 600;
   position: relative;
   height: fit-content;
   margin-inline-start: 1rem;
+  text-decoration: none;
+  color: red;
 `;
 
 const Navbar = () => {
@@ -77,20 +79,23 @@ const Navbar = () => {
             <HomeLinkStyled>Amit P</HomeLinkStyled>
           </Link>
           <NavStyled>
-            <Button
+            <ButtonIcon
               onClick={changeTheme}
-              bgColor={"transparent"}
-              hoverBgColor={useAppThemeValue("#F5F5F5", "#262626")}
-              activeBgColor={"transparent"}
-              fgColor={useAppThemeValue("#000000", "#ffffff")}
+              bgColor="transparent"
+              bgHoverColor="transparent"
+              bgActiveColor="transparent"
+              fgColor="transparent"
+              fgSvgColor={useAppThemeValue("#262626", "#F5F5F5")}
+              fgHoverSvgColor={useAppThemeValue("#404040", "#E5E5E5")}
+              fgActiveSvgColor={useAppThemeValue("#525252", "#D4D4D4")}
             >
               {useAppThemeValue(<SunIcon />, <MoonIcon />)}
-            </Button>
+            </ButtonIcon>
             <Link href="/" passHref>
-              <LinkStyled>Amit P</LinkStyled>
+              <LinkStyled>Blog</LinkStyled>
             </Link>
             <Link href="/" passHref>
-              <LinkStyled>Amit P</LinkStyled>
+              <LinkStyled>About</LinkStyled>
             </Link>
           </NavStyled>
         </NavInnerContainer>
