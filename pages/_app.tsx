@@ -5,7 +5,7 @@ import { ThemeProvider } from "styled-components";
 
 import { theme } from "@styles/theme";
 
-import "../styles/globals.css";
+import "@styles/globals.css";
 
 const AppThemeProvider = dynamic(
   () => import("@components/ui/AppThemeProvider"),

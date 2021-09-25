@@ -4,9 +4,7 @@ type AppTheme = "light" | "dark";
 
 export const useAppThemeProvider = () => {
   const [appTheme, setAppTheme] = React.useState<AppTheme>(
-    (document.documentElement.getAttribute("class")?.split(" ")[-1] as
-      | AppTheme
-      | undefined) ?? "light"
+    (document.documentElement.dataset.theme as AppTheme | undefined) ?? "light"
   );
 
   const changeTheme = () => {
