@@ -14,15 +14,23 @@ type RecentPosts = {
 
 type PostPreviewStyledProps = {
   fgColor: ColorShade;
+  bgColor: ColorShade;
   fgHoverColor: ColorShade;
   descriptionColor: ColorShade;
 };
 
 const PostPreviewStyled = styled.div<PostPreviewStyledProps>`
-  margin-bottom: 3.5rem;
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  margin-bottom: 1.5rem;
+  border-width: 2px;
+  border-style: solid;
 
-  ${({ theme: { colors }, fgColor, fgHoverColor, descriptionColor }) =>
+  ${({ theme: { colors }, fgColor, bgColor, fgHoverColor, descriptionColor }) =>
     css`
+      background-color: ${colors[bgColor]}22;
+      border-color: ${colors[bgColor]}66;
+
       h1 {
         color: ${colors[fgColor]};
       }
@@ -41,14 +49,15 @@ const PostPreviewStyled = styled.div<PostPreviewStyledProps>`
 
 const PostPreview = ({ title, description }: RecentPosts) => (
   <PostPreviewStyled
+    bgColor={useAppThemeValue<ColorShade>("gray.100", "gray.900")}
     fgColor={useAppThemeValue<ColorShade>("blue.600", "blue.100")}
     fgHoverColor={useAppThemeValue<ColorShade>("blue.800", "blue.400")}
     descriptionColor={useAppThemeValue<ColorShade>("gray.900", "gray.100")}
   >
     <Heading
       fgColor={useAppThemeValue<ColorShade>("blue.600", "blue.200")}
-      fontWeight={500}
-      fontSize={"1.2rem"}
+      fontWeight={600}
+      fontSize={"1.375rem"}
     >
       {title}
     </Heading>

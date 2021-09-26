@@ -103,11 +103,17 @@ const Navbar = () => {
       <NavInnerContainer>
         <Link href="/" passHref>
           <HomeLinkStyled
-            fgColor={useAppThemeValue<ColorShade>("gray.800", "gray.100")}
-            fgHoverColor={useAppThemeValue<ColorShade>("gray.700", "gray.300")}
-            fgActiveColor={useAppThemeValue<ColorShade>("gray.600", "gray.400")}
+            fgColor={useAppThemeValue<ColorShade>("yellow.400", "yellow.300")}
+            fgHoverColor={useAppThemeValue<ColorShade>(
+              "yellow.500",
+              "yellow.400"
+            )}
+            fgActiveColor={useAppThemeValue<ColorShade>(
+              "yellow.600",
+              "yellow.500"
+            )}
           >
-            Test
+            Amit P
           </HomeLinkStyled>
         </Link>
         <NavStyled>

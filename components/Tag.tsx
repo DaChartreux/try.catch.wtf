@@ -4,7 +4,7 @@ import styled, { css } from "styled-components";
 import { ColorShade } from "@typings/styled";
 
 type TagStyledProps = {
-  color: ColorShade;
+  bgColor: ColorShade;
   fgColor: string;
 };
 
@@ -14,7 +14,7 @@ type TagProps = {
 };
 
 const TagStyle = styled.a<TagStyledProps>`
-  font-size: 1rem;
+  font-size: 0.75rem;
   font-weight: 500;
   text-decoration: none;
   padding: 0.25rem 0.5rem;
@@ -33,24 +33,24 @@ const TagStyle = styled.a<TagStyledProps>`
     border-width: 2px;
   }
 
-  ${({ theme: { colors }, color }) => css`
-    color: ${colors[color]};
+  ${({ theme: { colors }, bgColor }) => css`
+    color: ${colors[bgColor]};
 
     div {
-      border-color: ${colors[color]};
-      background-color: ${colors[color]}33;
+      border-color: ${colors[bgColor]};
+      background-color: ${colors[bgColor]}33;
     }
 
     &:hover {
       div {
         transform: scale(1.05);
-        background-color: ${colors[color]}55;
+        background-color: ${colors[bgColor]}55;
       }
     }
 
     &:active {
       div {
-        background-color: ${colors[color]}66;
+        background-color: ${colors[bgColor]}66;
       }
     }
   `};
