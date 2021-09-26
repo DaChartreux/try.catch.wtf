@@ -1,3 +1,4 @@
+import { ColorShade } from "@typings/styled";
 import styled from "styled-components";
 
 type ButtonIconStyledProps = {
@@ -5,9 +6,9 @@ type ButtonIconStyledProps = {
   bgHoverColor: string;
   bgActiveColor: string;
   fgColor: string;
-  fgSvgColor: string;
-  fgHoverSvgColor: string;
-  fgActiveSvgColor: string;
+  fgSvgColor: ColorShade;
+  fgHoverSvgColor: ColorShade;
+  fgActiveSvgColor: ColorShade;
 };
 
 const ButtonIcon = styled.button<ButtonIconStyledProps>`
@@ -17,22 +18,25 @@ const ButtonIcon = styled.button<ButtonIconStyledProps>`
   color: ${(props) => props.fgColor};
   transition: all 200ms ease-in-out;
   outline: none;
+  cursor: pointer;
 
   & {
     svg {
-      color: ${({ fgSvgColor }) => fgSvgColor};
+      color: ${({ theme: { colors }, fgSvgColor }) => colors[fgSvgColor]};
     }
   }
 
   &:hover {
     svg {
-      color: ${({ fgHoverSvgColor }) => fgHoverSvgColor};
+      color: ${({ theme: { colors }, fgHoverSvgColor }) =>
+        colors[fgHoverSvgColor]};
     }
   }
 
   &:active {
     svg {
-      color: ${({ fgActiveSvgColor }) => fgActiveSvgColor};
+      color: ${({ theme: { colors }, fgActiveSvgColor }) =>
+        colors[fgActiveSvgColor]};
     }
   }
 `;
