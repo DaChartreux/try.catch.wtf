@@ -1,22 +1,24 @@
 import React from "react";
 import Link from "next/link";
-import Button from "@components/Button";
+import styled, { css } from "styled-components";
+
 import MoonIcon from "@components/icons/MoonIcon";
 import SunIcon from "@components/icons/SunIcon";
+import ButtonIcon from "@components/ButtonIcon";
 import { useAppTheme } from "@components/ui/AppThemeProvider";
 import { useAppThemeValue } from "@hooks/useAppThemeValue";
-import styled from "styled-components";
-import Spacer from "@components/Spacer";
+import { ColorShade } from "@typings/styled";
 
 type NavContainerStyles = {
-  bgColor: string;
+  bgColor: ColorShade;
 };
 
 const NavContainer = styled.div<NavContainerStyles>`
   position: sticky;
   top: 0;
+  z-index: 2;
   backdrop-filter: saturate(180%) blur(20px);
-  background-color: ${(props) => props.bgColor};
+  background-color: ${({ theme: { colors }, bgColor }) => colors[bgColor]}aa;
 `;
 
 const NavInnerContainer = styled.div`
@@ -36,66 +38,136 @@ const NavStyled = styled.nav`
   align-items: center;
 `;
 
-const HomeLinkStyled = styled.div`
+const HomeLinkStyled = styled.div<LinkStyledProps>`
   font-size: 1.5rem;
-  font-weight: 800;
+  font-weight: 600;
   position: relative;
   height: fit-content;
+  cursor: pointer;
 
   &::after {
     content: "";
-    background-color: #ff006a;
+    background-color: ${({ theme: { colors } }) => colors["pink.500"]};
     height: 0.25rem;
     width: 2rem;
     position: absolute;
     bottom: -0.25rem;
     left: 0;
   }
+
+  ${({ theme: { colors }, fgColor, fgHoverColor, fgActiveColor }) => css`
+    color: ${colors[fgColor]};
+
+    &:hover {
+      color: ${colors[fgHoverColor]};
+    }
+
+    &:active {
+      color: ${colors[fgActiveColor]};
+    }
+  `}
 `;
 
-const LinkStyled = styled.div`
+type LinkStyledProps = {
+  fgColor: ColorShade;
+  fgHoverColor: ColorShade;
+  fgActiveColor: ColorShade;
+};
+
+const LinkStyled = styled.a<LinkStyledProps>`
   font-weight: 600;
   position: relative;
   height: fit-content;
   margin-inline-start: 1rem;
+  text-decoration: none;
+  cursor: pointer;
+
+  ${({ theme: { colors }, fgColor, fgHoverColor, fgActiveColor }) => css`
+    color: ${colors[fgColor]};
+
+    &:hover {
+      color: ${colors[fgHoverColor]};
+    }
+
+    &:active {
+      color: ${colors[fgActiveColor]};
+    }
+  `}
 `;
 
 const Navbar = () => {
   const { changeTheme } = useAppTheme();
 
   return (
-    <>
-      <Spacer height="3rem" width="100%" />
-      <NavContainer
-        bgColor={useAppThemeValue(
-          "rgba(255, 255, 255, 0.6)",
-          "rgba(0, 0, 0, 0.6)"
-        )}
-      >
-        <NavInnerContainer>
+    <NavContainer bgColor={useAppThemeValue<ColorShade>("white", "black")}>
+      <NavInnerContainer>
+        <Link href="/" passHref>
+          <HomeLinkStyled
+            fgColor={useAppThemeValue<ColorShade>("yellow.400", "yellow.300")}
+            fgHoverColor={useAppThemeValue<ColorShade>(
+              "yellow.500",
+              "yellow.400"
+            )}
+            fgActiveColor={useAppThemeValue<ColorShade>(
+              "yellow.600",
+              "yellow.500"
+            )}
+          >
+            Amit P
+          </HomeLinkStyled>
+        </Link>
+        <NavStyled>
+          <ButtonIcon
+            onClick={changeTheme}
+            bgColor="transparent"
+            bgHoverColor="transparent"
+            bgActiveColor="transparent"
+            fgColor="transparent"
+            fgSvgColor={useAppThemeValue<ColorShade>("gray.800", "gray.100")}
+            fgHoverSvgColor={useAppThemeValue<ColorShade>(
+              "gray.700",
+              "gray.300"
+            )}
+            fgActiveSvgColor={useAppThemeValue<ColorShade>(
+              "gray.600",
+              "gray.400"
+            )}
+          >
+            {useAppThemeValue(<SunIcon />, <MoonIcon />)}
+          </ButtonIcon>
           <Link href="/" passHref>
-            <HomeLinkStyled>Amit P</HomeLinkStyled>
-          </Link>
-          <NavStyled>
-            <Button
-              onClick={changeTheme}
-              bgColor={"transparent"}
-              hoverBgColor={useAppThemeValue("#F5F5F5", "#262626")}
-              activeBgColor={"transparent"}
-              fgColor={useAppThemeValue("#000000", "#ffffff")}
+            <LinkStyled
+              fgColor={useAppThemeValue<ColorShade>("gray.800", "gray.100")}
+              fgHoverColor={useAppThemeValue<ColorShade>(
+                "gray.700",
+                "gray.300"
+              )}
+              fgActiveColor={useAppThemeValue<ColorShade>(
+                "gray.600",
+                "gray.400"
+              )}
             >
-              {useAppThemeValue(<SunIcon />, <MoonIcon />)}
-            </Button>
-            <Link href="/" passHref>
-              <LinkStyled>Amit P</LinkStyled>
-            </Link>
-            <Link href="/" passHref>
-              <LinkStyled>Amit P</LinkStyled>
-            </Link>
-          </NavStyled>
-        </NavInnerContainer>
-      </NavContainer>
-    </>
+              Blog
+            </LinkStyled>
+          </Link>
+          <Link href="/" passHref>
+            <LinkStyled
+              fgColor={useAppThemeValue<ColorShade>("gray.800", "gray.100")}
+              fgHoverColor={useAppThemeValue<ColorShade>(
+                "gray.700",
+                "gray.300"
+              )}
+              fgActiveColor={useAppThemeValue<ColorShade>(
+                "gray.600",
+                "gray.400"
+              )}
+            >
+              About
+            </LinkStyled>
+          </Link>
+        </NavStyled>
+      </NavInnerContainer>
+    </NavContainer>
   );
 };
 

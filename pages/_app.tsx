@@ -1,22 +1,34 @@
 import React from "react";
+import type { ReactElement, ReactNode } from "react";
 import dynamic from "next/dynamic";
+import type { NextPage } from "next";
 import type { AppProps } from "next/app";
 import { ThemeProvider } from "styled-components";
 
 import { theme } from "@styles/theme";
 
-import "../styles/globals.css";
+import "@styles/globals.css";
+
+type NextPageWithLayout = NextPage & {
+  getLayout?: (page: ReactElement) => ReactNode;
+};
+
+type AppPropsWithLayout = AppProps & {
+  Component: NextPageWithLayout;
+};
 
 const AppThemeProvider = dynamic(
   () => import("@components/ui/AppThemeProvider"),
   { ssr: false }
 );
 
-const App = ({ Component, pageProps }: AppProps) => {
+const App = ({ Component, pageProps }: AppPropsWithLayout) => {
+  const getLayout = Component.getLayout ?? ((page) => page);
+
   return (
     <AppThemeProvider>
       <ThemeProvider theme={theme}>
-        <Component {...pageProps} />
+        {getLayout(<Component {...pageProps} />)}
       </ThemeProvider>
     </AppThemeProvider>
   );
