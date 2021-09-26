@@ -23,6 +23,7 @@ body {
 
 html {
   background: var(--color-bg-primary);
+  overflow-y: scroll;
 }
 
 ::-webkit-scrollbar {
