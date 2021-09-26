@@ -1,102 +1,123 @@
-import React from "react";
+import React, { ReactNode } from "react";
+import type { ReactElement } from "react";
 import type { NextPage } from "next";
 
-import Button from "@components/Button";
-import Example from "@components/Navbar";
-import { useAppTheme } from "@components/ui/AppThemeProvider";
+import Navbar from "@components/Navbar";
+import Layout from "@components/Layout";
+import Categories from "@components/sections/Categories";
+import RecentPosts from "@components/sections/Recent";
+import styled from "styled-components";
 
-const Home: NextPage = () => {
-  const { changeTheme } = useAppTheme();
+type NextPageWithLayout = NextPage & {
+  getLayout?: (page: ReactElement) => ReactNode;
+};
 
+const LayoutWrapper = styled(Layout)`
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  grid-template-rows: auto 1fr;
+  grid-template-areas:
+    "recent categories"
+    "recent test";
+  gap: 64px 96px;
+`;
+
+const CategoriesWrapper = styled.div`
+  grid-area: categories;
+`;
+
+const RecentPostsWrapper = styled.div`
+  grid-area: recent;
+`;
+
+const Index: NextPageWithLayout = () => {
   return (
     <>
-      <Example />
-      <Button
-        bgColor="#8B5CF6"
-        hoverBgColor="#7C3AED"
-        activeBgColor="#6D28D9"
-        fgColor="#ffffff"
-        onClick={changeTheme}
-      >
-        Text
-      </Button>
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat,
-      cupiditate minima modi sit nostrum veritatis quam illo inventore corrupti
-      doloremque officia tempore odit recusandae unde, itaque molestias dicta
-      quo dignissimos maiores et ad dolore similique atque! Explicabo illo sint
-      voluptatem laboriosam aut reiciendis iste ipsa praesentium fugit
-      necessitatibus, alias vel dignissimos. At exercitationem omnis harum
-      molestiae, ducimus minima laborum dolorem quasi id blanditiis laboriosam
-      eveniet perferendis fuga eum veritatis cumque accusantium itaque accusamus
-      debitis rerum magni ad quibusdam! Nobis fuga tempore quae accusamus saepe,
-      omnis consequuntur quisquam error nulla aliquam tempora rem blanditiis.
-      Voluptatum dicta sed beatae aut dignissimos officia expedita quo modi,
-      omnis maiores eum ab, laborum neque ullam? Voluptatem sed, earum dolor
-      autem nesciunt eos nostrum temporibus repellendus facilis ullam vel quidem
-      esse, hic quaerat facere blanditiis beatae magnam id consequuntur, saepe
-      assumenda voluptate sequi dolore? Unde harum dolore amet aspernatur
-      aperiam, quia quod totam deserunt rerum vel eum ut eveniet sit sunt non,
-      cupiditate cumque modi! Magnam nihil, veritatis incidunt soluta ipsam,
-      ratione ea voluptatibus, impedit expedita beatae excepturi? Nam vitae
-      minus possimus similique fugit tempora odio lLorem ipsum dolor sit amet consectetur adipisicing elit. Placeat,
-      cupiditate minima modi sit nostrum veritatis quam illo inventore corrupti
-      doloremque officia tempore odit recusandae unde, itaque molestias dicta
-      quo dignissimos maiores et ad dolore similique atque! Explicabo illo sint
-      voluptatem laboriosam aut reiciendis iste ipsa praesentium fugit
-      necessitatibus, alias vel dignissimos. At exercitationem omnis harum
-      molestiae, ducimus minima laborum dolorem quasi id blanditiis laboriosam
-      eveniet perferendis fuga eum veritatis cumque accusantium itaque accusamus
-      debitis rerum magni ad quibusdam! Nobis fuga tempore quae accusamus saepe,
-      omnis consequuntur quisquam error nulla aliquam tempora rem blanditiis.
-      Voluptatum dicta sed beatae aut dignissimos officia expedita quo modi,
-      omnis maiores eum ab, laborum neque ullam? Voluptatem sed, earum dolor
-      autem nesciunt eos nostrum temporibus repellendus facilis ullam vel quidem
-      esse, hic quaerat facere blanditiis beatae magnam id consequuntur, saepe
-      assumenda voluptate sequi dolore? Unde harum dolore amet aspernatur
-      aperiam, quia quod totam deserunt rerum vel eum ut eveniet sit sunt non,
-      cupiditate cumque modi! Magnam nihil, veritatis incidunt soluta ipsam,
-      ratione ea voluptatibus, impedit expedita beatae excepturi? Nam vitae
-      minus possimus similique fugit tempora odio lLorem ipsum dolor sit amet consectetur adipisicing elit. Placeat,
-      cupiditate minima modi sit nostrum veritatis quam illo inventore corrupti
-      doloremque officia tempore odit recusandae unde, itaque molestias dicta
-      quo dignissimos maiores et ad dolore similique atque! Explicabo illo sint
-      voluptatem laboriosam aut reiciendis iste ipsa praesentium fugit
-      necessitatibus, alias vel dignissimos. At exercitationem omnis harum
-      molestiae, ducimus minima laborum dolorem quasi id blanditiis laboriosam
-      eveniet perferendis fuga eum veritatis cumque accusantium itaque accusamus
-      debitis rerum magni ad quibusdam! Nobis fuga tempore quae accusamus saepe,
-      omnis consequuntur quisquam error nulla aliquam tempora rem blanditiis.
-      Voluptatum dicta sed beatae aut dignissimos officia expedita quo modi,
-      omnis maiores eum ab, laborum neque ullam? Voluptatem sed, earum dolor
-      autem nesciunt eos nostrum temporibus repellendus facilis ullam vel quidem
-      esse, hic quaerat facere blanditiis beatae magnam id consequuntur, saepe
-      assumenda voluptate sequi dolore? Unde harum dolore amet aspernatur
-      aperiam, quia quod totam deserunt rerum vel eum ut eveniet sit sunt non,
-      cupiditate cumque modi! Magnam nihil, veritatis incidunt soluta ipsam,
-      ratione ea voluptatibus, impedit expedita beatae excepturi? Nam vitae
-      minus possimus similique fugit tempora odio lLorem ipsum dolor sit amet consectetur adipisicing elit. Placeat,
-      cupiditate minima modi sit nostrum veritatis quam illo inventore corrupti
-      doloremque officia tempore odit recusandae unde, itaque molestias dicta
-      quo dignissimos maiores et ad dolore similique atque! Explicabo illo sint
-      voluptatem laboriosam aut reiciendis iste ipsa praesentium fugit
-      necessitatibus, alias vel dignissimos. At exercitationem omnis harum
-      molestiae, ducimus minima laborum dolorem quasi id blanditiis laboriosam
-      eveniet perferendis fuga eum veritatis cumque accusantium itaque accusamus
-      debitis rerum magni ad quibusdam! Nobis fuga tempore quae accusamus saepe,
-      omnis consequuntur quisquam error nulla aliquam tempora rem blanditiis.
-      Voluptatum dicta sed beatae aut dignissimos officia expedita quo modi,
-      omnis maiores eum ab, laborum neque ullam? Voluptatem sed, earum dolor
-      autem nesciunt eos nostrum temporibus repellendus facilis ullam vel quidem
-      esse, hic quaerat facere blanditiis beatae magnam id consequuntur, saepe
-      assumenda voluptate sequi dolore? Unde harum dolore amet aspernatur
-      aperiam, quia quod totam deserunt rerum vel eum ut eveniet sit sunt non,
-      cupiditate cumque modi! Magnam nihil, veritatis incidunt soluta ipsam,
-      ratione ea voluptatibus, impedit expedita beatae excepturi? Nam vitae
-      minus possimus similique fugit tempora odio laudantium sit quae deserunt
-      voluptate saepe, non, voluptatibus, dolores quo quaerat ab atque.
-      Blanditiis totam illum fugiat minus sit eos. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis quasi magni id sequi deserunt qui sapiente reiciendis corrupti sint minus eius aut perspiciatis porro nobis dicta perferendis, blanditiis fuga excepturi quo culpa voluptatum laboriosam quisquam in autem. Asperiores et voluptatum porro quisquam sed, id voluptas, vel rem obcaecati minus sunt neque nesciunt nulla iusto! Modi, sapiente beatae blanditiis pariatur excepturi fuga. Aut ex, fugit unde temporibus facere deleniti suscipit nisi perspiciatis maiores ipsam laboriosam. Obcaecati reprehenderit unde sapiente fugiat at harum asperiores nostrum tempora vero. Facere a libero, culpa ipsam ipsum autem laboriosam, voluptas non saepe eligendi commodi laborum quisquam nihil dolores optio nobis? Ratione, similique dolores tenetur voluptates aliquid omnis beatae officia eius aperiam accusamus? Dolores est, officiis autem sint accusamus ab corrupti animi ex temporibus fuga rerum repellat debitis in dicta ullam? Nobis voluptatem quaerat excepturi nemo, dicta molestiae earum, blanditiis quod commodi velit asperiores nam magni autem illum qui eligendi harum possimus magnam vel unde fuga. Obcaecati, itaque qui! Molestiae saepe laboriosam iure quos dolorem quo minus quidem commodi facilis, eum delectus tempore, necessitatibus omnis quod dolores aperiam doloribus soluta fuga officiis? Porro ratione pariatur eos, asperiores nobis at quae voluptatum qui, voluptate nemo quo quas nisi. Illo ad assumenda voluptatem voluptatum dolorem placeat est nisi nobis nihil rerum corporis esse illum consequatur, incidunt tempora, aut et, nemo molestiae! Qui voluptatibus deserunt ducimus tenetur aspernatur cupiditate maxime neque voluptates? Ad odio consectetur quaerat odit beatae harum deserunt natus rerum. Quae sit ab harum quos architecto quaerat deleniti necessitatibus quibusdam! Tempore libero repellat eos accusamus, temporibus eius. Aliquid fugiat temporibus ad sint velit non neque error corporis, nobis voluptatibus impedit esse cupiditate nemo accusamus architecto commodi labore dignissimos, quo alias placeat sunt? Exercitationem aspernatur velit nemo, laborum commodi accusantium numquam eveniet, cum, expedita dolores fugit iusto tempore voluptatem consequatur sint alias. Dolores alias sunt maiores, ducimus iusto ullam eaque ut ipsam velit obcaecati qui impedit quis! Excepturi minus fuga hic nemo obcaecati blanditiis animi, a pariatur error est maiores dolor asperiores non veritatis molestias nesciunt, quos rerum consequatur sint rem ut? Nam impedit cum tenetur! Aperiam inventore ea vel ullam velit pariatur tempore voluptatum. Repellat, officia et incidunt quibusdam pariatur iste expedita optio fugiat nostrum illum rem maxime eveniet, libero dolorum odio animi culpa magni? Eligendi quasi facere aliquam molestias a possimus rem, ex blanditiis corrupti veniam, sint numquam eius quisquam quas impedit? Debitis fugiat saepe repudiandae quis voluptas sequi eligendi. Sunt quod voluptatibus dolor omnis dignissimos, alias ad. Suscipit voluptates explicabo corrupti iure fuga molestiae repellendus cumque magni in eos dolorem ut unde tempore officiis quas enim impedit nostrum modi, nemo ipsam, delectus ullam ad sed! Cumque inventore porro illum commodi adipisci? Magnam ab aut perferendis eaque alias accusantium ex amet tempora, nobis repudiandae consequatur distinctio minima, quo reiciendis expedita molestiae odio error culpa debitis. Explicabo ullam accusamus ipsum aspernatur. Placeat dolorem esse architecto est error dolorum velit facilis qui sapiente, nam eligendi sit ratione voluptatibus quos nobis quis vero fuga quam laudantium distinctio recusandae reprehenderit? Molestiae!
+      <CategoriesWrapper>
+        <Categories
+          categories={[
+            { id: 1, category: "ReactJS", slug: "test", color: "blue.300" },
+            { id: 2, category: "FFMPEG", slug: "test", color: "yellow.400" },
+            { id: 3, category: "TypeScript", slug: "test", color: "green.700" },
+            { id: 4, category: "Test", slug: "test", color: "pink.600" },
+            { id: 5, category: "Test", slug: "test", color: "blue.700" },
+            { id: 6, category: "Test", slug: "test", color: "green.300" },
+          ]}
+        />
+      </CategoriesWrapper>
+      <RecentPostsWrapper>
+        <RecentPosts
+          posts={[
+            {
+              id: 1,
+              categories: [],
+              title: "An Interactive Guide to Keyframe Animations",
+              slug: "An Interactive Guide to Keyframe Animations",
+              description:
+                "CSS keyframe animations are incredibly flexible and powerful, but they’re also a bit weird. In this deep-dive tutorial, we'll learn how CSS keyframes work from the ground up, and see how to use them to build high-quality animations.",
+            },
+            {
+              id: 1,
+              categories: [],
+              title: "An Interactive Guide to Keyframe Animations",
+              slug: "An Interactive Guide to Keyframe Animations",
+              description:
+                "CSS keyframe animations are incredibly flexible and powerful, but they’re also a bit weird. In this deep-dive tutorial, we'll learn how CSS keyframes work from the ground up, and see how to use them to build high-quality animations.",
+            },
+            {
+              id: 1,
+              categories: [],
+              title: "An Interactive Guide to Keyframe Animations",
+              slug: "An Interactive Guide to Keyframe Animations",
+              description:
+                "CSS keyframe animations are incredibly flexible and powerful, but they’re also a bit weird. In this deep-dive tutorial, we'll learn how CSS keyframes work from the ground up, and see how to use them to build high-quality animations.",
+            },
+            {
+              id: 1,
+              categories: [],
+              title: "An Interactive Guide to Keyframe Animations",
+              slug: "An Interactive Guide to Keyframe Animations",
+              description:
+                "CSS keyframe animations are incredibly flexible and powerful, but they’re also a bit weird. In this deep-dive tutorial, we'll learn how CSS keyframes work from the ground up, and see how to use them to build high-quality animations.",
+            },
+            {
+              id: 1,
+              categories: [],
+              title: "An Interactive Guide to Keyframe Animations",
+              slug: "An Interactive Guide to Keyframe Animations",
+              description:
+                "CSS keyframe animations are incredibly flexible and powerful, but they’re also a bit weird. In this deep-dive tutorial, we'll learn how CSS keyframes work from the ground up, and see how to use them to build high-quality animations.",
+            },
+            {
+              id: 1,
+              categories: [],
+              title: "An Interactive Guide to Keyframe Animations",
+              slug: "An Interactive Guide to Keyframe Animations",
+              description:
+                "CSS keyframe animations are incredibly flexible and powerful, but they’re also a bit weird. In this deep-dive tutorial, we'll learn how CSS keyframes work from the ground up, and see how to use them to build high-quality animations.",
+            },
+            {
+              id: 1,
+              categories: [],
+              title: "An Interactive Guide to Keyframe Animations",
+              slug: "An Interactive Guide to Keyframe Animations",
+              description:
+                "CSS keyframe animations are incredibly flexible and powerful, but they’re also a bit weird. In this deep-dive tutorial, we'll learn how CSS keyframes work from the ground up, and see how to use them to build high-quality animations.",
+            },
+          ]}
+        />
+      </RecentPostsWrapper>
     </>
   );
 };
 
-export default Home;
+Index.getLayout = (page: ReactElement) => {
+  return (
+    <>
+      <Navbar />
+      <LayoutWrapper>{page}</LayoutWrapper>
+    </>
+  );
+};
+
+export default Index;
