@@ -1,30 +1,39 @@
 import React, { ReactNode } from "react";
-import type { NextPage } from "next";
-import styled from "styled-components";
-
 import type { ReactElement } from "react";
+import type { NextPage } from "next";
 
 import Navbar from "@components/Navbar";
+import Layout from "@components/Layout";
 import Categories from "@components/sections/Categories";
 import RecentPosts from "@components/sections/Recent";
-
-const MainStyled = styled.main`
-  width: 100%;
-  max-width: 1100px;
-  margin-left: auto;
-  margin-right: auto;
-  padding-left: 32px;
-  padding-right: 32px;
-`;
+import styled from "styled-components";
 
 type NextPageWithLayout = NextPage & {
   getLayout?: (page: ReactElement) => ReactNode;
 };
 
+const LayoutWrapper = styled(Layout)`
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  grid-template-rows: auto 1fr;
+  grid-template-areas:
+    "recent categories"
+    "recent test";
+  gap: 64px 96px;
+`;
+
+const CategoriesWrapper = styled.div`
+  grid-area: categories;
+`;
+
+const RecentPostsWrapper = styled.div`
+  grid-area: recent;
+`;
+
 const Index: NextPageWithLayout = () => {
   return (
-    <MainStyled>
-      <div style={{ display: "block", width: "400px" }}>
+    <>
+      <CategoriesWrapper>
         <Categories
           categories={[
             { id: 1, category: "ReactJS", slug: "test", color: "blue.300" },
@@ -35,6 +44,8 @@ const Index: NextPageWithLayout = () => {
             { id: 6, category: "Test", slug: "test", color: "green.300" },
           ]}
         />
+      </CategoriesWrapper>
+      <RecentPostsWrapper>
         <RecentPosts
           posts={[
             {
@@ -61,10 +72,42 @@ const Index: NextPageWithLayout = () => {
               description:
                 "CSS keyframe animations are incredibly flexible and powerful, but they’re also a bit weird. In this deep-dive tutorial, we'll learn how CSS keyframes work from the ground up, and see how to use them to build high-quality animations.",
             },
+            {
+              id: 1,
+              categories: [],
+              title: "An Interactive Guide to Keyframe Animations",
+              slug: "An Interactive Guide to Keyframe Animations",
+              description:
+                "CSS keyframe animations are incredibly flexible and powerful, but they’re also a bit weird. In this deep-dive tutorial, we'll learn how CSS keyframes work from the ground up, and see how to use them to build high-quality animations.",
+            },
+            {
+              id: 1,
+              categories: [],
+              title: "An Interactive Guide to Keyframe Animations",
+              slug: "An Interactive Guide to Keyframe Animations",
+              description:
+                "CSS keyframe animations are incredibly flexible and powerful, but they’re also a bit weird. In this deep-dive tutorial, we'll learn how CSS keyframes work from the ground up, and see how to use them to build high-quality animations.",
+            },
+            {
+              id: 1,
+              categories: [],
+              title: "An Interactive Guide to Keyframe Animations",
+              slug: "An Interactive Guide to Keyframe Animations",
+              description:
+                "CSS keyframe animations are incredibly flexible and powerful, but they’re also a bit weird. In this deep-dive tutorial, we'll learn how CSS keyframes work from the ground up, and see how to use them to build high-quality animations.",
+            },
+            {
+              id: 1,
+              categories: [],
+              title: "An Interactive Guide to Keyframe Animations",
+              slug: "An Interactive Guide to Keyframe Animations",
+              description:
+                "CSS keyframe animations are incredibly flexible and powerful, but they’re also a bit weird. In this deep-dive tutorial, we'll learn how CSS keyframes work from the ground up, and see how to use them to build high-quality animations.",
+            },
           ]}
         />
-      </div>
-    </MainStyled>
+      </RecentPostsWrapper>
+    </>
   );
 };
 
@@ -72,7 +115,7 @@ Index.getLayout = (page: ReactElement) => {
   return (
     <>
       <Navbar />
-      {page}
+      <LayoutWrapper>{page}</LayoutWrapper>
     </>
   );
 };
