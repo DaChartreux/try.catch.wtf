@@ -4,9 +4,12 @@ type Color = "pink" | "blue" | "green" | "yellow" | "gray";
 
 type Shade = 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900;
 
-export type ColorShade = `${Color}.${Shade}`;
-
-type;
+export type ColorShade = keyof ({
+  white: string;
+  black: string;
+} & {
+  [C in `${Color}.${Shade}`]: string;
+});
 
 declare module "styled-components" {
   export interface DefaultTheme {
@@ -22,7 +25,7 @@ declare module "styled-components" {
       white: string;
       black: string;
     } & {
-      [C in ColorShade]: string;
+      [C in `${Color}.${Shade}`]: string;
     };
   }
 }
