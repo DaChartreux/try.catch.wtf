@@ -4,6 +4,7 @@ import Heading from "@components/Heading";
 import PostPreview from "@components/PostPreview";
 import { useAppThemeValue } from "@hooks/useAppThemeValue";
 import { ColorShade } from "@typings/styled";
+import styled, { css } from "styled-components";
 
 type RecentPostsProps = {
   posts: {
@@ -19,9 +20,8 @@ const RecentPosts = ({ posts }: RecentPostsProps) => (
   <>
     <Heading
       fgColor={useAppThemeValue<ColorShade>("pink.600", "pink.500")}
-      fgHoverColor={useAppThemeValue<ColorShade>("pink.600", "pink.500")}
       fontWeight={500}
-      fontSize={"1.2rem"}
+      fontSize={"1rem"}
     >
       RECENT
     </Heading>
