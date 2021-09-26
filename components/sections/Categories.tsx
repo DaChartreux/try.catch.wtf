@@ -15,14 +15,14 @@ type CategoriesProps = {
 
 const Categories = ({ categories }: CategoriesProps) => (
   <>
-    <Heading fgColor="pink.500" fontWeight={500} fontSize={"1.2rem"}>
+    <Heading fgColor="pink.500" fontWeight={500} fontSize={"1rem"}>
       CATEGORIES
     </Heading>
     {categories.map((category) => (
       <Tag
         href={category.slug}
         key={category.id}
-        color={category.color}
+        bgColor={category.color}
         fgColor="white"
       >
         {category.category}
