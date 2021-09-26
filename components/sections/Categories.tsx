@@ -1,36 +1,34 @@
-import Button from "@components/Button";
+import React from "react";
+
 import Heading from "@components/Heading";
 import Tag from "@components/Tag";
-import React from "react";
-import styled from "styled-components";
+import { ColorShade } from "@typings/styled";
 
 type CategoriesProps = {
   categories: {
+    id: number;
     category: string;
     slug: string;
+    color: ColorShade;
   }[];
 };
 
-const ButtonWrapper = styled(Button)`
-  margin: 0 0.5rem 0.5rem 0;
-  display: inline-block;
-  text-decoration: none;
-  color: ${({ theme }) => theme.colors.blue[200]};
-`;
-
-const Categories = ({ categories }: CategoriesProps) => {
-  return (
-    <>
-      <Heading fgColor={"#ff006a"} fontWeight={500} fontSize={"1.5rem"}>
-        CATEGORIES
-      </Heading>
-      {categories.map((category) => (
-        <Tag href={category.slug} key={1} color="pink.400" fgColor="white">
-          {category.category}
-        </Tag>
-      ))}
-    </>
-  );
-};
+const Categories = ({ categories }: CategoriesProps) => (
+  <>
+    <Heading fgColor="pink.500" fontWeight={500} fontSize={"1.2rem"}>
+      CATEGORIES
+    </Heading>
+    {categories.map((category) => (
+      <Tag
+        href={category.slug}
+        key={category.id}
+        color={category.color}
+        fgColor="white"
+      >
+        {category.category}
+      </Tag>
+    ))}
+  </>
+);
 
 export default Categories;
