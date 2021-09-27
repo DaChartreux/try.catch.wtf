@@ -4,9 +4,10 @@ import type { NextPage } from "next";
 
 import Navbar from "@components/Navbar";
 import Layout from "@components/Layout";
-import Categories from "@components/sections/Categories";
-import RecentPosts from "@components/sections/Recent";
+import Categories from "@components/Categories";
+import RecentPosts from "@components/Recent";
 import styled from "styled-components";
+import Hero from "@components/Hero";
 
 type NextPageWithLayout = NextPage & {
   getLayout?: (page: ReactElement) => ReactNode;
@@ -115,6 +116,7 @@ Index.getLayout = (page: ReactElement) => {
   return (
     <>
       <Navbar />
+      <Hero />
       <LayoutWrapper>{page}</LayoutWrapper>
     </>
   );
