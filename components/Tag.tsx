@@ -2,6 +2,7 @@ import { ReactNode } from "react";
 import styled, { css } from "styled-components";
 
 import { ColorShade } from "@typings/styled";
+import { motion } from "framer-motion";
 
 type TagStyledProps = {
   bgColor: ColorShade;
@@ -13,7 +14,7 @@ type TagProps = {
   children: ReactNode;
 };
 
-const TagStyle = styled.a<TagStyledProps>`
+const TagStyle = styled(motion.a)<TagStyledProps>`
   font-size: 0.75rem;
   font-weight: 500;
   text-decoration: none;
@@ -31,6 +32,7 @@ const TagStyle = styled.a<TagStyledProps>`
     border-style: solid;
     border-radius: 0.375rem;
     border-width: 2px;
+    transition: 100ms ease-in-out;
   }
 
   ${({ theme: { colors }, bgColor }) => css`
@@ -57,7 +59,16 @@ const TagStyle = styled.a<TagStyledProps>`
 `;
 
 const Tag = ({ children, ...props }: TagProps & TagStyledProps) => (
-  <TagStyle {...props}>
+  <TagStyle
+    variants={{
+      hidden: { y: 20, opacity: 0 },
+      visible: {
+        y: 0,
+        opacity: 1,
+      },
+    }}
+    {...props}
+  >
     <div />
     {children}
   </TagStyle>

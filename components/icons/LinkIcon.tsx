@@ -1,6 +1,6 @@
 import React from "react";
 
-const MoonIcon = () => (
+const LinkIcon = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width="24"
@@ -12,8 +12,9 @@ const MoonIcon = () => (
     strokeLinecap="round"
     strokeLinejoin="round"
   >
-    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+    <path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3" />
+    <line x1="8" y1="12" x2="16" y2="12" />
   </svg>
 );
 
-export default MoonIcon;
+export default LinkIcon;

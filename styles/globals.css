@@ -3,6 +3,7 @@ body {
   padding: 0;
   margin: 0;
   font-family: "Jost";
+  scroll-behavior: smooth;
 }
 
 :root {
@@ -18,12 +19,12 @@ body {
 * {
   border: 0;
   box-sizing: border-box;
-  transition: all 200ms ease-in-out;
 }
 
 html {
   background: var(--color-bg-primary);
   overflow-y: scroll;
+  transition: background-color 200ms ease-in-out;
 }
 
 ::-webkit-scrollbar {
