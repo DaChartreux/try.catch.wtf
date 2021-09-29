@@ -8,17 +8,19 @@ import ButtonIcon from "@components/ButtonIcon";
 import { useAppTheme } from "@components/ui/AppThemeProvider";
 import { useAppThemeValue } from "@hooks/useAppThemeValue";
 import { ColorShade } from "@typings/styled";
+import { motion } from "framer-motion";
 
 type NavContainerStyles = {
   bgColor: ColorShade;
 };
 
-const NavContainer = styled.div<NavContainerStyles>`
+const NavContainer = styled(motion.div)<NavContainerStyles>`
   position: sticky;
   top: 0;
   z-index: 2;
   backdrop-filter: saturate(180%) blur(20px);
-  background-color: ${({ theme: { colors }, bgColor }) => colors[bgColor]}aa;
+  background-color: ${({ theme: { colors }, bgColor }) => colors[bgColor]}cc;
+  transition: background-color 200ms ease-in-out;
 `;
 
 const NavInnerContainer = styled.div`
@@ -99,7 +101,17 @@ const Navbar = () => {
   const { changeTheme } = useAppTheme();
 
   return (
-    <NavContainer bgColor={useAppThemeValue<ColorShade>("white", "black")}>
+    <NavContainer
+      initial={{ translateY: -64 }}
+      animate={{ translateY: 0 }}
+      layout
+      transition={{
+        type: "spring",
+        stiffness: 200,
+        damping: 15,
+      }}
+      bgColor={useAppThemeValue<ColorShade>("white", "black")}
+    >
       <NavInnerContainer>
         <Link href="/" passHref>
           <HomeLinkStyled
@@ -113,7 +125,7 @@ const Navbar = () => {
               "yellow.500"
             )}
           >
-            Amit P
+            ABCD
           </HomeLinkStyled>
         </Link>
         <NavStyled>

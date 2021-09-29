@@ -17,8 +17,10 @@
     "paths": {
       "@components/*": ["components/*"],
       "@hooks/*": ["hooks/*"],
-      "@styles/*": ["styles/*"],
+      "@img/*": ["public/img/*"],
       "@lib/*": ["lib/*"],
+      "@public/*": ["public/*"],
+      "@styles/*": ["styles/*"],
       "@typings/*": ["typings/*"]
     }
   },

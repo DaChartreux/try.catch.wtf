@@ -4,6 +4,7 @@ import dynamic from "next/dynamic";
 import type { NextPage } from "next";
 import type { AppProps } from "next/app";
 import { ThemeProvider } from "styled-components";
+import { AnimateSharedLayout } from "framer-motion";
 
 import { theme } from "@styles/theme";
 
@@ -28,7 +29,9 @@ const App = ({ Component, pageProps }: AppPropsWithLayout) => {
   return (
     <AppThemeProvider>
       <ThemeProvider theme={theme}>
-        {getLayout(<Component {...pageProps} />)}
+        <AnimateSharedLayout>
+          {getLayout(<Component {...pageProps} />)}
+        </AnimateSharedLayout>
       </ThemeProvider>
     </AppThemeProvider>
   );
