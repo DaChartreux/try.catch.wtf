@@ -5,6 +5,7 @@ import PostPreview from "@components/PostPreview";
 import { useAppThemeValue } from "@hooks/useAppThemeValue";
 import { ColorShade } from "@typings/styled";
 import styled, { css } from "styled-components";
+import { HeroImageName } from "@typings/HeroImageName";
 
 type RecentPostsProps = {
   posts: {
@@ -13,7 +14,7 @@ type RecentPostsProps = {
     description: string;
     categories: string[];
     slug: string;
-    hero: string;
+    hero: HeroImageName;
   }[];
 };
 
