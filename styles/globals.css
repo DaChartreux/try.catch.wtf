@@ -19,12 +19,12 @@ body {
 * {
   border: 0;
   box-sizing: border-box;
-  transition: all 200ms ease-in-out;
 }
 
 html {
   background: var(--color-bg-primary);
-  /* overflow-y: scroll; */
+  overflow-y: scroll;
+  transition: background-color 200ms ease-in-out;
 }
 
 ::-webkit-scrollbar {

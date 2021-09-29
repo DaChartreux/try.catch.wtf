@@ -4,12 +4,11 @@ import dynamic from "next/dynamic";
 import type { NextPage } from "next";
 import type { AppProps } from "next/app";
 import { ThemeProvider } from "styled-components";
-import { MDXProvider } from "@mdx-js/react";
+import { AnimateSharedLayout } from "framer-motion";
 
 import { theme } from "@styles/theme";
 
 import "@styles/globals.css";
-import Heading from "@components/Heading";
 
 type NextPageWithLayout = NextPage & {
   getLayout?: (page: ReactElement) => ReactNode;
@@ -30,7 +29,9 @@ const App = ({ Component, pageProps }: AppPropsWithLayout) => {
   return (
     <AppThemeProvider>
       <ThemeProvider theme={theme}>
-        {getLayout(<Component {...pageProps} />)}
+        <AnimateSharedLayout>
+          {getLayout(<Component {...pageProps} />)}
+        </AnimateSharedLayout>
       </ThemeProvider>
     </AppThemeProvider>
   );

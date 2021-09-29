@@ -1,31 +1,44 @@
 import fs from "fs";
 import path from "path";
-import React, { ReactNode } from "react";
-import type { ReactElement } from "react";
+
+import React, { ReactNode, ReactElement, useEffect } from "react";
 import type { NextPage } from "next";
-import Head from "next/head";
-import { MDXRemote } from "next-mdx-remote";
+import { MDXRemote, MDXRemoteSerializeResult } from "next-mdx-remote";
 import { serialize } from "next-mdx-remote/serialize";
 import matter from "gray-matter";
+import styled from "styled-components";
+import { MDXProvider } from "@mdx-js/react";
+import { motion } from "framer-motion";
 
 import { POSTS_PATH, postFilePaths } from "utils/mdxUtils";
+import Hero from "@components/Hero";
 import Layout from "@components/Layout";
 import Navbar from "@components/Navbar";
 import Spacer from "@components/Spacer";
 import Heading from "@components/Heading";
-import { MDXProvider } from "@mdx-js/react";
-import styled from "styled-components";
-import BlogHeading from "@components/BlogHeading";
-import { useEffect } from "react";
-import router, { useRouter } from "next/dist/client/router";
+import heroImageMap from "@components/HeroImage";
+import MDXComponents from "@components/MDXComponents";
+import { HeroImageName } from "@typings/HeroImageName";
+import { useAppThemeValue } from "@hooks/useAppThemeValue";
 
 const components = {
-  Head,
   Spacer,
 };
 
-type NextPageWithLayout = NextPage & {
+type NextPageWithLayout = NextPage<BlogPropsType> & {
   getLayout?: (page: ReactElement) => ReactNode;
+};
+
+type BlogPropsType = {
+  source: MDXRemoteSerializeResult<Record<string, unknown>>;
+  frontMatter: {
+    slug: string;
+    heroImageName: HeroImageName;
+    heroCreditUserProfile: string;
+    heroCreditUserProfileUrl: string;
+    heroCreditSource: string;
+  };
+  children: ReactNode;
 };
 
 const LayoutWrapper = styled(Layout)`
@@ -33,12 +46,13 @@ const LayoutWrapper = styled(Layout)`
   grid-template-columns: 3fr 1fr;
   grid-template-rows: auto 1fr;
   grid-template-areas:
+    "hero categories"
     "recent categories"
-    "recent test";
-  gap: 64px 96px;
+    "recent categories";
+  gap: 3rem;
 `;
 
-const Blog: NextPageWithLayout = ({ source, frontMatter }: any) => {
+const Blog: NextPageWithLayout = ({ source, frontMatter }) => {
   useEffect(() => {
     const url = window.location.hash;
     document.getElementById(url.replace("#", ""))?.scrollIntoView({
@@ -48,38 +62,41 @@ const Blog: NextPageWithLayout = ({ source, frontMatter }: any) => {
 
   return (
     <>
-      <div style={{ gridArea: "recent" }}>
-        <MDXRemote {...source} components={components} />
-      </div>
+      <Spacer height="3rem" width="" />
+      <LayoutWrapper>
+        <div style={{ gridArea: "recent" }}>
+          <motion.div
+            layoutId={`${frontMatter.slug}__hero`}
+            style={{ gridArea: "hero" }}
+          >
+            <Hero
+              heroSrc={heroImageMap[`${frontMatter.heroImageName}_m`]}
+              heroCreditSource={frontMatter.heroCreditSource}
+              heroCreditUserProfile={frontMatter.heroCreditUserProfile}
+              heroCreditUserProfileUrl={frontMatter.heroCreditUserProfileUrl}
+            />
+          </motion.div>
+          <Spacer height="3rem" width="" />
+          <Heading
+            fgColor="green.300"
+            fontWeight={600}
+            fontSize={"3rem"}
+            margin={"1rem 0 0.5rem 0"}
+          >
+            An Interactive Guide to Keyframe Animations
+          </Heading>
+          <MDXRemote {...source} components={components} />
+        </div>
+      </LayoutWrapper>
     </>
   );
 };
 
 Blog.getLayout = (page: ReactElement) => {
   return (
-    <MDXProvider
-      components={{
-        h1: (props) => (
-          <Heading
-            fgColor="white"
-            fontWeight={500}
-            fontSize={"2.5rem"}
-            {...props}
-          />
-        ),
-        h3: (props) => <BlogHeading {...props} />,
-        a: (props): any => console.log({ props }),
-        h2: (props) => <BlogHeading {...props} />,
-        p: (props) => (
-          <p
-            {...props}
-            style={{ color: "white", fontSize: "1.125rem", fontWeight: 500 }}
-          />
-        ),
-      }}
-    >
+    <MDXProvider components={MDXComponents}>
       <Navbar />
-      <LayoutWrapper>{page}</LayoutWrapper>
+      {page}
     </MDXProvider>
   );
 };
