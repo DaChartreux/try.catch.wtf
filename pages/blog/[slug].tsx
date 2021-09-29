@@ -1,42 +1,113 @@
 import fs from "fs";
 import path from "path";
-import React, { ReactNode } from "react";
-import type { ReactElement } from "react";
+
+import React, { ReactNode, ReactElement, useEffect } from "react";
 import type { NextPage } from "next";
-import Link from "next/link";
-import Head from "next/head";
-import { MDXRemote } from "next-mdx-remote";
+import { MDXRemote, MDXRemoteSerializeResult } from "next-mdx-remote";
 import { serialize } from "next-mdx-remote/serialize";
 import matter from "gray-matter";
+import styled from "styled-components";
+import { MDXProvider } from "@mdx-js/react";
+import { motion } from "framer-motion";
 
 import { POSTS_PATH, postFilePaths } from "utils/mdxUtils";
+import Hero from "@components/Hero";
 import Layout from "@components/Layout";
 import Navbar from "@components/Navbar";
+import Spacer from "@components/Spacer";
+import Heading from "@components/Heading";
+import heroImageMap from "@components/HeroImage";
+import MDXComponents from "@components/MDXComponents";
+import { HeroImageName } from "@typings/HeroImageName";
 
 const components = {
-  Head,
+  Spacer,
 };
 
-type NextPageWithLayout = NextPage & {
+type NextPageWithLayout = NextPage<BlogPropsType> & {
   getLayout?: (page: ReactElement) => ReactNode;
 };
 
-const Blog: NextPageWithLayout = ({ source, frontMatter }: any) => {
+type BlogPropsType = {
+  source: MDXRemoteSerializeResult<Record<string, unknown>>;
+  frontMatter: {
+    slug: string;
+    heroImageName: HeroImageName;
+    heroCreditUserProfile: string;
+    heroCreditUserProfileUrl: string;
+    heroCreditSource: string;
+  };
+  children: ReactNode;
+};
+
+const LayoutWrapper = styled(Layout)`
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  grid-template-rows: auto 1fr;
+  grid-template-areas:
+    "hero hero"
+    "recent categories"
+    "recent categories";
+  gap: 3rem;
+`;
+
+const Blog: NextPageWithLayout = ({ source, frontMatter }) => {
+  useEffect(() => {
+    const url = window.location.hash;
+    document.getElementById(url.replace("#", ""))?.scrollIntoView({
+      behavior: "smooth",
+    });
+  }, []);
+
   return (
     <>
-      <main>
-        <MDXRemote {...source} components={components} />
-      </main>
+      <Spacer height="3rem" width="" />
+
+      <LayoutWrapper>
+        <div style={{ gridArea: "hero" }}>
+          <Hero
+            layoutId={`${frontMatter.slug}__hero`}
+            heroSrc={heroImageMap[`${frontMatter.heroImageName}_m`]}
+            heroCreditSource={frontMatter.heroCreditSource}
+            heroCreditUserProfile={frontMatter.heroCreditUserProfile}
+            heroCreditUserProfileUrl={frontMatter.heroCreditUserProfileUrl}
+          />
+        </div>
+        <Spacer height="3rem" width="" />
+        <Heading
+          fgColor="green.300"
+          fontWeight={600}
+          fontSize={"3rem"}
+          margin={"1rem 0 0.5rem 0"}
+          initial="hidden"
+          animate="visible"
+          variants={{
+            hidden: { opacity: 0, translateX: -32 },
+            visible: {
+              opacity: 1,
+              translateX: 0,
+            },
+          }}
+          transition={{ duration: 0.4 }}
+        >
+          LMAOSDASAnimations
+        </Heading>
+        <div style={{ gridArea: "recent" }}>
+          <MDXRemote {...source} components={components} />
+        </div>
+      </LayoutWrapper>
     </>
   );
 };
 
-Blog.getLayout = (page: ReactElement) => (
-  <>
-    <Navbar />
-    <Layout>{page}</Layout>
-  </>
-);
+Blog.getLayout = (page: ReactElement) => {
+  return (
+    <MDXProvider components={MDXComponents}>
+      <Navbar />
+      {page}
+    </MDXProvider>
+  );
+};
 
 export const getStaticProps = async ({ params }: any) => {
   const postFilePath = path.join(POSTS_PATH, `${params.slug}.mdx`);
@@ -48,7 +119,7 @@ export const getStaticProps = async ({ params }: any) => {
   return {
     props: {
       source: mdxSource,
-      frontMatter: data,
+      frontMatter: { ...data, slug: params.slug },
     },
   };
 };
