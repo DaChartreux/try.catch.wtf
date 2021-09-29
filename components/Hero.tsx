@@ -1,8 +1,10 @@
+import Image from "next/image";
+import styled, { css } from "styled-components";
+
 import ExternalLinkIcon from "@components/icons/ExternalLinkIcon";
 import { useAppThemeValue } from "@hooks/useAppThemeValue";
 import { ColorShade } from "@typings/styled";
-import Image from "next/image";
-import styled from "styled-components";
+import { motion } from "framer-motion";
 
 type ImageContainerProps = {
   bgColor: ColorShade;
@@ -22,29 +24,21 @@ const ImageContainer = styled.div<ImageContainerProps>`
     top: 0;
     left: 0;
     right: 0;
-    background-color: ${({ theme: { colors }, bgColor }) => colors[bgColor]}88;
-    opacity: 0;
     width: 100%;
     height: 100%;
     z-index: 1;
-    transition: all 200ms ease-in-out;
+    background-color: ${({ theme: { colors }, bgColor }) => colors[bgColor]}88;
+    backdrop-filter: blur(3rem);
 
-    a {
-      color: ${({ theme: { colors }, overlayFgColor }) =>
-        colors[overlayFgColor]};
-    }
+    ${({ theme: { colors }, overlayFgColor }) => css`
+      a {
+        color: ${colors[overlayFgColor]};
+      }
 
-    p {
-      color: ${({ theme: { colors }, overlayFgColor }) =>
-        colors[overlayFgColor]};
-    }
-  }
-
-  &:hover {
-    .overlay {
-      opacity: 1;
-      backdrop-filter: blur(3rem);
-    }
+      p {
+        color: ${colors[overlayFgColor]};
+      }
+    `}
   }
 `;
 
@@ -53,6 +47,7 @@ type HeroProps = {
   heroCreditUserProfile: string;
   heroCreditUserProfileUrl: string;
   heroCreditSource: string;
+  layoutId: string;
 };
 
 const Hero = ({
@@ -60,13 +55,19 @@ const Hero = ({
   heroCreditSource,
   heroCreditUserProfile,
   heroCreditUserProfileUrl,
+  layoutId,
 }: HeroProps) => {
   return (
     <ImageContainer
       bgColor={useAppThemeValue<ColorShade>("white", "black")}
       overlayFgColor={useAppThemeValue<ColorShade>("black", "white")}
     >
-      <div className="overlay">
+      <motion.div
+        className="overlay"
+        whileHover={{ opacity: [null, 0.15, 0.8, 1] }}
+        initial={{ opacity: 0 }}
+        transition={{ duration: 0.2 }}
+      >
         <div>
           <ExternalLinkIcon />
           <p>
@@ -75,15 +76,17 @@ const Hero = ({
             {heroCreditSource}
           </p>
         </div>
-      </div>
-      <Image
-        src={heroSrc}
-        alt="Hero Image"
-        className="image"
-        placeholder="blur"
-        layout="responsive"
-        quality={80}
-      />
+      </motion.div>
+      <motion.div layoutId={layoutId}>
+        <Image
+          src={heroSrc}
+          alt="Hero Image"
+          className="image"
+          placeholder="blur"
+          layout="responsive"
+          quality={80}
+        />
+      </motion.div>
     </ImageContainer>
   );
 };

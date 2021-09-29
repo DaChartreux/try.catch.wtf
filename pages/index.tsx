@@ -54,7 +54,7 @@ const Index: NextPageWithLayout = () => {
               categories: [],
               hero: "72Mf6a3tpno",
               title: "An Interactive Guide to Keyframe Animations",
-              slug: "test1",
+              slug: "blog-1",
               description:
                 "CSS keyframe animations are incredibly flexible and powerful, but they’re also a bit weird. In this deep-dive tutorial, we'll learn how CSS keyframes work from the ground up, and see how to use them to build high-quality animations.",
             },

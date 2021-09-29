@@ -89,16 +89,14 @@ const PostPreview = ({ title, description, slug, hero }: RecentPosts) => (
             alt="hero"
           />
         </motion.div>
-        <motion.div layoutId={`${slug}__heading`}>
-          <Heading
-            fgColor={useAppThemeValue<ColorShade>("blue.600", "blue.200")}
-            fontWeight={600}
-            fontSize={"1.375rem"}
-            margin={"1rem 0 0.5rem 0"}
-          >
-            {title}
-          </Heading>
-        </motion.div>
+        <Heading
+          fgColor={useAppThemeValue<ColorShade>("blue.600", "blue.200")}
+          fontWeight={600}
+          fontSize={"1.375rem"}
+          margin={"1rem 0 0.5rem 0"}
+        >
+          {title}
+        </Heading>
         <p className="description">{description}</p>
       </div>
     </PostPreviewStyled>

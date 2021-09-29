@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 import { ColorShade } from "@typings/styled";
+import { motion } from "framer-motion";
 
 type HeadingStyledProps = {
   fgColor: ColorShade;
@@ -9,7 +10,7 @@ type HeadingStyledProps = {
   margin: string;
 };
 
-const Heading = styled.h1<HeadingStyledProps>`
+const Heading = styled(motion.h1)<HeadingStyledProps>`
   color: ${({ theme: { colors }, fgColor }) => colors[fgColor]};
   font-weight: ${({ fontWeight }) => fontWeight};
   font-size: ${({ fontSize }) => fontSize};

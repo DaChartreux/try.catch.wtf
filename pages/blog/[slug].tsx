@@ -19,7 +19,6 @@ import Heading from "@components/Heading";
 import heroImageMap from "@components/HeroImage";
 import MDXComponents from "@components/MDXComponents";
 import { HeroImageName } from "@typings/HeroImageName";
-import { useAppThemeValue } from "@hooks/useAppThemeValue";
 
 const components = {
   Spacer,
@@ -46,7 +45,7 @@ const LayoutWrapper = styled(Layout)`
   grid-template-columns: 3fr 1fr;
   grid-template-rows: auto 1fr;
   grid-template-areas:
-    "hero categories"
+    "hero hero"
     "recent categories"
     "recent categories";
   gap: 3rem;
@@ -63,28 +62,37 @@ const Blog: NextPageWithLayout = ({ source, frontMatter }) => {
   return (
     <>
       <Spacer height="3rem" width="" />
+
       <LayoutWrapper>
-        <div style={{ gridArea: "recent" }}>
-          <motion.div
+        <div style={{ gridArea: "hero" }}>
+          <Hero
             layoutId={`${frontMatter.slug}__hero`}
-            style={{ gridArea: "hero" }}
-          >
-            <Hero
-              heroSrc={heroImageMap[`${frontMatter.heroImageName}_m`]}
-              heroCreditSource={frontMatter.heroCreditSource}
-              heroCreditUserProfile={frontMatter.heroCreditUserProfile}
-              heroCreditUserProfileUrl={frontMatter.heroCreditUserProfileUrl}
-            />
-          </motion.div>
-          <Spacer height="3rem" width="" />
-          <Heading
-            fgColor="green.300"
-            fontWeight={600}
-            fontSize={"3rem"}
-            margin={"1rem 0 0.5rem 0"}
-          >
-            An Interactive Guide to Keyframe Animations
-          </Heading>
+            heroSrc={heroImageMap[`${frontMatter.heroImageName}_m`]}
+            heroCreditSource={frontMatter.heroCreditSource}
+            heroCreditUserProfile={frontMatter.heroCreditUserProfile}
+            heroCreditUserProfileUrl={frontMatter.heroCreditUserProfileUrl}
+          />
+        </div>
+        <Spacer height="3rem" width="" />
+        <Heading
+          fgColor="green.300"
+          fontWeight={600}
+          fontSize={"3rem"}
+          margin={"1rem 0 0.5rem 0"}
+          initial="hidden"
+          animate="visible"
+          variants={{
+            hidden: { opacity: 0, translateX: -32 },
+            visible: {
+              opacity: 1,
+              translateX: 0,
+            },
+          }}
+          transition={{ duration: 0.4 }}
+        >
+          LMAOSDASAnimations
+        </Heading>
+        <div style={{ gridArea: "recent" }}>
           <MDXRemote {...source} components={components} />
         </div>
       </LayoutWrapper>
@@ -111,7 +119,7 @@ export const getStaticProps = async ({ params }: any) => {
   return {
     props: {
       source: mdxSource,
-      frontMatter: data,
+      frontMatter: { ...data, slug: params.slug },
     },
   };
 };
