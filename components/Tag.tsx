@@ -32,7 +32,7 @@ const TagStyle = styled(motion.a)<TagStyledProps>`
     border-style: solid;
     border-radius: 0.375rem;
     border-width: 2px;
-    transition: 100ms ease-in-out;
+    transition: background-color 100ms ease-in-out;
   }
 
   ${({ theme: { colors }, bgColor }) => css`
@@ -45,7 +45,6 @@ const TagStyle = styled(motion.a)<TagStyledProps>`
 
     &:hover {
       div {
-        transform: scale(1.05);
         background-color: ${colors[bgColor]}55;
       }
     }
@@ -69,7 +68,14 @@ const Tag = ({ children, ...props }: TagProps & TagStyledProps) => (
     }}
     {...props}
   >
-    <div />
+    <motion.div
+      whileHover={{
+        scale: 1.05,
+      }}
+      whileTap={{
+        scale: 1.03,
+      }}
+    />
     {children}
   </TagStyle>
 );

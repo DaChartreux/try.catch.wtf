@@ -8,14 +8,12 @@ import { serialize } from "next-mdx-remote/serialize";
 import matter from "gray-matter";
 import styled from "styled-components";
 import { MDXProvider } from "@mdx-js/react";
-import { motion } from "framer-motion";
 
 import { POSTS_PATH, postFilePaths } from "utils/mdxUtils";
 import Hero from "@components/Hero";
 import Layout from "@components/Layout";
 import Navbar from "@components/Navbar";
 import Spacer from "@components/Spacer";
-import Heading from "@components/Heading";
 import heroImageMap from "@components/HeroImage";
 import MDXComponents from "@components/MDXComponents";
 import { HeroImageName } from "@typings/HeroImageName";
@@ -36,6 +34,7 @@ type BlogPropsType = {
     heroCreditUserProfile: string;
     heroCreditUserProfileUrl: string;
     heroCreditSource: string;
+    title: string;
   };
   children: ReactNode;
 };
@@ -67,6 +66,7 @@ const Blog: NextPageWithLayout = ({ source, frontMatter }) => {
         <div style={{ gridArea: "hero" }}>
           <Hero
             layoutId={`${frontMatter.slug}__hero`}
+            title={frontMatter.title}
             heroSrc={heroImageMap[`${frontMatter.heroImageName}_m`]}
             heroCreditSource={frontMatter.heroCreditSource}
             heroCreditUserProfile={frontMatter.heroCreditUserProfile}
@@ -74,24 +74,7 @@ const Blog: NextPageWithLayout = ({ source, frontMatter }) => {
           />
         </div>
         <Spacer height="3rem" width="" />
-        <Heading
-          fgColor="green.300"
-          fontWeight={600}
-          fontSize={"3rem"}
-          margin={"1rem 0 0.5rem 0"}
-          initial="hidden"
-          animate="visible"
-          variants={{
-            hidden: { opacity: 0, translateX: -32 },
-            visible: {
-              opacity: 1,
-              translateX: 0,
-            },
-          }}
-          transition={{ duration: 0.4 }}
-        >
-          LMAOSDASAnimations
-        </Heading>
+
         <div style={{ gridArea: "recent" }}>
           <MDXRemote {...source} components={components} />
         </div>
