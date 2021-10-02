@@ -1,4 +1,4 @@
-import { DefaultTheme } from "styled-components";
+import { DefaultTheme } from "@emotion/styled";
 
 export const theme: DefaultTheme = {
   borderRadius: "0.375rem",

@@ -1,5 +1,5 @@
-import { ColorShade } from "@typings/styled";
-import styled from "styled-components";
+import { ColorShade } from "@typings/emotion";
+import styled from "@emotion/styled";
 
 type ButtonIconStyledProps = {
   bgColor: string;
@@ -20,10 +20,8 @@ const ButtonIcon = styled.button<ButtonIconStyledProps>`
   outline: none;
   cursor: pointer;
 
-  & {
-    svg {
-      color: ${({ theme: { colors }, fgSvgColor }) => colors[fgSvgColor]};
-    }
+  svg {
+    color: ${({ theme: { colors }, fgSvgColor }) => colors[fgSvgColor]};
   }
 
   &:hover {

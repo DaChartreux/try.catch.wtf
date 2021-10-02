@@ -1,10 +1,10 @@
 import React from "react";
-import styled, { css } from "styled-components";
+import styled from "@emotion/styled";
 
 import Heading from "@components/Heading";
 import PostPreview from "@components/PostPreview";
 import { useAppThemeValue } from "@hooks/useAppThemeValue";
-import { ColorShade } from "@typings/styled";
+import { ColorShade } from "@typings/emotion";
 import { HeroImageName } from "@typings/HeroImageName";
 
 type RecentPostsProps = {

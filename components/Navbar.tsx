@@ -1,13 +1,14 @@
 import React from "react";
 import Link from "next/link";
-import styled, { css } from "styled-components";
+import styled from "@emotion/styled";
+import { css } from "@emotion/react";
 
 import MoonIcon from "@components/icons/MoonIcon";
 import SunIcon from "@components/icons/SunIcon";
 import ButtonIcon from "@components/ButtonIcon";
 import { useAppTheme } from "@components/ui/AppThemeProvider";
 import { useAppThemeValue } from "@hooks/useAppThemeValue";
-import { ColorShade } from "@typings/styled";
+import { ColorShade } from "@typings/emotion";
 import { motion } from "framer-motion";
 
 type NavContainerStyles = {
@@ -31,7 +32,6 @@ const NavInnerContainer = styled.div`
   align-items: center;
   height: 4rem;
   position: relative;
-  display: flex;
   justify-content: space-between;
 `;
 

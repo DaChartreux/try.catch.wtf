@@ -2,16 +2,16 @@ import Heading from "@components/Heading";
 import LinkIcon from "@components/icons/LinkIcon";
 import { useAppThemeValue } from "@hooks/useAppThemeValue";
 import useInView from "@hooks/useInView";
-import { ColorShade } from "@typings/styled";
+import { ColorShade } from "@typings/emotion";
 import { motion, useAnimation } from "framer-motion";
 import { ReactNode } from "react";
 import { useEffect } from "react";
-import styled from "styled-components";
+import styled from "@emotion/styled";
 
 const BlogAnchorHeadingStyled = styled(motion.a)`
   position: relative;
-  text-decoration: none;
   scroll-margin-top: 5rem;
+  text-decoration: none;
 
   div {
     opacity: 0;

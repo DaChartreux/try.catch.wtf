@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 
 import Heading from "@components/Heading";
 import Tag from "@components/Tag";
-import { ColorShade } from "@typings/styled";
+import { ColorShade } from "@typings/emotion";
 
 type CategoriesProps = {
   categories: {

@@ -6,7 +6,7 @@ import type { NextPage } from "next";
 import { MDXRemote, MDXRemoteSerializeResult } from "next-mdx-remote";
 import { serialize } from "next-mdx-remote/serialize";
 import matter from "gray-matter";
-import styled from "styled-components";
+import styled from "@emotion/styled";
 import { MDXProvider } from "@mdx-js/react";
 
 import { POSTS_PATH, postFilePaths } from "utils/mdxUtils";

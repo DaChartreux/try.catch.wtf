@@ -1,9 +1,10 @@
 import Image from "next/image";
-import styled, { css } from "styled-components";
+import styled from "@emotion/styled";
+import { css } from "@emotion/react";
 
 import ExternalLinkIcon from "@components/icons/ExternalLinkIcon";
 import { useAppThemeValue } from "@hooks/useAppThemeValue";
-import { ColorShade } from "@typings/styled";
+import { ColorShade } from "@typings/emotion";
 import { motion } from "framer-motion";
 import React from "react";
 import Heading from "@components/Heading";
