@@ -1,9 +1,9 @@
 import React from "react";
+import { motion } from "framer-motion";
 
 import Heading from "@components/Heading";
 import Tag from "@components/Tag";
-import { ColorShade } from "@typings/styled";
-import { motion } from "framer-motion";
+import { ColorShade } from "@typings/emotion";
 
 type CategoriesProps = {
   categories: {
@@ -15,18 +15,7 @@ type CategoriesProps = {
 };
 
 const Categories = ({ categories }: CategoriesProps) => (
-  <motion.div
-    variants={{
-      visible: {
-        transition: {
-          delayChildren: 0.3,
-          staggerChildren: 0.02,
-        },
-      },
-    }}
-    initial="hidden"
-    animate="visible"
-  >
+  <>
     <Heading
       fgColor="pink.500"
       fontWeight={500}
@@ -35,17 +24,30 @@ const Categories = ({ categories }: CategoriesProps) => (
     >
       CATEGORIES
     </Heading>
-    {categories.map((category) => (
-      <Tag
-        key={category.id}
-        href={category.slug}
-        bgColor={category.color}
-        fgColor="white"
-      >
-        {category.category}
-      </Tag>
-    ))}
-  </motion.div>
+    <motion.div
+      variants={{
+        visible: {
+          transition: {
+            delayChildren: 0.3,
+            staggerChildren: 0.02,
+          },
+        },
+      }}
+      initial="hidden"
+      animate="visible"
+    >
+      {categories.map((category) => (
+        <Tag
+          key={category.id}
+          href={category.slug}
+          bgColor={category.color}
+          fgColor="white"
+        >
+          {category.category}
+        </Tag>
+      ))}
+    </motion.div>
+  </>
 );
 
 export default Categories;
