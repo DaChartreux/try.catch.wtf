@@ -6,7 +6,7 @@ import Navbar from "@components/Navbar";
 import Layout from "@components/Layout";
 import Categories from "@components/Categories";
 import RecentPosts from "@components/Recent";
-import styled from "styled-components";
+import styled from "@emotion/styled";
 
 type NextPageWithLayout = NextPage<never> & {
   getLayout?: (page: ReactElement) => ReactNode;

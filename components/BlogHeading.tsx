@@ -2,30 +2,23 @@ import Heading from "@components/Heading";
 import LinkIcon from "@components/icons/LinkIcon";
 import { useAppThemeValue } from "@hooks/useAppThemeValue";
 import useInView from "@hooks/useInView";
-import { ColorShade } from "@typings/styled";
-import { useAnimation } from "framer-motion";
-import { ReactNode } from "hoist-non-react-statics/node_modules/@types/react";
+import { ColorShade } from "@typings/emotion";
+import { motion, useAnimation } from "framer-motion";
+import { ReactNode } from "react";
 import { useEffect } from "react";
-import styled from "styled-components";
+import styled from "@emotion/styled";
 
-const BlogAnchorHeadingStyled = styled.a`
+const BlogAnchorHeadingStyled = styled(motion.a)`
   position: relative;
-  text-decoration: none;
   scroll-margin-top: 5rem;
+  text-decoration: none;
 
   div {
     opacity: 0;
-    transition: opacity 200ms ease-in-out;
-  }
-
-  &:hover {
-    div {
-      opacity: 1;
-    }
   }
 `;
 
-const BlogAnchorIcon = styled.div`
+const BlogAnchorIcon = styled(motion.div)`
   position: absolute;
   right: 10px;
 
@@ -37,6 +30,39 @@ const BlogAnchorIcon = styled.div`
 
 type BlogHeadingProps = {
   children: ReactNode;
+};
+
+const textMotion = {
+  rest: {
+    transition: {
+      duration: 2,
+      type: "tween",
+      ease: "easeIn",
+    },
+  },
+  hover: {
+    transition: {
+      duration: 0.4,
+      type: "tween",
+      ease: "easeOut",
+    },
+  },
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+  },
+};
+
+const slashMotion = {
+  rest: { opacity: 0, ease: "easeOut", duration: 0.2, type: "tween" },
+  hover: {
+    opacity: 1,
+    transition: {
+      duration: 0.4,
+      type: "tween",
+      ease: "easeIn",
+    },
+  },
 };
 
 const BlogHeading = ({ children }: BlogHeadingProps) => {
@@ -55,6 +81,8 @@ const BlogHeading = ({ children }: BlogHeadingProps) => {
 
   return (
     <BlogAnchorHeadingStyled
+      initial="rest"
+      animate="rest"
       ref={containerRef}
       id={(children as string).toLowerCase().replaceAll(" ", "-")}
       href={`#${(children as string).toLowerCase().replaceAll(" ", "-")}`}
@@ -64,17 +92,13 @@ const BlogHeading = ({ children }: BlogHeadingProps) => {
         fontWeight={500}
         fontSize={"1.75rem"}
         margin={"0"}
-        initial="hidden"
+        initial={["hidden", "rest"]}
+        whileHover="hover"
         animate={controls}
-        variants={{
-          hidden: { opacity: 0 },
-          visible: {
-            opacity: 1,
-          },
-        }}
+        variants={textMotion}
         transition={{ duration: 0.4 }}
       >
-        <BlogAnchorIcon>
+        <BlogAnchorIcon variants={slashMotion}>
           <LinkIcon />
         </BlogAnchorIcon>
         {children}

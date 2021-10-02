@@ -5,7 +5,8 @@ import Document, {
   Main,
   NextScript,
 } from "next/document";
-import { ServerStyleSheet } from "styled-components";
+import createEmotionServer from "@emotion/server/create-instance";
+import { cache } from "@emotion/css";
 
 const initialTheme = `
 !(function() {
@@ -20,26 +21,33 @@ const initialTheme = `
   document.documentElement.dataset.theme = theme;
 }())`;
 
+export const renderStatic = async (html: string) => {
+  if (html === undefined) {
+    throw new Error("did you forget to return html from renderToString?");
+  }
+  const { extractCritical } = createEmotionServer(cache);
+  const { ids, css } = extractCritical(html);
+
+  return { html, ids, css };
+};
+
 export default class MyDocument extends Document {
   static async getInitialProps(ctx: DocumentContext) {
-    const sheet = new ServerStyleSheet();
-    const originalRenderPage = ctx.renderPage;
-
-    try {
-      ctx.renderPage = () =>
-        originalRenderPage({
-          enhanceApp: function (App) {
-            return function enhance(props) {
-              return sheet.collectStyles(<App {...props} />);
-            };
-          },
-        });
-
-      const initialProps = await Document.getInitialProps(ctx);
-      return { ...initialProps };
-    } finally {
-      sheet.seal();
-    }
+    const page = await ctx.renderPage();
+    const { css, ids } = await renderStatic(page.html);
+    const initialProps = await Document.getInitialProps(ctx);
+    return {
+      ...initialProps,
+      styles: (
+        <>
+          {initialProps.styles}
+          <style
+            data-emotion={`css ${ids.join(" ")}`}
+            dangerouslySetInnerHTML={{ __html: css }}
+          />
+        </>
+      ),
+    };
   }
 
   render() {
