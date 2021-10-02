@@ -1,11 +1,12 @@
 import React from "react";
-import styled, { css } from "styled-components";
 import Image from "next/image";
 import Link from "next/link";
+import styled from "@emotion/styled";
+import { css } from "@emotion/react";
 
 import Heading from "@components/Heading";
 import { useAppThemeValue } from "@hooks/useAppThemeValue";
-import { ColorShade } from "@typings/styled";
+import { ColorShade } from "@typings/emotion";
 import { motion } from "framer-motion";
 import heroImageMap from "@components/HeroImage";
 import { HeroImageName } from "@typings/HeroImageName";
@@ -27,9 +28,9 @@ type PostPreviewStyledProps = {
 
 const PostPreviewStyled = styled.a<PostPreviewStyledProps>`
   padding: 0.75rem;
-  border-radius: 0.5rem;
   border-width: 2px;
   border-style: solid;
+  border-radius: 0.5rem;
   text-decoration: none;
 
   ${({ theme: { colors }, fgColor, bgColor, fgHoverColor, descriptionColor }) =>
@@ -57,11 +58,11 @@ const PostPreviewStyled = styled.a<PostPreviewStyledProps>`
   }
 
   .description {
-    overflow: hidden;
-    text-overflow: ellipsis;
     display: -webkit-box;
-    -webkit-line-clamp: 4;
+    overflow: hidden;
     -webkit-box-orient: vertical;
+    -webkit-line-clamp: 4;
+    text-overflow: ellipsis;
   }
 `;
 

@@ -3,7 +3,7 @@ import type { ReactElement, ReactNode } from "react";
 import dynamic from "next/dynamic";
 import type { NextPage } from "next";
 import type { AppProps } from "next/app";
-import { ThemeProvider } from "styled-components";
+import { ThemeProvider } from "@emotion/react";
 import { AnimateSharedLayout } from "framer-motion";
 
 import { theme } from "@styles/theme";

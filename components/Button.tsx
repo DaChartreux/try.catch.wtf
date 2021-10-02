@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from "@emotion/styled";
 
 type ButtonStyledProps = {
   bgColor: string;
@@ -9,17 +9,17 @@ type ButtonStyledProps = {
 
 const Button = styled.button<ButtonStyledProps>`
   padding: 0.5rem 0.75rem;
+  background-color: ${({ bgColor }) => bgColor};
   border-radius: 0.375rem;
-  background-color: ${(props) => props.bgColor};
-  color: ${(props) => props.fgColor};
+  color: ${props => props.fgColor};
   transition: all 200ms ease-in-out;
 
   &:hover {
-    background-color: ${(props) => props.hoverBgColor};
+    background-color: ${props => props.hoverBgColor};
   }
 
   &:active {
-    background-color: ${(props) => props.activeBgColor};
+    background-color: ${props => props.activeBgColor};
   }
 `;
 

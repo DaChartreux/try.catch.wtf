@@ -1,4 +1,4 @@
-import "styled-components";
+import "@emotion/react";
 
 type Color = "pink" | "blue" | "green" | "yellow" | "gray";
 
@@ -11,8 +11,8 @@ export type ColorShade = keyof ({
   [C in `${Color}.${Shade}`]: string;
 });
 
-declare module "styled-components" {
-  export interface DefaultTheme {
+declare module "@emotion/react" {
+  export interface Theme {
     borderRadius: string;
 
     fonts: {
