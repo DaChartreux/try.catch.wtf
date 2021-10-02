@@ -1,6 +1,6 @@
-import { DefaultTheme } from "@emotion/styled";
+import { Theme } from "@emotion/react";
 
-export const theme: DefaultTheme = {
+export const theme: Theme = {
   borderRadius: "0.375rem",
   fonts: {
     fontFamily: "Roboto Mono",
