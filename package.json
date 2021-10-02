@@ -24,7 +24,7 @@
     "@emotion/babel-plugin": "^11.3.0",
     "@emotion/eslint-plugin": "^11.2.0",
     "@types/mdx-js__react": "^1.5.4",
-    "@types/react": "17.0.21",
+    "@types/react": "17.0.26",
     "eslint": "7.32.0",
     "eslint-config-next": "11.1.2",
     "next-mdx-remote": "^3.0.4",
