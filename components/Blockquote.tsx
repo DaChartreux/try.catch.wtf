@@ -8,7 +8,7 @@ const BlockquoteStyle = styled.blockquote`
   background-color: ${({ theme }) => theme.colors["blue.2300"]};
   border: 2px solid ${({ theme }) => theme.colors["blue.2100"]};
   border-radius: 0.5rem;
-  margin: 0 -1rem;
+  margin: 0 -1rem 2rem -1rem;
   padding: 1rem 1rem 1rem 2rem;
 
   .quote {
@@ -42,16 +42,18 @@ const IconStyle = styled.div`
   background-color: ${({ theme }) => theme.colors["blue.2100"]};
 `;
 
-const Blockquote = (props: any) => {
-  return (
-    <BlockquoteStyle>
-      <IconStyle>
-        <InfoIcon />
-      </IconStyle>
-      <p className="quote">{props.children[0].props.children}</p>
-      <p className="quote-source">{props.children[1].props.children}</p>
-    </BlockquoteStyle>
-  );
-};
+const Blockquote = ({ children }: any) => (
+  <BlockquoteStyle>
+    <IconStyle>
+      <InfoIcon />
+    </IconStyle>
+    <p className="quote">
+      {children.length ? children[0].props.children : children.props.children}
+    </p>
+    {children.length === 2 && (
+      <p className="quote-source">{children[1].props.children}</p>
+    )}
+  </BlockquoteStyle>
+);
 
 export default Blockquote;

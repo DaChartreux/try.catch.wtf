@@ -1,0 +1,42 @@
+---
+title: Theme toggle in SSR
+heroImageName: 72Mf6a3tpno
+heroCreditUserProfile: Pawel Czerwinski
+heroCreditUserProfileUrl: https://unsplash.com/@pawel_czerwinski?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText
+heroCreditSource: Unsplash
+---
+
+### Theme toggle
+
+A theme toggle might sound very trivial at first. What could go wrong with switching themes? _A lot_, things start to get serious. So let's dive right into how to toggle themes in SSR. I will be using Next.js and Emotion, but this can also be applied to any SSR framework using either CSS-in-JS or CSS to style the app.
+
+```bash
+yarn create next-app theme-toggle
+```
+
+```bash
+$ yarn add @emotion/styled @emotion/react
+```
+
+```jsx
+>>> _app.js
+
+import styled from "@emotion/styled";
+
+const Container = styled.div`
+  display: flex;
+  justify-content: center;
+  padding-top: 35vh;
+`;
+
+export default function Home: any() {
+  return (
+    <Container>
+      <main>
+        <h1>Next.js dark mode toggle</h1>
+        <h4>Dark mode is more than just a gimmick, right?!</h4>
+      </main>
+    </Container>
+  );
+}
+```

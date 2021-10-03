@@ -31,5 +31,9 @@ We can create a duplicate video element with upscaled video which fits the viewp
 But before we call it a day, taken directly from [here](https://developers.google.com/web/updates/2017/10/animated-blur#tldr),
 
 > Animating a blur is not really an option as it is very slow. Instead, pre-compute a series of increasingly blurred versions and cross-fade between them.
+>
+> developers.google.com
+
+> Animating a blur is not really an option as it is very slow. Instead, pre-compute a series of increasingly blurred versions and cross-fade between them.
 
 Welp, we aren't clearly "animating" a blur effect, but we are blurring a portion of the screen with video playing. Which IS an expensive filter. Not to mention the limitation of the API. We will not enjoy the features of modern CSS in Android or iOS runtime. Which is why processing the video using FFMPEG beforehand is the way to go for most of the cases.
