@@ -1,6 +1,8 @@
 import React, { useContext } from "react";
+import { ThemeProvider } from "@emotion/react";
 
 import { useAppThemeProvider } from "@hooks/useAppThemeProvider";
+import THEME from "@styles/theme";
 
 type AppThemeProviderProps = {
   children: React.ReactNode;
@@ -18,7 +20,7 @@ const AppThemeProvider = ({ children }: AppThemeProviderProps) => {
 
   return (
     <AppThemeContext.Provider value={theme}>
-      {children}
+      <ThemeProvider theme={THEME[theme.appTheme]}>{children}</ThemeProvider>
     </AppThemeContext.Provider>
   );
 };

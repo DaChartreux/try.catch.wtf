@@ -64,8 +64,8 @@ const Hero = ({
 }: HeroProps) => {
   return (
     <ImageContainer
-      bgColor={useAppThemeValue<ColorShade>("white", "black")}
-      overlayFgColor={useAppThemeValue<ColorShade>("black", "white")}
+      bgColor={useAppThemeValue<ColorShade>("black.100", "black.2400")}
+      overlayFgColor={useAppThemeValue<ColorShade>("black.2400", "black.100")}
     >
       <motion.div
         className="overlay"
@@ -98,8 +98,8 @@ const Hero = ({
           <Heading
             fgColor="green.300"
             fontWeight={600}
-            fontSize={"3rem"}
-            margin={"1rem 0 0.5rem 0"}
+            fontSize="3rem"
+            margin="1rem 0 0.5rem 0"
             initial="hidden"
             animate="visible"
             variants={{

@@ -69,10 +69,10 @@ const PostPreviewStyled = styled.a<PostPreviewStyledProps>`
 const PostPreview = ({ title, description, slug, hero }: RecentPosts) => (
   <Link href={`blog/${slug}`} passHref>
     <PostPreviewStyled
-      bgColor={useAppThemeValue<ColorShade>("gray.100", "gray.900")}
-      fgColor={useAppThemeValue<ColorShade>("blue.600", "blue.100")}
-      fgHoverColor={useAppThemeValue<ColorShade>("blue.800", "blue.400")}
-      descriptionColor={useAppThemeValue<ColorShade>("gray.900", "gray.100")}
+      bgColor={useAppThemeValue<ColorShade>("gray.300", "gray.1900")}
+      fgColor={useAppThemeValue<ColorShade>("blue.1300", "blue.300")}
+      fgHoverColor={useAppThemeValue<ColorShade>("blue.1700", "blue.900")}
+      descriptionColor={useAppThemeValue<ColorShade>("gray.1900", "gray.300")}
     >
       <div
         style={{
@@ -91,10 +91,10 @@ const PostPreview = ({ title, description, slug, hero }: RecentPosts) => (
           />
         </motion.div>
         <Heading
-          fgColor={useAppThemeValue<ColorShade>("blue.600", "blue.200")}
+          fgColor={useAppThemeValue<ColorShade>("blue.1300", "blue.500")}
           fontWeight={600}
-          fontSize={"1.375rem"}
-          margin={"1rem 0 0.5rem 0"}
+          fontSize="1.375rem"
+          margin="1rem 0 0.5rem 0"
         >
           {title}
         </Heading>

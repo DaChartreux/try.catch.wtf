@@ -49,7 +49,7 @@ const HomeLinkStyled = styled.div<LinkStyledProps>`
 
   &::after {
     content: "";
-    background-color: ${({ theme: { colors } }) => colors["pink.500"]};
+    background-color: ${({ theme: { colors } }) => colors["pink.1100"]};
     height: 0.25rem;
     width: 2rem;
     position: absolute;
@@ -110,19 +110,19 @@ const Navbar = () => {
         stiffness: 200,
         damping: 15,
       }}
-      bgColor={useAppThemeValue<ColorShade>("white", "black")}
+      bgColor={useAppThemeValue<ColorShade>("white", "black.2300")}
     >
       <NavInnerContainer>
         <Link href="/" passHref>
           <HomeLinkStyled
-            fgColor={useAppThemeValue<ColorShade>("yellow.400", "yellow.300")}
+            fgColor="yellow.900"
             fgHoverColor={useAppThemeValue<ColorShade>(
               "yellow.500",
-              "yellow.400"
+              "yellow.400",
             )}
             fgActiveColor={useAppThemeValue<ColorShade>(
               "yellow.600",
-              "yellow.500"
+              "yellow.500",
             )}
           >
             ABCD
@@ -135,28 +135,25 @@ const Navbar = () => {
             bgHoverColor="transparent"
             bgActiveColor="transparent"
             fgColor="transparent"
-            fgSvgColor={useAppThemeValue<ColorShade>("gray.800", "gray.100")}
-            fgHoverSvgColor={useAppThemeValue<ColorShade>(
-              "gray.700",
-              "gray.300"
-            )}
+            fgSvgColor={useAppThemeValue<ColorShade>("gray.1700", "gray.300")}
+            fgHoverSvgColor={useAppThemeValue<ColorShade>("gray.1500", "gray.700")}
             fgActiveSvgColor={useAppThemeValue<ColorShade>(
-              "gray.600",
-              "gray.400"
+              "gray.1300",
+              "gray.700",
             )}
           >
             {useAppThemeValue(<SunIcon />, <MoonIcon />)}
           </ButtonIcon>
           <Link href="/" passHref>
             <LinkStyled
-              fgColor={useAppThemeValue<ColorShade>("gray.800", "gray.100")}
+              fgColor={useAppThemeValue<ColorShade>("gray.1700", "gray.300")}
               fgHoverColor={useAppThemeValue<ColorShade>(
+                "gray.1500",
                 "gray.700",
-                "gray.300"
               )}
               fgActiveColor={useAppThemeValue<ColorShade>(
-                "gray.600",
-                "gray.400"
+                "gray.1300",
+                "gray.700",
               )}
             >
               Blog
@@ -164,14 +161,14 @@ const Navbar = () => {
           </Link>
           <Link href="/" passHref>
             <LinkStyled
-              fgColor={useAppThemeValue<ColorShade>("gray.800", "gray.100")}
+              fgColor={useAppThemeValue<ColorShade>("gray.1700", "gray.300")}
               fgHoverColor={useAppThemeValue<ColorShade>(
+                "gray.1500",
                 "gray.700",
-                "gray.300"
               )}
               fgActiveColor={useAppThemeValue<ColorShade>(
-                "gray.600",
-                "gray.400"
+                "gray.1300",
+                "gray.900",
               )}
             >
               About

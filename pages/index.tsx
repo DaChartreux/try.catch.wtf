@@ -1,12 +1,12 @@
 import React, { ReactNode } from "react";
 import type { ReactElement } from "react";
 import type { NextPage } from "next";
+import styled from "@emotion/styled";
 
 import Navbar from "@components/Navbar";
 import Layout from "@components/Layout";
 import Categories from "@components/Categories";
 import RecentPosts from "@components/Recent";
-import styled from "@emotion/styled";
 
 type NextPageWithLayout = NextPage<never> & {
   getLayout?: (page: ReactElement) => ReactNode;
@@ -33,6 +33,7 @@ const RecentPostsWrapper = styled.div`
 const Index: NextPageWithLayout = () => {
   return (
     <>
+      <button>asdasdasd</button>
       <CategoriesWrapper>
         <Categories
           categories={[

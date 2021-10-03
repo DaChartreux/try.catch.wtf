@@ -28,10 +28,10 @@ const PostsGrid = styled.div`
 const RecentPosts = ({ posts }: RecentPostsProps) => (
   <>
     <Heading
-      fgColor={useAppThemeValue<ColorShade>("pink.600", "pink.500")}
+      fgColor={useAppThemeValue<ColorShade>("pink.1300", "pink.900")}
       fontWeight={500}
-      fontSize={"1rem"}
-      margin={"0 0 1.75rem 0"}
+      fontSize="1rem"
+      margin="0 0 1.75rem 0"
     >
       RECENT
     </Heading>

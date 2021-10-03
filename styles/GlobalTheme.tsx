@@ -1,4 +1,5 @@
 import { css, Global } from "@emotion/react";
+
 import FONT_FAMILIES from "@styles/fontFamilies";
 
 const GlobalTheme = () => (
@@ -12,19 +13,10 @@ const GlobalTheme = () => (
         margin: 0;
         scroll-behavior: smooth;
         font-family: ${theme.fonts.fontFamily};
-        color-scheme: dark;
       }
 
       code {
         font-family: ${theme.fonts.monoFontFamily};
-      }
-
-      :root {
-        --color-bg-primary: ${theme.colors.white};
-      }
-
-      :root[data-theme="dark"] {
-        --color-bg-primary: ${theme.colors.black};
       }
 
       * {
@@ -33,8 +25,8 @@ const GlobalTheme = () => (
       }
 
       html {
-        background: var(--color-bg-primary);
-        overflow-y: scroll;
+        background: ${theme.colors[theme.bgColor]};
+        color: ${theme.colors[theme.fgColor]};
         transition: background-color 200ms ease-in-out;
       }
 

@@ -3,7 +3,7 @@ import { motion, useAnimation } from "framer-motion";
 import styled from "@emotion/styled";
 
 import Heading from "@components/Heading";
-import LinkIcon from "@components/icons/LinkIcon";
+import LinkIcon from "@icons/LinkIcon";
 import { useAppThemeValue } from "@hooks/useAppThemeValue";
 import { useInView } from "@hooks/useInView";
 import { ColorShade } from "@typings/emotion";
@@ -91,7 +91,7 @@ const BlogHeading = ({ children }: BlogHeadingProps) => {
       href={`#${title.toLowerCase().replaceAll(" ", "-")}`}
     >
       <Heading
-        fgColor={useAppThemeValue<ColorShade>("yellow.400", "yellow.400")}
+        fgColor="yellow.900"
         fontWeight={500}
         fontSize={"1.75rem"}
         margin={"0"}

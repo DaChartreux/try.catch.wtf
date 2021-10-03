@@ -17,6 +17,7 @@
     "paths": {
       "@components/*": ["components/*"],
       "@hooks/*": ["hooks/*"],
+      "@icons/*": ["components/icons/*"],
       "@img/*": ["public/img/*"],
       "@lib/*": ["lib/*"],
       "@public/*": ["public/*"],

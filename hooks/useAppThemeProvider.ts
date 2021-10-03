@@ -4,7 +4,7 @@ type AppTheme = "light" | "dark";
 
 export const useAppThemeProvider = () => {
   const [appTheme, setAppTheme] = React.useState<AppTheme>(
-    (document.documentElement.dataset.theme as AppTheme | undefined) ?? "light"
+    (document.documentElement.dataset.theme as AppTheme | undefined) ?? "light",
   );
 
   const changeTheme = () => {
@@ -15,6 +15,7 @@ export const useAppThemeProvider = () => {
 
   React.useEffect(() => {
     document.documentElement.dataset.theme = appTheme;
+    document.documentElement.style.colorScheme = appTheme;
     window.localStorage.setItem("__APP_THEME__", appTheme);
   }, [appTheme]);
 

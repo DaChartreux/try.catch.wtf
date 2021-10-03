@@ -1,9 +1,11 @@
 import React from "react";
+import { MDXProviderComponentsProp } from "@mdx-js/react";
 
 import BlogHeading from "@components/BlogHeading";
 import Heading from "@components/Heading";
+import Blockquote from "@components/Blockquote";
 
-const MDXComponents = {
+const MDXComponents: MDXProviderComponentsProp = {
   h1: (props: any) => (
     <Heading {...props} fontSize="5rem" fontWeight={400} fgColor="pink.400" />
   ),
@@ -15,6 +17,7 @@ const MDXComponents = {
       style={{ color: "white", fontSize: "1.125rem", fontWeight: 500 }}
     />
   ),
+  blockquote: (props: any) => <Blockquote {...props} />,
 };
 
 export default MDXComponents;

@@ -7,7 +7,6 @@ import NextDocument, {
 } from "next/document";
 import createEmotionServer from "@emotion/server/create-instance";
 import { cache } from "@emotion/css";
-import GlobalTheme from "@styles/GlobalTheme";
 
 const initialTheme = `
 !(function() {
@@ -20,6 +19,7 @@ const initialTheme = `
   }
   const theme = getTheme();
   document.documentElement.dataset.theme = theme;
+  document.documentElement.style.colorScheme = theme;
 }())`;
 
 export const renderStatic = async (html: string) => {
@@ -54,7 +54,7 @@ export default class Document extends NextDocument {
 
   render() {
     return (
-      <Html>
+      <Html style={{ colorScheme: "dark" }}>
         <Head />
         <body>
           <script dangerouslySetInnerHTML={{ __html: initialTheme }} />

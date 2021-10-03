@@ -3,10 +3,8 @@ import type { ReactElement, ReactNode } from "react";
 import dynamic from "next/dynamic";
 import type { NextPage } from "next";
 import type { AppProps } from "next/app";
-import { ThemeProvider } from "@emotion/react";
 import { AnimateSharedLayout } from "framer-motion";
 
-import THEME from "@styles/theme";
 import GlobalTheme from "@styles/GlobalTheme";
 
 type NextPageWithLayout = NextPage & {
@@ -27,12 +25,10 @@ const App = ({ Component, pageProps }: AppPropsWithLayout) => {
 
   return (
     <AppThemeProvider>
-      <ThemeProvider theme={THEME}>
-        <GlobalTheme />
-        <AnimateSharedLayout>
-          {getLayout(<Component {...pageProps} />)}
-        </AnimateSharedLayout>
-      </ThemeProvider>
+      <GlobalTheme />
+      <AnimateSharedLayout>
+        {getLayout(<Component {...pageProps} />)}
+      </AnimateSharedLayout>
     </AppThemeProvider>
   );
 };
