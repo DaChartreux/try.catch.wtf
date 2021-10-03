@@ -1,9 +1,10 @@
 import { Theme } from "@emotion/react";
 
-export const theme: Theme = {
+const THEME: Theme = {
   borderRadius: "0.375rem",
   fonts: {
-    fontFamily: "Roboto Mono",
+    fontFamily: "Jost",
+    monoFontFamily: "Iosevka",
     normalWeight: 400,
     boldWeight: 700,
   },
@@ -57,3 +58,5 @@ export const theme: Theme = {
     "gray.900": "#323A48",
   },
 };
+
+export default THEME;

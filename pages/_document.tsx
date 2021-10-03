@@ -1,4 +1,4 @@
-import Document, {
+import NextDocument, {
   DocumentContext,
   Html,
   Head,
@@ -7,6 +7,7 @@ import Document, {
 } from "next/document";
 import createEmotionServer from "@emotion/server/create-instance";
 import { cache } from "@emotion/css";
+import GlobalTheme from "@styles/GlobalTheme";
 
 const initialTheme = `
 !(function() {
@@ -31,11 +32,12 @@ export const renderStatic = async (html: string) => {
   return { html, ids, css };
 };
 
-export default class MyDocument extends Document {
+export default class Document extends NextDocument {
   static async getInitialProps(ctx: DocumentContext) {
     const page = await ctx.renderPage();
     const { css, ids } = await renderStatic(page.html);
-    const initialProps = await Document.getInitialProps(ctx);
+    const initialProps = await NextDocument.getInitialProps(ctx);
+
     return {
       ...initialProps,
       styles: (
@@ -53,18 +55,7 @@ export default class MyDocument extends Document {
   render() {
     return (
       <Html>
-        <Head>
-          <link rel="preconnect" href="https://fonts.googleapis.com" />
-          <link
-            rel="preconnect"
-            href="https://fonts.gstatic.com"
-            crossOrigin="crossorigin"
-          />
-          <link
-            href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;700&display=swap"
-            rel="stylesheet"
-          />
-        </Head>
+        <Head />
         <body>
           <script dangerouslySetInnerHTML={{ __html: initialTheme }} />
           <Main />

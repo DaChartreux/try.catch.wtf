@@ -16,6 +16,7 @@ declare module "@emotion/react" {
     borderRadius: string;
 
     fonts: {
+      monoFontFamily: string;
       fontFamily: string;
       normalWeight: number;
       boldWeight: number;
