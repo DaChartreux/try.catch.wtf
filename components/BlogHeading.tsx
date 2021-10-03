@@ -1,12 +1,12 @@
+import { ReactNode, useEffect } from "react";
+import { motion, useAnimation } from "framer-motion";
+import styled from "@emotion/styled";
+
 import Heading from "@components/Heading";
 import LinkIcon from "@components/icons/LinkIcon";
 import { useAppThemeValue } from "@hooks/useAppThemeValue";
-import useInView from "@hooks/useInView";
+import { useInView } from "@hooks/useInView";
 import { ColorShade } from "@typings/emotion";
-import { motion, useAnimation } from "framer-motion";
-import { ReactNode } from "react";
-import { useEffect } from "react";
-import styled from "@emotion/styled";
 
 const BlogAnchorHeadingStyled = styled(motion.a)`
   position: relative;
@@ -79,13 +79,16 @@ const BlogHeading = ({ children }: BlogHeadingProps) => {
     }
   }, [controls, isVisible]);
 
+  const title =
+    typeof children === "string" ? children : (children as any[])[0];
+
   return (
     <BlogAnchorHeadingStyled
       initial="rest"
       animate="rest"
       ref={containerRef}
-      id={(children as string).toLowerCase().replaceAll(" ", "-")}
-      href={`#${(children as string).toLowerCase().replaceAll(" ", "-")}`}
+      id={title.toLowerCase().replaceAll(" ", "-")}
+      href={`#${title.toLowerCase().replaceAll(" ", "-")}`}
     >
       <Heading
         fgColor={useAppThemeValue<ColorShade>("yellow.400", "yellow.400")}

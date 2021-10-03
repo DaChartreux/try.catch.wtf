@@ -1,7 +1,6 @@
-import { useEffect, useState } from "react";
-import { useRef } from "react";
+import { useEffect, useState, useRef } from "react";
 
-const useInView = (options: IntersectionObserverInit) => {
+export const useInView = (options: IntersectionObserverInit) => {
   const containerRef = useRef(null);
   const [isVisible, setIsVisible] = useState<boolean>(false);
 
@@ -30,5 +29,3 @@ const useInView = (options: IntersectionObserverInit) => {
 
   return { containerRef, isVisible };
 };
-
-export default useInView;

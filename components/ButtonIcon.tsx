@@ -1,5 +1,6 @@
-import { ColorShade } from "@typings/emotion";
 import styled from "@emotion/styled";
+
+import { ColorShade } from "@typings/emotion";
 
 type ButtonIconStyledProps = {
   bgColor: string;

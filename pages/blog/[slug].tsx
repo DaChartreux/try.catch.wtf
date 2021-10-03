@@ -3,6 +3,7 @@ import path from "path";
 
 import React, { ReactNode, ReactElement, useEffect } from "react";
 import type { NextPage } from "next";
+import Image from "next/image";
 import { MDXRemote, MDXRemoteSerializeResult } from "next-mdx-remote";
 import { serialize } from "next-mdx-remote/serialize";
 import matter from "gray-matter";
@@ -20,6 +21,7 @@ import { HeroImageName } from "@typings/HeroImageName";
 
 const components = {
   Spacer,
+  Image,
 };
 
 type NextPageWithLayout = NextPage<BlogPropsType> & {

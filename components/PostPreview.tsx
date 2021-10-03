@@ -3,13 +3,13 @@ import Image from "next/image";
 import Link from "next/link";
 import styled from "@emotion/styled";
 import { css } from "@emotion/react";
+import { motion } from "framer-motion";
 
 import Heading from "@components/Heading";
-import { useAppThemeValue } from "@hooks/useAppThemeValue";
-import { ColorShade } from "@typings/emotion";
-import { motion } from "framer-motion";
 import heroImageMap from "@components/HeroImage";
+import { useAppThemeValue } from "@hooks/useAppThemeValue";
 import { HeroImageName } from "@typings/HeroImageName";
+import { ColorShade } from "@typings/emotion";
 
 type RecentPosts = {
   title: string;

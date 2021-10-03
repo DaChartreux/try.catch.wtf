@@ -1,13 +1,13 @@
+import React from "react";
 import Image from "next/image";
 import styled from "@emotion/styled";
 import { css } from "@emotion/react";
+import { motion } from "framer-motion";
 
+import Heading from "@components/Heading";
 import ExternalLinkIcon from "@components/icons/ExternalLinkIcon";
 import { useAppThemeValue } from "@hooks/useAppThemeValue";
 import { ColorShade } from "@typings/emotion";
-import { motion } from "framer-motion";
-import React from "react";
-import Heading from "@components/Heading";
 
 type ImageContainerProps = {
   bgColor: ColorShade;

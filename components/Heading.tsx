@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
+import { motion } from "framer-motion";
 
 import { ColorShade } from "@typings/emotion";
-import { motion } from "framer-motion";
 
 type HeadingStyledProps = {
   fgColor: ColorShade;
