@@ -4,6 +4,7 @@ import { MDXProviderComponentsProp } from "@mdx-js/react";
 import BlogHeading from "@components/BlogHeading";
 import Heading from "@components/Heading";
 import Blockquote from "@components/Blockquote";
+import Prism from "@components/Highlight";
 
 const MDXComponents: MDXProviderComponentsProp = {
   h1: (props: any) => (
@@ -18,6 +19,7 @@ const MDXComponents: MDXProviderComponentsProp = {
     />
   ),
   blockquote: (props: any) => <Blockquote {...props} />,
+  pre: (props: any) => <Prism {...props} />,
 };
 
 export default MDXComponents;
