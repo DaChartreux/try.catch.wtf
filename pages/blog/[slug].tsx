@@ -3,6 +3,7 @@ import path from "path";
 
 import React, { ReactNode, ReactElement, useEffect } from "react";
 import type { NextPage } from "next";
+import dynamic from "next/dynamic";
 import Image from "next/image";
 import { MDXRemote, MDXRemoteSerializeResult } from "next-mdx-remote";
 import { serialize } from "next-mdx-remote/serialize";
@@ -13,11 +14,12 @@ import { MDXProvider } from "@mdx-js/react";
 import { POSTS_PATH, postFilePaths } from "utils/mdxUtils";
 import Hero from "@components/Hero";
 import Layout from "@components/Layout";
-import Navbar from "@components/Navbar";
 import Spacer from "@components/Spacer";
 import heroImageMap from "@components/HeroImage";
 import MDXComponents from "@components/MDXComponents";
 import { HeroImageName } from "@typings/HeroImageName";
+
+const Navbar = dynamic(() => import("@components/Navbar"), { ssr: false });
 
 const components = {
   Spacer,
