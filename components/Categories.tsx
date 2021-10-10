@@ -3,14 +3,14 @@ import { motion } from "framer-motion";
 
 import Heading from "@components/Heading";
 import Tag from "@components/Tag";
-import { ColorShade } from "@typings/emotion";
+import THEME from "@styles/theme";
 
 type CategoriesProps = {
   categories: {
     id: number;
     category: string;
     slug: string;
-    color: ColorShade;
+    color: keyof typeof THEME["colors"];
   }[];
 };
 

@@ -20,7 +20,9 @@ const AppThemeProvider = ({ children }: AppThemeProviderProps) => {
 
   return (
     <AppThemeContext.Provider value={theme}>
-      <ThemeProvider theme={THEME[theme.appTheme]}>{children}</ThemeProvider>
+      {/* <ThemeProvider theme={THEME[appTheme]}> */}
+      {children}
+      {/* </ThemeProvider> */}
     </AppThemeContext.Provider>
   );
 };

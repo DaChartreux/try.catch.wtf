@@ -4,9 +4,7 @@ import styled from "@emotion/styled";
 
 import Heading from "@components/Heading";
 import LinkIcon from "@icons/LinkIcon";
-import { useAppThemeValue } from "@hooks/useAppThemeValue";
 import { useInView } from "@hooks/useInView";
-import { ColorShade } from "@typings/emotion";
 
 const BlogAnchorHeadingStyled = styled(motion.a)`
   position: relative;
@@ -91,12 +89,12 @@ const BlogHeading = ({ children }: BlogHeadingProps) => {
       href={`#${title.toLowerCase().replaceAll(" ", "-")}`}
     >
       <Heading
-        fgColor="yellow.900"
+        fgColor="color-primary-100"
         fontWeight={500}
-        fontSize={"1.75rem"}
-        margin={"0"}
-        initial={["hidden", "rest"]}
+        fontSize="1.75rem"
+        margin="0"
         whileHover="hover"
+        initial={["hidden", "rest"]}
         animate={controls}
         variants={textMotion}
         transition={{ duration: 0.4 }}

@@ -19,13 +19,15 @@
     "next": "11.1.2",
     "prism-react-renderer": "^1.2.1",
     "react": "17.0.2",
-    "react-dom": "17.0.2"
+    "react-dom": "17.0.2",
+    "react-syntax-highlighter": "^15.4.4"
   },
   "devDependencies": {
     "@emotion/babel-plugin": "^11.3.0",
     "@emotion/eslint-plugin": "^11.2.0",
     "@types/mdx-js__react": "^1.5.4",
     "@types/react": "17.0.26",
+    "@types/react-syntax-highlighter": "^13.5.2",
     "eslint": "7.32.0",
     "eslint-config-next": "11.1.2",
     "next-mdx-remote": "^3.0.4",

@@ -2,31 +2,26 @@ import React from "react";
 import styled from "@emotion/styled";
 
 import InfoIcon from "@icons/InfoIcon";
+import THEME from "@styles/theme";
 
 const BlockquoteStyle = styled.blockquote`
   position: relative;
-  background-color: ${({ theme }) => theme.colors["blue.2300"]};
-  border: 2px solid ${({ theme }) => theme.colors["blue.2100"]};
+  background-color: hsl(${THEME.colors["color-info-bg"]});
+  border: 2px solid hsl(${THEME.colors["color-info-fg"]});
+  box-sizing: border-box;
   border-radius: 0.5rem;
   margin: 0 -1rem 2rem -1rem;
   padding: 1rem 1rem 1rem 2rem;
 
   .quote {
-    font-size: 1.125rem;
-    color: ${({ theme }) => theme.colors["blue.300"]};
-
-    ::after {
-      content: '"';
-    }
-
-    ::before {
-      content: '"';
-    }
+    font-size: 0.875rem;
+    font-family: "Inter";
+    color: hsl(${THEME.colors["color-fg"]}, 1);
   }
 
   .quote-source {
     font-size: 1rem;
-    color: ${({ theme }) => theme.colors["blue.1600"]};
+    color: hsl(${THEME.colors["color-info-fg"]}, 1);
   }
 `;
 
@@ -38,8 +33,8 @@ const IconStyle = styled.div`
   border-radius: 50%;
   left: -1.375rem;
   top: 1rem;
-  color: ${({ theme }) => theme.colors["blue.600"]};
-  background-color: ${({ theme }) => theme.colors["blue.2100"]};
+  color: hsl(${THEME.colors["color-info-bg"]});
+  background-color: hsl(${THEME.colors["color-info-fg"]});
 `;
 
 const Blockquote = ({ children }: any) => (

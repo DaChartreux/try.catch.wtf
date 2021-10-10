@@ -3,8 +3,6 @@ import styled from "@emotion/styled";
 
 import Heading from "@components/Heading";
 import PostPreview from "@components/PostPreview";
-import { useAppThemeValue } from "@hooks/useAppThemeValue";
-import { ColorShade } from "@typings/emotion";
 import { HeroImageName } from "@typings/HeroImageName";
 
 type RecentPostsProps = {
@@ -28,7 +26,7 @@ const PostsGrid = styled.div`
 const RecentPosts = ({ posts }: RecentPostsProps) => (
   <>
     <Heading
-      fgColor={useAppThemeValue<ColorShade>("pink.1300", "pink.900")}
+      fgColor="color-fgAlpha-800"
       fontWeight={500}
       fontSize="1rem"
       margin="0 0 1.75rem 0"

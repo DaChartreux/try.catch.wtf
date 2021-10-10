@@ -4,7 +4,9 @@ import { MDXProviderComponentsProp } from "@mdx-js/react";
 import BlogHeading from "@components/BlogHeading";
 import Heading from "@components/Heading";
 import Blockquote from "@components/Blockquote";
-import Prism from "@components/Highlight";
+import Highlight from "@components/Highlight";
+import OrderedList from "@components/Lists";
+import Paragraph from "@components/Paragraph";
 
 const MDXComponents: MDXProviderComponentsProp = {
   h1: (props: any) => (
@@ -12,14 +14,10 @@ const MDXComponents: MDXProviderComponentsProp = {
   ),
   h3: (props: any) => <BlogHeading {...props} />,
   h2: (props: any) => <BlogHeading {...props} />,
-  p: (props: any) => (
-    <p
-      {...props}
-      style={{ color: "white", fontSize: "1.125rem", fontWeight: 500 }}
-    />
-  ),
+  p: ({ children }) => <Paragraph>{children}</Paragraph>,
   blockquote: (props: any) => <Blockquote {...props} />,
-  pre: (props: any) => <Prism {...props} />,
+  ol: (props: any) => <OrderedList {...props} />,
+  pre: ({ children }: any) => <Highlight {...children.props} />,
 };
 
 export default MDXComponents;
