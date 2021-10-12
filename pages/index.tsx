@@ -18,7 +18,6 @@ type NextPageWithLayout = NextPage<never> & {
 const LayoutWrapper = styled(Layout)`
   margin-top: 3rem;
   padding: 0 2rem;
-  min-height: 100vh;
   box-sizing: border-box;
   display: grid;
   grid-template-columns: 3fr 1fr;
@@ -68,7 +67,6 @@ const LayoutWrapper = styled(Layout)`
   }
 
   @media (max-width: 768px) {
-    height: 5rem;
     padding: 0 2rem;
     margin-top: 3rem;
     box-sizing: border-box;
@@ -83,7 +81,6 @@ const LayoutWrapper = styled(Layout)`
   }
 
   @media (max-width: 640px) {
-    height: 4rem;
     padding: 0 2rem;
     margin-top: 3rem;
     box-sizing: border-box;

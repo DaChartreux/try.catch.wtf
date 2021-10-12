@@ -4,7 +4,7 @@ import Link from "next/link";
 
 import Heading from "@components/Heading";
 import heroImageMap from "@components/HeroImage";
-import { HeroImageName } from "@typings/HeroImageName";
+import { HeroImageName } from "@typings/heroImageName";
 import {
   MotionHeroStyled,
   PostFooter,

@@ -8,35 +8,38 @@ heroCreditSource: Unsplash
 
 ### Theme toggle
 
-A theme toggle might sound very trivial at first. What could go wrong with switching themes? _A lot_, things start to get serious. So let's dive right into how to toggle themes in SSR. I will be using Next.js and Emotion, but this can also be applied to any SSR framework using either CSS-in-JS or CSS to style the app.
+A theme toggle might sound very trivial at first. What could go wrong with switching themes? _A lot!_. We have to...
+
+- manage the theme context
+- sync the theme across different tabs
+- the infamous flash bang
+
+So, let's dive right into it and tackle these problems one by one. I will be using Next.js and Emotion, but this can also be applied to any SSR framework using either CSS-in-JS or CSS to style the app.
+
+Lets start by creating a next.js app and installing the dependencies.
 
 ```bash
-yarn create next-app theme-toggle
-```
-
-```bash
+$ yarn create next-app theme-toggle
+$ cd theme-toggle
 $ yarn add @emotion/styled @emotion/react
 ```
 
 ```jsx
 >>> _app.js
 
-import styled from "@emotion/styled";
-
-const Container = styled.div`
-  display: flex;
-  justify-content: center;
-  padding-top: 35vh;
-`;
-
-export default function Home: any() {
-  return (
-    <Container>
-      <main>
-        <h1>Next.js dark mode toggle</h1>
-        <h4>Dark mode is more than just a gimmick, right?!</h4>
-      </main>
-    </Container>
-  );
-}
+import React from "react";
+import type { ReactElement, ReactNode } from "react";
+import type { ReactElement, ReactNode } from "react";import React from "react";
+import type { ReactElement, ReactNode } from "react";
+import type { ReactElement, ReactNode } from "react";import React from "react";
+import type { ReactElement, ReactNode } from "react";
+import type { ReactElement, ReactNode } from "react";import React from "react";
+import type { ReactElement, ReactNode } from "react";
+import type { ReactElement, ReactNode } from "react";import React from "react";
+import type { ReactElement, ReactNode } from "react";
+import type { ReactElement, ReactNode } from "react";import React from "react";
+import type { ReactElement, ReactNode } from "react";
+import type { ReactElement, ReactNode } from "react";import React from "react";
+import type { ReactElement, ReactNode } from "react";
+import type { ReactElement, ReactNode } from "react";
 ```

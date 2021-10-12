@@ -17,7 +17,7 @@ import Layout from "@components/Layout";
 import Spacer from "@components/Spacer";
 import heroImageMap from "@components/HeroImage";
 import MDXComponents from "@components/MDXComponents";
-import { HeroImageName } from "@typings/HeroImageName";
+import { HeroImageName } from "@typings/heroImageName";
 
 const Navbar = dynamic(() => import("@components/Navbar"), { ssr: false });
 

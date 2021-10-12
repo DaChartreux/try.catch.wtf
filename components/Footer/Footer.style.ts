@@ -5,7 +5,7 @@ import THEME from "@styles/theme";
 export const FooterWrapper = styled.footer`
   background-color: hsl(${THEME.colors["color-primary-200"]});
   box-sizing: border-box;
-  padding: 3rem 2rem 1rem 2rem;
+  padding: 2rem;
   color: black;
 `;
 
@@ -14,8 +14,16 @@ export const FooterTopWrapper = styled.div`
   margin: auto;
   max-width: 1200px;
   height: 10rem;
-
   border-bottom: 1px solid hsl(${THEME.colors["color-bg"]});
+
+  .links {
+    margin-top: 1rem;
+
+    svg {
+      width: 1.2rem;
+      margin-right: 1rem;
+    }
+  }
 
   span {
     align-items: flex-end;

@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 import { css } from "@emotion/react";
 import { motion } from "framer-motion";
 
-import { ColorShade } from "@typings/emotion";
+import { ColorShade } from "@typings/theme";
 import THEME from "@styles/theme";
 
 type NavContainerStyles = {
@@ -17,9 +17,14 @@ export const NavContainer = styled(motion.div)<NavContainerStyles>`
   position: sticky;
   top: 0;
   z-index: 2;
+  padding: 0 2rem;
   backdrop-filter: blur(0.5rem);
   background-color: hsla(${({ bgColor }) => THEME.colors[bgColor]}, 0.85);
   transition: background-color 200ms ease-in-out;
+
+  @media (max-width: 640px) {
+    padding: 0 2rem;
+  }
 `;
 
 export const NavInnerContainer = styled.div`
@@ -34,27 +39,20 @@ export const NavInnerContainer = styled.div`
   border-bottom: 2px hsla(${THEME.colors["color-fg"]}, 0.08) solid;
 
   @media (max-width: 1536px) {
-    background-color: red;
   }
 
   @media (max-width: 1280px) {
-    background-color: green;
   }
 
   @media (max-width: 1024px) {
-    padding: 0 4rem;
-    background-color: blue;
   }
 
   @media (max-width: 768px) {
     height: 5rem;
-    background-color: yellow;
+    padding: 0;
   }
 
   @media (max-width: 640px) {
-    height: 4rem;
-    padding: 0 2rem;
-    background-color: beige;
   }
 `;
 

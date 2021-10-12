@@ -34,6 +34,40 @@ const GlobalTheme = () => (
         --color-primary-100: hsl(40, 95%, 67%);
         --color-primary-200: hsl(40, 95%, 57%);
         --color-primary-300: hsl(40, 95%, 47%);
+
+        --color-rose-100: hsl(350, 89%, 60%);
+        --color-rose-200: hsl(350, 89%, 50%);
+        --color-rose-300: hsl(350, 89%, 40%);
+
+        --color-pink-100: hsl(330, 81%, 60%);
+        --color-pink-200: hsl(330, 81%, 50%);
+        --color-pink-300: hsl(330, 81%, 40%);
+
+        --color-fuchsia-100: hsl(292, 84%, 61%);
+        --color-fuchsia-200: hsl(292, 84%, 51%);
+        --color-fuchsia-300: hsl(292, 84%, 41%);
+
+        --color-rose-100: hsl(330, 81%, 60%);
+        --color-rose-200: hsl(330, 81%, 50%);
+        --color-rose-300: hsl(330, 81%, 40%);
+
+        --color-rose-100: hsl(330, 81%, 60%);
+        --color-rose-200: hsl(330, 81%, 50%);
+        --color-rose-300: hsl(330, 81%, 40%);
+
+        --color-rose-100: hsl(330, 81%, 60%);
+        --color-rose-200: hsl(330, 81%, 50%);
+        --color-rose-300: hsl(330, 81%, 40%);
+
+        --color-rose-100: hsl(330, 81%, 60%);
+        --color-rose-200: hsl(330, 81%, 50%);
+        --color-rose-300: hsl(330, 81%, 40%);
+
+        --color-rose-100: hsl(330, 81%, 60%);
+        --color-rose-200: hsl(330, 81%, 50%);
+        --color-rose-300: hsl(330, 81%, 40%);
+
+        
         */
       }
 
@@ -102,20 +136,20 @@ const GlobalTheme = () => (
       }
 
       html {
-        background: hsl(${THEME.colors["color-bg"]});
-        color: hsl(${THEME.colors["color-fg"]});
+        background: hsl(${THEME.colors["bg"]});
+        color: hsl(${THEME.colors["fg"]});
         transition: background-color 200ms ease-in-out;
       }
 
       ::-webkit-scrollbar {
         width: 0.5rem;
-        background-color: hsla(${THEME.colors["color-bg"]}, 1);
+        background-color: hsla(${THEME.colors["bg"]}, 1);
       }
 
       ::-webkit-scrollbar-thumb {
         border-radius: 0.5rem;
-        background-color: hsla(${THEME.colors["color-fg"]}, 0.2);
-        border: 2px solid hsla(${THEME.colors["color-bg"]}, 1);
+        background-color: hsla(${THEME.colors["fg"]}, 0.2);
+        border: 2px solid hsla(${THEME.colors["bg"]}, 1);
       }
     `}
   />

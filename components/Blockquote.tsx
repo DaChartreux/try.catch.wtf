@@ -15,7 +15,6 @@ const BlockquoteStyle = styled.blockquote`
 
   .quote {
     font-size: 0.875rem;
-    font-family: "Inter";
     color: hsl(${THEME.colors["color-fg"]}, 1);
   }
 

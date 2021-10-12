@@ -1,0 +1,184 @@
+---
+title: React state and render
+heroImageName: 72Mf6a3tpno
+heroCreditUserProfile: Pawel Czerwinski
+heroCreditUserProfileUrl: https://unsplash.com/@pawel_czerwinski?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText
+heroCreditSource: Unsplash
+---
+
+### React state
+
+A state is a data container that contains the data for a component throughout its lifecycle in a React app. React will re-render the app when state changes. But there are some very interesting cases where state updates may leave us confused! So let's dive right into demystifying some of the cases.
+
+All the examples used in this blog post can be found in this codesandbox
+
+### Async nature
+
+React state updates are asynchronous in nature. Let's understand with an example.
+
+```jsx
+const App = () => {
+  const [counter, setCounter] = useState(0);
+
+  const updateState = () => {
+    setCounter(counter + 100);
+    console.log("App::updateState", counter);
+  };
+
+  console.log("App::render");
+
+  return (
+    <>
+      <h2>Counter: {counter}</h2>
+      <button onClick={updateState}>Click me</button>
+    </>
+  );
+};
+```
+
+`updateState` function updates the state, but then it doesn't log the updated state. This is because React does state update asynchronously. `setCounter` updates the state in background, and control flows to `console.log` which logs the state. After logging, the state is updated and the component is re-rendered. But why does it update asynchronously? This is because React does state update in batches, which reduces unnecessary re-renders.
+
+Example below shows how to properly react to state updates. `useEffect` takes in a dependency array, and when any of the variables in the dependency array change, the passed function is called. Enabling us to log the updated state properly.
+
+```jsx
+const App = () => {
+  const [counter, setCounter] = useState(0);
+
+  const updateState = () => {
+    setCounter(counter + 100);
+  };
+
+  useEffect(() => {
+    console.log("App::stateUpdated", counter);
+  }, [counter]);
+
+  console.log("App::render");
+
+  return (
+    <>
+      <h2>Counter: {counter}</h2>
+      <button onClick={updateState}>Click me</button>
+    </>
+  );
+};
+```
+
+### Multiple State Updates
+
+What happens when we update the state multiple times?
+
+```jsx
+const App = () => {
+  const [counter, setCounter] = useState(0);
+
+  const updateState = () => {
+    setCounter(counter + 1);
+    setCounter(counter + 1);
+    setCounter(counter + 1);
+  };
+
+  console.log("App::render");
+
+  return (
+    <>
+      <h2>Counter: {counter}</h2>
+      <button onClick={updateState}>Click me</button>
+    </>
+  );
+};
+```
+
+When we click the button, we expect the state to be incremented three times, resulting in the value of counter to 3. But what renders is completely off. Why though? The culprit is asynchronous (and batched) state updates. When `updateState` function is called, React updated state one after the other without re-rendering (this is evident because `App::render` is logged only once for 3 state updates). Now since it didn't trigger a re-render, the value of `counter` was `0` for all 3 `setCounter` functions. Resulting in incorrect value of state.
+
+React is well aware of this shortcoming of asynchronous (and batched) state updates. React allows us to update state by passing it a callback instead of value. This callback recieves the updated state value. Which resolves this issue.
+
+```jsx
+const App = () => {
+  const [counter, setCounter] = useState(1);
+
+  const updateState = () => {
+    setCounter((counter) => counter + 1);
+    setCounter((counter) => counter + 1);
+    setCounter((counter) => counter + 1);
+  };
+
+  console.log("App::render");
+
+  return (
+    <>
+      <h2>Counter: {counter}</h2>
+      <button onClick={updateState}>Click me</button>
+    </>
+  );
+};
+```
+
+Also note that this still re-renders once for 3 state updates.
+
+### Does React ALWAYS update state in batches?
+
+NO. React updates state in batches only inside synthetic events and React lifecycle methods. This is because React can only update state in batches when it knows when the function updating the state is called.
+
+Example below does 2 state updates after resolving the promise. But since these state updates are not in any synthetic events (or React lifecycle methods), React does not know when this state update is called, hence it causes 2 re-renders (1 re-render for each state update).
+
+```jsx
+const App = () => {
+  const [counter, setCounter] = useState(0);
+  const [flag, setFlag] = useState(false);
+
+  const updateState = () => {
+    new Promise((resolve) => setTimeout(resolve, 1000)).then(() => {
+      // causes a re-render
+      setCounter(counter + 1);
+
+      // causes a re-render
+      setFlag(!flag);
+    });
+  };
+
+  console.log("App::render");
+
+  return (
+    <>
+      <h2>Counter: {counter}</h2>
+      <h2>Flag: {JSON.stringify(flag)}</h2>
+      <button onClick={updateState}>Click me</button>
+    </>
+  );
+};
+```
+
+We can force React to batch these state updates by wrapping state update in `unstable_batchedUpdates`.
+
+```jsx
+const App = () => {
+  const [counter, setCounter] = useState(0);
+  const [flag, setFlag] = useState(false);
+
+  const updateState = () => {
+    new Promise((resolve) => setTimeout(resolve, 1000)).then(() => {
+      // unstable_batchedUpdates expects a callback wherein we can
+      // update state
+      unstable_batchedUpdates(() => {
+        // doesn't cause re-render
+        setCounter(counter + 1);
+
+        // doesn't cause re-render
+        setFlag(!flag);
+      });
+    });
+  };
+
+  console.log("App::render");
+
+  return (
+    <>
+      <h2>Counter: {counter}</h2>
+      <h2>Flag: {JSON.stringify(flag)}</h2>
+      <button onClick={updateState}>Click me</button>
+    </>
+  );
+};
+```
+
+> React v18 will batch state updates automatically, no matter where the updates happen.
