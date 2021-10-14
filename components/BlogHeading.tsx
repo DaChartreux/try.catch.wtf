@@ -89,7 +89,7 @@ const BlogHeading = ({ children }: BlogHeadingProps) => {
       href={`#${title.toLowerCase().replaceAll(" ", "-")}`}
     >
       <Heading
-        fgColor="color-primary-100"
+        fgColor="primary-100"
         fontWeight={500}
         fontSize="1.75rem"
         margin="0"

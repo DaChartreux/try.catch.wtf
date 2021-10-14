@@ -36,7 +36,7 @@ const PostPreview = ({ title, slug, hero }: RecentPosts) => (
         />
       </MotionHeroStyled>
       <Heading
-        fgColor="color-primary-100"
+        fgColor="primary-100"
         fontWeight={600}
         fontSize="1.375rem"
         margin="0"

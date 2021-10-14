@@ -3,7 +3,7 @@ import styled from "@emotion/styled";
 import THEME from "@styles/theme";
 
 export const FooterWrapper = styled.footer`
-  background-color: hsl(${THEME.colors["color-primary-200"]});
+  background-color: hsl(${THEME.colors["primary-200"]});
   box-sizing: border-box;
   padding: 2rem;
   color: black;
@@ -14,14 +14,17 @@ export const FooterTopWrapper = styled.div`
   margin: auto;
   max-width: 1200px;
   height: 10rem;
-  border-bottom: 1px solid hsl(${THEME.colors["color-bg"]});
+  border-bottom: 1px solid hsl(${THEME.colors["bg"]});
 
   .links {
     margin-top: 1rem;
 
+    button {
+      margin-right: 1rem;
+    }
+
     svg {
       width: 1.2rem;
-      margin-right: 1rem;
     }
   }
 

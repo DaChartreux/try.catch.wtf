@@ -1,3 +1,5 @@
+import React from "react";
+
 import {
   FooterWrapper,
   FooterTopWrapper,
@@ -5,7 +7,7 @@ import {
 } from "@components/Footer/Footer.style";
 import GithubIcon from "@components/icons/GithubIcon";
 import TwitterIcon from "@components/icons/TwitterIcon";
-import React from "react";
+import ButtonIcon from "@components/ButtonIcon";
 
 const Footer = () => {
   return (
@@ -24,8 +26,12 @@ const Footer = () => {
           </span>
         </div>
         <div className="links">
-          <GithubIcon />
-          <TwitterIcon />
+          <ButtonIcon bgColor="bg" fgColor="bg">
+            <GithubIcon />
+          </ButtonIcon>
+          <ButtonIcon bgColor="bg" fgColor="bg">
+            <TwitterIcon />
+          </ButtonIcon>
         </div>
       </FooterTopWrapper>
       <FooterBottomWrapper>

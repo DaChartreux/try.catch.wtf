@@ -1,8 +1,9 @@
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
+
 import THEME from "@styles/theme";
 
-import { ColorShade } from "@typings/emotion";
+import { ColorShade } from "@typings/theme";
 
 type ButtonIconStyledProps = {
   bgColor: ColorShade;

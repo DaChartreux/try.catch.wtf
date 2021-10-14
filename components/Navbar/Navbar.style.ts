@@ -14,8 +14,10 @@ type LinkStyledProps = {
 };
 
 export const NavContainer = styled(motion.div)<NavContainerStyles>`
-  position: sticky;
+  position: fixed;
   top: 0;
+  left: 0;
+  right: 0;
   z-index: 2;
   padding: 0 2rem;
   backdrop-filter: blur(0.5rem);
@@ -36,32 +38,20 @@ export const NavInnerContainer = styled.div`
   height: 5.75rem;
   position: relative;
   justify-content: space-between;
-  border-bottom: 2px hsla(${THEME.colors["color-fg"]}, 0.08) solid;
-
-  @media (max-width: 1536px) {
-  }
-
-  @media (max-width: 1280px) {
-  }
-
-  @media (max-width: 1024px) {
-  }
+  border-bottom: 2px hsla(${THEME.colors["fg"]}, 0.08) solid;
 
   @media (max-width: 768px) {
     height: 5rem;
     padding: 0;
   }
-
-  @media (max-width: 640px) {
-  }
 `;
 
-export const NavStyled = styled.nav`
+export const NavStyle = styled.nav`
   display: inline-flex;
   align-items: center;
 `;
 
-export const HomeLinkStyled = styled.div<LinkStyledProps>`
+export const HomeLinkStyle = styled.div<LinkStyledProps>`
   font-size: 1.5rem;
   font-weight: 600;
   position: relative;
@@ -70,7 +60,7 @@ export const HomeLinkStyled = styled.div<LinkStyledProps>`
 
   &::after {
     content: "";
-    background-color: hsl(${THEME.colors["color-primary-100"]});
+    background-color: hsl(${THEME.colors["primary-100"]});
     height: 0.25rem;
     width: 2rem;
     position: absolute;
@@ -91,7 +81,7 @@ export const HomeLinkStyled = styled.div<LinkStyledProps>`
   `}
 `;
 
-export const LinkStyled = styled.a<LinkStyledProps>`
+export const LinkStyle = styled.a<LinkStyledProps>`
   font-weight: 600;
   position: relative;
   height: fit-content;
@@ -110,4 +100,15 @@ export const LinkStyled = styled.a<LinkStyledProps>`
       color: hsl(${THEME.colors[fgColor]});
     }
   `}
+`;
+
+export const MenuItemStyle = styled(motion.div)`
+  height: 4rem;
+  display: flex;
+  align-items: center;
+
+  p {
+    font-weight: 500;
+    margin: 0;
+  }
 `;

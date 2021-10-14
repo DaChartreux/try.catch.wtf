@@ -26,12 +26,12 @@ export const PostFooter = styled.footer`
 
     svg {
       transition: 200ms ease-in-out;
-      color: hsla(${THEME.colors["color-fg"]}, 0.5);
+      color: hsla(${THEME.colors["fg"]}, 0.5);
     }
 
     p {
       font-size: 0.875rem;
-      color: hsla(${THEME.colors["color-fg"]}, 0.5);
+      color: hsla(${THEME.colors["fg"]}, 0.5);
       font-weight: 500;
       margin: auto 0.5rem;
     }
@@ -48,7 +48,7 @@ export const PostPreviewStyled = styled.a`
   transition: 200ms ease-in-out;
   display: flex;
   flex-direction: column;
-  border-color: hsla(${THEME.colors["color-fg"]}, 0.06);
+  border-color: hsla(${THEME.colors["fg"]}, 0.06);
   box-shadow: 0px 0.2px 0.5px rgba(0, 0, 0, 0.016),
     0px 0.6px 1.5px rgba(0, 0, 0, 0.024), 0px 1.4px 3.6px rgba(0, 0, 0, 0.032),
     0px 6px 12px rgba(0, 0, 0, 0.05);
@@ -58,12 +58,12 @@ export const PostPreviewStyled = styled.a`
   }
 
   &:hover {
-    background-color: hsla(${THEME.colors["color-fg"]}, 0.02);
-    border-color: hsla(${THEME.colors["color-fg"]}, 0.08);
+    background-color: hsla(${THEME.colors["fg"]}, 0.02);
+    border-color: hsla(${THEME.colors["fg"]}, 0.08);
 
     ${PostFooter} {
       svg {
-        color: hsla(${THEME.colors["color-fg"]}, 0.6);
+        color: hsla(${THEME.colors["fg"]}, 0.6);
       }
     }
   }

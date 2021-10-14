@@ -42,7 +42,7 @@ const PostsGrid = styled.div`
 const RecentPosts = ({ posts }: RecentPostsProps) => (
   <>
     <Heading
-      fgColor="color-fgAlpha-800"
+      fgColor="fg"
       fontWeight={500}
       fontSize="1rem"
       margin="0 0 1.75rem 0"

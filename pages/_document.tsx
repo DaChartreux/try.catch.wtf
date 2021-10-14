@@ -55,12 +55,7 @@ export default class Document extends NextDocument {
   render() {
     return (
       <Html style={{ colorScheme: "dark" }}>
-        <Head>
-          <meta
-            name="viewport"
-            content="width=device-width, initial-scale=1, shrink-to-fit=no"
-          />
-        </Head>
+        <Head />
         <body>
           <script dangerouslySetInnerHTML={{ __html: initialTheme }} />
           <Main />

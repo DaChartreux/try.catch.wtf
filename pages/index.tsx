@@ -16,7 +16,6 @@ type NextPageWithLayout = NextPage<never> & {
 };
 
 const LayoutWrapper = styled(Layout)`
-  margin-top: 3rem;
   padding: 0 2rem;
   box-sizing: border-box;
   display: grid;
@@ -28,7 +27,6 @@ const LayoutWrapper = styled(Layout)`
   gap: 3rem;
 
   @media (max-width: 1536px) {
-    margin-top: 3rem;
     padding: 0 2rem;
     box-sizing: border-box;
     display: grid;
@@ -41,7 +39,6 @@ const LayoutWrapper = styled(Layout)`
   }
 
   @media (max-width: 1280px) {
-    margin-top: 3rem;
     padding: 0 2rem;
     box-sizing: border-box;
     display: grid;
@@ -54,7 +51,6 @@ const LayoutWrapper = styled(Layout)`
   }
 
   @media (max-width: 1024px) {
-    margin-top: 3rem;
     padding: 0 2rem;
     box-sizing: border-box;
     display: grid;
@@ -68,7 +64,6 @@ const LayoutWrapper = styled(Layout)`
 
   @media (max-width: 768px) {
     padding: 0 2rem;
-    margin-top: 3rem;
     box-sizing: border-box;
     display: grid;
     grid-template-columns: auto;
@@ -82,7 +77,6 @@ const LayoutWrapper = styled(Layout)`
 
   @media (max-width: 640px) {
     padding: 0 2rem;
-    margin-top: 3rem;
     box-sizing: border-box;
     display: grid;
     grid-template-columns: auto;
@@ -106,7 +100,8 @@ const RecentPostsWrapper = styled.div`
 const Index: NextPageWithLayout = () => {
   return (
     <>
-      {/* <CategoriesWrapper>
+      <body>
+        {/* <CategoriesWrapper>
         <Categories
           categories={[
             { id: 1, category: "ReactJS", slug: "test", color: "blue.100" },
@@ -119,30 +114,31 @@ const Index: NextPageWithLayout = () => {
         />
       </CategoriesWrapper> */}
 
-      <RecentPostsWrapper>
-        <RecentPosts
-          posts={[
-            {
-              id: 1,
-              categories: [],
-              hero: "72Mf6a3tpno",
-              title: "An Interactive Guide to Keyframe Animations",
-              slug: "blog-1",
-              description:
-                "CSS keyframe animations are incredibly flexible and powerful, but they’re also a bit weird. In this deep-dive tutorial, we'll learn how CSS keyframes work from the ground up, and see how to use them to build high-quality animations.",
-            },
-            {
-              id: 2,
-              categories: [],
-              hero: "Dcu09vM9H-U",
-              title: "An Interactive Guide to Keyframe Animations",
-              slug: "test2",
-              description:
-                "CSS keyframe animations are incredibly flexible and powerful, but they’re also a bit weird. In this deep-dive tutorial, we'll learn how CSS keyframes work from the ground up, and see how to use them to build high-quality animations.",
-            },
-          ]}
-        />
-      </RecentPostsWrapper>
+        <RecentPostsWrapper>
+          <RecentPosts
+            posts={[
+              {
+                id: 1,
+                categories: [],
+                hero: "72Mf6a3tpno",
+                title: "An Interactive Guide to Keyframe Animations",
+                slug: "blog-1",
+                description:
+                  "CSS keyframe animations are incredibly flexible and powerful, but they’re also a bit weird. In this deep-dive tutorial, we'll learn how CSS keyframes work from the ground up, and see how to use them to build high-quality animations.",
+              },
+              {
+                id: 2,
+                categories: [],
+                hero: "Dcu09vM9H-U",
+                title: "An Interactive Guide to Keyframe Animations",
+                slug: "test2",
+                description:
+                  "CSS keyframe animations are incredibly flexible and powerful, but they’re also a bit weird. In this deep-dive tutorial, we'll learn how CSS keyframes work from the ground up, and see how to use them to build high-quality animations.",
+              },
+            ]}
+          />
+        </RecentPostsWrapper>
+      </body>
     </>
   );
 };
