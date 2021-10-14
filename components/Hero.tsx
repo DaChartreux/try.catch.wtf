@@ -30,7 +30,7 @@ const ImageContainer = styled.div<ImageContainerProps>`
     width: 100%;
     height: 100%;
     z-index: 1;
-    background-color: rgba(var(${({ bgColor }) => THEME.colors[bgColor]}), 0.5);
+    background-color: hsla(${({ bgColor }) => THEME.colors[bgColor]}, 0.5);
     backdrop-filter: blur(3rem);
 
     ${({ overlayFgColor }) => css`
@@ -63,7 +63,7 @@ const Hero = ({
   layoutId,
 }: HeroProps) => {
   return (
-    <ImageContainer bgColor="rich.100" overlayFgColor="rich.100">
+    <ImageContainer bgColor="bg-100" overlayFgColor="bg-100">
       <motion.div
         className="overlay"
         whileHover={{ opacity: [null, 0.15, 0.8, 1] }}
@@ -93,7 +93,7 @@ const Hero = ({
           }}
         >
           <Heading
-            fgColor="green.300"
+            fgColor="green-100"
             fontWeight={600}
             fontSize="3rem"
             margin="1rem 0 0.5rem 0"

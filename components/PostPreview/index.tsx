@@ -22,7 +22,7 @@ type RecentPosts = {
 };
 
 const PostPreview = ({ title, slug, hero }: RecentPosts) => (
-  <Link href={`blog/${slug}`} passHref>
+  <Link href={`/blog/${slug}`} passHref>
     <PostPreviewStyled>
       <MotionHeroStyled layoutId={`${slug}__hero`} whileHover={{ scale: 0.99 }}>
         <Image

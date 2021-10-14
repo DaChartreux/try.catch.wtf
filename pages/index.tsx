@@ -100,45 +100,48 @@ const RecentPostsWrapper = styled.div`
 const Index: NextPageWithLayout = () => {
   return (
     <>
-      <body>
-        {/* <CategoriesWrapper>
+      <CategoriesWrapper>
         <Categories
           categories={[
-            { id: 1, category: "ReactJS", slug: "test", color: "blue.100" },
-            { id: 2, category: "FFMPEG", slug: "test", color: "yellow.100" },
-            { id: 3, category: "TypeScript", slug: "test", color: "green.100" },
-            { id: 4, category: "Test", slug: "test", color: "red.100" },
-            { id: 5, category: "Test", slug: "test", color: "blue.100" },
-            { id: 6, category: "Test", slug: "test", color: "green.100" },
+            { id: 1, category: "Test 1", slug: "test", color: "blue-100" },
+            { id: 2, category: "Test 2", slug: "test", color: "yellow-100" },
+            {
+              id: 3,
+              category: "Test 3",
+              slug: "test",
+              color: "purple-100",
+            },
+            { id: 4, category: "Test 4", slug: "test", color: "red-100" },
+            { id: 5, category: "Test 5", slug: "test", color: "pink-100" },
+            { id: 6, category: "Test 6", slug: "test", color: "indigo-100" },
           ]}
         />
-      </CategoriesWrapper> */}
+      </CategoriesWrapper>
 
-        <RecentPostsWrapper>
-          <RecentPosts
-            posts={[
-              {
-                id: 1,
-                categories: [],
-                hero: "72Mf6a3tpno",
-                title: "An Interactive Guide to Keyframe Animations",
-                slug: "blog-1",
-                description:
-                  "CSS keyframe animations are incredibly flexible and powerful, but they’re also a bit weird. In this deep-dive tutorial, we'll learn how CSS keyframes work from the ground up, and see how to use them to build high-quality animations.",
-              },
-              {
-                id: 2,
-                categories: [],
-                hero: "Dcu09vM9H-U",
-                title: "An Interactive Guide to Keyframe Animations",
-                slug: "test2",
-                description:
-                  "CSS keyframe animations are incredibly flexible and powerful, but they’re also a bit weird. In this deep-dive tutorial, we'll learn how CSS keyframes work from the ground up, and see how to use them to build high-quality animations.",
-              },
-            ]}
-          />
-        </RecentPostsWrapper>
-      </body>
+      <RecentPostsWrapper>
+        <RecentPosts
+          posts={[
+            {
+              id: 1,
+              categories: [],
+              hero: "72Mf6a3tpno",
+              title: "An Interactive Guide to Keyframe Animations",
+              slug: "blog-1",
+              description:
+                "CSS keyframe animations are incredibly flexible and powerful, but they’re also a bit weird. In this deep-dive tutorial, we'll learn how CSS keyframes work from the ground up, and see how to use them to build high-quality animations.",
+            },
+            {
+              id: 2,
+              categories: [],
+              hero: "Dcu09vM9H-U",
+              title: "An Interactive Guide to Keyframe Animations",
+              slug: "test2",
+              description:
+                "CSS keyframe animations are incredibly flexible and powerful, but they’re also a bit weird. In this deep-dive tutorial, we'll learn how CSS keyframes work from the ground up, and see how to use them to build high-quality animations.",
+            },
+          ]}
+        />
+      </RecentPostsWrapper>
     </>
   );
 };

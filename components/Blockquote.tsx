@@ -15,7 +15,7 @@ const BlockquoteStyle = styled.blockquote`
 
   .quote {
     font-size: 0.875rem;
-    color: hsl(${THEME.colors["fg"]}, 1);
+    color: hsl(${THEME.colors["fg-100"]}, 1);
   }
 
   .quote-source {

@@ -37,22 +37,22 @@ const TagStyle = styled(motion.a)<TagStyledProps>`
   }
 
   ${({ bgColor }) => css`
-    color: rgb(var(${THEME.colors[bgColor]}));
+    color: hsl(${THEME.colors[bgColor]});
 
     div {
-      border-color: rgb(var(${THEME.colors[bgColor]}));
-      background-color: rgba(var(${THEME.colors[bgColor]}), 0.2);
+      border-color: hsl(${THEME.colors[bgColor]});
+      background-color: hsla(${THEME.colors[bgColor]}, 0.2);
     }
 
     &:hover {
       div {
-        background-color: rgba(var(${THEME.colors[bgColor]}), 0.3);
+        background-color: hsla(${THEME.colors[bgColor]}, 0.3);
       }
     }
 
     &:active {
       div {
-        background-color: rgba(var(${THEME.colors[bgColor]}), 0.4);
+        background-color: hsla(${THEME.colors[bgColor]}, 0.4);
       }
     }
   `};
