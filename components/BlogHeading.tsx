@@ -77,7 +77,7 @@ const BlogHeading = ({ children }: BlogHeadingProps) => {
     }
   }, [controls, isVisible]);
 
-  const title =
+  const title: string =
     typeof children === "string" ? children : (children as any[])[0];
 
   return (
@@ -85,8 +85,8 @@ const BlogHeading = ({ children }: BlogHeadingProps) => {
       initial="rest"
       animate="rest"
       ref={containerRef}
-      id={title.toLowerCase().replaceAll(" ", "-")}
-      href={`#${title.toLowerCase().replaceAll(" ", "-")}`}
+      id={title.toLowerCase().replace(/ /g, "-")}
+      href={`#${title.toLowerCase().replace(/ /g, "-")}`}
     >
       <Heading
         fgColor="primary-100"
