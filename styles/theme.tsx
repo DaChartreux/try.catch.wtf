@@ -1,8 +1,11 @@
 const colors = {
   white: "#ffffff",
   transparent: "#00000000",
-  bg: "var(--color-bg)",
-  fg: "var(--color-fg)",
+
+  "bg-100": "var(--color-bg-100)",
+  "bg-200": "var(--color-bg-200)",
+  "fg-100": "var(--color-fg-100)",
+  "fg-200": "var(--color-fg-200)",
 
   "primary-100": "var(--color-primary-100)",
   "primary-200": "var(--color-primary-200)",

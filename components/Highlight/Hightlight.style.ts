@@ -8,7 +8,7 @@ export const PreContainer = styled.div`
 `;
 
 export const ContainerStyle = styled.div<{ hasFilename: boolean }>`
-  background-color: hsla(${THEME.colors["fg"]}, 0.04);
+  background-color: hsla(${THEME.colors["fg-100"]}, 0.04);
   font-size: 1rem;
   border-radius: ${({ hasFilename }) =>
     hasFilename ? "0 0 0.375rem 0.375rem" : "0.375rem"};
@@ -23,7 +23,7 @@ export const FilenameHeader = styled.div`
   display: flex;
   justify-content: space-between;
   border-radius: 0.375rem 0.375rem 0 0;
-  background-color: hsla(${THEME.colors["fg"]}, 0.06);
+  background-color: hsla(${THEME.colors["fg-100"]}, 0.06);
   padding: 1rem 2rem;
   font-family: ${THEME.fonts.monoFontFamily};
 

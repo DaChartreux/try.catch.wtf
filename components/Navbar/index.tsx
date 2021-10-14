@@ -49,7 +49,7 @@ const Navbar = () => {
       height: "5rem",
     },
     open: {
-      height: "13rem",
+      height: "17rem",
       transition: {
         delayChildren: 0.3,
         staggerChildren: 0.02,
@@ -71,7 +71,7 @@ const Navbar = () => {
         stiffness: 200,
         damping: 25,
       }}
-      bgColor="bg"
+      bgColor="bg-100"
     >
       <NavInnerContainer>
         <Link href="/" passHref>
@@ -86,16 +86,16 @@ const Navbar = () => {
               window.localStorage.setItem("__APP_THEME__", appTheme);
               setTheme(appTheme);
             }}
-            bgColor="fg"
-            fgColor="fg"
+            bgColor="fg-100"
+            fgColor="fg-100"
           >
             {true ? <SunIcon /> : <MoonIcon />}
           </ButtonIcon>
           <Link href="/" passHref>
-            <LinkStyle fgColor="fg">Blog</LinkStyle>
+            <LinkStyle fgColor="fg-100">Blog</LinkStyle>
           </Link>
           <Link href="/" passHref>
-            <LinkStyle fgColor="fg">About</LinkStyle>
+            <LinkStyle fgColor="fg-100">About</LinkStyle>
           </Link>
         </DesktopNavbarStyle>
         <MobileNavbarStyle>
@@ -109,8 +109,8 @@ const Navbar = () => {
                   : "open",
               );
             }}
-            bgColor="fg"
-            fgColor="fg"
+            bgColor="fg-100"
+            fgColor="fg-100"
           >
             <MenuIcon />
           </ButtonIcon>
@@ -139,6 +139,30 @@ const Navbar = () => {
         }}
       >
         <p>About</p>
+      </MenuItemStyle>
+      <MenuItemStyle
+        variants={{
+          initial: { y: -20, display: "none" },
+          close: { y: -20, display: "none" },
+          open: {
+            y: 0,
+            display: "flex",
+          },
+        }}
+      >
+        <ButtonIcon
+          onClick={() => {
+            const appTheme = theme === "dark" ? "light" : "dark";
+            document.documentElement.dataset.theme = appTheme;
+            document.documentElement.style.colorScheme = appTheme;
+            window.localStorage.setItem("__APP_THEME__", appTheme);
+            setTheme(appTheme);
+          }}
+          bgColor="fg-100"
+          fgColor="fg-100"
+        >
+          {true ? <SunIcon /> : <MoonIcon />}
+        </ButtonIcon>
       </MenuItemStyle>
     </NavContainer>
   );

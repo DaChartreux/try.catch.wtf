@@ -35,10 +35,10 @@ export const NavInnerContainer = styled.div`
   max-width: 1200px;
   margin: auto;
   align-items: center;
-  height: 5.75rem;
+  height: 5rem;
   position: relative;
   justify-content: space-between;
-  border-bottom: 2px hsla(${THEME.colors["fg"]}, 0.08) solid;
+  border-bottom: 2px hsla(${THEME.colors["fg-100"]}, 0.08) solid;
 
   @media (max-width: 768px) {
     height: 5rem;

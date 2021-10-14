@@ -14,7 +14,8 @@ export const FooterTopWrapper = styled.div`
   margin: auto;
   max-width: 1200px;
   height: 10rem;
-  border-bottom: 1px solid hsl(${THEME.colors["bg"]});
+  color: hsl(${THEME.colors["bg-100"]});
+  border-bottom: 1px solid hsl(${THEME.colors["bg-100"]});
 
   .links {
     margin-top: 1rem;
@@ -37,7 +38,7 @@ export const FooterTopWrapper = styled.div`
       line-height: 0.8;
     }
 
-    p:nth-child(2) {
+    p:nth-of-type(2) {
       font-weight: 600;
       font-size: 2rem;
     }
@@ -48,4 +49,5 @@ export const FooterBottomWrapper = styled.div`
   box-sizing: border-box;
   margin: 0 auto;
   max-width: 1200px;
+  color: hsl(${THEME.colors["bg-100"]});
 `;

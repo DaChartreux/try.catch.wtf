@@ -26,17 +26,29 @@ const Footer = () => {
           </span>
         </div>
         <div className="links">
-          <ButtonIcon bgColor="bg" fgColor="bg">
-            <GithubIcon />
-          </ButtonIcon>
-          <ButtonIcon bgColor="bg" fgColor="bg">
-            <TwitterIcon />
-          </ButtonIcon>
+          <a
+            href="https://github.com/cheemzkun"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <ButtonIcon bgColor="bg-100" fgColor="bg-100">
+              <GithubIcon />
+            </ButtonIcon>
+          </a>
+          <a
+            href="https://github.com/cheemzkun"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <ButtonIcon bgColor="bg-100" fgColor="bg-100">
+              <TwitterIcon />
+            </ButtonIcon>
+          </a>
         </div>
       </FooterTopWrapper>
       <FooterBottomWrapper>
         <p>
-          © 2021-present catch.wtf.
+          © 2021 - present catch.wtf.
           <br /> All Rights Reserved; I guess <code>¯\_(ツ)_/¯</code>
         </p>
       </FooterBottomWrapper>

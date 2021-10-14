@@ -9,8 +9,11 @@ const GlobalTheme = () => (
       ${FONT_FAMILIES}
 
       :root {
-        --color-bg: 0, 0%, 100%; // hsl(0, 0%, 100%)
-        --color-fg: 210, 50%, 9%; // hsl(210, 50%, 9%)
+        --color-bg-100: 225, 25%, 95%; // hsl(225, 25%, 95%)
+        --color-bg-200: 0, 0%, 100%; // hsl(0, 0%, 100%)
+
+        --color-fg-100: 210, 50%, 9%; // hsl(210, 50%, 9%)
+        --color-fg-200: 0, 0%, 0%; // hsl(0, 0%, 0%)
 
         --color-primary-100: 40, 95%, 67%; // hsl(40, 95%, 67%)
         --color-primary-200: 40, 95%, 57%; // hsl(40, 95%, 57%)
@@ -89,8 +92,11 @@ const GlobalTheme = () => (
       }
 
       :root[data-theme="dark"] {
-        --color-bg: 210, 50%, 9%; // hsl(210, 50%, 9%)
-        --color-fg: 0, 0%, 100%; // hsl(0, 0%, 100%)
+        --color-bg-100: 210, 50%, 9%; // hsl(210, 50%, 9%)
+        --color-bg-200: 0, 0%, 0%; // hsl(0, 0%, 0%)
+
+        --color-fg-100: 225, 25%, 95%; // hsl(225, 25%, 95%)
+        --color-fg-200: 0, 0%, 100%; // hsl(0, 0%, 100%)
 
         --color-primary-100: 40, 95%, 77%; // hsl(40, 95%, 77%)
         --color-primary-200: 40, 95%, 67%; // hsl(40, 95%, 67%)
@@ -102,7 +108,7 @@ const GlobalTheme = () => (
         --color-red-100: 0, 91%, 81%; // hsl(0, 91%, 81%)
         --color-red-200: 0, 91%, 76%; // hsl(0, 91%, 76%)
         --color-red-300: 0, 91%, 71%; // hsl(0, 91%, 71%)
-       
+
         --color-orange-100: 27, 96%, 71%; // hsl(27, 96%, 71%)
         --color-orange-200: 27, 96%, 66%; // hsl(27, 96%, 66%)
         --color-orange-300: 27, 96%, 61%; // hsl(27, 96%, 61%)
@@ -174,6 +180,7 @@ const GlobalTheme = () => (
         margin: 0;
         scroll-behavior: smooth;
         font-family: ${THEME.fonts.fontFamily};
+        overflow: overlay;
       }
 
       code {
@@ -186,20 +193,20 @@ const GlobalTheme = () => (
       }
 
       html {
-        background: hsl(${THEME.colors["bg"]});
-        color: hsl(${THEME.colors["fg"]});
+        background: hsl(${THEME.colors["bg-100"]});
+        color: hsl(${THEME.colors["fg-100"]});
         transition: background-color 200ms ease-in-out;
       }
 
       ::-webkit-scrollbar {
         width: 0.5rem;
-        background-color: hsla(${THEME.colors["bg"]}, 1);
+        background-color: hsla(${THEME.colors["bg-100"]}, 1);
       }
 
       ::-webkit-scrollbar-thumb {
         border-radius: 0.5rem;
-        background-color: hsla(${THEME.colors["fg"]}, 0.2);
-        border: 2px solid hsla(${THEME.colors["bg"]}, 1);
+        background-color: hsla(${THEME.colors["fg-100"]}, 0.2);
+        border: 2px solid hsla(${THEME.colors["bg-100"]}, 1);
       }
     `}
   />
