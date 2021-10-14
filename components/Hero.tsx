@@ -1,23 +1,23 @@
+import React from "react";
 import Image from "next/image";
 import styled from "@emotion/styled";
 import { css } from "@emotion/react";
-
-import ExternalLinkIcon from "@components/icons/ExternalLinkIcon";
-import { useAppThemeValue } from "@hooks/useAppThemeValue";
-import { ColorShade } from "@typings/emotion";
 import { motion } from "framer-motion";
-import React from "react";
+
 import Heading from "@components/Heading";
+import ExternalLinkIcon from "@components/icons/ExternalLinkIcon";
+import THEME from "@styles/theme";
 
 type ImageContainerProps = {
-  bgColor: ColorShade;
-  overlayFgColor: ColorShade;
+  bgColor: keyof typeof THEME["colors"];
+  overlayFgColor: keyof typeof THEME["colors"];
 };
 
 const ImageContainer = styled.div<ImageContainerProps>`
   position: relative;
   border-radius: 1rem;
   overflow: hidden;
+  margin: 0 1rem;
 
   .overlay {
     position: absolute;
@@ -30,16 +30,16 @@ const ImageContainer = styled.div<ImageContainerProps>`
     width: 100%;
     height: 100%;
     z-index: 1;
-    background-color: ${({ theme: { colors }, bgColor }) => colors[bgColor]}88;
+    background-color: hsla(${({ bgColor }) => THEME.colors[bgColor]}, 0.5);
     backdrop-filter: blur(3rem);
 
-    ${({ theme: { colors }, overlayFgColor }) => css`
+    ${({ overlayFgColor }) => css`
       a {
-        color: ${colors[overlayFgColor]};
+        color: rgb(var(${THEME.colors[overlayFgColor]}));
       }
 
       p {
-        color: ${colors[overlayFgColor]};
+        color: rgb(var(${THEME.colors[overlayFgColor]}));
       }
     `}
   }
@@ -63,10 +63,7 @@ const Hero = ({
   layoutId,
 }: HeroProps) => {
   return (
-    <ImageContainer
-      bgColor={useAppThemeValue<ColorShade>("white", "black")}
-      overlayFgColor={useAppThemeValue<ColorShade>("black", "white")}
-    >
+    <ImageContainer bgColor="bg-100" overlayFgColor="bg-100">
       <motion.div
         className="overlay"
         whileHover={{ opacity: [null, 0.15, 0.8, 1] }}
@@ -96,10 +93,10 @@ const Hero = ({
           }}
         >
           <Heading
-            fgColor="green.300"
+            fgColor="green-100"
             fontWeight={600}
-            fontSize={"3rem"}
-            margin={"1rem 0 0.5rem 0"}
+            fontSize="3rem"
+            margin="1rem 0 0.5rem 0"
             initial="hidden"
             animate="visible"
             variants={{
