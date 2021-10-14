@@ -1,4 +1,4 @@
-import Document, {
+import NextDocument, {
   DocumentContext,
   Html,
   Head,
@@ -19,6 +19,7 @@ const initialTheme = `
   }
   const theme = getTheme();
   document.documentElement.dataset.theme = theme;
+  document.documentElement.style.colorScheme = theme;
 }())`;
 
 export const renderStatic = async (html: string) => {
@@ -31,11 +32,12 @@ export const renderStatic = async (html: string) => {
   return { html, ids, css };
 };
 
-export default class MyDocument extends Document {
+export default class Document extends NextDocument {
   static async getInitialProps(ctx: DocumentContext) {
     const page = await ctx.renderPage();
     const { css, ids } = await renderStatic(page.html);
-    const initialProps = await Document.getInitialProps(ctx);
+    const initialProps = await NextDocument.getInitialProps(ctx);
+
     return {
       ...initialProps,
       styles: (
@@ -52,19 +54,8 @@ export default class MyDocument extends Document {
 
   render() {
     return (
-      <Html>
-        <Head>
-          <link rel="preconnect" href="https://fonts.googleapis.com" />
-          <link
-            rel="preconnect"
-            href="https://fonts.gstatic.com"
-            crossOrigin="crossorigin"
-          />
-          <link
-            href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;700&display=swap"
-            rel="stylesheet"
-          />
-        </Head>
+      <Html style={{ colorScheme: "dark" }}>
+        <Head />
         <body>
           <script dangerouslySetInnerHTML={{ __html: initialTheme }} />
           <Main />

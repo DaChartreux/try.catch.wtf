@@ -1,11 +1,11 @@
-import React from "react";
+import { useState, useEffect } from "react";
+import { useLocalStorage } from "@hooks/useLocalStorage";
 
 type AppTheme = "light" | "dark";
 
 export const useAppThemeProvider = () => {
-  const [appTheme, setAppTheme] = React.useState<AppTheme>(
-    (document.documentElement.dataset.theme as AppTheme | undefined) ?? "light"
-  );
+  const [appTheme, setAppTheme] = useState<AppTheme>("light");
+  const { value: newAppTheme } = useLocalStorage("__APP_THEME__");
 
   const changeTheme = () => {
     const inactiveTheme = appTheme === "light" ? "dark" : "light";
@@ -13,10 +13,15 @@ export const useAppThemeProvider = () => {
     setAppTheme(inactiveTheme);
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     document.documentElement.dataset.theme = appTheme;
+    document.documentElement.style.colorScheme = appTheme;
     window.localStorage.setItem("__APP_THEME__", appTheme);
   }, [appTheme]);
+
+  useEffect(() => {
+    setAppTheme(newAppTheme === "dark" ? "dark" : "light");
+  }, [newAppTheme]);
 
   return {
     appTheme,

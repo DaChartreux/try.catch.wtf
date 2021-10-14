@@ -1,17 +1,17 @@
 import styled from "@emotion/styled";
-
-import { ColorShade } from "@typings/emotion";
 import { motion } from "framer-motion";
 
+import THEME from "@styles/theme";
+
 type HeadingStyledProps = {
-  fgColor: ColorShade;
+  fgColor: keyof typeof THEME["colors"];
   fontWeight: number;
   fontSize: string;
   margin: string;
 };
 
 const Heading = styled(motion.h1)<HeadingStyledProps>`
-  color: ${({ theme: { colors }, fgColor }) => colors[fgColor]};
+  color: hsla(${({ fgColor }) => THEME.colors[fgColor]});
   font-weight: ${({ fontWeight }) => fontWeight};
   font-size: ${({ fontSize }) => fontSize};
   margin: ${({ margin }) => margin};

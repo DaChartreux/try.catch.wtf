@@ -1,18 +1,23 @@
 import React, { ReactNode } from "react";
 import type { ReactElement } from "react";
 import type { NextPage } from "next";
+import dynamic from "next/dynamic";
+import styled from "@emotion/styled";
 
-import Navbar from "@components/Navbar";
 import Layout from "@components/Layout";
 import Categories from "@components/Categories";
 import RecentPosts from "@components/Recent";
-import styled from "@emotion/styled";
+import Footer from "@components/Footer";
+
+const Navbar = dynamic(() => import("@components/Navbar"), { ssr: false });
 
 type NextPageWithLayout = NextPage<never> & {
   getLayout?: (page: ReactElement) => ReactNode;
 };
 
 const LayoutWrapper = styled(Layout)`
+  padding: 0 2rem;
+  box-sizing: border-box;
   display: grid;
   grid-template-columns: 3fr 1fr;
   grid-template-rows: auto 1fr;
@@ -20,6 +25,68 @@ const LayoutWrapper = styled(Layout)`
     "recent categories"
     "recent test";
   gap: 3rem;
+
+  @media (max-width: 1536px) {
+    padding: 0 2rem;
+    box-sizing: border-box;
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    grid-template-rows: auto 1fr;
+    grid-template-areas:
+      "recent categories"
+      "recent test";
+    gap: 3rem;
+  }
+
+  @media (max-width: 1280px) {
+    padding: 0 2rem;
+    box-sizing: border-box;
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    grid-template-rows: auto 1fr;
+    grid-template-areas:
+      "recent categories"
+      "recent test";
+    gap: 3rem;
+  }
+
+  @media (max-width: 1024px) {
+    padding: 0 2rem;
+    box-sizing: border-box;
+    display: grid;
+    grid-template-columns: 4fr 1fr;
+    grid-template-rows: auto 1fr;
+    grid-template-areas:
+      "recent categories"
+      "recent test";
+    gap: 3rem;
+  }
+
+  @media (max-width: 768px) {
+    padding: 0 2rem;
+    box-sizing: border-box;
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: auto;
+    grid-template-areas:
+      "recent"
+      "recent"
+      "categories";
+    gap: 3rem;
+  }
+
+  @media (max-width: 640px) {
+    padding: 0 2rem;
+    box-sizing: border-box;
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: auto;
+    grid-template-areas:
+      "recent"
+      "recent"
+      "categories";
+    gap: 3rem;
+  }
 `;
 
 const CategoriesWrapper = styled.div`
@@ -36,12 +103,17 @@ const Index: NextPageWithLayout = () => {
       <CategoriesWrapper>
         <Categories
           categories={[
-            { id: 1, category: "ReactJS", slug: "test", color: "blue.300" },
-            { id: 2, category: "FFMPEG", slug: "test", color: "yellow.400" },
-            { id: 3, category: "TypeScript", slug: "test", color: "green.700" },
-            { id: 4, category: "Test", slug: "test", color: "pink.600" },
-            { id: 5, category: "Test", slug: "test", color: "blue.700" },
-            { id: 6, category: "Test", slug: "test", color: "green.300" },
+            { id: 1, category: "Test 1", slug: "test", color: "blue-100" },
+            { id: 2, category: "Test 2", slug: "test", color: "yellow-100" },
+            {
+              id: 3,
+              category: "Test 3",
+              slug: "test",
+              color: "purple-100",
+            },
+            { id: 4, category: "Test 4", slug: "test", color: "red-100" },
+            { id: 5, category: "Test 5", slug: "test", color: "pink-100" },
+            { id: 6, category: "Test 6", slug: "test", color: "indigo-100" },
           ]}
         />
       </CategoriesWrapper>
@@ -79,6 +151,7 @@ Index.getLayout = (page: ReactElement) => {
     <>
       <Navbar />
       <LayoutWrapper>{page}</LayoutWrapper>
+      <Footer />
     </>
   );
 };

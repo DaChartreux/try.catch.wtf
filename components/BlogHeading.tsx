@@ -1,12 +1,10 @@
-import Heading from "@components/Heading";
-import LinkIcon from "@components/icons/LinkIcon";
-import { useAppThemeValue } from "@hooks/useAppThemeValue";
-import useInView from "@hooks/useInView";
-import { ColorShade } from "@typings/emotion";
+import { ReactNode, useEffect } from "react";
 import { motion, useAnimation } from "framer-motion";
-import { ReactNode } from "react";
-import { useEffect } from "react";
 import styled from "@emotion/styled";
+
+import Heading from "@components/Heading";
+import LinkIcon from "@icons/LinkIcon";
+import { useInView } from "@hooks/useInView";
 
 const BlogAnchorHeadingStyled = styled(motion.a)`
   position: relative;
@@ -79,21 +77,24 @@ const BlogHeading = ({ children }: BlogHeadingProps) => {
     }
   }, [controls, isVisible]);
 
+  const title: string =
+    typeof children === "string" ? children : (children as any[])[0];
+
   return (
     <BlogAnchorHeadingStyled
       initial="rest"
       animate="rest"
       ref={containerRef}
-      id={(children as string).toLowerCase().replaceAll(" ", "-")}
-      href={`#${(children as string).toLowerCase().replaceAll(" ", "-")}`}
+      id={title.toLowerCase().replace(/ /g, "-")}
+      href={`#${title.toLowerCase().replace(/ /g, "-")}`}
     >
       <Heading
-        fgColor={useAppThemeValue<ColorShade>("yellow.400", "yellow.400")}
+        fgColor="primary-100"
         fontWeight={500}
-        fontSize={"1.75rem"}
-        margin={"0"}
-        initial={["hidden", "rest"]}
+        fontSize="1.75rem"
+        margin="0"
         whileHover="hover"
+        initial={["hidden", "rest"]}
         animate={controls}
         variants={textMotion}
         transition={{ duration: 0.4 }}

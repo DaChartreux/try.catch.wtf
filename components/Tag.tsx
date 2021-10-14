@@ -3,10 +3,10 @@ import styled from "@emotion/styled";
 import { css } from "@emotion/react";
 import { motion } from "framer-motion";
 
-import { ColorShade } from "@typings/emotion";
+import THEME from "@styles/theme";
 
 type TagStyledProps = {
-  bgColor: ColorShade;
+  bgColor: keyof typeof THEME["colors"];
   fgColor: string;
 };
 
@@ -36,23 +36,23 @@ const TagStyle = styled(motion.a)<TagStyledProps>`
     transition: all 200ms ease-in-out;
   }
 
-  ${({ theme: { colors }, bgColor }) => css`
-    color: ${colors[bgColor]};
+  ${({ bgColor }) => css`
+    color: hsl(${THEME.colors[bgColor]});
 
     div {
-      border-color: ${colors[bgColor]};
-      background-color: ${colors[bgColor]}33;
+      border-color: hsl(${THEME.colors[bgColor]});
+      background-color: hsla(${THEME.colors[bgColor]}, 0.2);
     }
 
     &:hover {
       div {
-        background-color: ${colors[bgColor]}55;
+        background-color: hsla(${THEME.colors[bgColor]}, 0.3);
       }
     }
 
     &:active {
       div {
-        background-color: ${colors[bgColor]}66;
+        background-color: hsla(${THEME.colors[bgColor]}, 0.4);
       }
     }
   `};
