@@ -83,13 +83,11 @@ const Blog: NextPageWithLayout = ({ source, frontMatter }) => {
   );
 };
 
-Blog.getLayout = (page: ReactElement) => {
-  return (
-    <LayoutWrapper>
-      <MDXProvider components={MDXComponents}>{page}</MDXProvider>
-    </LayoutWrapper>
-  );
-};
+Blog.getLayout = (page: ReactElement) => (
+  <LayoutWrapper>
+    <MDXProvider components={MDXComponents}>{page}</MDXProvider>
+  </LayoutWrapper>
+);
 
 export const getStaticProps = async ({ params }: any) => {
   const postFilePath = path.join(POSTS_PATH, `${params.slug}.mdx`);

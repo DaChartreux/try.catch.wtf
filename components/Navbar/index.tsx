@@ -57,21 +57,14 @@ const Navbar = () => {
         staggerChildren: 0.02,
       },
     },
-    initial: { translateY: -64 },
-    load: { translateY: 0 },
   };
 
   return (
     <NavContainer
       ref={ref}
-      initial="initial"
-      animate={[navVariant, "load"]}
+      initial="close"
+      animate={navVariant}
       variants={variants}
-      transition={{
-        type: "spring",
-        stiffness: 200,
-        damping: 25,
-      }}
       bgColor="bg-100"
     >
       <NavInnerContainer>
