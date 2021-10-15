@@ -17,7 +17,6 @@ const ImageContainer = styled.div<ImageContainerProps>`
   position: relative;
   border-radius: 1rem;
   overflow: hidden;
-  margin: 0 1rem;
 
   .overlay {
     position: absolute;
@@ -113,11 +112,12 @@ const Hero = ({
         </div>
         <Image
           src={heroSrc}
-          alt="Hero Image"
-          className="image"
-          placeholder="blur"
+          quality={60}
+          width={3}
+          height={2}
           layout="responsive"
-          quality={80}
+          objectFit="cover"
+          alt="Hero Image"
         />
       </motion.div>
     </ImageContainer>

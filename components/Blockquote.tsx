@@ -10,7 +10,7 @@ const BlockquoteStyle = styled.blockquote`
   border: 2px solid hsl(${THEME.colors["info-fg"]});
   box-sizing: border-box;
   border-radius: 0.5rem;
-  margin: 0 -1rem 2rem -1rem;
+  margin: 0 0 2rem 0;
   padding: 1rem 1rem 1rem 2rem;
 
   .quote {
