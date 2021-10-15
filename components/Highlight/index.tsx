@@ -20,15 +20,17 @@ const Highlight = ({ fileName, added, removed, children }: HighlightProps) => {
   const REMOVED = JSON.parse(removed ?? "[]");
 
   return (
-    <PreContainer>
-      {!!fileName && <FilenameHeader>{fileName}</FilenameHeader> }
+    <PreContainer style={{}}>
+      {!!fileName && <FilenameHeader>{fileName}</FilenameHeader>}
       <ContainerStyle hasFilename={!!fileName}>
         <Prism
           language="tsx"
           style={solarized}
           showLineNumbers
           showInlineLineNumbers
+          wrapLines
           lineNumberStyle={{ minWidth: "3rem" }}
+          customStyle={{ overflowX: "scroll" }}
           lineProps={(lineNumber) => {
             let style: any = { display: "block" };
             if (ADDED.includes(lineNumber)) {
