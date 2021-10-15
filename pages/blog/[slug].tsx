@@ -3,7 +3,6 @@ import path from "path";
 
 import React, { ReactNode, ReactElement, useEffect } from "react";
 import type { NextPage } from "next";
-import dynamic from "next/dynamic";
 import Image from "next/image";
 import { MDXRemote, MDXRemoteSerializeResult } from "next-mdx-remote";
 import { serialize } from "next-mdx-remote/serialize";
@@ -18,8 +17,6 @@ import Spacer from "@components/Spacer";
 import heroImageMap from "@components/HeroImage";
 import MDXComponents from "@components/MDXComponents";
 import { HeroImageName } from "@typings/heroImageName";
-
-const Navbar = dynamic(() => import("@components/Navbar"), { ssr: false });
 
 const components = {
   Spacer,
@@ -44,14 +41,18 @@ type BlogPropsType = {
 };
 
 const LayoutWrapper = styled(Layout)`
+  padding: 0 2rem;
   display: grid;
-  grid-template-columns: 3fr 1fr;
-  grid-template-rows: auto 1fr;
+  grid-template-columns: minmax(100px, max-content);
+  grid-template-rows: auto auto;
   grid-template-areas:
-    "hero hero"
-    "recent categories"
-    "recent categories";
+    "hero"
+    "post";
   gap: 3rem;
+
+  @media (max-width: 768px) {
+    padding: 0 1rem;
+  }
 `;
 
 const Blog: NextPageWithLayout = ({ source, frontMatter }) => {
@@ -64,35 +65,29 @@ const Blog: NextPageWithLayout = ({ source, frontMatter }) => {
 
   return (
     <>
-      <Spacer height="3rem" width="" />
+      <div style={{ gridArea: "hero" }}>
+        <Hero
+          layoutId={`${frontMatter.slug}__hero`}
+          title={frontMatter.title}
+          heroSrc={heroImageMap[`${frontMatter.heroImageName}_m`]}
+          heroCreditSource={frontMatter.heroCreditSource}
+          heroCreditUserProfile={frontMatter.heroCreditUserProfile}
+          heroCreditUserProfileUrl={frontMatter.heroCreditUserProfileUrl}
+        />
+      </div>
 
-      <LayoutWrapper>
-        <div style={{ gridArea: "hero" }}>
-          <Hero
-            layoutId={`${frontMatter.slug}__hero`}
-            title={frontMatter.title}
-            heroSrc={heroImageMap[`${frontMatter.heroImageName}_m`]}
-            heroCreditSource={frontMatter.heroCreditSource}
-            heroCreditUserProfile={frontMatter.heroCreditUserProfile}
-            heroCreditUserProfileUrl={frontMatter.heroCreditUserProfileUrl}
-          />
-        </div>
-        <Spacer height="3rem" width="" />
-
-        <div style={{ gridArea: "recent" }}>
-          <MDXRemote {...source} components={components} />
-        </div>
-      </LayoutWrapper>
+      <div style={{ gridArea: "post" }}>
+        <MDXRemote {...source} components={components} />
+      </div>
     </>
   );
 };
 
 Blog.getLayout = (page: ReactElement) => {
   return (
-    <MDXProvider components={MDXComponents}>
-      <Navbar />
-      {page}
-    </MDXProvider>
+    <LayoutWrapper>
+      <MDXProvider components={MDXComponents}>{page}</MDXProvider>
+    </LayoutWrapper>
   );
 };
 

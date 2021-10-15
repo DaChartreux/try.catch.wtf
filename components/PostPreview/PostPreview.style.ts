@@ -49,10 +49,7 @@ export const PostPreviewStyled = styled.a`
   display: flex;
   flex-direction: column;
   background-color: hsla(${THEME.colors["bg-200"]}, 0.075);
-  border-color: hsla(${THEME.colors["fg-100"]}, 0.12);
-  box-shadow: 0px 0.2px 0.5px rgba(0, 0, 0, 0.012),
-    0px 0.6px 1.5px rgba(0, 0, 0, 0.018), 0px 1.4px 3.6px rgba(0, 0, 0, 0.024),
-    0px 6px 12px rgba(0, 0, 0, 0.0375);
+  border-color: hsla(${THEME.colors["fg-100"]}, 0.08);
 
   ${Heading} {
     margin-bottom: 1rem;
@@ -60,10 +57,10 @@ export const PostPreviewStyled = styled.a`
 
   &:hover {
     background-color: hsla(${THEME.colors["bg-200"]}, 0.1);
-    border-color: hsla(${THEME.colors["fg-100"]}, 0.16);
-    box-shadow: 0px 0.2px 0.5px rgba(0, 0, 0, 0.020),
-      0px 0.6px 1.5px rgba(0, 0, 0, 0.028), 0px 1.4px 3.6px rgba(0, 0, 0, 0.040),
-      0px 6px 12px rgba(0, 0, 0, 0.0625);
+    border-color: hsla(${THEME.colors["fg-100"]}, 0.12);
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.025), 0 2px 2px rgba(0, 0, 0, 0.025),
+      0 4px 4px rgba(0, 0, 0, 0.025), 0 6px 6px rgba(0, 0, 0, 0.025),
+      0 8px 8px rgba(0, 0, 0, 0.025), 0 20px 20px rgba(0, 0, 0, 0.05);
 
     ${PostFooter} {
       svg {

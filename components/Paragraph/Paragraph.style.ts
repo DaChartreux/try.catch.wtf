@@ -8,8 +8,8 @@ export const ParagraphStyle = styled.p`
   font-weight: 400;
 
   code {
-    color: hsla(${THEME.colors["fg-200"]}, 0.6);
-    background-color: hsla(${THEME.colors["fg-200"]}, 0.2);
+    color: hsl(${THEME.colors["red-300"]});
+    background-color: hsla(${THEME.colors["fg-100"]}, 0.1);
     padding: 0 0.25rem;
     font-size: 1rem;
     font-weight: 400;
