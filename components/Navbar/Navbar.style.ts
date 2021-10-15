@@ -51,12 +51,13 @@ export const NavStyle = styled.nav`
   align-items: center;
 `;
 
-export const HomeLinkStyle = styled.div<LinkStyledProps>`
+export const HomeLinkStyle = styled.a`
   font-size: 1.5rem;
   font-weight: 600;
   position: relative;
+  color: hsl(${THEME.colors["fg-100"]});
   height: fit-content;
-  cursor: pointer;
+  text-decoration: none;
 
   &::after {
     content: "";
@@ -67,18 +68,6 @@ export const HomeLinkStyle = styled.div<LinkStyledProps>`
     bottom: -0.25rem;
     left: 0;
   }
-
-  ${({ fgColor }) => css`
-    color: hsl(${THEME.colors[fgColor]});
-
-    &:hover {
-      color: hsl(${THEME.colors[fgColor]});
-    }
-
-    &:active {
-      color: hsl(${THEME.colors[fgColor]});
-    }
-  `}
 `;
 
 export const LinkStyle = styled.a<LinkStyledProps>`

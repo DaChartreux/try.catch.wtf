@@ -16,6 +16,7 @@ import styled from "@emotion/styled";
 import MenuIcon from "@components/icons/MenuIcon";
 import { Variants } from "framer-motion";
 import useOnClickOutside from "@hooks/useClickOutside";
+import Logo from "@components/Logo";
 
 const DesktopNavbarStyle = styled(NavStyle)`
   @media (max-width: 768px) {
@@ -40,6 +41,7 @@ const Navbar = () => {
     (window.localStorage.getItem("__APP_THEME__") as "light" | "dark") ??
       "dark",
   );
+
   const [navVariant, setNavVariant] = useState<"load" | "close" | "open">(
     "load",
   );
@@ -63,9 +65,8 @@ const Navbar = () => {
     <NavContainer
       ref={ref}
       initial="initial"
-      animate={navVariant}
+      animate={[navVariant, "load"]}
       variants={variants}
-      layout
       transition={{
         type: "spring",
         stiffness: 200,
@@ -75,7 +76,9 @@ const Navbar = () => {
     >
       <NavInnerContainer>
         <Link href="/" passHref>
-          <HomeLinkStyle fgColor="primary-100">ABCD</HomeLinkStyle>
+          <HomeLinkStyle>
+            <Logo />
+          </HomeLinkStyle>
         </Link>
         <DesktopNavbarStyle>
           <ButtonIcon
@@ -89,7 +92,7 @@ const Navbar = () => {
             bgColor="fg-100"
             fgColor="fg-100"
           >
-            {true ? <SunIcon /> : <MoonIcon />}
+            {theme === "dark" ? <SunIcon /> : <MoonIcon />}
           </ButtonIcon>
           <Link href="/" passHref>
             <LinkStyle fgColor="fg-100">Blog</LinkStyle>

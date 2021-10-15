@@ -28,21 +28,6 @@ export const FooterTopWrapper = styled.div`
       width: 1.2rem;
     }
   }
-
-  span {
-    align-items: flex-end;
-    display: inline-flex;
-
-    p {
-      margin: 0;
-      line-height: 0.8;
-    }
-
-    p:nth-of-type(2) {
-      font-weight: 600;
-      font-size: 2rem;
-    }
-  }
 `;
 
 export const FooterBottomWrapper = styled.div`
