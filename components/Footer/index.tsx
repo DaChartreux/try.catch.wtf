@@ -8,18 +8,13 @@ import {
 import GithubIcon from "@components/icons/GithubIcon";
 import TwitterIcon from "@components/icons/TwitterIcon";
 import ButtonIcon from "@components/ButtonIcon";
+import Logo from "@components/Logo";
 
 const Footer = () => {
   return (
     <FooterWrapper>
       <FooterTopWrapper>
-        <div className="logo">
-          <span>
-            <p>TRY</p>
-            <p>.CATCH.</p>
-            <p>WTF</p>
-          </span>
-        </div>
+        <Logo />
         <div className="tagline">
           <span>
             <p>Keep catching!</p>
