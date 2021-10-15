@@ -9,15 +9,15 @@ const GlobalTheme = () => (
       ${FONT_FAMILIES}
 
       :root {
-        --color-bg-100: 225, 25%, 95%; // hsl(225, 25%, 95%)
+        --color-bg-100: 225, 0%, 99%; // hsl(225, 0%, 99%)
         --color-bg-200: 0, 0%, 100%; // hsl(0, 0%, 100%)
 
         --color-fg-100: 210, 50%, 9%; // hsl(210, 50%, 9%)
         --color-fg-200: 0, 0%, 0%; // hsl(0, 0%, 0%)
 
-        --color-primary-100: 40, 95%, 67%; // hsl(40, 95%, 67%)
-        --color-primary-200: 40, 95%, 57%; // hsl(40, 95%, 57%)
-        --color-primary-300: 40, 95%, 47%; // hsl(40, 95%, 47%)
+        --color-primary-100: 40, 95%, 47%; // hsl(40, 95%, 67%)
+        --color-primary-200: 40, 95%, 42%; // hsl(40, 95%, 57%)
+        --color-primary-300: 40, 95%, 38%; // hsl(40, 95%, 47%)
 
         --color-info-bg: 210, 55%, 92%; // hsl(210, 55%, 92%)
         --color-info-fg: 245, 100%, 60%; // hsl(245, 100%, 60%)
@@ -180,7 +180,6 @@ const GlobalTheme = () => (
         margin: 0;
         scroll-behavior: smooth;
         font-family: ${THEME.fonts.fontFamily};
-        overflow: overlay;
       }
 
       code {
@@ -200,6 +199,7 @@ const GlobalTheme = () => (
 
       ::-webkit-scrollbar {
         width: 0.5rem;
+        height: 0.5rem;
         background-color: hsla(${THEME.colors["bg-100"]}, 1);
       }
 
