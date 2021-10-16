@@ -1,5 +1,5 @@
 import React from "react";
-import { Prism } from "react-syntax-highlighter";
+import { PrismAsyncLight as Prism } from "react-syntax-highlighter";
 
 import {
   PreContainer,
