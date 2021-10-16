@@ -1,12 +1,15 @@
 import React, { ReactNode } from "react";
 import type { ReactElement } from "react";
 import type { NextPage } from "next";
+import dynamic from "next/dynamic";
 import styled from "@emotion/styled";
 
 import Layout from "@components/Layout";
-import Categories from "@components/Categories";
-import RecentPosts from "@components/Recent";
-import Footer from "@components/Footer";
+
+const Categories = dynamic(() => import("@components/Categories"), {
+  ssr: true,
+});
+const RecentPosts = dynamic(() => import("@components/Recent"), { ssr: true });
 
 type NextPageWithLayout = NextPage<never> & {
   getLayout?: (page: ReactElement) => ReactNode;
@@ -95,13 +98,6 @@ const Index: NextPageWithLayout = () => {
   );
 };
 
-Index.getLayout = (page: ReactElement) => {
-  return (
-    <>
-      <LayoutWrapper>{page}</LayoutWrapper>
-      <Footer />
-    </>
-  );
-};
+Index.getLayout = (page: ReactElement) => <LayoutWrapper>{page}</LayoutWrapper>;
 
 export default Index;

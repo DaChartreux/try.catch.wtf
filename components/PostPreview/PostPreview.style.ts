@@ -32,7 +32,7 @@ export const PostFooter = styled.footer`
     p {
       font-size: 0.875rem;
       color: hsla(${THEME.colors["fg-200"]}, 0.5);
-      font-weight: 500;
+      font-weight: 600;
       margin: auto 0.5rem;
     }
   }

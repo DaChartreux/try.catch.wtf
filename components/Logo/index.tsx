@@ -13,11 +13,10 @@ const LogoStyle = styled.div`
       margin: 0;
       line-height: 0.8;
       font-size: 0.8rem;
-      font-weight: 500;
+      font-weight: 600;
     }
 
     .bold {
-      font-weight: 600;
       font-size: 1.5rem;
     }
   }

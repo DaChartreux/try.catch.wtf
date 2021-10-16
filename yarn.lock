@@ -848,15 +848,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/mdx-js__react@npm:^1.5.4":
-  version: 1.5.4
-  resolution: "@types/mdx-js__react@npm:1.5.4"
-  dependencies:
-    "@types/react": "*"
-  checksum: b06ec66dc91d8c0b425ee0fb7f4ff29b77d6ffe9da0a4f5f60b45ceb8773b19fc6225570b92914d2fd4df63f24d8aadafffb60207705b541e9922cd485575dbd
-  languageName: node
-  linkType: hard
-
 "@types/node@npm:*":
   version: 16.10.9
   resolution: "@types/node@npm:16.10.9"
@@ -1382,8 +1373,6 @@ __metadata:
     "@emotion/react": ^11.4.1
     "@emotion/server": ^11.4.0
     "@emotion/styled": ^11.3.0
-    "@mdx-js/react": ^1.6.22
-    "@types/mdx-js__react": ^1.5.4
     "@types/react": 17.0.26
     "@types/react-syntax-highlighter": ^13.5.2
     eslint: 7.32.0
@@ -1393,7 +1382,6 @@ __metadata:
     next: 11.1.2
     next-mdx-remote: ^3.0.4
     next-remote-watch: ^1.0.0
-    prism-react-renderer: ^1.2.1
     react: 17.0.2
     react-dom: 17.0.2
     react-syntax-highlighter: ^15.4.4
@@ -5333,15 +5321,6 @@ __metadata:
   version: 1.2.1
   resolution: "prelude-ls@npm:1.2.1"
   checksum: cd192ec0d0a8e4c6da3bb80e4f62afe336df3f76271ac6deb0e6a36187133b6073a19e9727a1ff108cd8b9982e4768850d413baa71214dd80c7979617dca827a
-  languageName: node
-  linkType: hard
-
-"prism-react-renderer@npm:^1.2.1":
-  version: 1.2.1
-  resolution: "prism-react-renderer@npm:1.2.1"
-  peerDependencies:
-    react: ">=0.14.9"
-  checksum: 66cab3d9f9f18ff5db222df74e1f326262ad093202f855ef2bd9e8001fef21b92f2242a2292caa77c36a517a7f379620417b421eaa320405deb6ecb27c18ee5e
   languageName: node
   linkType: hard
 
