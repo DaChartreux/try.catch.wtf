@@ -71,7 +71,7 @@ const Tag = ({ children, ...props }: TagProps & TagStyledProps) => (
   >
     <motion.div
       whileHover={{
-        scale: 1.05,
+        scale: 1.06,
       }}
       whileTap={{
         scale: 1.03,

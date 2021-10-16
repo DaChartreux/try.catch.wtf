@@ -65,10 +65,10 @@ export default class Document extends NextDocument {
           />
           <link
             rel="preload"
-            href="/fonts/Jost/Jost-400.woff"
+            href="/fonts/Jost/Jost-600.woff2"
             crossOrigin="anonymous"
             as="font"
-            type="font/woff"
+            type="font/woff2"
           />
         </Head>
         <body>

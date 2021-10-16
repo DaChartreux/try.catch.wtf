@@ -14,11 +14,8 @@ type MDXComponentsType = {
 
 const MDXComponents: MDXComponentsType = {
   Spacer,
-  h1: (props: any) => (
-    <Heading {...props} fontSize="5rem" fontWeight={400} fgColor="pink.400" />
-  ),
-  h3: (props: any) => <BlogHeading {...props} />,
-  h2: (props: any) => <BlogHeading {...props} />,
+  BlogHeading,
+  Heading,
   p: ({ children }) => <Paragraph>{children}</Paragraph>,
   blockquote: (props: any) => <Blockquote {...props} />,
   ol: (props: any) => <OrderedList {...props} />,

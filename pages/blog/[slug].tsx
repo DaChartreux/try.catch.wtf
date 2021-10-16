@@ -35,8 +35,8 @@ type BlogPropsType = {
 const LayoutWrapper = styled(Layout)`
   padding: 0 2rem;
   display: grid;
-  grid-template-columns: minmax(100px, max-content);
-  grid-template-rows: auto auto;
+  grid-template-columns: minmax(0, max-content);
+  grid-template-rows: min-content minmax(0, max-content);
   grid-template-areas:
     "hero"
     "post";

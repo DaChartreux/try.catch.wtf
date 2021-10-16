@@ -3,6 +3,7 @@ import styled from "@emotion/styled";
 import THEME from "@styles/theme";
 
 export const ParagraphStyle = styled.p`
+  line-height: 1.6;
   color: hsla(${THEME.colors["fg-200"]}, 0.85);
   font-size: 1.125rem;
 

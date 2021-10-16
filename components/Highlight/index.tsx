@@ -27,7 +27,6 @@ const Highlight = ({ fileName, added, removed, children }: HighlightProps) => {
           language="tsx"
           style={solarized}
           showLineNumbers
-          showInlineLineNumbers
           wrapLines
           lineNumberStyle={{ minWidth: "3rem" }}
           customStyle={{ overflowX: "scroll" }}
