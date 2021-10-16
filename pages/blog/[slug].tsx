@@ -3,25 +3,17 @@ import path from "path";
 
 import React, { ReactNode, ReactElement, useEffect } from "react";
 import type { NextPage } from "next";
-import Image from "next/image";
 import { MDXRemote, MDXRemoteSerializeResult } from "next-mdx-remote";
 import { serialize } from "next-mdx-remote/serialize";
 import matter from "gray-matter";
 import styled from "@emotion/styled";
-import { MDXProvider } from "@mdx-js/react";
 
 import { POSTS_PATH, postFilePaths } from "utils/mdxUtils";
 import Hero from "@components/Hero";
 import Layout from "@components/Layout";
-import Spacer from "@components/Spacer";
 import heroImageMap from "@components/HeroImage";
 import MDXComponents from "@components/MDXComponents";
 import { HeroImageName } from "@typings/heroImageName";
-
-const components = {
-  Spacer,
-  Image,
-};
 
 type NextPageWithLayout = NextPage<BlogPropsType> & {
   getLayout?: (page: ReactElement) => ReactNode;
@@ -77,17 +69,13 @@ const Blog: NextPageWithLayout = ({ source, frontMatter }) => {
       </div>
 
       <div style={{ gridArea: "post" }}>
-        <MDXRemote {...source} components={components} />
+        <MDXRemote {...source} components={MDXComponents} />
       </div>
     </>
   );
 };
 
-Blog.getLayout = (page: ReactElement) => (
-  <LayoutWrapper>
-    <MDXProvider components={MDXComponents}>{page}</MDXProvider>
-  </LayoutWrapper>
-);
+Blog.getLayout = (page: ReactElement) => <LayoutWrapper>{page}</LayoutWrapper>;
 
 export const getStaticProps = async ({ params }: any) => {
   const postFilePath = path.join(POSTS_PATH, `${params.slug}.mdx`);

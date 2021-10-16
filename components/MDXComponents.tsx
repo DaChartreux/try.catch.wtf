@@ -1,5 +1,4 @@
-import React from "react";
-import { MDXProviderComponentsProp } from "@mdx-js/react";
+import React, { ReactNode } from "react";
 
 import BlogHeading from "@components/BlogHeading";
 import Heading from "@components/Heading";
@@ -7,8 +6,14 @@ import Blockquote from "@components/Blockquote";
 import Highlight from "@components/Highlight";
 import OrderedList from "@components/Lists";
 import Paragraph from "@components/Paragraph";
+import Spacer from "@components/Spacer";
 
-const MDXComponents: MDXProviderComponentsProp = {
+type MDXComponentsType = {
+  [key: string]: (props: any) => ReactNode;
+};
+
+const MDXComponents: MDXComponentsType = {
+  Spacer,
   h1: (props: any) => (
     <Heading {...props} fontSize="5rem" fontWeight={400} fgColor="pink.400" />
   ),
