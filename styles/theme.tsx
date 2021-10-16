@@ -85,8 +85,8 @@ const colors = {
 
 const THEME = {
   fonts: {
-    fontFamily: "Jost",
-    monoFontFamily: "Iosevka",
+    fontFamily: "'Jost', sans-serif",
+    monoFontFamily: "Iosevka, monospace",
   },
   colors,
 };
