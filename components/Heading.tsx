@@ -5,14 +5,14 @@ import THEME from "@styles/theme";
 
 type HeadingStyledProps = {
   fgColor: keyof typeof THEME["colors"];
-  fontWeight: number;
   fontSize: string;
   margin: string;
 };
 
-const Heading = styled(motion.h1)<HeadingStyledProps>`
+const Heading = styled(motion.p)<HeadingStyledProps>`
+  line-height: 1.2;
+  font-weight: 600;
   color: hsla(${({ fgColor }) => THEME.colors[fgColor]});
-  font-weight: ${({ fontWeight }) => fontWeight};
   font-size: ${({ fontSize }) => fontSize};
   margin: ${({ margin }) => margin};
 `;

@@ -56,16 +56,20 @@ export default class Document extends NextDocument {
     return (
       <Html style={{ colorScheme: "dark" }}>
         <Head>
-          <link rel="preconnect" href="https://fonts.googleapis.com" />
           <link
-            rel="preconnect"
-            href="https://fonts.gstatic.com"
-            crossOrigin="crossorigin"
+            rel="preload"
+            href="/fonts/Jost/Jost-400.woff2"
+            crossOrigin="anonymous"
+            as="font"
+            type="font/woff2"
           />
           <link
-            href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600&display=swap"
-            rel="stylesheet"
-          ></link>
+            rel="preload"
+            href="/fonts/Jost/Jost-400.woff"
+            crossOrigin="anonymous"
+            as="font"
+            type="font/woff"
+          />
         </Head>
         <body>
           <script dangerouslySetInnerHTML={{ __html: initialTheme }} />

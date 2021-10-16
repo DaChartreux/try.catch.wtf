@@ -21,7 +21,7 @@ const TagStyle = styled(motion.a)<TagStyledProps>`
   padding: 0.25rem 0.5rem;
   margin: 0 0.625rem 0.5rem 0;
   font-size: 0.75rem;
-  font-weight: 500;
+  font-weight: 600;
   text-decoration: none;
 
   div {

@@ -26,21 +26,17 @@ const PostPreview = ({ title, slug, hero }: RecentPosts) => (
     <PostPreviewStyled>
       <MotionHeroStyled layoutId={`${slug}__hero`} whileHover={{ scale: 0.99 }}>
         <Image
-          src={heroImageMap[`${hero}_s`]}
+          src={heroImageMap[`${hero}_m`]}
           quality={60}
           width={3}
           height={2}
           layout="responsive"
           objectFit="cover"
           alt="hero"
+          priority
         />
       </MotionHeroStyled>
-      <Heading
-        fgColor="primary-100"
-        fontWeight={600}
-        fontSize="1.375rem"
-        margin="0"
-      >
+      <Heading fgColor="primary-100" fontSize="1.375rem" margin="0">
         {title}
       </Heading>
       <PostFooter>

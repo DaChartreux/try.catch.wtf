@@ -93,7 +93,6 @@ const Hero = ({
         >
           <Heading
             fgColor="green-100"
-            fontWeight={600}
             fontSize="3rem"
             margin="1rem 0 0.5rem 0"
             initial="hidden"
