@@ -43,7 +43,6 @@ const RecentPosts = ({ posts }: RecentPostsProps) => (
   <>
     <Heading
       fgColor="primary-100"
-      fontWeight={500}
       fontSize="1rem"
       margin="0 0 1.75rem 0"
     >

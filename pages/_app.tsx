@@ -1,33 +1,23 @@
 import React from "react";
-import type { ReactElement, ReactNode } from "react";
-import type { NextPage } from "next";
-import type { AppProps } from "next/app";
 import dynamic from "next/dynamic";
 import { AnimateSharedLayout } from "framer-motion";
 
 import GlobalTheme from "@styles/GlobalTheme";
+import { AppPropsWithLayout } from "@typings/app";
 
 const Navbar = dynamic(() => import("@components/Navbar"), { ssr: false });
-
-type NextPageWithLayout = NextPage & {
-  getLayout?: (page: ReactElement) => ReactNode;
-};
-
-type AppPropsWithLayout = AppProps & {
-  Component: NextPageWithLayout;
-};
+const Footer = dynamic(() => import("@components/Footer"), { ssr: true });
 
 const App = ({ Component, pageProps }: AppPropsWithLayout) => {
   const getLayout = Component.getLayout ?? ((page) => page);
 
   return (
-    <>
+    <AnimateSharedLayout>
       <Navbar />
       <GlobalTheme />
-      <AnimateSharedLayout>
-        {getLayout(<Component {...pageProps} />)}
-      </AnimateSharedLayout>
-    </>
+      {getLayout(<Component {...pageProps} />)}
+      <Footer />
+    </AnimateSharedLayout>
   );
 };
 

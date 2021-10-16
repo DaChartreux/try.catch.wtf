@@ -1,5 +1,5 @@
 import React from "react";
-import { Prism } from "react-syntax-highlighter";
+import { PrismAsyncLight as Prism } from "react-syntax-highlighter";
 
 import {
   PreContainer,
@@ -27,7 +27,6 @@ const Highlight = ({ fileName, added, removed, children }: HighlightProps) => {
           language="tsx"
           style={solarized}
           showLineNumbers
-          showInlineLineNumbers
           wrapLines
           lineNumberStyle={{ minWidth: "3rem" }}
           customStyle={{ overflowX: "scroll" }}

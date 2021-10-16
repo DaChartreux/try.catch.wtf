@@ -90,7 +90,6 @@ const BlogHeading = ({ children }: BlogHeadingProps) => {
     >
       <Heading
         fgColor="primary-100"
-        fontWeight={500}
         fontSize="1.75rem"
         margin="0"
         whileHover="hover"

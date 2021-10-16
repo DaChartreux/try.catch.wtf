@@ -6,13 +6,13 @@ heroCreditUserProfileUrl: https://unsplash.com/@pawel_czerwinski?utm_source=unsp
 heroCreditSource: Unsplash
 ---
 
-### React state
+<BlogHeading>React state</BlogHeading>
 
 A state is a data container that contains the data for a component throughout its lifecycle in a React app. React will re-render the app when state changes. But there are some very interesting cases where state updates may leave us confused! So let's dive right into demystifying some of the cases.
 
 All the examples used in this blog post can be found in this codesandbox
 
-### Async nature
+<BlogHeading>Async nature</BlogHeading>
 
 React state updates are asynchronous in nature. Let's understand with an example.
 
@@ -63,7 +63,7 @@ const App = () => {
 };
 ```
 
-### Multiple State Updates
+<BlogHeading>Multiple State Updates</BlogHeading>
 
 What happens when we update the state multiple times?
 
@@ -115,7 +115,7 @@ const App = () => {
 
 Also note that this still re-renders once for 3 state updates.
 
-### Does React ALWAYS update state in batches?
+<BlogHeading>Does React ALWAYS update state in batches?</BlogHeading>
 
 NO. React updates state in batches only inside synthetic events and React lifecycle methods. This is because React can only update state in batches when it knows when the function updating the state is called.
 
@@ -180,7 +180,5 @@ const App = () => {
   );
 };
 ```
-
-
 
 > React v18 will batch state updates automatically, no matter where the updates happen.
