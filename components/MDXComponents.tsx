@@ -18,12 +18,10 @@ const MDXComponents: MDXComponentsType = {
   Image,
   SectionHeading,
   h1: ({ children }: any) => (
-    <SectionHeading as="h1" fontWeight={500}>
-      {children}
-    </SectionHeading>
+    <SectionHeading fontWeight={500}>{children}</SectionHeading>
   ),
   h2: ({ children }: any) => (
-    <SectionHeading as="h2" fontWeight={600}>
+    <SectionHeading fontWeight={500} fontSize="1.625rem">
       {children}
     </SectionHeading>
   ),

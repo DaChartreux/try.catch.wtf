@@ -10,8 +10,8 @@ import HashIcon from "@components/icons/HashIcon";
 
 type BlogHeadingProps = {
   children: string;
-  as?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "p";
   fontWeight?: number;
+  fontSize?: string;
 };
 
 const textMotion = {
@@ -32,7 +32,7 @@ const slashMotion = {
   },
 };
 
-const BlogHeading = ({ fontWeight, as, children }: BlogHeadingProps) => {
+const BlogHeading = ({ fontWeight, fontSize, children }: BlogHeadingProps) => {
   const { containerRef, isVisible } = useInView({
     root: null,
     rootMargin: "0px",
@@ -56,7 +56,7 @@ const BlogHeading = ({ fontWeight, as, children }: BlogHeadingProps) => {
       </BlogAnchorIconStyle>
       <HeadingStyle
         fgColor="primary-100"
-        fontSize="2rem"
+        fontSize={fontSize!}
         fontWeight={fontWeight}
         whileHover="hover"
         initial={["hidden", "rest"]}
@@ -74,7 +74,7 @@ const BlogHeading = ({ fontWeight, as, children }: BlogHeadingProps) => {
 
 BlogHeading.defaultProps = {
   fontWeight: 600,
-  as: "p",
+  fontSize: "2rem",
 };
 
 export default BlogHeading;

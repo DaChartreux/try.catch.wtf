@@ -44,16 +44,18 @@ const Highlight = ({
         >
           <CopyIcon />
         </ButtonIcon>
-        <ButtonIcon
-          as="a"
-          bgColor="bg-100"
-          fgColor="fg-100"
-          href={`https://codesandbox.io/s/${cbSlug}`}
-          target="_blank"
-          rel="noreferrer"
-        >
-          <CodesandboxIcon />
-        </ButtonIcon>
+        {cbSlug && (
+          <ButtonIcon
+            as="a"
+            bgColor="bg-100"
+            fgColor="fg-100"
+            href={`https://codesandbox.io/s/${cbSlug}`}
+            target="_blank"
+            rel="noreferrer"
+          >
+            <CodesandboxIcon />
+          </ButtonIcon>
+        )}
       </div>
       {!!fileName && <FilenameHeader>{fileName}</FilenameHeader>}
       <ContainerStyle hasFilename={!!fileName}>
