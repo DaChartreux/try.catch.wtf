@@ -1,6 +1,7 @@
 import React, { ReactNode } from "react";
+import Image from "next/image";
 
-import BlogHeading from "@components/BlogHeading";
+import SectionHeading from "@components/SectionHeading";
 import Heading from "@components/Heading";
 import Blockquote from "@components/Blockquote";
 import Highlight from "@components/Highlight";
@@ -13,13 +14,36 @@ type MDXComponentsType = {
 };
 
 const MDXComponents: MDXComponentsType = {
-  Spacer,
-  BlogHeading,
   Heading,
+  Image,
+  SectionHeading,
+  h1: ({ children }: any) => (
+    <SectionHeading fontWeight={500}>{children}</SectionHeading>
+  ),
+  h2: ({ children }: any) => (
+    <SectionHeading fontWeight={500} fontSize="1.625rem">
+      {children}
+    </SectionHeading>
+  ),
+  h3: ({ children }: any) => (
+    <Heading
+      fgColor="primary-200"
+      fontSize="1.375rem"
+      fontWeight={500}
+      whileHover="hover"
+      initial={["hidden", "rest"]}
+    >
+      {children}
+    </Heading>
+  ),
+  Spacer,
+  Blockquote,
+  blockquote: ({ children }) => <Blockquote type="info">{children}</Blockquote>,
   p: ({ children }) => <Paragraph>{children}</Paragraph>,
-  blockquote: (props: any) => <Blockquote {...props} />,
   ol: (props: any) => <OrderedList {...props} />,
-  pre: ({ children }: any) => <Highlight {...children.props} />,
+  pre: ({ children }: any) => {
+    return <Highlight {...children.props} />;
+  },
 };
 
 export default MDXComponents;

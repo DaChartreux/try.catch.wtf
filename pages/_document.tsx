@@ -58,14 +58,7 @@ export default class Document extends NextDocument {
         <Head>
           <link
             rel="preload"
-            href="/fonts/Jost/Jost-400.woff2"
-            crossOrigin="anonymous"
-            as="font"
-            type="font/woff2"
-          />
-          <link
-            rel="preload"
-            href="/fonts/Jost/Jost-600.woff2"
+            href="/fonts/Jost/Jost-VF.woff2"
             crossOrigin="anonymous"
             as="font"
             type="font/woff2"
