@@ -14,9 +14,10 @@ import useCopyToClipboard from "@hooks/useCopyToClipboard";
 
 type HighlightProps = {
   fileName: string;
-  children: any;
   added: string;
   removed: string;
+  children: string;
+  className: string;
   cbSlug?: string;
 };
 
@@ -26,6 +27,7 @@ const Highlight = ({
   removed,
   cbSlug,
   children,
+  className,
 }: HighlightProps) => {
   const [value, copy] = useCopyToClipboard();
 
@@ -56,7 +58,7 @@ const Highlight = ({
       {!!fileName && <FilenameHeader>{fileName}</FilenameHeader>}
       <ContainerStyle hasFilename={!!fileName}>
         <Prism
-          language="tsx"
+          language={className.replace("language-", "")}
           style={solarized}
           wrapLines
           lineNumberStyle={{ minWidth: "3rem" }}
@@ -72,7 +74,7 @@ const Highlight = ({
             return { style };
           }}
         >
-          {children}
+          {children.split("\n").slice(0, -1).join("\n")}
         </Prism>
       </ContainerStyle>
     </PreContainer>

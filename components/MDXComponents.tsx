@@ -43,7 +43,9 @@ const MDXComponents: MDXComponentsType = {
   blockquote: ({ children }) => <Blockquote type="info">{children}</Blockquote>,
   p: ({ children }) => <Paragraph>{children}</Paragraph>,
   ol: (props: any) => <OrderedList {...props} />,
-  pre: ({ children }: any) => <Highlight {...children.props} />,
+  pre: ({ children }: any) => {
+    return <Highlight {...children.props} />;
+  },
 };
 
 export default MDXComponents;
