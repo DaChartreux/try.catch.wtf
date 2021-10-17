@@ -1,7 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 
-import Heading from "@components/Heading";
+import HeadingPStyle from "@components/Heading";
 import Tag from "@components/Tag";
 import THEME from "@styles/theme";
 
@@ -16,13 +16,14 @@ type CategoriesProps = {
 
 const Categories = ({ categories }: CategoriesProps) => (
   <>
-    <Heading
+    <HeadingPStyle
       fgColor="primary-100"
-      fontSize="1rem"
-      margin="0 0 1.75rem 0"
+      fontSize="1.25rem"
+      fontWeight={600}
+      margin="0 0 1rem 0"
     >
       CATEGORIES
-    </Heading>
+    </HeadingPStyle>
     <motion.div
       variants={{
         visible: {

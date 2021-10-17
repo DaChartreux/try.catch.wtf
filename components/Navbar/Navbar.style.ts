@@ -24,8 +24,12 @@ export const NavContainer = styled(motion.div)<NavContainerStyles>`
   background-color: hsla(${({ bgColor }) => THEME.colors[bgColor]}, 0.85);
   transition: background-color 200ms ease-in-out;
 
+  @media (max-width: 1280px) {
+    padding: 0 1rem;
+  }
+
   @media (max-width: 640px) {
-    padding: 0 2rem;
+    padding: 0;
   }
 `;
 
@@ -40,9 +44,8 @@ export const NavInnerContainer = styled.div`
   justify-content: space-between;
   border-bottom: 2px hsla(${THEME.colors["fg-100"]}, 0.08) solid;
 
-  @media (max-width: 768px) {
+  @media (max-width: 640px) {
     height: 5rem;
-    padding: 0;
   }
 `;
 
@@ -58,16 +61,6 @@ export const HomeLinkStyle = styled.a`
   color: hsl(${THEME.colors["fg-100"]});
   height: fit-content;
   text-decoration: none;
-
-  &::after {
-    content: "";
-    background-color: hsl(${THEME.colors["primary-100"]});
-    height: 0.25rem;
-    width: 2rem;
-    position: absolute;
-    bottom: -0.25rem;
-    left: 0;
-  }
 `;
 
 export const LinkStyle = styled.a<LinkStyledProps>`

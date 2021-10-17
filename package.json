@@ -13,6 +13,7 @@
     "@emotion/react": "^11.4.1",
     "@emotion/server": "^11.4.0",
     "@emotion/styled": "^11.3.0",
+    "dayjs": "^1.10.7",
     "framer-motion": "^4.1.17",
     "gray-matter": "^4.0.3",
     "next": "11.1.2",
