@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import { motion } from "framer-motion";
 
-import Heading from "@components/Heading";
+import HeadingPStyle from "@components/Heading";
 import THEME from "@styles/theme";
 
 export const MotionHeroStyled = styled(motion.div)`
@@ -17,7 +17,7 @@ export const PostFooter = styled.footer`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.25rem;
 
   span {
     display: inline-flex;
@@ -51,8 +51,9 @@ export const PostPreviewStyled = styled.a`
   background-color: hsla(${THEME.colors["bg-200"]}, 0.075);
   border-color: hsla(${THEME.colors["fg-100"]}, 0.08);
 
-  ${Heading} {
+  ${HeadingPStyle} {
     margin-bottom: 1rem;
+    transition: 200ms ease-in-out;
   }
 
   &:hover {

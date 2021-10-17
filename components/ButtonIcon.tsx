@@ -1,48 +1,40 @@
-import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 
 import THEME from "@styles/theme";
-
 import { ColorShade } from "@typings/theme";
 
 type ButtonIconStyledProps = {
   bgColor: ColorShade;
   fgColor: ColorShade;
+  href?: string;
+  target?: string;
+  rel?: string;
 };
 
 const ButtonIcon = styled.button<ButtonIconStyledProps>`
-  padding: 0.5rem;
-  border-radius: 0.375rem;
-  height: 2.5rem;
   width: 2.5rem;
+  padding: 0.5rem;
+  height: 2.5rem;
+  border-radius: 0.375rem;
   outline: none;
   cursor: pointer;
   transition: all 200ms ease-in-out;
+  color: hsla(${({ fgColor }) => THEME.colors[fgColor]}, 0.7);
+  background-color: hsla(${({ bgColor }) => THEME.colors[bgColor]}, 0.1);
 
-  ${({ bgColor, fgColor }) => css`
-    background-color: hsla(${THEME.colors[bgColor]}, 0.1);
+  svg {
+    transition: all 200ms ease-in-out;
+  }
 
-    svg {
-      transition: all 200ms ease-in-out;
-      color: hsla(${THEME.colors[fgColor]}, 0.9);
-    }
+  &:hover {
+    background-color: hsla(${({ bgColor }) => THEME.colors[bgColor]}, 0.15);
+    color: hsla(${({ fgColor }) => THEME.colors[fgColor]}, 1);
+  }
 
-    &:hover {
-      background-color: hsla(${THEME.colors[bgColor]}, 0.15);
-
-      svg {
-        color: hsla(${THEME.colors[fgColor]}, 0.95);
-      }
-    }
-
-    &:active {
-      background-color: hsla(${THEME.colors[bgColor]}, 0.17);
-
-      svg {
-        color: hsla(${THEME.colors[fgColor]}, 0.97);
-      }
-    }
-  `}
+  &:active {
+    background-color: hsla(${({ bgColor }) => THEME.colors[bgColor]}, 0.2);
+    color: hsla(${({ fgColor }) => THEME.colors[fgColor]}, 0.95);
+  }
 `;
 
 export default ButtonIcon;

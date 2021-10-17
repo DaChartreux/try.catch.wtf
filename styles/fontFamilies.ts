@@ -2,21 +2,21 @@ import { css } from "@emotion/react";
 
 const FONT_FAMILIES = css`
   @font-face {
-    font-family: "Jost";
-    font-style: normal;
-    font-weight: 400;
+    font-family: Jost VF;
+    font-weight: 100 900;
     font-display: swap;
-    src: local(""), url("/fonts/Jost/Jost-400.woff2") format("woff2"),
-      url("/fonts/Jost/Jost-400.woff") format("woff");
+    font-style: normal;
+    src: url("/fonts/Jost/Jost-VF.woff2") format("woff2-variations"),
+      url("/fonts/Jost/Jost-VF.woff") format("woff-variations");
   }
 
   @font-face {
-    font-family: "Jost";
-    font-style: normal;
-    font-weight: 600;
+    font-family: Jost VF;
+    font-weight: 100 900;
     font-display: swap;
-    src: local(""), url("/fonts/Jost/Jost-600.woff2") format("woff2"),
-      url("/fonts/Jost/Jost-600.woff") format("woff");
+    font-style: italic;
+    src: url("/fonts/Jost/Jost-VF.woff2") format("woff2-variations"),
+      url("/fonts/Jost/Jost-VF.woff") format("woff-variations");
   }
 
   @font-face {

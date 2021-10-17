@@ -4,7 +4,15 @@ import THEME from "@styles/theme";
 
 export const PreContainer = styled.div`
   display: flex;
+  position: relative;
   flex-direction: column;
+  margin: 0 0 1.5rem 0;
+
+  .icon {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
 `;
 
 export const ContainerStyle = styled.div<{ hasFilename: boolean }>`

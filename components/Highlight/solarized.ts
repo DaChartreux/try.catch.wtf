@@ -40,7 +40,7 @@ const solarized = {
     MozHyphens: "none",
     msHyphens: "none",
     hyphens: "none",
-    padding: "1rem 0",
+    padding: "1rem",
     margin: "0",
   },
   ':not(pre) > code[class*="language-"]': {

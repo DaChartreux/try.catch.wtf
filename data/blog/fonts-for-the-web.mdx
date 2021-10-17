@@ -1,0 +1,93 @@
+---
+title: Fonts for the web
+heroImageName: LRFR--AMjQc
+heroCreditUserProfile: Pawel Czerwinski
+heroCreditUserProfileUrl: https://unsplash.com/@pawel_czerwinski?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText
+heroCreditSource: Unsplash
+createdAt: 17 Oct 2021
+---
+
+When I was building this blog, I struggled a lot to find a good font which fit well with the overall design, and is easy to read. After several weeks, I settled with [Jost\*](https://indestructibletype.com/Jost.html) font. To my surprise, just adding a simple font lowered my lighthouse performance score below 30 😐. Thats when I realized that fonts can impact performance.
+
+In this post, I'm going to share some 🪄 woodoo I used to uplift the lighthouse performance score.
+
+# Potential impacts of fonts
+
+- ### Delayed text rendering
+
+  If a web font has not loaded, it can delay text rendering. Which results in delayed First Contentful Paint (FCP) or in some cases, delayed Largest Contentful Paint (LCP).
+
+- ### Layout shifts
+  When fonts are loaded and swapped, they can cause layout shifts. These layout shifts occur when a web font and its fallbackfont take up different amounts of space on the page.
+
+# Font loading
+
+We can use `@font-face` CSS at-rule to specify a custom font.
+
+```css
+@font-face {
+  font-family: Jost;
+  font-weight: 400;
+  font-display: swap;
+  font-style: normal;
+  src: url("/fonts/Jost/Jost-400.woff2") format("woff2");
+}
+```
+
+This specifies a custom font located at `/fonts/Jost/Jost-400.woff2` of type `woff2`, will be referenced as `Jost`, having a weight of `400`, and `normal` style. Another thing to note is that the browser will not download the font until it is referenced by styling that is used on the page.
+
+Fonts are essential resources, without which users might be unable to view page content. So it seems obvious to load them as early as possible.
+
+When loading fonts from a 3rd party origin (like [Google Fonts](https://fonts.google.com/)), you can `preconnect` to establish early connection(s). First load the font stylesheet. To `preconnect` the connection for downloading the font, add `crossorigin` attribute.
+
+```html
+<head>
+  <link rel="preconnect" href="https://fonts.example.com" />
+  <link rel="preconnect" href="https://fonts.example.com" crossorigin />
+</head>
+```
+
+> Unlike stylesheets, font files are served over [CORS connection](https://www.w3.org/TR/css-fonts-3/#font-fetching-requirements).
+
+These `<link>` tags should be placed as early in the document as possible.
+
+<div style={{ display: "grid", maxWidth: "100%" }}>
+  <Image
+    src="/img/blog/fonts-for-the-web/no-prefetch.png"
+    width={677}
+    height={381}
+    quality={70}
+    layout="intrinsic"
+    objectFit="contain"
+  />
+</div>
+
+<div style={{ display: "grid", maxWidth: "100%" }}>
+  <Image
+    src="/img/blog/fonts-for-the-web/prefetch.png"
+    width={677}
+    height={381}
+    quality={70}
+    layout="intrinsic"
+    objectFit="contain"
+  />
+</div>
+
+If you are serving the font yourself, you can `preload` the fonts in `<head>`. It will load fonts early, but it will slow down the loading of other resources. `preload` also ignores `unicode-range` when loading fonts. It is most useful to load single font files.
+
+```html
+<head>
+  <link
+    rel="preload"
+    href="/fonts/Jost/Jost-400.woff2"
+    as="font"
+    type="font/woff2"
+    crossorigin
+  />
+</head>
+```
+
+# Font delivery
+
+When serving fonts yourself, it is better to serve them over a CDN via HTTP/2. You can perform font-subsetting and WOFF2 compression to reduce the size of font files.
+
