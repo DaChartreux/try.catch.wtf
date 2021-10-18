@@ -55,7 +55,15 @@ export default class Document extends NextDocument {
   render() {
     return (
       <Html style={{ colorScheme: "dark" }}>
-        <Head />
+        <Head>
+          <link
+            rel="preload"
+            href="/fonts/Jost/Jost-VF.woff2"
+            crossOrigin="anonymous"
+            as="font"
+            type="font/woff2"
+          />
+        </Head>
         <body>
           <script dangerouslySetInnerHTML={{ __html: initialTheme }} />
           <Main />

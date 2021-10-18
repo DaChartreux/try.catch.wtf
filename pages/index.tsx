@@ -1,15 +1,36 @@
-import React, { ReactNode } from "react";
+import fs from "fs";
+import path from "path";
+
+import React from "react";
 import type { ReactElement } from "react";
-import type { NextPage } from "next";
+import type { GetStaticProps, NextPage } from "next";
+import dynamic from "next/dynamic";
 import styled from "@emotion/styled";
 
 import Layout from "@components/Layout";
-import Categories from "@components/Categories";
-import RecentPosts from "@components/Recent";
-import Footer from "@components/Footer";
+import { postFilePaths, POSTS_PATH } from "utils/mdxUtils";
+import matter from "gray-matter";
+import dayjs from "dayjs";
+import { NextPageWithLayout } from "@typings/app";
+import { HeroImageName } from "@typings/heroImageName";
 
-type NextPageWithLayout = NextPage<never> & {
-  getLayout?: (page: ReactElement) => ReactNode;
+const Categories = dynamic(() => import("@components/Categories"), {
+  ssr: true,
+});
+const RecentPosts = dynamic(() => import("@components/RecentPosts"), {
+  ssr: true,
+});
+
+type IndexProps = {
+  latestPosts: {
+    id: number;
+    title: string;
+    description: string;
+    categories: string[];
+    slug: string;
+    heroImageName: HeroImageName;
+    createdAt: string;
+  }[];
 };
 
 const LayoutWrapper = styled(Layout)`
@@ -27,7 +48,7 @@ const LayoutWrapper = styled(Layout)`
     grid-template-columns: 4fr 1fr;
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: 640px) {
     padding: 0 1rem;
     grid-template-columns: auto;
     grid-template-rows: auto;
@@ -46,7 +67,7 @@ const RecentPostsWrapper = styled.div`
   grid-area: recent;
 `;
 
-const Index: NextPageWithLayout = () => {
+const Index: NextPageWithLayout<IndexProps> = ({ latestPosts }) => {
   return (
     <>
       <CategoriesWrapper>
@@ -68,40 +89,43 @@ const Index: NextPageWithLayout = () => {
       </CategoriesWrapper>
 
       <RecentPostsWrapper>
-        <RecentPosts
-          posts={[
-            {
-              id: 1,
-              categories: [],
-              hero: "72Mf6a3tpno",
-              title: "An Interactive Guide to Keyframe Animations",
-              slug: "react-state-and-render",
-              description:
-                "CSS keyframe animations are incredibly flexible and powerful, but they’re also a bit weird. In this deep-dive tutorial, we'll learn how CSS keyframes work from the ground up, and see how to use them to build high-quality animations.",
-            },
-            {
-              id: 2,
-              categories: [],
-              hero: "Dcu09vM9H-U",
-              title: "An Interactive Guide to Keyframe Animations",
-              slug: "test2",
-              description:
-                "CSS keyframe animations are incredibly flexible and powerful, but they’re also a bit weird. In this deep-dive tutorial, we'll learn how CSS keyframes work from the ground up, and see how to use them to build high-quality animations.",
-            },
-          ]}
-        />
+        <RecentPosts posts={latestPosts} />
       </RecentPostsWrapper>
     </>
   );
 };
 
-Index.getLayout = (page: ReactElement) => {
-  return (
-    <>
-      <LayoutWrapper>{page}</LayoutWrapper>
-      <Footer />
-    </>
-  );
+Index.getLayout = (page: ReactElement) => <LayoutWrapper>{page}</LayoutWrapper>;
+
+export const getStaticProps: GetStaticProps<IndexProps> = async () => {
+  const offset = new Date().getTimezoneOffset();
+  const slugs = postFilePaths
+    .map((path) => path.replace(/\.mdx?$/, ""))
+    .map((slug) => slug);
+
+  const latestPosts: any = slugs
+    .map((slug) => {
+      const postFilePath = path.join(POSTS_PATH, `${slug}.mdx`);
+      const source = fs.readFileSync(postFilePath);
+      const { data } = matter(source);
+
+      return {
+        ...data,
+        slug,
+        createdAt: dayjs(data.createdAt).subtract(offset, "minute"),
+      };
+    })
+    .sort((a, b) => {
+      return -a.createdAt.diff(b.createdAt);
+    })
+    .slice(0, 4)
+    .map((data) => ({ ...data, createdAt: data.createdAt.format("DD MMM") }));
+
+  return {
+    props: {
+      latestPosts,
+    },
+  };
 };
 
 export default Index;

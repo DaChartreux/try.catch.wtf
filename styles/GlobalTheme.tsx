@@ -9,8 +9,8 @@ const GlobalTheme = () => (
       ${FONT_FAMILIES}
 
       :root {
-        --color-bg-100: 225, 0%, 99%; // hsl(225, 0%, 99%)
-        --color-bg-200: 0, 0%, 100%; // hsl(0, 0%, 100%)
+        --color-bg-100: 0, 0%, 100%; // hsl(0, 0%, 100%)
+        --color-bg-200: 225, 0%, 99%; // hsl(225, 0%, 99%)
 
         --color-fg-100: 210, 50%, 9%; // hsl(210, 50%, 9%)
         --color-fg-200: 0, 0%, 0%; // hsl(0, 0%, 0%)
@@ -195,6 +195,10 @@ const GlobalTheme = () => (
         background: hsl(${THEME.colors["bg-100"]});
         color: hsl(${THEME.colors["fg-100"]});
         transition: background-color 200ms ease-in-out;
+      }
+
+      em {
+        font-variation-settings: "ital" 1;
       }
 
       ::-webkit-scrollbar {

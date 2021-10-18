@@ -4,17 +4,22 @@ import styled from "@emotion/styled";
 import InfoIcon from "@icons/InfoIcon";
 import THEME from "@styles/theme";
 
+type BlockquoteProps = {
+  children: string;
+  type: "info" | "warning";
+};
+
 const BlockquoteStyle = styled.blockquote`
   position: relative;
-  background-color: hsl(${THEME.colors["info-bg"]});
+  background-color: hsla(${THEME.colors["info-fg"]}, 0.2);
   border: 2px solid hsl(${THEME.colors["info-fg"]});
   box-sizing: border-box;
   border-radius: 0.5rem;
-  margin: 0 0 2rem 0;
-  padding: 1rem 1rem 1rem 2rem;
+  margin: 0 0 1rem 0;
+  padding: 0.5rem 0.5rem 0.5rem 2rem;
 
   .quote {
-    font-size: 0.875rem;
+    font-size: 1.25rem;
     color: hsl(${THEME.colors["fg-100"]}, 1);
   }
 
@@ -32,21 +37,16 @@ const IconStyle = styled.div`
   border-radius: 50%;
   left: -1.375rem;
   top: 1rem;
-  color: hsl(${THEME.colors["info-bg"]});
+  color: hsla(${THEME.colors["bg-100"]}, 0.8);
   background-color: hsl(${THEME.colors["info-fg"]});
 `;
 
-const Blockquote = ({ children }: any) => (
+const Blockquote = ({ children, type }: BlockquoteProps) => (
   <BlockquoteStyle>
     <IconStyle>
       <InfoIcon />
     </IconStyle>
-    <p className="quote">
-      {children.length ? children[0].props.children : children.props.children}
-    </p>
-    {children.length === 2 && (
-      <p className="quote-source">{children[1].props.children}</p>
-    )}
+    <p className="quote">{children}</p>
   </BlockquoteStyle>
 );
 

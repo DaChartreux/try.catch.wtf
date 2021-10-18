@@ -1,23 +1,49 @@
-import React from "react";
-import { MDXProviderComponentsProp } from "@mdx-js/react";
+import React, { ReactNode } from "react";
+import Image from "next/image";
 
-import BlogHeading from "@components/BlogHeading";
+import SectionHeading from "@components/SectionHeading";
 import Heading from "@components/Heading";
 import Blockquote from "@components/Blockquote";
 import Highlight from "@components/Highlight";
 import OrderedList from "@components/Lists";
 import Paragraph from "@components/Paragraph";
+import Spacer from "@components/Spacer";
 
-const MDXComponents: MDXProviderComponentsProp = {
-  h1: (props: any) => (
-    <Heading {...props} fontSize="5rem" fontWeight={400} fgColor="pink.400" />
+type MDXComponentsType = {
+  [key: string]: (props: any) => ReactNode;
+};
+
+const MDXComponents: MDXComponentsType = {
+  Heading,
+  Image,
+  SectionHeading,
+  h1: ({ children }: any) => (
+    <SectionHeading fontWeight={500}>{children}</SectionHeading>
   ),
-  h3: (props: any) => <BlogHeading {...props} />,
-  h2: (props: any) => <BlogHeading {...props} />,
+  h2: ({ children }: any) => (
+    <SectionHeading fontWeight={500} fontSize="1.625rem">
+      {children}
+    </SectionHeading>
+  ),
+  h3: ({ children }: any) => (
+    <Heading
+      fgColor="primary-200"
+      fontSize="1.375rem"
+      fontWeight={500}
+      whileHover="hover"
+      initial={["hidden", "rest"]}
+    >
+      {children}
+    </Heading>
+  ),
+  Spacer,
+  Blockquote,
+  blockquote: ({ children }) => <Blockquote type="info">{children}</Blockquote>,
   p: ({ children }) => <Paragraph>{children}</Paragraph>,
-  blockquote: (props: any) => <Blockquote {...props} />,
   ol: (props: any) => <OrderedList {...props} />,
-  pre: ({ children }: any) => <Highlight {...children.props} />,
+  pre: ({ children }: any) => {
+    return <Highlight {...children.props} />;
+  },
 };
 
 export default MDXComponents;

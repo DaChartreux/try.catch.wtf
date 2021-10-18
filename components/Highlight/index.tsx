@@ -1,5 +1,5 @@
 import React from "react";
-import { Prism } from "react-syntax-highlighter";
+import { PrismAsyncLight as Prism } from "react-syntax-highlighter";
 
 import {
   PreContainer,
@@ -7,27 +7,61 @@ import {
   ContainerStyle,
 } from "@components/Highlight/Hightlight.style";
 import solarized from "@components/Highlight/solarized";
+import CodesandboxIcon from "@components/icons/CodesandboxIcon";
+import ButtonIcon from "@components/ButtonIcon";
+import CopyIcon from "@components/icons/CopyIcon";
+import useCopyToClipboard from "@hooks/useCopyToClipboard";
 
 type HighlightProps = {
   fileName: string;
-  children: any;
   added: string;
   removed: string;
+  children: string;
+  className: string;
+  cbSlug?: string;
 };
 
-const Highlight = ({ fileName, added, removed, children }: HighlightProps) => {
+const Highlight = ({
+  fileName,
+  added,
+  removed,
+  cbSlug,
+  children,
+  className,
+}: HighlightProps) => {
+  const [value, copy] = useCopyToClipboard();
+
   const ADDED = JSON.parse(added ?? "[]");
   const REMOVED = JSON.parse(removed ?? "[]");
 
   return (
-    <PreContainer style={{}}>
+    <PreContainer>
+      <div className="icon">
+        <ButtonIcon
+          bgColor="bg-100"
+          fgColor="fg-100"
+          onClick={() => copy(children)}
+        >
+          <CopyIcon />
+        </ButtonIcon>
+        {cbSlug && (
+          <ButtonIcon
+            as="a"
+            bgColor="bg-100"
+            fgColor="fg-100"
+            href={`https://codesandbox.io/s/${cbSlug}`}
+            target="_blank"
+            rel="noreferrer"
+          >
+            <CodesandboxIcon />
+          </ButtonIcon>
+        )}
+      </div>
       {!!fileName && <FilenameHeader>{fileName}</FilenameHeader>}
       <ContainerStyle hasFilename={!!fileName}>
         <Prism
-          language="tsx"
+          language={className.replace("language-", "")}
           style={solarized}
-          showLineNumbers
-          showInlineLineNumbers
           wrapLines
           lineNumberStyle={{ minWidth: "3rem" }}
           customStyle={{ overflowX: "scroll" }}
@@ -42,11 +76,15 @@ const Highlight = ({ fileName, added, removed, children }: HighlightProps) => {
             return { style };
           }}
         >
-          {children}
+          {children.split("\n").slice(0, -1).join("\n")}
         </Prism>
       </ContainerStyle>
     </PreContainer>
   );
+};
+
+Highlight.defaultProps = {
+  cbSlug: "",
 };
 
 export default Highlight;
