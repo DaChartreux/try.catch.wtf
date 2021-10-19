@@ -32,7 +32,7 @@ const MobileNavbarStyle = styled(NavStyle)`
 
 const Navbar = () => {
   const handleClickOutside = () => {
-    setNavVariant("close");
+    navVariant === "open" && setNavVariant("close");
   };
 
   const { ref } = useOnClickOutside<HTMLDivElement>(handleClickOutside);
@@ -65,7 +65,7 @@ const Navbar = () => {
     <NavContainer
       ref={ref}
       initial="initial"
-      animate={[navVariant, "load"]}
+      animate={navVariant}
       variants={variants}
       transition={{
         type: "spring",

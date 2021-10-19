@@ -1,5 +1,5 @@
 import React from "react";
-import { motion } from "framer-motion";
+import { LazyMotion, domAnimation, m } from "framer-motion";
 
 import HeadingPStyle from "@components/Heading";
 import Tag from "@components/Tag";
@@ -15,7 +15,7 @@ type CategoriesProps = {
 };
 
 const Categories = ({ categories }: CategoriesProps) => (
-  <>
+  <LazyMotion features={domAnimation}>
     <HeadingPStyle
       fgColor="primary-100"
       fontSize="1.25rem"
@@ -24,9 +24,11 @@ const Categories = ({ categories }: CategoriesProps) => (
     >
       CATEGORIES
     </HeadingPStyle>
-    <motion.div
+    <m.div
       variants={{
+        hidden: { opacity: 0 },
         visible: {
+          opacity: 1,
           transition: {
             delayChildren: 0.3,
             staggerChildren: 0.02,
@@ -46,8 +48,8 @@ const Categories = ({ categories }: CategoriesProps) => (
           {category.category}
         </Tag>
       ))}
-    </motion.div>
-  </>
+    </m.div>
+  </LazyMotion>
 );
 
 export default Categories;

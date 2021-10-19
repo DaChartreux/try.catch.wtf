@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 import styled from "@emotion/styled";
 import { css } from "@emotion/react";
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 
 import THEME from "@styles/theme";
 
@@ -15,7 +15,7 @@ type TagProps = {
   children: ReactNode;
 };
 
-const TagStyle = styled(motion.a)<TagStyledProps>`
+const TagStyle = styled(m.a)<TagStyledProps>`
   position: relative;
   display: inline-block;
   padding: 0.25rem 0.5rem;
@@ -69,7 +69,7 @@ const Tag = ({ children, ...props }: TagProps & TagStyledProps) => (
     }}
     {...props}
   >
-    <motion.div
+    <m.div
       whileHover={{
         scale: 1.06,
       }}

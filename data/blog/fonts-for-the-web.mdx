@@ -7,18 +7,18 @@ heroCreditSource: Unsplash
 createdAt: 17 Oct 2021
 ---
 
-When I was building this blog, I struggled a lot to find a good font which fit well with the overall design, and is easy to read. After several weeks, I settled with [Jost\*](https://indestructibletype.com/Jost.html) font. To my surprise, just adding a simple font lowered my lighthouse performance score below 30 😐. Thats when I realized that fonts can impact performance.
+When I was building this blog, I struggled a lot to find a good font that fit well with the overall design and is easy to read. After several weeks, I settled with [Jost\*](https://indestructibletype.com/Jost.html) font. To my surprise, just adding a simple font lowered my lighthouse performance score below 30 😐. That's when I realized that fonts can impact performance.
 
-In this post, I'm going to share some 🪄 woodoo I used to uplift the lighthouse performance score.
+In this post, I'm going to share some 🪄 voodoo I used to uplift the lighthouse performance score.
 
 # Potential impacts of fonts
 
 - ### Delayed text rendering
 
-  If a web font has not loaded, it can delay text rendering. Which results in delayed First Contentful Paint (FCP) or in some cases, delayed Largest Contentful Paint (LCP).
+  If a web font has not loaded, it can delay text rendering. Which results in delayed First Contentful Paint (FCP) or delayed Largest Contentful Paint (LCP).
 
 - ### Layout shifts
-  When fonts are loaded and swapped, they can cause layout shifts. These layout shifts occur when a web font and its fallbackfont take up different amounts of space on the page.
+  When fonts are loaded and swapped, they can cause layout shifts. These layout shifts occur when a web font and its fallback font take up different amounts of space on the page.
 
 # Font loading
 
@@ -38,7 +38,7 @@ This specifies a custom font located at `/fonts/Jost/Jost-400.woff2` of type `wo
 
 Fonts are essential resources, without which users might be unable to view page content. So it seems obvious to load them as early as possible.
 
-When loading fonts from a 3rd party origin (like [Google Fonts](https://fonts.google.com/)), you can `preconnect` to establish early connection(s). First load the font stylesheet. To `preconnect` the connection for downloading the font, add `crossorigin` attribute.
+When loading fonts from a 3rd party origin (like [Google Fonts](https://fonts.google.com/)), you can `preconnect` to establish early connection(s). First load the font stylesheet. To `preconnect` the connection for downloading the font, add the `crossorigin` attribute.
 
 ```html
 <head>
@@ -91,3 +91,39 @@ If you are serving the font yourself, you can `preload` the fonts in `<head>`. I
 
 When serving fonts yourself, it is better to serve them over a CDN via HTTP/2. You can perform font-subsetting and WOFF2 compression to reduce the size of font files.
 
+## Font subsetting
+
+Font subsetting is the process of taking a font file and creating smaller files with fewer characters (or OpenType features). This will naturally reduce the size of the font file. You can use tools like [glyphhanger](https://github.com/zachleat/glyphhanger) or [subfont](https://github.com/Munter/subfont).
+
+Let's subset Jost-VF.ttf (the font used in this site 😳).
+
+```shell
+# install glyphhanger
+npm i -g glyphhanger
+
+# install fonttools
+pip install fonttools
+
+# subsetting Jost-VF font to Latin charset
+glyphhanger --LATIN --subset=Jost-VF.ttf
+```
+
+## WOFF2 compression
+
+WOFF2 is a compressed font format that can compress a TTF font up to 30% (on average).
+
+And now let's compress our font.
+
+```shell
+# clone woff2
+git clone --recursive https://github.com/google/woff2.git
+
+# enter into the cloned repo
+cd woff2
+
+# build
+make clean all
+
+# convert the font
+./woff2_compress ~/Jost-VF.ttf
+```
