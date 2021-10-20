@@ -26,6 +26,7 @@ type BlogPropsType = {
     heroCreditUserProfileUrl: string;
     heroCreditSource: string;
     title: string;
+    createdAt: string;
   };
 };
 
@@ -59,6 +60,7 @@ const Blog: NextPageWithLayout<BlogPropsType> = ({ source, frontMatter }) => {
         <HeadingPStyle
           fgColor="green-100"
           fontSize="3rem"
+          fontWeight={600}
           margin="1rem 0 0.5rem 0"
           initial="hidden"
           animate="visible"
@@ -71,8 +73,9 @@ const Blog: NextPageWithLayout<BlogPropsType> = ({ source, frontMatter }) => {
           }}
           transition={{ duration: 0.4, delay: 0.3 }}
         >
-          TITLE
+          {frontMatter.title}
         </HeadingPStyle>
+        <p>{frontMatter.createdAt}</p>
       </div>
       <div style={{ gridArea: "hero" }}>
         <Hero

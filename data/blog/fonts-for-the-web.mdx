@@ -1,15 +1,15 @@
 ---
 title: Fonts for the web
-heroImageName: LRFR--AMjQc
-heroCreditUserProfile: Pawel Czerwinski
-heroCreditUserProfileUrl: https://unsplash.com/@pawel_czerwinski?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText
+heroImageName: aWZJCO4Rs1Y
+heroCreditUserProfile: Greg Rosenke
+heroCreditUserProfileUrl: https://unsplash.com/@greg_rosenke?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText
 heroCreditSource: Unsplash
 createdAt: 17 Oct 2021
 ---
 
-When I was building this blog, I struggled a lot to find a good font that fit well with the overall design and is easy to read. After several weeks, I settled with [Jost\*](https://indestructibletype.com/Jost.html) font. To my surprise, just adding a simple font lowered my lighthouse performance score below 30 😐. That's when I realized that fonts can impact performance.
+When I was building this blog, finding a good font was a pain in the butt. After several weeks, I settled with [Jost\*](https://indestructibletype.com/Jost.html) font only to find realize that my lighthouse performance score dipped 😐. Thats when I realized that fonts can impact performance.
 
-In this post, I'm going to share some 🪄 voodoo I used to uplift the lighthouse performance score.
+In this post, I'm going to share some 🪄 woodoo to uplift the lighthouse performance score.
 
 # Potential impacts of fonts
 
@@ -20,9 +20,11 @@ In this post, I'm going to share some 🪄 voodoo I used to uplift the lighthous
 - ### Layout shifts
   When fonts are loaded and swapped, they can cause layout shifts. These layout shifts occur when a web font and its fallback font take up different amounts of space on the page.
 
+Umm... What can we do to fix these 🤔s?
+
 # Font loading
 
-We can use `@font-face` CSS at-rule to specify a custom font.
+We can use `@font-face` CSS rule to specify a custom font.
 
 ```css
 @font-face {
@@ -34,11 +36,11 @@ We can use `@font-face` CSS at-rule to specify a custom font.
 }
 ```
 
-This specifies a custom font located at `/fonts/Jost/Jost-400.woff2` of type `woff2`, will be referenced as `Jost`, having a weight of `400`, and `normal` style. Another thing to note is that the browser will not download the font until it is referenced by styling that is used on the page.
+This specifies that a font located at `/fonts/Jost/Jost-400.woff2` of type `woff2`, will be referenced as `Jost`, having a weight of `400`, and `normal` style. Another thing to note is that the browser will not download the fonts until it is referenced by styling that is used on the page.
 
 Fonts are essential resources, without which users might be unable to view page content. So it seems obvious to load them as early as possible.
 
-When loading fonts from a 3rd party origin (like [Google Fonts](https://fonts.google.com/)), you can `preconnect` to establish early connection(s). First load the font stylesheet. To `preconnect` the connection for downloading the font, add the `crossorigin` attribute.
+When loading fonts from a 3rd party origin (like [Google Fonts](https://fonts.google.com/)), you can `preconnect` to establish early connection(s). First load the fonts stylesheet. To `preconnect` the connection for downloading the fonts, add `crossorigin` attribute.
 
 ```html
 <head>
@@ -73,7 +75,7 @@ These `<link>` tags should be placed as early in the document as possible.
   />
 </div>
 
-If you are serving the font yourself, you can `preload` the fonts in `<head>`. It will load fonts early, but it will slow down the loading of other resources. `preload` also ignores `unicode-range` when loading fonts. It is most useful to load single font files.
+If you are serving the fonts yourself, you can `preload` the fonts in `<head>`. It will load fonts early, but it will slow down the loading of other resources. `preload` also ignores `unicode-range` when loading fonts. It is most useful to load single font files.
 
 ```html
 <head>
