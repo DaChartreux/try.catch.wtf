@@ -20,11 +20,11 @@ In this post, I'm going to share some 🪄 woodoo to uplift the lighthouse perfo
 - ### Layout shifts
   When fonts are loaded and swapped, they can cause layout shifts. These layout shifts occur when a web font and its fallback font take up different amounts of space on the page.
 
-Umm... What can we do to fix these 🤔s?
+Umm... What can we do to fix these issues 🤔?
 
 # Font loading
 
-We can use `@font-face` CSS rule to specify a custom font.
+Let's see how we can load and use a font.
 
 ```css
 @font-face {
@@ -34,24 +34,49 @@ We can use `@font-face` CSS rule to specify a custom font.
   font-style: normal;
   src: url("/fonts/Jost/Jost-400.woff2") format("woff2");
 }
+
+.custom-font {
+  font-family: Jost;
+}
 ```
 
-This specifies that a font located at `/fonts/Jost/Jost-400.woff2` of type `woff2`, will be referenced as `Jost`, having a weight of `400`, and `normal` style. Another thing to note is that the browser will not download the fonts until it is referenced by styling that is used on the page.
+This specifies that a font located at `/fonts/Jost/Jost-400.woff2`, of `woff2` type, with `400` weight, and `normal` style is referenced as `Jost`. Now we can use our font anywhere by setting `font-family: Jost;`. Browsers download fonts only if a styling on the page references them. In this case, the browser will download 'Jost' font only if the page had an element with class `.custom-font`.
 
-Fonts are essential resources, without which users might be unable to view page content. So it seems obvious to load them as early as possible.
-
-When loading fonts from a 3rd party origin (like [Google Fonts](https://fonts.google.com/)), you can `preconnect` to establish early connection(s). First load the fonts stylesheet. To `preconnect` the connection for downloading the fonts, add `crossorigin` attribute.
+Sometimes, the absence of fonts can make your page unusable. It might be a no-brainer to load them asap because you WILL use them. We can `preload` fonts by adding a `<link>` in the `<head>`. This way it will be downloaded at the earliest.
 
 ```html
 <head>
-  <link rel="preconnect" href="https://fonts.example.com" />
-  <link rel="preconnect" href="https://fonts.example.com" crossorigin />
+  <link
+    rel="preload"
+    href="/fonts/Jost/Jost-400.woff2"
+    as="font"
+    type="font/woff2"
+    crossorigin
+  />
 </head>
 ```
 
-> Unlike stylesheets, font files are served over [CORS connection](https://www.w3.org/TR/css-fonts-3/#font-fetching-requirements).
+But this comes at a cost 😔. `preload`ing fonts super early might obstruct other critical resources for the page. If at-all you end up `preload`ing fonts, make sure your longest critical chain is short.
 
-These `<link>` tags should be placed as early in the document as possible.
+When loading fonts from a 3rd party origin, you can `preconnect` to establish early connection(s). Below is an example with Google Fonts.
+
+```html
+<head>
+  <!-- preconnect origin serving stylesheets -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+
+  <!-- preconnect origin serving fonts -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+  <!-- loading stylesheets -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Jost&display=swap"
+    rel="stylesheet"
+  />
+</head>
+```
+
+> `preconnect` for fonts needs a `crossorigin` attribute because unlike stylesheets, font files are served over [CORS connection](https://www.w3.org/TR/css-fonts-3/#font-fetching-requirements).
 
 <div style={{ display: "grid", maxWidth: "100%" }}>
   <Image
@@ -75,29 +100,21 @@ These `<link>` tags should be placed as early in the document as possible.
   />
 </div>
 
-If you are serving the fonts yourself, you can `preload` the fonts in `<head>`. It will load fonts early, but it will slow down the loading of other resources. `preload` also ignores `unicode-range` when loading fonts. It is most useful to load single font files.
-
-```html
-<head>
-  <link
-    rel="preload"
-    href="/fonts/Jost/Jost-400.woff2"
-    as="font"
-    type="font/woff2"
-    crossorigin
-  />
-</head>
-```
+If you are serving the fonts yourself,
 
 # Font delivery
 
-When serving fonts yourself, it is better to serve them over a CDN via HTTP/2. You can perform font-subsetting and WOFF2 compression to reduce the size of font files.
+We are ready to load our fonts in the web page. But, how do we deliver them optimally? If you are using a 3rd party service, there is nothing much for you to do in this section. Services like Google Fonts already optimize fonts for fast serving.
+
+If you are serving the fonts yourself, it is better to serve them over a CDN via HTTP/2 which results in faster delivery to clients. You can perform font-subsetting and WOFF2 compression to reduce the size of font files as well.
 
 ## Font subsetting
 
-Font subsetting is the process of taking a font file and creating smaller files with fewer characters (or OpenType features). This will naturally reduce the size of the font file. You can use tools like [glyphhanger](https://github.com/zachleat/glyphhanger) or [subfont](https://github.com/Munter/subfont).
+Font subsetting is the process of taking a font file and reducing the number of characters. For example, let's say you have a font with japanese characters like `月`. You are serving a page which is in english. It is highly unlikely you'd ever use these japanese characters. So you can subset your font to contain only simple latin characters.
 
-Let's subset Jost-VF.ttf (the font used in this site 😳).
+This will naturally reduce the size of the font file. Use tools like [glyphhanger](https://github.com/zachleat/glyphhanger) or [subfont](https://github.com/Munter/subfont) to subset fonts.
+
+Let's subset `Jost-400-Book.ttf`. You can download it from [here](https://indestructibletype.com/Jost.html).
 
 ```shell
 # install glyphhanger
@@ -106,15 +123,19 @@ npm i -g glyphhanger
 # install fonttools
 pip install fonttools
 
-# subsetting Jost-VF font to Latin charset
-glyphhanger --LATIN --subset=Jost-VF.ttf
+# subsetting Jost-400-Book.ttf font to Latin charset
+glyphhanger --LATIN --subset=Jost-400-Book.ttf
 ```
+
+This results in a TTF file (`Jost-400-Book-subset.ttf`) of size `40.5 kb` from `88.7 kb`! Already a reduction of 54%!
+
+> There are online tools like [Charset checker](https://www.alphabet-type.com/tools/charset-checker) to check the charset of fonts. You can use this to verify if subsetted font match your required charset or not.
 
 ## WOFF2 compression
 
-WOFF2 is a compressed font format that can compress a TTF font up to 30% (on average).
+WOFF2 is a compressed font format that can compress a TTF font.
 
-And now let's compress our font.
+Let's use our subset font (`Jost-400-Book-subset.ttf`) and compress it to woff2.
 
 ```shell
 # clone woff2
@@ -127,5 +148,7 @@ cd woff2
 make clean all
 
 # convert the font
-./woff2_compress ~/Jost-VF.ttf
+./woff2_compress ~/Jost-400-Book-subset.ttf
 ```
+
+This results in a woff2 file (`Jost-400-Book-subset.woff2`) of size `15.3 kb` from `40.5 kb`! A whopping decrease of 62% (and 82% decrease when compared to the original font file `Jost-400-Book.ttf`)!
