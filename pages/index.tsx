@@ -122,7 +122,9 @@ export const getStaticProps: GetStaticProps<IndexProps> = async () => {
     };
   });
 
-  await updatePosts(allPosts);
+  if (process.env.VERCEL_ENV) {
+    await updatePosts(allPosts);
+  }
 
   const latestPosts: any[] = allPosts
     .filter((data: any) => data.isPublished)
