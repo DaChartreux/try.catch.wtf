@@ -1,0 +1,24 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model views {
+  id     Int    @id @default(autoincrement())
+  ipHash String @db.VarChar(64)
+  postId Int
+
+  @@unique([ipHash, postId], map: "views_ipHash_postId_UNIQUE")
+}
+
+model posts {
+  id          Int       @id @default(autoincrement())
+  slug        String    @unique(map: "posts_slug_UNIQUE") @db.VarChar(50)
+  isPublished Boolean?  @default(false)
+  createdAt   DateTime? @default(now()) @db.Timestamp(0)
+  updatedAt   DateTime? @default(now()) @db.Timestamp(0)
+}

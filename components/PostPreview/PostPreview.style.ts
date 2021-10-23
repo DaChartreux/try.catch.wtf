@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import { motion } from "framer-motion";
 
-import HeadingPStyle from "@components/Heading";
+import HeadingStyle from "@components/Heading";
 import THEME from "@styles/theme";
 
 export const MotionHeroStyled = styled(motion.div)`
@@ -48,10 +48,12 @@ export const PostPreviewStyled = styled.a`
   transition: 200ms ease-in-out;
   display: flex;
   flex-direction: column;
-  background-color: hsla(${THEME.colors["bg-200"]}, 0.075);
+  background-color: hsla(${THEME.colors["bg-100"]});
   border-color: hsla(${THEME.colors["fg-100"]}, 0.08);
+  box-shadow: rgb(0 0 0 / 5%) 0px 1px 0px, rgb(0 0 0 / 3%) 0px 0px 8px,
+    rgb(0 0 0 / 2%) 0px 30px 30px;
 
-  ${HeadingPStyle} {
+  ${HeadingStyle} {
     margin-bottom: 1rem;
     transition: 200ms ease-in-out;
   }
@@ -59,9 +61,9 @@ export const PostPreviewStyled = styled.a`
   &:hover {
     background-color: hsla(${THEME.colors["bg-200"]}, 0.1);
     border-color: hsla(${THEME.colors["fg-100"]}, 0.12);
-    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.025), 0 2px 2px rgba(0, 0, 0, 0.025),
-      0 4px 4px rgba(0, 0, 0, 0.025), 0 6px 6px rgba(0, 0, 0, 0.025),
-      0 8px 8px rgba(0, 0, 0, 0.025), 0 20px 20px rgba(0, 0, 0, 0.05);
+    box-shadow: rgb(0 0 0 / 7%) 0px 100px 80px, rgb(0 0 0 / 5%) 0px 42px 33px,
+      rgb(0 0 0 / 4%) 0px 22px 17px, rgb(0 0 0 / 3%) 0px 12px 10px,
+      rgb(0 0 0 / 2%) 0px 6px 5px, rgb(0 0 0 /1%) 0px 3px 3px;
 
     ${PostFooter} {
       svg {
