@@ -7,7 +7,6 @@ import { MDXRemote, MDXRemoteSerializeResult } from "next-mdx-remote";
 import { serialize } from "next-mdx-remote/serialize";
 import matter from "gray-matter";
 import styled from "@emotion/styled";
-import useSWR from "swr";
 
 import { POSTS_PATH, postFilePaths } from "utils/mdxUtils";
 import Hero from "@components/Hero";
