@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import { motion } from "framer-motion";
 
-import HeadingPStyle from "@components/Heading";
+import HeadingStyle from "@components/Heading";
 import THEME from "@styles/theme";
 
 export const MotionHeroStyled = styled(motion.div)`
@@ -53,7 +53,7 @@ export const PostPreviewStyled = styled.a`
   box-shadow: rgb(0 0 0 / 5%) 0px 1px 0px, rgb(0 0 0 / 3%) 0px 0px 8px,
     rgb(0 0 0 / 2%) 0px 30px 30px;
 
-  ${HeadingPStyle} {
+  ${HeadingStyle} {
     margin-bottom: 1rem;
     transition: 200ms ease-in-out;
   }

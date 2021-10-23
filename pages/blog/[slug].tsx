@@ -1,11 +1,13 @@
 import fs from "fs";
 import path from "path";
 
-import React, { ReactElement, useEffect } from "react";
+import React, { ReactElement, useEffect, useState } from "react";
+import Head from "next/head";
 import { MDXRemote, MDXRemoteSerializeResult } from "next-mdx-remote";
 import { serialize } from "next-mdx-remote/serialize";
 import matter from "gray-matter";
 import styled from "@emotion/styled";
+import useSWR from "swr";
 
 import { POSTS_PATH, postFilePaths } from "utils/mdxUtils";
 import Hero from "@components/Hero";
@@ -13,9 +15,13 @@ import Layout from "@components/Layout";
 import heroImageMap from "@components/HeroImage";
 import MDXComponents from "@components/MDXComponents";
 import { HeroImageName } from "@typings/heroImageName";
-import HeadingPStyle from "@components/Heading";
+import HeadingStyle from "@components/Heading";
 import { NextPageWithLayout } from "@typings/app";
 import { GetStaticPaths, GetStaticProps } from "next";
+import axios, { Axios } from "axios";
+import Counter from "@components/ViewsCounter";
+import CalendarIcon from "@components/icons/CalendarIcon";
+import EyeIcon from "@components/icons/EyeIcon";
 
 type BlogPropsType = {
   source: MDXRemoteSerializeResult<Record<string, unknown>>;
@@ -27,6 +33,7 @@ type BlogPropsType = {
     heroCreditSource: string;
     title: string;
     createdAt: string;
+    tags: string[];
   };
 };
 
@@ -47,6 +54,17 @@ const LayoutWrapper = styled(Layout)`
 `;
 
 const Blog: NextPageWithLayout<BlogPropsType> = ({ source, frontMatter }) => {
+  const { slug } = frontMatter;
+
+  const [views, setViews] = useState(0);
+
+  useEffect(() => {
+    axios
+      .get("/api/updateViews/" + slug)
+      .then(({ data }) => setViews(data as number))
+      .catch((err) => console.log(err));
+  });
+
   useEffect(() => {
     const url = window.location.hash;
     document.getElementById(url.replace("#", ""))?.scrollIntoView({
@@ -56,8 +74,15 @@ const Blog: NextPageWithLayout<BlogPropsType> = ({ source, frontMatter }) => {
 
   return (
     <>
+      <Head>
+        <title>{frontMatter.title}</title>
+        <meta
+          name="description"
+          content="How to use fonts with minimal side effects on lighthouse score"
+        />
+      </Head>
       <div style={{ gridArea: "heading" }}>
-        <HeadingPStyle
+        <HeadingStyle
           fgColor="green-100"
           fontSize="3rem"
           fontWeight={600}
@@ -74,8 +99,15 @@ const Blog: NextPageWithLayout<BlogPropsType> = ({ source, frontMatter }) => {
           transition={{ duration: 0.4, delay: 0.3 }}
         >
           {frontMatter.title}
-        </HeadingPStyle>
-        <p>{frontMatter.createdAt}</p>
+        </HeadingStyle>
+        <div>
+          <CalendarIcon />
+          <p>{frontMatter.createdAt}</p>
+        </div>
+        <div>
+          <EyeIcon />
+          <Counter from={0} to={views} />
+        </div>
       </div>
       <div style={{ gridArea: "hero" }}>
         <Hero

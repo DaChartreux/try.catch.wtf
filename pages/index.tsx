@@ -3,16 +3,18 @@ import path from "path";
 
 import React from "react";
 import type { ReactElement } from "react";
-import type { GetStaticProps, NextPage } from "next";
+import type { GetStaticProps } from "next";
+import Head from "next/head";
 import dynamic from "next/dynamic";
 import styled from "@emotion/styled";
+import matter from "gray-matter";
+import dayjs from "dayjs";
 
 import Layout from "@components/Layout";
 import { postFilePaths, POSTS_PATH } from "utils/mdxUtils";
-import matter from "gray-matter";
-import dayjs from "dayjs";
 import { NextPageWithLayout } from "@typings/app";
 import { HeroImageName } from "@typings/heroImageName";
+import { updatePosts } from "utils/dbSync";
 
 const Categories = dynamic(() => import("@components/Categories"), {
   ssr: true,
@@ -27,9 +29,11 @@ type IndexProps = {
     title: string;
     description: string;
     categories: string[];
+    fileName: string;
     slug: string;
     heroImageName: HeroImageName;
     createdAt: string;
+    isPublished: boolean;
   }[];
 };
 
@@ -70,6 +74,9 @@ const RecentPostsWrapper = styled.div`
 const Index: NextPageWithLayout<IndexProps> = ({ latestPosts }) => {
   return (
     <>
+      <Head>
+        <title>Try... Catch</title>
+      </Head>
       <CategoriesWrapper>
         <Categories
           categories={[
@@ -99,22 +106,26 @@ Index.getLayout = (page: ReactElement) => <LayoutWrapper>{page}</LayoutWrapper>;
 
 export const getStaticProps: GetStaticProps<IndexProps> = async () => {
   const offset = new Date().getTimezoneOffset();
-  const slugs = postFilePaths
-    .map((path) => path.replace(/\.mdx?$/, ""))
-    .map((slug) => slug);
+  const fileNames = postFilePaths.map((path) => path.replace(/\.mdx?$/, ""));
 
-  const latestPosts: any = slugs
-    .map((slug) => {
-      const postFilePath = path.join(POSTS_PATH, `${slug}.mdx`);
-      const source = fs.readFileSync(postFilePath);
-      const { data } = matter(source);
+  console.log(fileNames);
 
-      return {
-        ...data,
-        slug,
-        createdAt: dayjs(data.createdAt).subtract(offset, "minute"),
-      };
-    })
+  const allPosts: any[] = fileNames.map((slug) => {
+    const postFilePath = path.join(POSTS_PATH, `${slug}.mdx`);
+    const source = fs.readFileSync(postFilePath);
+    const { data } = matter(source);
+
+    return {
+      ...data,
+      slug,
+      createdAt: dayjs(data.createdAt).subtract(offset, "minute"),
+    };
+  });
+
+  await updatePosts(allPosts);
+
+  const latestPosts: any[] = allPosts
+    .filter((data: any) => data.isPublished)
     .sort((a, b) => {
       return -a.createdAt.diff(b.createdAt);
     })

@@ -5,9 +5,11 @@ heroCreditUserProfile: Greg Rosenke
 heroCreditUserProfileUrl: https://unsplash.com/@greg_rosenke?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText
 heroCreditSource: Unsplash
 createdAt: 17 Oct 2021
+tags: ["Web", "Performance"]
+isPublished: true
 ---
 
-When I was building this blog, finding a good font was a pain in the butt. After several weeks, I settled with [Jost\*](https://indestructibletype.com/Jost.html) font only to find realize that my lighthouse performance score dipped 😐. Thats when I realized that fonts can impact performance.
+When I was building this blog, finding a good font was a pain in the butt. After several weeks, I settled with [Jost\*](https://indestructibletype.com/Jost.html) font only to realize that my lighthouse performance score dipped 😐. Thats when I realized that fonts can impact performance.
 
 In this post, I'm going to share some 🪄 woodoo to uplift the lighthouse performance score.
 
@@ -100,11 +102,9 @@ When loading fonts from a 3rd party origin, you can `preconnect` to establish ea
   />
 </div>
 
-If you are serving the fonts yourself,
-
 # Font delivery
 
-We are ready to load our fonts in the web page. But, how do we deliver them optimally? If you are using a 3rd party service, there is nothing much for you to do in this section. Services like Google Fonts already optimize fonts for fast serving.
+We are ready to load our fonts in the web page. But, how do we deliver them optimally? If you are using a 3rd party service, most of the things are already taken care of. Services like Google Fonts already optimize fonts for fast serving.
 
 If you are serving the fonts yourself, it is better to serve them over a CDN via HTTP/2 which results in faster delivery to clients. You can perform font-subsetting and WOFF2 compression to reduce the size of font files as well.
 
