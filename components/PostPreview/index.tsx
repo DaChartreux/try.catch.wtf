@@ -2,7 +2,7 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 
-import HeadingPStyle from "@components/Heading";
+import HeadingStyle from "@components/Heading";
 import heroImageMap from "@components/HeroImage";
 import { HeroImageName } from "@typings/heroImageName";
 import {
@@ -36,14 +36,14 @@ const PostPreview = ({ title, slug, hero, createdAt }: RecentPosts) => (
           priority
         />
       </MotionHeroStyled>
-      <HeadingPStyle
+      <HeadingStyle
         fgColor="primary-100"
         fontSize="1.375rem"
         margin="0"
         fontWeight={500}
       >
         {title}
-      </HeadingPStyle>
+      </HeadingStyle>
       <PostFooter>
         <span>
           <EyeIcon />
