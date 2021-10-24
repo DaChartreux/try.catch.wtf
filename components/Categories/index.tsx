@@ -3,15 +3,12 @@ import { LazyMotion, domAnimation, m } from "framer-motion";
 
 import HeadingStyle from "@components/Heading";
 import Tag from "@components/Tag";
-import THEME from "@styles/theme";
+import { CATEGORIES } from "@utils/categories";
+
+import type { CategoryString } from "@typings/data";
 
 type CategoriesProps = {
-  categories: {
-    id: number;
-    category: string;
-    slug: string;
-    color: keyof typeof THEME["colors"];
-  }[];
+  categories: CategoryString[];
 };
 
 const Categories = ({ categories }: CategoriesProps) => (
@@ -38,14 +35,14 @@ const Categories = ({ categories }: CategoriesProps) => (
       initial="hidden"
       animate="visible"
     >
-      {categories.map((category) => (
+      {categories.map((category, i) => (
         <Tag
-          key={category.id}
-          href={category.slug}
-          bgColor={category.color}
+          key={i}
+          href={category}
+          bgColor={CATEGORIES[category].color}
           fgColor="white"
         >
-          {category.category}
+          {CATEGORIES[category].category}
         </Tag>
       ))}
     </m.div>

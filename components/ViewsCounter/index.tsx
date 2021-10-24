@@ -1,7 +1,9 @@
-import { useRef, useEffect } from "react";
+import React, { useRef, useEffect } from "react";
 import { animate } from "framer-motion";
+import EyeIcon from "@components/icons/EyeIcon";
+import { ViewsContainerStyle } from "@components/ViewsCounter/ViewsCounter.style";
 
-const Counter = ({ from, to }: { from: number; to: number }) => {
+const ViewsCounter = ({ from, to }: { from: number; to: number }) => {
   const nodeRef = useRef<HTMLParagraphElement>(null);
 
   useEffect(() => {
@@ -12,7 +14,7 @@ const Counter = ({ from, to }: { from: number; to: number }) => {
     const node = nodeRef.current;
 
     const controls = animate(from, to, {
-      duration: 1,
+      duration: 0.4,
       onUpdate(value) {
         node.textContent = `${value.toFixed(0)} Views`;
       },
@@ -21,7 +23,12 @@ const Counter = ({ from, to }: { from: number; to: number }) => {
     return () => controls.stop();
   }, [from, to]);
 
-  return <p ref={nodeRef} />;
+  return (
+    <ViewsContainerStyle>
+      <EyeIcon />
+      <p ref={nodeRef} />
+    </ViewsContainerStyle>
+  );
 };
 
-export default Counter;
+export default ViewsCounter;

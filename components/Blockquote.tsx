@@ -3,6 +3,7 @@ import styled from "@emotion/styled";
 
 import InfoIcon from "@icons/InfoIcon";
 import THEME from "@styles/theme";
+import { ParagraphStyle } from "@components/Paragraph/Paragraph.style";
 
 type BlockquoteProps = {
   children: string;
@@ -16,16 +17,16 @@ const BlockquoteStyle = styled.blockquote`
   box-sizing: border-box;
   border-radius: 0.5rem;
   margin: 0 0 1rem 0;
-  padding: 0.5rem 0.5rem 0.5rem 2rem;
+  padding: 2rem 1.5rem 2rem 2rem;
 
-  .quote {
-    font-size: 1.25rem;
-    color: hsl(${THEME.colors["fg-100"]}, 1);
+  ${ParagraphStyle} {
+    margin: 0;
+    color: hsla(${THEME.colors["info-fg"]}, 1);
   }
 
   .quote-source {
     font-size: 1rem;
-    color: hsl(${THEME.colors["info-fg"]}, 1);
+    color: hsla(${THEME.colors["info-fg"]}, 1);
   }
 `;
 
@@ -46,7 +47,7 @@ const Blockquote = ({ children, type }: BlockquoteProps) => (
     <IconStyle>
       <InfoIcon />
     </IconStyle>
-    <p className="quote">{children}</p>
+    {children}
   </BlockquoteStyle>
 );
 
