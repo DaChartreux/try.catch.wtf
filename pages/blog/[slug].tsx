@@ -71,6 +71,8 @@ const Blog: NextPageWithLayout<BlogPropsType> = ({ source, frontMatter }) => {
           name="image"
           content="https://unsplash.com/photos/lUuUQo4PFV8/download?ixid=MnwxMjA3fDB8MXxhbGx8MTV8fHx8fHwyfHwxNjM1MTAyODQz&force=true&w=2400"
         />
+        <meta property="og:image:width" content="1280" />
+        <meta property="og:image:height" content="675" />
         <meta
           property="og:image"
           content="https://unsplash.com/photos/lUuUQo4PFV8/download?ixid=MnwxMjA3fDB8MXxhbGx8MTV8fHx8fHwyfHwxNjM1MTAyODQz&force=true&w=2400"
