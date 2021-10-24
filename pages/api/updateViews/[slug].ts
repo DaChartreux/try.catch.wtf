@@ -4,6 +4,10 @@ import sha256 from "crypto-js/sha256";
 import { prisma } from "@lib/prisma";
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
+  if (process.env.NODE_ENV === "development") {
+    return res.send(200);
+  }
+
   try {
     const slug = req.query.slug.toString();
     const ip = (req.headers["x-real-ip"] as string) || "192.168.0.123";

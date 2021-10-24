@@ -1,5 +1,6 @@
 import { prisma } from "@lib/prisma";
-import { Post } from "@typings/data";
+
+import type { Post } from "@typings/data";
 
 export const updatePosts = async (posts: Post[]) => {
   for (const post of posts) {

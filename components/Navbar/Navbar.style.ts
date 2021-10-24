@@ -2,8 +2,9 @@ import styled from "@emotion/styled";
 import { css } from "@emotion/react";
 import { motion } from "framer-motion";
 
-import { ColorShade } from "@typings/theme";
 import THEME from "@styles/theme";
+
+import type { ColorShade } from "@typings/theme";
 
 type NavContainerStyles = {
   bgColor: ColorShade;

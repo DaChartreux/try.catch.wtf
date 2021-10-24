@@ -2,19 +2,12 @@ import React from "react";
 
 import HeadingStyle from "@components/Heading";
 import PostPreview from "@components/PostPreview";
-import { HeroImageName } from "@typings/heroImageName";
 import { PostsGridStyle } from "@components/RecentPosts/RecentPosts.style";
 
+import type { Post } from "@typings/data";
+
 type RecentPostsProps = {
-  posts: {
-    id: number;
-    title: string;
-    description: string;
-    categories: string[];
-    slug: string;
-    heroImageName: HeroImageName;
-    createdAt: string;
-  }[];
+  posts: Post[];
 };
 
 const RecentPosts = ({ posts }: RecentPostsProps) => (
@@ -36,7 +29,7 @@ const RecentPosts = ({ posts }: RecentPostsProps) => (
           title={post.title}
           description={post.description}
           categories={post.categories}
-          hero={post.heroImageName}
+          heroImageName={post.heroImageName}
           createdAt={post.createdAt}
         />
       ))}

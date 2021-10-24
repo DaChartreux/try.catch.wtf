@@ -5,13 +5,12 @@ heroCreditUserProfile: Greg Rosenke
 heroCreditUserProfileUrl: https://unsplash.com/@greg_rosenke?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText
 heroCreditSource: Unsplash
 createdAt: 17 Oct 2021
-tags: ["Web", "Performance"]
+tags: ["web", "performance"]
 isPublished: true
 ---
 
-When I was building this blog, finding a good font was a pain in the butt. After several weeks, I settled with [Jost\*](https://indestructibletype.com/Jost.html) font only to realize that my lighthouse performance score dipped 😐. Thats when I realized that fonts can impact performance.
-
-In this post, I'm going to share some 🪄 woodoo to uplift the lighthouse performance score.
+Adding fonts to your site can make it look better. But they can also affect the performance.
+In this post, I'm going to share how to use fonts without a performance and lighthouse score drop.
 
 # Potential impacts of fonts
 
@@ -24,93 +23,45 @@ In this post, I'm going to share some 🪄 woodoo to uplift the lighthouse perfo
 
 Umm... What can we do to fix these issues 🤔?
 
-# Font loading
+# Prepping the font to serve
 
-Let's see how we can load and use a font.
+Before we go ahead with anything, let's see how we can optimally serve our font files. If you are using a 3rd party font provider (like Google Fonts), you can't do much in this case. However, if you are serving the fonts yourself, make sure to serve them (or any static assets) over a CDN and HTTP/2.
 
-```css
-@font-face {
-  font-family: Jost;
-  font-weight: 400;
-  font-display: swap;
-  font-style: normal;
-  src: url("/fonts/Jost/Jost-400.woff2") format("woff2");
-}
+A small font file will always be early to the party 🥳. Keeping that in mind, let's try to reduce the size of our font(s).
 
-.custom-font {
-  font-family: Jost;
-}
-```
+### Synthetic weights
 
-This specifies that a font located at `/fonts/Jost/Jost-400.woff2`, of `woff2` type, with `400` weight, and `normal` style is referenced as `Jost`. Now we can use our font anywhere by setting `font-family: Jost;`. Browsers download fonts only if a styling on the page references them. In this case, the browser will download 'Jost' font only if the page had an element with class `.custom-font`.
+Designers hate this one simple trick 😡. Instead of downloading multiple weights of the same font, we can load a regular variant (400 weight), and rely on the browser to synthetically create other weights 😳. But why do designers hate this trick? This seems to be working perfectly fine right? The red text is the bold variant of Roboto font and the blue variant is synthetically created from the normal variant. The difference might look subtle, but they can affect the UI and UX.
 
-Sometimes, the absence of fonts can make your page unusable. It might be a no-brainer to load them asap because you WILL use them. We can `preload` fonts by adding a `<link>` in the `<head>`. This way it will be downloaded at the earliest.
+<ImageSection
+  src="/img/blog/fonts-for-the-web/synthetic-weight.png"
+  width={663}
+  height={346}
+  quality={90}
+  title={
+    "Red text is Jost font, 700 weight. Blue text is Jost font, 400 variant, with synthetic 700 weight"
+  }
+/>
 
-```html
-<head>
-  <link
-    rel="preload"
-    href="/fonts/Jost/Jost-400.woff2"
-    as="font"
-    type="font/woff2"
-    crossorigin
-  />
-</head>
-```
+So we can't get away with loading multiple font variants? 😔
 
-But this comes at a cost 😔. `preload`ing fonts super early might obstruct other critical resources for the page. If at-all you end up `preload`ing fonts, make sure your longest critical chain is short.
+### Variable fonts
 
-When loading fonts from a 3rd party origin, you can `preconnect` to establish early connection(s). Below is an example with Google Fonts.
+A variable font is packed with multiple styles like weight, width, slant, optical size, and italics (called axis) of the fonts. The font creator can create several axes for the font, reducing the number of variants you need to download. For this case, we will use the weight axis. If you want to learn more about the other axes or variable fonts, [web.dev](https://web.dev/variable-fonts/) has a great article on it.
 
-```html
-<head>
-  <!-- preconnect origin serving stylesheets -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
+<ImageSection
+  src="/img/blog/fonts-for-the-web/variable-font-weight.png"
+  width={663}
+  height={346}
+  quality={90}
+  title={
+    "Red text is Jost font, 700 weight. Blue text is Jost variable font with weight as one of its axes"
+  }
+/>
 
-  <!-- preconnect origin serving fonts -->
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+### Font subsetting
 
-  <!-- loading stylesheets -->
-  <link
-    href="https://fonts.googleapis.com/css2?family=Jost&display=swap"
-    rel="stylesheet"
-  />
-</head>
-```
-
-> `preconnect` for fonts needs a `crossorigin` attribute because unlike stylesheets, font files are served over [CORS connection](https://www.w3.org/TR/css-fonts-3/#font-fetching-requirements).
-
-<div style={{ display: "grid", maxWidth: "100%" }}>
-  <Image
-    src="/img/blog/fonts-for-the-web/no-prefetch.png"
-    width={677}
-    height={381}
-    quality={70}
-    layout="intrinsic"
-    objectFit="contain"
-  />
-</div>
-
-<div style={{ display: "grid", maxWidth: "100%" }}>
-  <Image
-    src="/img/blog/fonts-for-the-web/prefetch.png"
-    width={677}
-    height={381}
-    quality={70}
-    layout="intrinsic"
-    objectFit="contain"
-  />
-</div>
-
-# Font delivery
-
-We are ready to load our fonts in the web page. But, how do we deliver them optimally? If you are using a 3rd party service, most of the things are already taken care of. Services like Google Fonts already optimize fonts for fast serving.
-
-If you are serving the fonts yourself, it is better to serve them over a CDN via HTTP/2 which results in faster delivery to clients. You can perform font-subsetting and WOFF2 compression to reduce the size of font files as well.
-
-## Font subsetting
-
-Font subsetting is the process of taking a font file and reducing the number of characters. For example, let's say you have a font with japanese characters like `月`. You are serving a page which is in english. It is highly unlikely you'd ever use these japanese characters. So you can subset your font to contain only simple latin characters.
+Font subsetting is the process of taking a font file and reducing the number of characters. For example, let's say you have a font with Japanese characters like `月`. You are serving a page that is in English. It is highly unlikely you'd ever use these Japanese characters. So you can subset your font to contain only simple Latin characters.
 
 This will naturally reduce the size of the font file. Use tools like [glyphhanger](https://github.com/zachleat/glyphhanger) or [subfont](https://github.com/Munter/subfont) to subset fonts.
 
@@ -129,9 +80,9 @@ glyphhanger --LATIN --subset=Jost-400-Book.ttf
 
 This results in a TTF file (`Jost-400-Book-subset.ttf`) of size `40.5 kb` from `88.7 kb`! Already a reduction of 54%!
 
-> There are online tools like [Charset checker](https://www.alphabet-type.com/tools/charset-checker) to check the charset of fonts. You can use this to verify if subsetted font match your required charset or not.
+> There are online tools like [Charset checker](https://www.alphabet-type.com/tools/charset-checker) to check the charset of fonts. You can use this to verify if the subsetted font matches your required charset or not.
 
-## WOFF2 compression
+### WOFF2 compression
 
 WOFF2 is a compressed font format that can compress a TTF font.
 
@@ -152,3 +103,149 @@ make clean all
 ```
 
 This results in a woff2 file (`Jost-400-Book-subset.woff2`) of size `15.3 kb` from `40.5 kb`! A whopping decrease of 62% (and 82% decrease when compared to the original font file `Jost-400-Book.ttf`)!
+
+> If you are using `glyphhanger` for font subsetting, you can also compress to woff2 directly in a single command!
+>
+> `glyphhanger --LATIN --subset=Jost-400-Book.ttf --formats=woff2`
+
+# Loading the fonts
+
+Let's see how we can load and use a font.
+
+```css
+@font-face {
+  font-family: Jost;
+  font-weight: 400;
+  font-display: swap;
+  font-style: normal;
+  src: url("/fonts/Jost/Jost-400.woff2") format("woff2");
+}
+
+.custom-font {
+  font-family: Jost;
+}
+```
+
+This specifies that a font located at `/fonts/Jost/Jost-400.woff2`, of `woff2` type, with `400` weight, and `normal` style is referenced as `Jost`. Now we can use our font anywhere by setting `font-family: Jost;`. Browsers download fonts only if a styling on the page references them. In this case, the browser will download 'Jost' font only if the page has an element with class `.custom-font`.
+
+The `font-display` property tells the browser when to render the font once it is loaded. It accepts the following values:
+
+### `auto`
+
+This is browser default.
+
+<Spacer height="1rem" />
+
+### `swap`
+
+The fallback font will be immediately used. Once the custom font downloads, it swaps the font. It can cause 'Flash of Unstyled Text' or [FOUT](https://css-tricks.com/fout-foit-foft/).
+
+<ImageSection
+  src="/img/blog/fonts-for-the-web/swap-1.png"
+  width={888}
+  height={214}
+  quality={90}
+  title={
+    "Fallback font loaded after block period, swapped with custom font after it downloads"
+  }
+/>
+
+<Spacer height="1rem" />
+
+### `block`
+
+Displays invisible text. Once the custom font downloads, it swaps the font. It can cause 'Flash of Invisible Text' or [FOIT](https://css-tricks.com/fout-foit-foft/).
+
+<ImageSection
+  src="/img/blog/fonts-for-the-web/block-1.png"
+  width={877}
+  height={314}
+  quality={90}
+  title={
+    "Fallback font loaded immediately, swapped with custom font after it downloads"
+  }
+/>
+
+<ImageSection
+  src="/img/blog/fonts-for-the-web/block-2.png"
+  width={877}
+  height={214}
+  quality={90}
+  title={"Custom font loaded immediately (from cache) after blocking period"}
+/>
+
+<Spacer height="1rem" />
+
+### `fallback`
+
+Blocks rendering for a short time (100ms). If the font is still not downloaded, uses the fallback font. Gives a swap period of about 3 seconds for the custom font to load. If it doesn't load within the swap period, it will not be used.
+
+<ImageSection
+  src="/img/blog/fonts-for-the-web/fallback-1.png"
+  width={877}
+  height={302}
+  quality={90}
+  title={
+    "Fallback font loaded after block period, swapped with custom font after it downloads within swap period"
+  }
+/>
+<ImageSection
+  src="/img/blog/fonts-for-the-web/fallback-2.png"
+  width={877}
+  height={320}
+  quality={90}
+  title={
+    "Fallback font loaded after block period, custom font loads after swap period, hence not swapped"
+  }
+/>
+<ImageSection
+  src="/img/blog/fonts-for-the-web/fallback-3.png"
+  width={877}
+  height={314}
+  quality={90}
+  title={"Custom font loaded immediately (from cache) after blocking period"}
+/>
+
+<Spacer height="2rem" />
+
+### `optional`
+
+Just like `fallback`, it blocks for a short time, and displays the fallback if the custom font is not yet downloaded. But, the browser decides whether to swap the downloaded custom font depending on the connection speed.
+
+# Preloading?
+
+Sometimes, the absence of fonts can make your page unusable. It might be a no-brainer to load them asap because you WILL use them. We can `preload` fonts by adding a `<link>` in the `<head>`. This way it will be downloaded at the earliest.
+
+```html
+<head>
+  <link
+    rel="preload"
+    href="/fonts/Jost/Jost-400.woff2"
+    as="font"
+    type="font/woff2"
+    crossorigin
+  />
+</head>
+```
+
+But this comes at a cost 😔. `preload`ing fonts super early might obstruct other critical resources for the page. If at all you end up `preload`ing fonts, make sure your longest critical chain is short.
+
+When loading fonts from a 3rd party origin, you can `preconnect` to establish an early connection. Below is an example with Google Fonts.
+
+```html
+<head>
+  <!-- preconnect origin serving stylesheets -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+
+  <!-- preconnect origin serving fonts -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+  <!-- loading stylesheets -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Jost&display=swap"
+    rel="stylesheet"
+  />
+</head>
+```
+
+> `preconnect` for fonts needs a `crossorigin` attribute because, unlike stylesheets, font files are served over [CORS connection](https://www.w3.org/TR/css-fonts-3/#font-fetching-requirements).

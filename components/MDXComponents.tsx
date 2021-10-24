@@ -8,6 +8,7 @@ import Highlight from "@components/Highlight";
 import OrderedList from "@components/Lists";
 import Paragraph from "@components/Paragraph";
 import Spacer from "@components/Spacer";
+import ImageSection from "@components/ImageSection";
 
 type MDXComponentsType = {
   [key: string]: (props: any) => ReactNode;
@@ -16,34 +17,29 @@ type MDXComponentsType = {
 const MDXComponents: MDXComponentsType = {
   Heading,
   Image,
+  Spacer,
+  ImageSection,
   SectionHeading,
   h1: ({ children }: any) => (
-    <SectionHeading fontWeight={500}>{children}</SectionHeading>
+    <SectionHeading fontWeight={500} fontSize="2rem">
+      {children}
+    </SectionHeading>
   ),
   h2: ({ children }: any) => (
-    <SectionHeading fontWeight={500} fontSize="1.625rem">
+    <SectionHeading fontWeight={500} fontSize="1.75rem">
       {children}
     </SectionHeading>
   ),
   h3: ({ children }: any) => (
-    <Heading
-      fgColor="primary-200"
-      fontSize="1.375rem"
-      fontWeight={500}
-      whileHover="hover"
-      initial={["hidden", "rest"]}
-    >
+    <Heading fgColor="primary-100" fontWeight={600} fontSize="1.5rem">
       {children}
     </Heading>
   ),
-  Spacer,
-  Blockquote,
   blockquote: ({ children }) => <Blockquote type="info">{children}</Blockquote>,
   p: ({ children }) => <Paragraph>{children}</Paragraph>,
   ol: (props: any) => <OrderedList {...props} />,
-  pre: ({ children }: any) => {
-    return <Highlight {...children.props} />;
-  },
+  ul: (props: any) => <OrderedList {...props} />,
+  pre: ({ children }: any) => <Highlight {...children.props} />,
 };
 
 export default MDXComponents;

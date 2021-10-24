@@ -1,21 +1,14 @@
-import { ReactNode } from "react";
+import { m } from "framer-motion";
 import styled from "@emotion/styled";
 import { css } from "@emotion/react";
-import { m } from "framer-motion";
-
 import THEME from "@styles/theme";
 
-type TagStyledProps = {
+export type TagStyledProps = {
   bgColor: keyof typeof THEME["colors"];
   fgColor: string;
 };
 
-type TagProps = {
-  href: string;
-  children: ReactNode;
-};
-
-const TagStyle = styled(m.a)<TagStyledProps>`
+export const TagStyle = styled(m.a)<TagStyledProps>`
   position: relative;
   display: inline-block;
   padding: 0.25rem 0.5rem;
@@ -57,28 +50,3 @@ const TagStyle = styled(m.a)<TagStyledProps>`
     }
   `};
 `;
-
-const Tag = ({ children, ...props }: TagProps & TagStyledProps) => (
-  <TagStyle
-    variants={{
-      hidden: { y: 20, opacity: 0 },
-      visible: {
-        y: 0,
-        opacity: 1,
-      },
-    }}
-    {...props}
-  >
-    <m.div
-      whileHover={{
-        scale: 1.06,
-      }}
-      whileTap={{
-        scale: 1.03,
-      }}
-    />
-    {children}
-  </TagStyle>
-);
-
-export default Tag;

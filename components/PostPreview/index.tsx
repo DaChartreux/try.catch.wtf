@@ -4,7 +4,6 @@ import Link from "next/link";
 
 import HeadingStyle from "@components/Heading";
 import heroImageMap from "@components/HeroImage";
-import { HeroImageName } from "@typings/heroImageName";
 import {
   MotionHeroStyled,
   PostFooter,
@@ -12,21 +11,29 @@ import {
 } from "@components/PostPreview/PostPreview.style";
 import EyeIcon from "@components/icons/EyeIcon";
 
-type RecentPosts = {
-  title: string;
-  description: string;
-  categories: string[];
-  slug: string;
-  createdAt: string;
-  hero: HeroImageName;
-};
+import type { Post } from "@typings/data";
 
-const PostPreview = ({ title, slug, hero, createdAt }: RecentPosts) => (
+type RecentPosts = Pick<
+  Post,
+  | "title"
+  | "description"
+  | "categories"
+  | "slug"
+  | "createdAt"
+  | "heroImageName"
+>;
+
+const PostPreview = ({
+  title,
+  slug,
+  heroImageName,
+  createdAt,
+}: RecentPosts) => (
   <Link href={`/blog/${slug}`} passHref>
     <PostPreviewStyled>
       <MotionHeroStyled layoutId={`${slug}__hero`} whileHover={{ scale: 0.99 }}>
         <Image
-          src={heroImageMap[`${hero}`]}
+          src={heroImageMap[`${heroImageName}`]}
           quality={60}
           width={3}
           height={2}
