@@ -68,6 +68,14 @@ const Blog: NextPageWithLayout<BlogPropsType> = ({ source, frontMatter }) => {
       <Head>
         <title>{frontMatter.title}</title>
         <meta
+          name="image"
+          content="https://images.unsplash.com/photo-1634861466640-1e140781a8ed?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1479&q=80"
+        />
+        <meta
+          property="og:image"
+          content="https://images.unsplash.com/photo-1634861466640-1e140781a8ed?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1479&q=80"
+        />
+        <meta
           name="description"
           content="How to use fonts with minimal side effects on lighthouse score"
         />
