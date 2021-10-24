@@ -2,43 +2,35 @@ import fs from "fs";
 import path from "path";
 
 import React, { ReactElement, useEffect, useState } from "react";
+import type { GetStaticPaths, GetStaticProps } from "next";
 import Head from "next/head";
 import { MDXRemote, MDXRemoteSerializeResult } from "next-mdx-remote";
 import { serialize } from "next-mdx-remote/serialize";
+import axios, { Axios } from "axios";
 import matter from "gray-matter";
 import styled from "@emotion/styled";
 
-import { POSTS_PATH, postFilePaths } from "utils/mdxUtils";
 import Hero from "@components/Hero";
 import Layout from "@components/Layout";
 import heroImageMap from "@components/HeroImage";
 import MDXComponents from "@components/MDXComponents";
-import { HeroImageName } from "@typings/heroImageName";
 import HeadingStyle from "@components/Heading";
-import { NextPageWithLayout } from "@typings/app";
-import { GetStaticPaths, GetStaticProps } from "next";
-import axios, { Axios } from "axios";
-import Counter from "@components/ViewsCounter";
+import ViewsCounter from "@components/ViewsCounter";
 import CalendarIcon from "@components/icons/CalendarIcon";
-import EyeIcon from "@components/icons/EyeIcon";
+import { POSTS_PATH, postFilePaths } from "@utils/mdxUtils";
+
+import type { NextPageWithLayout } from "@typings/app";
+import type { Post } from "@typings/data";
 
 type BlogPropsType = {
   source: MDXRemoteSerializeResult<Record<string, unknown>>;
-  frontMatter: {
-    slug: string;
-    heroImageName: HeroImageName;
-    heroCreditUserProfile: string;
-    heroCreditUserProfileUrl: string;
-    heroCreditSource: string;
-    title: string;
-    createdAt: string;
-    tags: string[];
-  };
+  frontMatter: Post;
 };
 
 const LayoutWrapper = styled(Layout)`
   padding: 0 2rem;
   display: grid;
+  max-width: 900px;
   grid-template-columns: minmax(0, max-content);
   grid-template-rows: min-content min-content minmax(0, max-content);
   grid-template-areas:
@@ -62,7 +54,7 @@ const Blog: NextPageWithLayout<BlogPropsType> = ({ source, frontMatter }) => {
       .get("/api/updateViews/" + slug)
       .then(({ data }) => setViews(data as number))
       .catch((err) => console.log(err));
-  });
+  }, [slug]);
 
   useEffect(() => {
     const url = window.location.hash;
@@ -103,25 +95,23 @@ const Blog: NextPageWithLayout<BlogPropsType> = ({ source, frontMatter }) => {
           <CalendarIcon />
           <p>{frontMatter.createdAt}</p>
         </div>
-        <div>
-          <EyeIcon />
-          <Counter from={0} to={views} />
-        </div>
       </div>
       <div style={{ gridArea: "hero" }}>
         <Hero
           layoutId={`${frontMatter.slug}__hero`}
           title={frontMatter.title}
           heroSrc={heroImageMap[frontMatter.heroImageName]}
-          heroCreditSource={frontMatter.heroCreditSource}
-          heroCreditUserProfile={frontMatter.heroCreditUserProfile}
-          heroCreditUserProfileUrl={frontMatter.heroCreditUserProfileUrl}
+          heroCreditSource={frontMatter.heroCreditSource!}
+          heroCreditUserProfile={frontMatter.heroCreditUserProfile!}
+          heroCreditUserProfileUrl={frontMatter.heroCreditUserProfileUrl!}
         />
       </div>
 
       <div style={{ gridArea: "post" }}>
         <MDXRemote {...source} components={MDXComponents} />
       </div>
+
+      <ViewsCounter from={0} to={views} />
     </>
   );
 };
@@ -141,9 +131,22 @@ export const getStaticProps: GetStaticProps<BlogPropsType> = async ({
     props: {
       source: mdxSource,
       frontMatter: {
-        ...data,
+        ...(data as Pick<
+          Post,
+          | "id"
+          | "title"
+          | "description"
+          | "categories"
+          | "fileName"
+          | "createdAt"
+          | "isPublished"
+          | "heroImageName"
+          | "heroCreditSource"
+          | "heroCreditUserProfile"
+          | "heroCreditUserProfileUrl"
+        >),
         slug: params.slug,
-      } as BlogPropsType["frontMatter"],
+      },
     },
   };
 };

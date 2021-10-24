@@ -6,15 +6,16 @@ import type { ReactElement } from "react";
 import type { GetStaticProps } from "next";
 import Head from "next/head";
 import dynamic from "next/dynamic";
+import dayjs, { Dayjs } from "dayjs";
 import styled from "@emotion/styled";
 import matter from "gray-matter";
-import dayjs from "dayjs";
 
 import Layout from "@components/Layout";
-import { postFilePaths, POSTS_PATH } from "utils/mdxUtils";
-import { NextPageWithLayout } from "@typings/app";
-import { HeroImageName } from "@typings/heroImageName";
-import { updatePosts } from "utils/dbSync";
+import { postFilePaths, POSTS_PATH } from "@utils/mdxUtils";
+import { updatePosts } from "@utils/dbSync";
+
+import type { NextPageWithLayout } from "@typings/app";
+import type { Post } from "@typings/data";
 
 const Categories = dynamic(() => import("@components/Categories"), {
   ssr: true,
@@ -24,17 +25,7 @@ const RecentPosts = dynamic(() => import("@components/RecentPosts"), {
 });
 
 type IndexProps = {
-  latestPosts: {
-    id: number;
-    title: string;
-    description: string;
-    categories: string[];
-    fileName: string;
-    slug: string;
-    heroImageName: HeroImageName;
-    createdAt: string;
-    isPublished: boolean;
-  }[];
+  latestPosts: Post[];
 };
 
 const LayoutWrapper = styled(Layout)`
@@ -78,21 +69,7 @@ const Index: NextPageWithLayout<IndexProps> = ({ latestPosts }) => {
         <title>Try... Catch</title>
       </Head>
       <CategoriesWrapper>
-        <Categories
-          categories={[
-            { id: 1, category: "Test 1", slug: "test", color: "blue-100" },
-            { id: 2, category: "Test 2", slug: "test", color: "yellow-100" },
-            {
-              id: 3,
-              category: "Test 3",
-              slug: "test",
-              color: "purple-100",
-            },
-            { id: 4, category: "Test 4", slug: "test", color: "red-100" },
-            { id: 5, category: "Test 5", slug: "test", color: "pink-100" },
-            { id: 6, category: "Test 6", slug: "test", color: "indigo-100" },
-          ]}
-        />
+        <Categories categories={["web", "performance"]} />
       </CategoriesWrapper>
 
       <RecentPostsWrapper>
@@ -108,15 +85,23 @@ export const getStaticProps: GetStaticProps<IndexProps> = async () => {
   const offset = new Date().getTimezoneOffset();
   const fileNames = postFilePaths.map((path) => path.replace(/\.mdx?$/, ""));
 
-  console.log(fileNames);
-
-  const allPosts: any[] = fileNames.map((slug) => {
+  const allPosts: Post[] = fileNames.map((slug) => {
     const postFilePath = path.join(POSTS_PATH, `${slug}.mdx`);
     const source = fs.readFileSync(postFilePath);
     const { data } = matter(source);
 
     return {
-      ...data,
+      ...(data as Pick<
+        Post,
+        | "categories"
+        | "description"
+        | "fileName"
+        | "heroImageName"
+        | "id"
+        | "slug"
+        | "title"
+        | "isPublished"
+      >),
       slug,
       createdAt: dayjs(data.createdAt).subtract(offset, "minute"),
     };
@@ -129,10 +114,13 @@ export const getStaticProps: GetStaticProps<IndexProps> = async () => {
   const latestPosts: any[] = allPosts
     .filter((data: any) => data.isPublished)
     .sort((a, b) => {
-      return -a.createdAt.diff(b.createdAt);
+      return -(a.createdAt as Dayjs).diff(b.createdAt as Dayjs);
     })
     .slice(0, 4)
-    .map((data) => ({ ...data, createdAt: data.createdAt.format("DD MMM") }));
+    .map((data) => ({
+      ...data,
+      createdAt: (data.createdAt as Dayjs).format("DD MMM"),
+    }));
 
   return {
     props: {

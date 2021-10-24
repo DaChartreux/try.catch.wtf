@@ -3,7 +3,8 @@ import dynamic from "next/dynamic";
 import { AnimateSharedLayout } from "framer-motion";
 
 import GlobalTheme from "@styles/GlobalTheme";
-import { AppPropsWithLayout } from "@typings/app";
+
+import type { AppPropsWithLayout } from "@typings/app";
 
 const Navbar = dynamic(() => import("@components/Navbar"), { ssr: false });
 const Footer = dynamic(() => import("@components/Footer"), { ssr: true });

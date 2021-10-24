@@ -1,7 +1,8 @@
 import styled from "@emotion/styled";
 
 import THEME from "@styles/theme";
-import { ColorShade } from "@typings/theme";
+
+import type { ColorShade } from "@typings/theme";
 
 type ButtonIconStyledProps = {
   bgColor: ColorShade;
