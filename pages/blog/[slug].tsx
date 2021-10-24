@@ -69,13 +69,14 @@ const Blog: NextPageWithLayout<BlogPropsType> = ({ source, frontMatter }) => {
         <title>{frontMatter.title}</title>
         <meta
           name="image"
-          content="https://unsplash.com/photos/lUuUQo4PFV8/download?ixid=MnwxMjA3fDB8MXxhbGx8MTV8fHx8fHwyfHwxNjM1MTAyODQz&force=true&w=2400"
+          content="https://try.catch.wtf/_next/image?url=%2F_next%2Fstatic%2Fimage%2Fpublic%2Fimg%2Fhero%2FaWZJCO4Rs1Y.de311756c6be2b1d09e44e82656b3d24.jpg&w=1920&q=60"
         />
-        <meta property="og:image:width" content="1280" />
-        <meta property="og:image:height" content="675" />
+        <meta property="og:type" content="website" />
+        <meta property="og:image:width" content="1920" />
+        <meta property="og:image:height" content="1280" />
         <meta
           property="og:image"
-          content="https://unsplash.com/photos/lUuUQo4PFV8/download?ixid=MnwxMjA3fDB8MXxhbGx8MTV8fHx8fHwyfHwxNjM1MTAyODQz&force=true&w=2400"
+          content="https://try.catch.wtf/_next/image?url=%2F_next%2Fstatic%2Fimage%2Fpublic%2Fimg%2Fhero%2FaWZJCO4Rs1Y.de311756c6be2b1d09e44e82656b3d24.jpg&w=1920&q=60"
         />
         <meta
           name="description"
