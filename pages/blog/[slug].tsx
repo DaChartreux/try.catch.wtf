@@ -72,14 +72,22 @@ const Blog: NextPageWithLayout<BlogPropsType> = ({ source, frontMatter }) => {
           content="https://try.catch.wtf/_next/image?url=%2F_next%2Fstatic%2Fimage%2Fpublic%2Fimg%2Fhero%2FaWZJCO4Rs1Y.de311756c6be2b1d09e44e82656b3d24.jpg&w=1920&q=60"
         />
         <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://try.catch.wtf" />
+        <meta property="og:title" content={frontMatter.title} />
+
         <meta property="og:image:width" content="1920" />
         <meta property="og:image:height" content="1280" />
+        <meta name="twitter:card" content="summary_large_image" />
         <meta
           property="og:image"
           content="https://try.catch.wtf/_next/image?url=%2F_next%2Fstatic%2Fimage%2Fpublic%2Fimg%2Fhero%2FaWZJCO4Rs1Y.de311756c6be2b1d09e44e82656b3d24.jpg&w=1920&q=60"
         />
         <meta
           name="description"
+          content="How to use fonts with minimal side effects on lighthouse score"
+        />
+        <meta
+          property="og:description"
           content="How to use fonts with minimal side effects on lighthouse score"
         />
       </Head>
