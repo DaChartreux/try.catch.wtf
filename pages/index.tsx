@@ -96,7 +96,6 @@ export const getStaticProps: GetStaticProps<IndexProps> = async () => {
         | "categories"
         | "description"
         | "fileName"
-        | "heroImageName"
         | "id"
         | "slug"
         | "title"
