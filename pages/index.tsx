@@ -107,7 +107,10 @@ export const getStaticProps: GetStaticProps<IndexProps> = async () => {
     };
   });
 
-  if (process.env.VERCEL_ENV) {
+  if (
+    process.env.NODE_ENV === "production" &&
+    process.env.VERCEL_ENV === "production"
+  ) {
     await updatePosts(allPosts);
   }
 

@@ -1,7 +1,5 @@
 import { Dayjs } from "dayjs";
 
-import type { HeroImageName } from "@typings/heroImageName";
-
 export type Post = {
   id: number;
   title: string;
@@ -11,7 +9,6 @@ export type Post = {
   slug: string;
   createdAt: string | Dayjs;
   isPublished: boolean;
-  heroImageName: HeroImageName;
   heroCreditSource?: string;
   heroCreditUserProfile?: string;
   heroCreditUserProfileUrl?: string;

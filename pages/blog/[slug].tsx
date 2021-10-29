@@ -12,7 +12,6 @@ import styled from "@emotion/styled";
 
 import Hero from "@components/Hero";
 import Layout from "@components/Layout";
-import heroImageMap from "@components/HeroImage";
 import MDXComponents from "@components/MDXComponents";
 import HeadingStyle from "@components/Heading";
 import ViewsCounter from "@components/ViewsCounter";
@@ -30,8 +29,6 @@ type BlogPropsType = {
 const LayoutWrapper = styled(Layout)`
   padding: 0 2rem;
   display: grid;
-  max-width: 900px;
-  grid-template-columns: minmax(0, max-content);
   grid-template-rows: min-content min-content minmax(0, max-content);
   grid-template-areas:
     "heading"
@@ -42,6 +39,18 @@ const LayoutWrapper = styled(Layout)`
   @media (max-width: 640px) {
     padding: 0 1rem;
   }
+`;
+
+const HeroStyle = styled.div`
+  grid-area: hero;
+  width: 100%;
+`;
+
+const PostStyle = styled.div`
+  grid-area: post;
+  max-width: 900px;
+  margin: auto;
+  width: 100%;
 `;
 
 const Blog: NextPageWithLayout<BlogPropsType> = ({ source, frontMatter }) => {
@@ -115,20 +124,20 @@ const Blog: NextPageWithLayout<BlogPropsType> = ({ source, frontMatter }) => {
           <p>{frontMatter.createdAt}</p>
         </div>
       </div>
-      <div style={{ gridArea: "hero" }}>
+      <HeroStyle>
         <Hero
           layoutId={`${frontMatter.slug}__hero`}
           title={frontMatter.title}
-          heroSrc={heroImageMap[frontMatter.heroImageName]}
+          heroSrc={`/img/${frontMatter.slug}/hero.jpg`}
           heroCreditSource={frontMatter.heroCreditSource!}
           heroCreditUserProfile={frontMatter.heroCreditUserProfile!}
           heroCreditUserProfileUrl={frontMatter.heroCreditUserProfileUrl!}
         />
-      </div>
+      </HeroStyle>
 
-      <div style={{ gridArea: "post" }}>
+      <PostStyle>
         <MDXRemote {...source} components={MDXComponents} />
-      </div>
+      </PostStyle>
 
       <ViewsCounter from={0} to={views} />
     </>
@@ -159,7 +168,6 @@ export const getStaticProps: GetStaticProps<BlogPropsType> = async ({
           | "fileName"
           | "createdAt"
           | "isPublished"
-          | "heroImageName"
           | "heroCreditSource"
           | "heroCreditUserProfile"
           | "heroCreditUserProfileUrl"

@@ -17,9 +17,15 @@ export const FooterTopWrapper = styled.div`
   color: hsl(${THEME.colors["bg-100"]});
   border-bottom: 1px solid hsl(${THEME.colors["bg-100"]});
 
-  .links {
-    margin-top: 1rem;
+  .tagline {
+    font-weight: 440;
 
+    p {
+      margin: 0 0 2rem 0;
+    }
+  }
+
+  .links {
     button {
       margin-right: 1rem;
     }
