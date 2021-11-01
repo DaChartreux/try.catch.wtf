@@ -16,9 +16,7 @@ const Footer = () => {
       <FooterTopWrapper>
         <Logo />
         <div className="tagline">
-          <span>
-            <p>Keep catching!</p>
-          </span>
+          <p>Keep catching!</p>
         </div>
         <div className="links">
           <a
@@ -31,7 +29,7 @@ const Footer = () => {
             </ButtonIcon>
           </a>
           <a
-            href="https://github.com/cheemzkun"
+            href="https://twitter.com/cheemzkun"
             target="_blank"
             rel="noreferrer"
           >

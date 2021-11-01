@@ -3,17 +3,22 @@ import { prisma } from "@lib/prisma";
 import type { Post } from "@typings/data";
 
 export const updatePosts = async (posts: Post[]) => {
-  for (const post of posts) {
+  for (const { title, slug, description, isPublished } of posts) {
     await prisma.posts.upsert({
       where: {
-        slug: post.slug,
+        slug,
       },
       update: {
-        isPublished: post.isPublished,
+        isPublished,
+        slug,
+        description,
+        title,
       },
       create: {
-        slug: post.slug,
-        isPublished: post.isPublished,
+        slug,
+        isPublished,
+        description,
+        title,
       },
     });
   }

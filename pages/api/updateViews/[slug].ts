@@ -11,9 +11,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     const slug = req.query.slug.toString();
     const ip = (req.headers["x-real-ip"] as string) || "192.168.0.123";
-
     const ipHash = sha256(ip).toString();
-
     const post = await prisma.posts.findUnique({
       where: {
         slug,
