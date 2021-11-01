@@ -220,7 +220,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       .replace("{{viewsCount}}", viewsCount.toString())
       .replace("{{createdAt}}", dayjs(post.createdAt).format("DD MMM, YYYY"));
 
-    // const image = await captureScreenshot(templateHtml);
+    const image = await captureScreenshot(templateHtml);
 
     // res.setHeader("Content-type", "image/png");
     // res.setHeader("Cache-Control", "s-maxage=86400");
