@@ -5,7 +5,6 @@ export type Post = {
   title: string;
   description: string;
   categories: string[];
-  fileName: string;
   slug: string;
   createdAt: string | Dayjs;
   isPublished: boolean;
