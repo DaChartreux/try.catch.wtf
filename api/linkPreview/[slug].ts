@@ -1,8 +1,9 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import dayjs from "dayjs";
+import chrome from "chrome-aws-lambda";
+import core from "puppeteer-core";
 
 import { prisma } from "../../lib/prisma";
-import { captureScreenshot } from "../../lib/puppeteer";
 
 const HTML = `
 <!DOCTYPE html>
@@ -220,13 +221,21 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       .replace("{{viewsCount}}", viewsCount.toString())
       .replace("{{createdAt}}", dayjs(post.createdAt).format("DD MMM, YYYY"));
 
-    const image = await captureScreenshot(templateHtml);
+    const browser = await core.launch({
+      args: chrome.args,
+      executablePath: await chrome.executablePath,
+      headless: chrome.headless,
+    });
+    const page = await browser.newPage();
 
-    // res.setHeader("Content-type", "image/png");
-    // res.setHeader("Cache-Control", "s-maxage=86400");
-    // res.send(image);
+    await page.setViewport({ width: 1200, height: 600 });
+    await page.setContent(templateHtml, { waitUntil: "networkidle0" });
 
-    res.send("ok");
+    const image = await page.screenshot({ type: "png" });
+
+    res.setHeader("Content-type", "image/png");
+    res.setHeader("Cache-Control", "s-maxage=86400");
+    res.send(image);
   } catch (e) {
     console.log(e);
     return res.status(500).json({ message: e });
