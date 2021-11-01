@@ -1,0 +1,7 @@
+{
+  "functions": {
+    "api/linkPreview/[slug].ts": {
+      "excludeFiles": "{public,.next,pages,images,_next,gen}/**"
+    }
+  }
+}
