@@ -93,21 +93,17 @@ export const getStaticProps: GetStaticProps<IndexProps> = async () => {
     return {
       ...(data as Pick<
         Post,
-        | "categories"
-        | "description"
-        | "fileName"
-        | "heroImageName"
-        | "id"
-        | "slug"
-        | "title"
-        | "isPublished"
+        "categories" | "description" | "id" | "slug" | "title" | "isPublished"
       >),
       slug,
       createdAt: dayjs(data.createdAt).subtract(offset, "minute"),
     };
   });
 
-  if (process.env.VERCEL_ENV) {
+  if (
+    process.env.NODE_ENV === "production" &&
+    process.env.VERCEL_ENV === "production"
+  ) {
     await updatePosts(allPosts);
   }
 

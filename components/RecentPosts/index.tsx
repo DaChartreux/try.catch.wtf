@@ -29,7 +29,6 @@ const RecentPosts = ({ posts }: RecentPostsProps) => (
           title={post.title}
           description={post.description}
           categories={post.categories}
-          heroImageName={post.heroImageName}
           createdAt={post.createdAt}
         />
       ))}
