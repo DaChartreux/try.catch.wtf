@@ -93,13 +93,7 @@ export const getStaticProps: GetStaticProps<IndexProps> = async () => {
     return {
       ...(data as Pick<
         Post,
-        | "categories"
-        | "description"
-        | "fileName"
-        | "id"
-        | "slug"
-        | "title"
-        | "isPublished"
+        "categories" | "description" | "id" | "slug" | "title" | "isPublished"
       >),
       slug,
       createdAt: dayjs(data.createdAt).subtract(offset, "minute"),

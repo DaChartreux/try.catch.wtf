@@ -76,13 +76,16 @@ const Blog: NextPageWithLayout<BlogPropsType> = ({ source, frontMatter }) => {
     <>
       <Head>
         <title>{frontMatter.title}</title>
-        <meta name="image" content="https://preview.try.catch.wtf/api/image" />
+        <meta name="image" content={`/api/linkPreview/${frontMatter.slug}`} />
+        <meta
+          property="og:image"
+          content={`/api/linkPreview/${frontMatter.slug}`}
+        />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://try.catch.wtf" />
         <meta property="og:title" content={frontMatter.title} />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="600" />
-        <meta property="og:image" content="https://preview.try.catch.wtf/api/image" />
 
         <meta name="twitter:card" content="summary_large_image" />
 
@@ -160,7 +163,6 @@ export const getStaticProps: GetStaticProps<BlogPropsType> = async ({
           | "title"
           | "description"
           | "categories"
-          | "fileName"
           | "createdAt"
           | "isPublished"
           | "heroCreditSource"
