@@ -1,8 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import dayjs from "dayjs";
 import chrome from "chrome-aws-lambda";
-
-// import { prisma } from "../../lib/prisma";
+import fetch from "node-fetch";
 
 const HTML = `
 <!DOCTYPE html>
@@ -178,44 +177,34 @@ const HTML = `
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     const slug = req.query.slug.toString();
-    // const post = await prisma.posts.findUnique({
-    //   where: {
-    //     slug,
-    //   },
-    // });
+    const response = await fetch("http://localhost:3000/api/post/hello-world");
+    const post = (await response.json()) as any;
 
-    // if (post === null) {
-    //   return res.status(404).send("post not found");
-    // }
-
-    // const viewsCount = await prisma.views.count({
-    //   where: {
-    //     postId: post.id,
-    //   },
-    // });
+    if (post === null) {
+      return res.status(404).send("post not found");
+    }
 
     const baseUrl =
       process.env.NODE_ENV === "production"
         ? "https://try.catch.wtf"
         : "http://localhost:3000";
 
-    // const templateHtml = HTML.replace("{{baseUrl}}", baseUrl)
-    //   .replace("{{title}}", post.title)
-    //   .replace("{{description}}", post.description)
-    //   .replace("{{viewsCount}}", viewsCount.toString())
-    //   .replace("{{createdAt}}", dayjs(post.createdAt).format("DD MMM, YYYY"));
+    const templateHtml = HTML.replace("{{baseUrl}}", baseUrl)
+      .replace("{{title}}", post.title)
+      .replace("{{description}}", post.description)
+      // .replace("{{viewsCount}}", viewsCount.toString())
+      .replace("{{createdAt}}", dayjs(post.createdAt).format("DD MMM, YYYY"));
 
     const browser = await chrome.puppeteer.launch({
-      args: [...chrome.args, "--hide-scrollbars", "--disable-web-security"],
+      args: chrome.args,
       defaultViewport: chrome.defaultViewport,
       executablePath: await chrome.executablePath,
       headless: true,
-      ignoreHTTPSErrors: true,
     });
     const page = await browser.newPage();
 
     await page.setViewport({ width: 1200, height: 600 });
-    await page.setContent(HTML, { waitUntil: "networkidle0" });
+    await page.setContent(templateHtml, { waitUntil: "networkidle0" });
 
     const image = await page.screenshot({ type: "png" });
 
