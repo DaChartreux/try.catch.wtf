@@ -1,27 +1,27 @@
 import chrome from "chrome-aws-lambda";
 import core from "puppeteer-core";
 
-const localChromeLocation = "/usr/bin/google-chrome";
-
-let _page: core.Page | null = null;
-
 const launchPuppeteer = async () => {
-  if (_page) {
-    return _page;
-  }
+  const browser = await core.launch(
+    process.env.NODE_ENV === "production"
+      ? {
+          args: chrome.args,
+          executablePath: await chrome.executablePath,
+          headless: chrome.headless,
+        }
+      : {
+          args: [],
+          executablePath:
+            process.platform === "win32"
+              ? "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe"
+              : process.platform === "linux"
+              ? "/usr/bin/google-chrome"
+              : "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+        },
+  );
+  const page = await browser.newPage();
 
-  console.log(process.env.NODE_ENV);
-  const browser = await core.launch({
-    args: chrome.args,
-    executablePath:
-      process.env.NODE_ENV === "production"
-        ? await chrome.executablePath
-        : localChromeLocation,
-    headless: chrome.headless,
-  });
-  _page = await browser.newPage();
-
-  return _page;
+  return page;
 };
 
 export const captureScreenshot = async (html: string) => {
