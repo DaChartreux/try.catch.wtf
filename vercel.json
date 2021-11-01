@@ -1,6 +1,6 @@
 {
   "functions": {
-    "api/linkPreview/[slug].ts": {
+    "api/linkPreview/test.js": {
       "excludeFiles": "{.git,components,data,hooks,pages,prisma,public,styles,typings,utils}/**"
     }
   }

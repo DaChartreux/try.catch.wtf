@@ -27,6 +27,11 @@
     },
     "incremental": true
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "api/linkPreview/test.js"
+  ],
   "exclude": ["node_modules"]
 }
