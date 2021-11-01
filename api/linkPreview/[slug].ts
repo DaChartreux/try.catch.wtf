@@ -206,9 +206,11 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       .replace("{{createdAt}}", dayjs(post.createdAt).format("DD MMM, YYYY"));
 
     const browser = await chrome.puppeteer.launch({
-      args: chrome.args,
+      args: [...chrome.args, "--hide-scrollbars", "--disable-web-security"],
+      defaultViewport: chrome.defaultViewport,
       executablePath: await chrome.executablePath,
-      headless: chrome.headless,
+      headless: true,
+      ignoreHTTPSErrors: true,
     });
     const page = await browser.newPage();
 
