@@ -1,8 +1,8 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import dayjs from "dayjs";
 
-import { prisma } from "@lib/prisma";
-import { captureScreenshot } from "@lib/puppeteer";
+import { prisma } from "../../lib/prisma";
+import { captureScreenshot } from "../../lib/puppeteer";
 
 const HTML = `
 <!DOCTYPE html>
