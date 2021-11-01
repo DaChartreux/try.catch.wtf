@@ -1,7 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import sha256 from "crypto-js/sha256";
 
-import { prisma } from "@lib/prisma";
+import { prisma } from "../../lib/prisma";
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   if (process.env.NODE_ENV === "development") {
