@@ -1,7 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import dayjs from "dayjs";
 
-import { prisma } from "../../lib/prisma";
+// import { prisma } from "../../lib/prisma";
 import { captureScreenshot } from "../../lib/puppeteer";
 
 const HTML = `
@@ -193,38 +193,40 @@ const HTML = `
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     const slug = req.query.slug.toString();
-    const post = await prisma.posts.findUnique({
-      where: {
-        slug,
-      },
-    });
+    // const post = await prisma.posts.findUnique({
+    //   where: {
+    //     slug,
+    //   },
+    // });
 
-    if (post === null) {
-      return res.status(404).send("post not found");
-    }
+    // if (post === null) {
+    //   return res.status(404).send("post not found");
+    // }
 
-    const viewsCount = await prisma.views.count({
-      where: {
-        postId: post.id,
-      },
-    });
+    // const viewsCount = await prisma.views.count({
+    //   where: {
+    //     postId: post.id,
+    //   },
+    // });
 
-    const baseUrl =
-      process.env.NODE_ENV === "production"
-        ? "https://try.catch.wtf"
-        : "http://localhost:3000";
+    // const baseUrl =
+    //   process.env.NODE_ENV === "production"
+    //     ? "https://try.catch.wtf"
+    //     : "http://localhost:3000";
 
-    const templateHtml = HTML.replace("{{baseUrl}}", baseUrl)
-      .replace("{{title}}", post.title)
-      .replace("{{description}}", post.description)
-      .replace("{{viewsCount}}", viewsCount.toString())
-      .replace("{{createdAt}}", dayjs(post.createdAt).format("DD MMM, YYYY"));
+    // const templateHtml = HTML.replace("{{baseUrl}}", baseUrl)
+    //   .replace("{{title}}", post.title)
+    //   .replace("{{description}}", post.description)
+    //   .replace("{{viewsCount}}", viewsCount.toString())
+    //   .replace("{{createdAt}}", dayjs(post.createdAt).format("DD MMM, YYYY"));
 
-    const image = await captureScreenshot(templateHtml);
+    // const image = await captureScreenshot(templateHtml);
 
-    res.setHeader("Content-type", "image/png");
-    res.setHeader("Cache-Control", "s-maxage=86400");
-    res.send(image);
+    // res.setHeader("Content-type", "image/png");
+    // res.setHeader("Cache-Control", "s-maxage=86400");
+    // res.send(image);
+
+    res.send("ok");
   } catch (e) {
     console.log(e);
     return res.status(500).json({ message: e });
