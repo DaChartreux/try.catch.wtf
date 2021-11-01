@@ -25,7 +25,6 @@ export const captureScreenshot = async (html: string) => {
   await page.setContent(html, { waitUntil: "networkidle0" });
 
   const file = await page.screenshot({ type: "png" });
-  await page.close();
 
   return file;
 };
