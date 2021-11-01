@@ -16,7 +16,7 @@
     "@emotion/styled": "^11.3.0",
     "@prisma/client": "^3.3.0",
     "axios": "^0.23.0",
-    "chrome-aws-lambda": "^10.1.0",
+    "chrome-aws-lambda": "^7.0.0",
     "crypto-js": "^4.1.1",
     "dayjs": "^1.10.7",
     "framer-motion": "^4.1.17",
