@@ -1,0 +1,5 @@
+{
+  "api/linkPreview/[slug].ts": {
+    "excludeFiles": "components"
+  }
+}
