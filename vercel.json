@@ -1,6 +1,6 @@
 {
   "functions": {
-    "api/linkPreview/[slug].ts": {
+    "pages/api/linkPreview/[slug].ts": {
       "excludeFiles": "components"
     }
   }
