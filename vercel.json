@@ -1,0 +1,7 @@
+{
+  "functions": {
+    "pages/api/linkPreview/[slug].ts": {
+      "excludeFiles": "/{node_modules,components,styles,public,utils,prisma,data,hooks,typings}/**"
+    }
+  }
+}
