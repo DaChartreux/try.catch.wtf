@@ -1,7 +1,7 @@
 {
   "functions": {
     "api/linkPreview/[slug].ts": {
-      "excludeFiles": "{.git,components,data,hooks,pages,prisma,node_modules,public,styles,typings,utils}/**"
+      "excludeFiles": "{.git,components,data,hooks,pages,prisma,public,styles,typings,utils}/**"
     }
   }
 }
