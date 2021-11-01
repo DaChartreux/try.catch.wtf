@@ -1,10 +1,10 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import dayjs from "dayjs";
+import fetch from "node-fetch";
 
-import { prisma } from "@lib/prisma";
 import { captureScreenshot } from "@lib/puppeteer";
 
-const HTML = `
+const HTML_TEMPLATE = `
 <!DOCTYPE html>
 <html>
   <head>
@@ -15,31 +15,26 @@ const HTML = `
         src: url("https://try.catch.wtf/fonts/Jost/Jost-VF.woff2")
           format("woff2-variations");
       }
-
       html,
       body {
         width: 1200px;
         height: 600px;
         margin: 0;
       }
-
       .fg {
         position: relative;
         width: 100%;
         height: 100%;
         background: white;
       }
-
       .fg .item {
         z-index: 1;
       }
-
       .item.container {
         position: absolute;
         top: 135px;
         left: 85px;
       }
-
       .item.footer {
         position: absolute;
         bottom: 0;
@@ -51,13 +46,11 @@ const HTML = `
         color: #be123c;
         font-family: Jost VF;
       }
-
       .footer-item {
         display: flex;
         place-items: center;
         margin: 0 5rem 0 0;
       }
-
       .item.container .title,
       .item.container .description {
         font-family: Jost VF;
@@ -66,24 +59,20 @@ const HTML = `
         margin: 0;
         color: #be123c;
       }
-
       .item.container .description {
         font-size: 36px;
         opacity: 0.6;
       }
-
       .footer-item .icon,
       .footer-item .text {
         display: inline-block;
       }
-
       .footer-item .icon {
         width: 2rem;
         height: 2rem;
         display: inline-block;
         vertical-align: middle;
       }
-
       .footer-item .text {
         font-weight: 450;
         margin-left: 1rem;
@@ -96,7 +85,6 @@ const HTML = `
         <p class="title">{{title}}</p>
         <p class="description">{{description}}</p>
       </div>
-
       <div class="item footer">
         <div style="display: flex">
           <div class="footer-item">
@@ -117,7 +105,6 @@ const HTML = `
             </svg>
             <span class="text" style="font-size: 2rem">{{viewsCount}}</span>
           </div>
-
           <div class="footer-item">
             <svg
               class="icon"
@@ -139,7 +126,6 @@ const HTML = `
             <span class="text" style="font-size: 2rem">{{createdAt}}</span>
           </div>
         </div>
-
         <div>
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -179,7 +165,6 @@ const HTML = `
           </svg>
         </div>
       </div>
-
       <div class="bg" style="position: absolute; right: 0">
         <img
           src="{{baseUrl}}/img/hello-world/linkPreviewBg.png"
@@ -191,36 +176,27 @@ const HTML = `
 `;
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
+  const baseUrl =
+    process.env.NODE_ENV === "production"
+      ? "https://try.catch.wtf"
+      : "http://localhost:3000";
+
   try {
     const slug = req.query.slug.toString();
-    const post = await prisma.posts.findUnique({
-      where: {
-        slug,
-      },
-    });
+    const response = await fetch(`${baseUrl}/api/post/${slug}`);
+    const post = (await response.json()) as any;
 
     if (post === null) {
       return res.status(404).send("post not found");
     }
 
-    const viewsCount = await prisma.views.count({
-      where: {
-        postId: post.id,
-      },
-    });
-
-    const baseUrl =
-      process.env.NODE_ENV === "production"
-        ? "https://try.catch.wtf"
-        : "http://localhost:3000";
-
-    const templateHtml = HTML.replace("{{baseUrl}}", baseUrl)
+    const html = HTML_TEMPLATE.replace("{{baseUrl}}", baseUrl)
       .replace("{{title}}", post.title)
       .replace("{{description}}", post.description)
-      .replace("{{viewsCount}}", viewsCount.toString())
+      .replace("{{viewsCount}}", post.viewsCount.toString())
       .replace("{{createdAt}}", dayjs(post.createdAt).format("DD MMM, YYYY"));
 
-    const image = await captureScreenshot(templateHtml);
+    const image = await captureScreenshot(html);
 
     res.setHeader("Content-type", "image/png");
     res.setHeader("Cache-Control", "s-maxage=86400");

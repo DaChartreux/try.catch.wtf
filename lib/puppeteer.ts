@@ -1,8 +1,6 @@
 import chrome from "chrome-aws-lambda";
 import core from "puppeteer-core";
 
-const localChromeLocation = "/usr/bin/google-chrome";
-
 let _page: core.Page | null = null;
 
 const launchPuppeteer = async () => {
@@ -10,13 +8,9 @@ const launchPuppeteer = async () => {
     return _page;
   }
 
-  console.log(process.env.NODE_ENV);
   const browser = await core.launch({
     args: chrome.args,
-    executablePath:
-      process.env.NODE_ENV === "production"
-        ? await chrome.executablePath
-        : localChromeLocation,
+    executablePath: await chrome.executablePath,
     headless: chrome.headless,
   });
   _page = await browser.newPage();
