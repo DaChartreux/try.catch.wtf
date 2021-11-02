@@ -199,7 +199,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     const image = await captureScreenshot(html);
 
     res.setHeader("Content-type", "image/png");
-    res.setHeader("Cache-Control", "s-maxage=86400");
+    res.setHeader("Cache-Control", "max-age=60");
     res.send(image);
   } catch (e) {
     console.log(e);
