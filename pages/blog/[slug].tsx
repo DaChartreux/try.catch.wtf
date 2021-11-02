@@ -6,7 +6,6 @@ import type { GetStaticPaths, GetStaticProps } from "next";
 import Head from "next/head";
 import { MDXRemote, MDXRemoteSerializeResult } from "next-mdx-remote";
 import { serialize } from "next-mdx-remote/serialize";
-import axios, { Axios } from "axios";
 import matter from "gray-matter";
 import styled from "@emotion/styled";
 
@@ -19,7 +18,7 @@ import CalendarIcon from "@components/icons/CalendarIcon";
 import { POSTS_PATH, postFilePaths } from "@utils/mdxUtils";
 
 import type { NextPageWithLayout } from "@typings/app";
-import type { Post } from "@typings/data";
+import type { Post, Views } from "@typings/data";
 
 type BlogPropsType = {
   source: MDXRemoteSerializeResult<Record<string, unknown>>;
@@ -59,9 +58,9 @@ const Blog: NextPageWithLayout<BlogPropsType> = ({ source, frontMatter }) => {
   const [views, setViews] = useState(0);
 
   useEffect(() => {
-    axios
-      .get("/api/updateViews/" + slug)
-      .then(({ data }) => setViews(data as number))
+    fetch(`/api/updateViews/${slug}`)
+      .then<Views>((res) => res.json())
+      .then((json) => setViews(json.views))
       .catch((err) => console.log(err));
   }, [slug]);
 

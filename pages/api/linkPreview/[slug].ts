@@ -3,6 +3,7 @@ import dayjs from "dayjs";
 import fetch from "node-fetch";
 
 import { captureScreenshot } from "@lib/puppeteer";
+import { Post, Views } from "@typings/data";
 
 const HTML_TEMPLATE = `
 <!DOCTYPE html>
@@ -184,7 +185,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     const slug = req.query.slug.toString();
     const response = await fetch(`${baseUrl}/api/post/${slug}`);
-    const post = (await response.json()) as any;
+    const post = (await response.json()) as Post & Views;
 
     if (post === null) {
       return res.status(404).send("post not found");
@@ -193,7 +194,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     const html = HTML_TEMPLATE.replace("{{baseUrl}}", baseUrl)
       .replace("{{title}}", post.title)
       .replace("{{description}}", post.description)
-      .replace("{{viewsCount}}", post.viewsCount.toString())
+      .replace("{{viewsCount}}", post.views.toString())
       .replace("{{createdAt}}", dayjs(post.createdAt).format("DD MMM, YYYY"));
 
     const image = await captureScreenshot(html);
