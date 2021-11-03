@@ -15,13 +15,13 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       return res.status(404).send("post not found");
     }
 
-    const viewsCount = await prisma.views.count({
+    const views = await prisma.views.count({
       where: {
         postId: post.id,
       },
     });
 
-    res.send({ ...post, viewsCount });
+    res.send({ ...post, views });
   } catch (e) {
     console.log(e);
     return res.status(500).json({ message: e });
