@@ -12,7 +12,7 @@ import matter from "gray-matter";
 
 import Layout from "@components/Layout";
 import { postFilePaths, POSTS_PATH } from "@utils/mdxUtils";
-import { updatePosts } from "@utils/dbSync";
+import { updatePosts } from "@utils/db";
 
 import type { NextPageWithLayout } from "@typings/app";
 import type { Post } from "@typings/data";
