@@ -69,7 +69,7 @@ const Index: NextPageWithLayout<IndexProps> = ({ latestPosts }) => {
         <title>Try... Catch</title>
       </Head>
       <CategoriesWrapper>
-        <Categories categories={["web", "performance"]} />
+        <Categories categories={["web", "performance", "front-end"]} />
       </CategoriesWrapper>
 
       <RecentPostsWrapper>
@@ -116,7 +116,8 @@ export const getStaticProps: GetStaticProps<IndexProps> = async () => {
     .map((data) => ({
       ...data,
       createdAt: (data.createdAt as Dayjs).format("DD MMM"),
-    }));
+    }))
+    .reverse();
 
   return {
     props: {
