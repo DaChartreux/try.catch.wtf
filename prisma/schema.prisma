@@ -1,11 +1,12 @@
 generator client {
-  provider = "prisma-client-js"
-  previewFeatures = ["dataProxy"]
+  provider        = "prisma-client-js"
+  previewFeatures = ["dataProxy", "referentialIntegrity"]
 }
 
 datasource db {
-  provider = "mysql"
-  url      = env("DATABASE_URL")
+  provider             = "mysql"
+  url                  = env("DATABASE_URL")
+  referentialIntegrity = "prisma"
 }
 
 model views {
