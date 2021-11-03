@@ -12,7 +12,7 @@ import matter from "gray-matter";
 
 import Layout from "@components/Layout";
 import { postFilePaths, POSTS_PATH } from "@utils/mdxUtils";
-import { updatePosts } from "@utils/dbSync";
+import { updatePosts } from "@utils/db";
 
 import type { NextPageWithLayout } from "@typings/app";
 import type { Post } from "@typings/data";
@@ -100,7 +100,12 @@ export const getStaticProps: GetStaticProps<IndexProps> = async () => {
     };
   });
 
-  await updatePosts(allPosts);
+  if (
+    process.env.NODE_ENV === "production" &&
+    process.env.VERCEL_ENV === "production"
+  ) {
+    await updatePosts(allPosts);
+  }
 
   const latestPosts: any[] = allPosts
     .filter((data: any) => data.isPublished)

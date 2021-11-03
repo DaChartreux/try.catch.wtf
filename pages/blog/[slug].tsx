@@ -19,6 +19,7 @@ import { POSTS_PATH, postFilePaths } from "@utils/mdxUtils";
 
 import type { NextPageWithLayout } from "@typings/app";
 import type { Post, Views } from "@typings/data";
+import { getPost } from "@utils/db";
 
 type BlogPropsType = {
   source: MDXRemoteSerializeResult<Record<string, unknown>>;
@@ -53,16 +54,16 @@ const PostStyle = styled.div`
 `;
 
 const Blog: NextPageWithLayout<BlogPropsType> = ({ source, frontMatter }) => {
-  const { slug } = frontMatter;
+  const { id } = frontMatter;
 
   const [views, setViews] = useState(0);
 
   useEffect(() => {
-    fetch(`/api/updateViews/${slug}`)
+    fetch(`/api/updateViews/${id}`)
       .then<Views>((res) => res.json())
       .then((json) => setViews(json.views))
       .catch((err) => console.log(err));
-  }, [slug]);
+  }, [id]);
 
   useEffect(() => {
     const url = window.location.hash;
@@ -152,6 +153,12 @@ export const getStaticProps: GetStaticProps<BlogPropsType> = async ({
   const { content, data } = matter(source);
   const mdxSource = await serialize(content);
 
+  const post = await getPost(params.slug);
+
+  if (post === null) {
+    throw new Error("Post not found");
+  }
+
   return {
     props: {
       source: mdxSource,
@@ -168,6 +175,7 @@ export const getStaticProps: GetStaticProps<BlogPropsType> = async ({
           | "heroCreditUserProfile"
           | "heroCreditUserProfileUrl"
         >),
+        id: post.id,
         slug: params.slug,
       },
     },
