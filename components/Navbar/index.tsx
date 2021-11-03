@@ -39,7 +39,7 @@ const Navbar = () => {
 
   const [theme, setTheme] = useState<"light" | "dark">(
     (window.localStorage.getItem("__APP_THEME__") as "light" | "dark") ??
-      "dark",
+      "light",
   );
 
   const [navVariant, setNavVariant] = useState<"load" | "close" | "open">(
@@ -83,7 +83,7 @@ const Navbar = () => {
         <DesktopNavbarStyle>
           <ButtonIcon
             onClick={() => {
-              const appTheme = theme === "dark" ? "light" : "dark";
+              const appTheme = theme === "light" ? "dark" : "light";
               document.documentElement.dataset.theme = appTheme;
               document.documentElement.style.colorScheme = appTheme;
               window.localStorage.setItem("__APP_THEME__", appTheme);
