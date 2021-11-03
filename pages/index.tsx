@@ -100,7 +100,12 @@ export const getStaticProps: GetStaticProps<IndexProps> = async () => {
     };
   });
 
-  await updatePosts(allPosts);
+  if (
+    process.env.NODE_ENV === "production" &&
+    process.env.VERCEL_ENV === "production"
+  ) {
+    await updatePosts(allPosts);
+  }
 
   const latestPosts: any[] = allPosts
     .filter((data: any) => data.isPublished)
