@@ -17,4 +17,8 @@ export const CATEGORIES: Category = {
     category: "Performance",
     color: "green-300",
   },
+  "front-end": {
+    category: "Front End",
+    color: "red-300",
+  },
 };
