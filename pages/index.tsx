@@ -69,7 +69,7 @@ const Index: NextPageWithLayout<IndexProps> = ({ latestPosts }) => {
         <title>Try... Catch</title>
       </Head>
       <CategoriesWrapper>
-        <Categories categories={["web", "performance", "front-end"]} />
+        <Categories categories={["web", "performance", "frontend"]} />
       </CategoriesWrapper>
 
       <RecentPostsWrapper>

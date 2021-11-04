@@ -17,4 +17,4 @@ export type Views = {
   views: number;
 };
 
-export type CategoryString = "web" | "performance" | "front-end";
+export type CategoryString = "web" | "performance" | "frontend";

@@ -7,6 +7,8 @@ export const PreContainer = styled.div`
   position: relative;
   flex-direction: column;
   margin: 0 0 1.5rem 0;
+  max-width: -webkit-fill-available;
+  box-sizing: border-box;
 
   .icon {
     position: absolute;

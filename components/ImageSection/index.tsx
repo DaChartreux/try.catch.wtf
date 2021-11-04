@@ -12,9 +12,14 @@ type ImageSectionProps = {
 
 const ImageSection = ({ src, width, height, title }: ImageSectionProps) => (
   <ImageSectionStyle>
-    <div>
-      <Image src={src} width={width} height={height} alt={title} />
-    </div>
+    <Image src={src} width={width} height={height} alt={title} />
+    {/* <Image
+        className="dark"
+        src={src}
+        width={width}
+        height={height}
+        alt={title}
+      /> */}
     <p>{title}</p>
   </ImageSectionStyle>
 );

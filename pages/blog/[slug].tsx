@@ -133,9 +133,7 @@ const Blog: NextPageWithLayout<BlogPropsType> = ({ source, frontMatter }) => {
         />
       </HeroStyle>
 
-      <PostStyle>
-        <MDXRemote {...source} components={MDXComponents} />
-      </PostStyle>
+      <MDXRemote {...source} components={MDXComponents} />
 
       <ViewsCounter from={0} to={views} />
     </>

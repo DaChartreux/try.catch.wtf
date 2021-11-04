@@ -35,8 +35,9 @@ const Highlight = ({
   const REMOVED = JSON.parse(removed ?? "[]");
 
   return (
-    <div>
-      <PreContainer>
+    <>
+      {!!fileName && <FilenameHeader>{fileName}</FilenameHeader>}
+      <ContainerStyle hasFilename={!!fileName}>
         <div className="icon">
           <ButtonIcon
             bgColor="bg-100"
@@ -58,30 +59,27 @@ const Highlight = ({
             </ButtonIcon>
           )}
         </div>
-        {!!fileName && <FilenameHeader>{fileName}</FilenameHeader>}
-        <ContainerStyle hasFilename={!!fileName}>
-          <Prism
-            language={className.replace("language-", "")}
-            style={solarized}
-            wrapLines
-            lineNumberStyle={{ minWidth: "3rem" }}
-            customStyle={{ overflowX: "scroll" }}
-            lineProps={(lineNumber) => {
-              let style: any = { display: "block" };
-              if (ADDED.includes(lineNumber)) {
-                style.backgroundColor = "#dbffdb22";
-              } else if (REMOVED.includes(lineNumber)) {
-                style.backgroundColor = "#ffecec22";
-              }
+        <Prism
+          language={className.replace("language-", "")}
+          style={solarized}
+          wrapLines
+          lineNumberStyle={{ minWidth: "3rem" }}
+          customStyle={{ overflowX: "scroll" }}
+          lineProps={(lineNumber) => {
+            let style: any = { display: "block" };
+            if (ADDED.includes(lineNumber)) {
+              style.backgroundColor = "#dbffdb22";
+            } else if (REMOVED.includes(lineNumber)) {
+              style.backgroundColor = "#ffecec22";
+            }
 
-              return { style };
-            }}
-          >
-            {children.split("\n").slice(0, -1).join("\n")}
-          </Prism>
-        </ContainerStyle>
-      </PreContainer>
-    </div>
+            return { style };
+          }}
+        >
+          {children.split("\n").slice(0, -1).join("\n")}
+        </Prism>
+      </ContainerStyle>
+    </>
   );
 };
 
