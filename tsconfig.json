@@ -16,6 +16,7 @@
     "baseUrl": ".",
     "paths": {
       "@components/*": ["components/*"],
+      "@context/*": ["context/*"],
       "@hooks/*": ["hooks/*"],
       "@icons/*": ["components/icons/*"],
       "@img/*": ["public/img/*"],

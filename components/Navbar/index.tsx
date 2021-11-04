@@ -17,6 +17,7 @@ import MenuIcon from "@components/icons/MenuIcon";
 import { Variants } from "framer-motion";
 import useOnClickOutside from "@hooks/useClickOutside";
 import Logo from "@components/Logo";
+import { APP_THEME, useAppTheme } from "context/AppThemeContext";
 
 const DesktopNavbarStyle = styled(NavStyle)`
   @media (max-width: 768px) {
@@ -35,13 +36,8 @@ const Navbar = () => {
     navVariant === "open" && setNavVariant("close");
   };
 
+  const { theme, setTheme } = useAppTheme();
   const { ref } = useOnClickOutside<HTMLDivElement>(handleClickOutside);
-
-  const [theme, setTheme] = useState<"light" | "dark">(
-    (window.localStorage.getItem("__APP_THEME__") as "light" | "dark") ??
-      "light",
-  );
-
   const [navVariant, setNavVariant] = useState<"load" | "close" | "open">(
     "load",
   );
@@ -83,10 +79,8 @@ const Navbar = () => {
         <DesktopNavbarStyle>
           <ButtonIcon
             onClick={() => {
-              const appTheme = theme === "light" ? "dark" : "light";
-              document.documentElement.dataset.theme = appTheme;
-              document.documentElement.style.colorScheme = appTheme;
-              window.localStorage.setItem("__APP_THEME__", appTheme);
+              const appTheme =
+                theme === APP_THEME.DARK ? APP_THEME.LIGHT : APP_THEME.DARK;
               setTheme(appTheme);
             }}
             bgColor="fg-100"
@@ -155,10 +149,8 @@ const Navbar = () => {
       >
         <ButtonIcon
           onClick={() => {
-            const appTheme = theme === "dark" ? "light" : "dark";
-            document.documentElement.dataset.theme = appTheme;
-            document.documentElement.style.colorScheme = appTheme;
-            window.localStorage.setItem("__APP_THEME__", appTheme);
+            const appTheme =
+              theme === APP_THEME.DARK ? APP_THEME.LIGHT : APP_THEME.DARK;
             setTheme(appTheme);
           }}
           bgColor="fg-100"

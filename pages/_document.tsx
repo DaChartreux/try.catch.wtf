@@ -8,6 +8,8 @@ import NextDocument, {
 import createEmotionServer from "@emotion/server/create-instance";
 import { cache } from "@emotion/css";
 
+import { APP_THEME } from "@context/AppThemeContext";
+
 const initialTheme = `
 !(function() {
   function getTheme() {
@@ -15,17 +17,14 @@ const initialTheme = `
     if (theme) {
       return theme;
     }
-    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    return window.matchMedia('(prefers-color-scheme: dark)').matches ? '${APP_THEME.DARK}' : '${APP_THEME.LIGHT}';
   }
   const theme = getTheme();
   document.documentElement.dataset.theme = theme;
   document.documentElement.style.colorScheme = theme;
 }())`;
 
-export const renderStatic = async (html: string) => {
-  if (html === undefined) {
-    throw new Error("did you forget to return html from renderToString?");
-  }
+const renderStatic = (html: string) => {
   const { extractCritical } = createEmotionServer(cache);
   const { ids, css } = extractCritical(html);
 
@@ -35,7 +34,7 @@ export const renderStatic = async (html: string) => {
 export default class Document extends NextDocument {
   static async getInitialProps(ctx: DocumentContext) {
     const page = await ctx.renderPage();
-    const { css, ids } = await renderStatic(page.html);
+    const { css, ids } = renderStatic(page.html);
     const initialProps = await NextDocument.getInitialProps(ctx);
 
     return {
@@ -56,16 +55,6 @@ export default class Document extends NextDocument {
     return (
       <Html style={{ colorScheme: "dark" }}>
         <Head>
-          {/* <link rel="preconnect" href="https://fonts.googleapis.com" /> */}
-          {/* <link
-            rel="preconnect"
-            href="https://fonts.gstatic.com"
-            crossOrigin="anonymous"
-          /> */}
-          {/* <link
-            href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@700&display=swap"
-            rel="stylesheet"
-          /> */}
           <link
             rel="preload"
             href="/fonts/Jost/Jost-VF.woff2"

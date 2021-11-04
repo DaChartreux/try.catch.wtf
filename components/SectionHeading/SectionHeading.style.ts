@@ -6,7 +6,6 @@ export const BlogAnchorHeadingStyle = styled(motion.a)`
   position: relative;
   scroll-margin-top: 5rem;
   text-decoration: none;
-  width: min-content;
 
   div {
     opacity: 0;

@@ -35,6 +35,7 @@ const Categories = ({ categories }: CategoriesProps) => (
       initial="hidden"
       animate="visible"
     >
+      {console.log(categories)}
       {categories.map((category, i) => (
         <Tag
           key={i}
