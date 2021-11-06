@@ -24,11 +24,9 @@ const RecentPosts = ({ posts }: RecentPostsProps) => (
     <PostsGridStyle>
       {posts.map((post) => (
         <PostPreview
-          key={post.id}
+          key={post.slug}
           slug={post.slug}
           title={post.title}
-          description={post.description}
-          categories={post.categories}
           createdAt={post.createdAt}
         />
       ))}

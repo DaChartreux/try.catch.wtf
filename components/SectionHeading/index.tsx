@@ -63,6 +63,7 @@ const BlogHeading = ({ fontWeight, fontSize, children }: BlogHeadingProps) => {
         animate={isVisible && "visible"}
         variants={textMotion}
         transition={{ duration: 0.4 }}
+        margin="2rem 0 1rem 0"
         onHoverStart={() => setIsHovering(true)}
         onHoverEnd={() => setIsHovering(false)}
       >

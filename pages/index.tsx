@@ -62,7 +62,7 @@ const RecentPostsWrapper = styled.div`
   grid-area: recent;
 `;
 
-const Index: NextPageWithLayout<IndexProps> = ({ latestPosts }) => {
+const Index: NextPageWithLayout<IndexProps> = ({ latestPosts }: IndexProps) => {
   return (
     <>
       <Head>

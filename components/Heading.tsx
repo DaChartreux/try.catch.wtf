@@ -18,7 +18,6 @@ const Heading = styled(motion.h1)<HeadingStyledProps>`
   font-size: ${({ fontSize }) => fontSize};
   margin: ${({ margin }) => margin};
   width: fit-content;
-  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
 `;
 
 Heading.defaultProps = {

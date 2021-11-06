@@ -31,11 +31,18 @@ const MDXComponents: MDXComponentsType = {
     </SectionHeading>
   ),
   h3: ({ children }: any) => (
-    <Heading fgColor="primary-100" fontWeight={600} fontSize="1.5rem">
+    <Heading
+      fgColor="primary-100"
+      fontWeight={600}
+      fontSize="1.5rem"
+      margin="1rem 0"
+    >
       {children}
     </Heading>
   ),
-  blockquote: ({ children }) => <Blockquote type="info">{children}</Blockquote>,
+  blockquote: ({ children }) => (
+    <Blockquote type="info">{children}</Blockquote>
+  ),
   p: ({ children }) => <Paragraph>{children}</Paragraph>,
   ol: (props: any) => <OrderedList {...props} />,
   ul: (props: any) => <OrderedList {...props} />,

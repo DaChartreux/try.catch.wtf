@@ -14,7 +14,7 @@
     [
       "@emotion",
       {
-        "sourceMap": true,
+        "sourceMap": false,
         "autoLabel": "dev-only",
         "labelFormat": "[local]",
         "cssPropOptimization": true

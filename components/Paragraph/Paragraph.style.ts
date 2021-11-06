@@ -17,4 +17,15 @@ export const ParagraphStyle = styled.p`
     padding: 0 0.25rem;
     font-size: 1rem;
   }
+
+  @media (max-width: 640px) {
+    font-size: 1rem;
+
+    code {
+      color: hsl(${THEME.colors["red-300"]});
+      background-color: hsla(${THEME.colors["fg-100"]}, 0.1);
+      padding: 0 0.25rem;
+      font-size: 0.875rem;
+    }
+  }
 `;

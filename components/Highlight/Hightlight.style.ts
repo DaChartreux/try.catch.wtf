@@ -23,6 +23,7 @@ export const ContainerStyle = styled.div<{ hasFilename: boolean }>`
   border-radius: ${({ hasFilename }) =>
     hasFilename ? "0 0 0.375rem 0.375rem" : "0.375rem"};
   overflow: hidden;
+  margin: 1rem -1rem;
 
   pre {
     padding: 0;
