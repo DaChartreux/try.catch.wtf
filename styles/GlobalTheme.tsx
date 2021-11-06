@@ -1,3 +1,4 @@
+import React from "react";
 import { css, Global } from "@emotion/react";
 
 import THEME from "@styles/theme";
@@ -89,6 +90,14 @@ const GlobalTheme = () => (
         --color-rose-100: 351, 95%, 71%; //  hsl(351, 95%, 71%)
         --color-rose-200: 351, 95%, 66%; //  hsl(351, 95%, 66%)
         --color-rose-300: 351, 95%, 61%; //  hsl(351, 95%, 61%)
+
+        .light-image-section {
+          display: block;
+        }
+
+        .dark-image-section {
+          display: none;
+        }
       }
 
       :root[data-theme="dark"] {
@@ -172,6 +181,14 @@ const GlobalTheme = () => (
         --color-rose-100: 351, 95%, 81%; // hsl(351, 95%, 81%)
         --color-rose-200: 351, 95%, 76%; // hsl(351, 95%, 76%)
         --color-rose-300: 351, 95%, 71%; // hsl(351, 95%, 71%)
+
+        .dark-image-section {
+          display: block;
+        }
+
+        .light-image-section {
+          display: none;
+        }
       }
 
       html,
