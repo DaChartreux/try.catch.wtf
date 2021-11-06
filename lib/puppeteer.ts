@@ -8,11 +8,21 @@ const launchPuppeteer = async () => {
     return _page;
   }
 
+  const path =
+    process.env.NODE_ENV === "production"
+      ? await chrome.executablePath
+      : process.platform === "win32"
+      ? "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe"
+      : process.platform === "linux"
+      ? "/usr/bin/google-chrome"
+      : "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome";
+
   const browser = await core.launch({
     args: chrome.args,
-    executablePath: await chrome.executablePath,
+    executablePath: path,
     headless: chrome.headless,
   });
+
   _page = await browser.newPage();
 
   return _page;

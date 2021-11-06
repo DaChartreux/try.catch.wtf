@@ -46,10 +46,17 @@ const PostWrapper = styled.div`
 
 const Blog: NextPageWithLayout<BlogPropsType> = ({
   source,
-  frontMatter,
+  frontMatter: {
+    id,
+    title,
+    slug,
+    description,
+    createdAt,
+    heroCreditSource,
+    heroCreditUserProfile,
+    heroCreditUserProfileUrl,
+  },
 }: BlogPropsType) => {
-  const { id } = frontMatter;
-
   const [views, setViews] = useState(0);
 
   useEffect(() => {
@@ -69,26 +76,17 @@ const Blog: NextPageWithLayout<BlogPropsType> = ({
   return (
     <>
       <Head>
-        <title>{frontMatter.title}</title>
-        <meta name="image" content={`/api/linkPreview/${frontMatter.slug}`} />
-        <meta
-          property="og:image"
-          content={`/api/linkPreview/${frontMatter.slug}`}
-        />
+        <title>{title}</title>
+        <meta name="image" content={`/api/linkPreview/${id}`} />
+        <meta property="og:image" content={`/api/linkPreview/${id}`} />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://try.catch.wtf" />
-        <meta property="og:title" content={frontMatter.title} />
+        <meta property="og:title" content={title} />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="600" />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta
-          name="description"
-          content="How to use fonts with minimal side effects on lighthouse score"
-        />
-        <meta
-          property="og:description"
-          content="How to use fonts with minimal side effects on lighthouse score"
-        />
+        <meta name="description" content={description} />
+        <meta property="og:description" content={description} />
       </Head>
       <HeadingStyle
         fgColor="green-100"
@@ -106,19 +104,19 @@ const Blog: NextPageWithLayout<BlogPropsType> = ({
         }}
         transition={{ duration: 0.4, delay: 0.3 }}
       >
-        {frontMatter.title}
+        {title}
       </HeadingStyle>
       <div>
         <CalendarIcon />
-        <p>{frontMatter.createdAt}</p>
+        <p>{createdAt}</p>
       </div>
       <Hero
-        layoutId={`${frontMatter.slug}__hero`}
-        title={frontMatter.title}
-        heroSrc={`/img/${frontMatter.slug}/hero.jpg`}
-        heroCreditSource={frontMatter.heroCreditSource!}
-        heroCreditUserProfile={frontMatter.heroCreditUserProfile!}
-        heroCreditUserProfileUrl={frontMatter.heroCreditUserProfileUrl!}
+        layoutId={`${slug}__hero`}
+        title={title}
+        heroSrc={`/img/${slug}/hero.jpg`}
+        heroCreditSource={heroCreditSource!}
+        heroCreditUserProfile={heroCreditUserProfile!}
+        heroCreditUserProfileUrl={heroCreditUserProfileUrl!}
       />
       <Spacer height="2rem" />
       <PostWrapper>
