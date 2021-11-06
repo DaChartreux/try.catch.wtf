@@ -1,4 +1,11 @@
 {
-  "extends": ["next/core-web-vitals"],
-  "plugins": ["@emotion"]
+  "extends": [
+    "next/core-web-vitals",
+    "eslint:recommended",
+    "plugin:react/recommended"
+  ],
+  "plugins": ["@emotion"],
+  "rules": {
+    "no-unused-vars": ["error", { "args": "none", "varsIgnorePattern": "^_" }]
+  }
 }

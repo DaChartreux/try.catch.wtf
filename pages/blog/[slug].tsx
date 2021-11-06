@@ -20,6 +20,7 @@ import { POSTS_PATH, postFilePaths } from "@utils/mdxUtils";
 import type { NextPageWithLayout } from "@typings/app";
 import type { Post, Views } from "@typings/data";
 import { getPost } from "@utils/db";
+import Spacer from "@components/Spacer";
 
 type BlogPropsType = {
   source: MDXRemoteSerializeResult<Record<string, unknown>>;
@@ -28,32 +29,25 @@ type BlogPropsType = {
 
 const LayoutWrapper = styled(Layout)`
   padding: 0 2rem;
-  display: grid;
-  grid-template-rows: min-content min-content minmax(0, max-content);
-  grid-template-areas:
-    "heading"
-    "hero"
-    "post";
-  gap: 3rem;
 
   @media (max-width: 640px) {
     padding: 0 1rem;
   }
 `;
 
-const HeroStyle = styled.div`
-  grid-area: hero;
-  width: 100%;
-`;
-
-const PostStyle = styled.div`
-  grid-area: post;
-  max-width: 900px;
+const PostWrapper = styled.div`
+  max-width: 1000px;
   margin: auto;
-  width: 100%;
+
+  @media (max-width: 640px) {
+    padding: 0 1rem;
+  }
 `;
 
-const Blog: NextPageWithLayout<BlogPropsType> = ({ source, frontMatter }) => {
+const Blog: NextPageWithLayout<BlogPropsType> = ({
+  source,
+  frontMatter,
+}: BlogPropsType) => {
   const { id } = frontMatter;
 
   const [views, setViews] = useState(0);
@@ -86,9 +80,7 @@ const Blog: NextPageWithLayout<BlogPropsType> = ({ source, frontMatter }) => {
         <meta property="og:title" content={frontMatter.title} />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="600" />
-
         <meta name="twitter:card" content="summary_large_image" />
-
         <meta
           name="description"
           content="How to use fonts with minimal side effects on lighthouse score"
@@ -98,42 +90,40 @@ const Blog: NextPageWithLayout<BlogPropsType> = ({ source, frontMatter }) => {
           content="How to use fonts with minimal side effects on lighthouse score"
         />
       </Head>
-      <div style={{ gridArea: "heading" }}>
-        <HeadingStyle
-          fgColor="green-100"
-          fontSize="3rem"
-          fontWeight={600}
-          margin="1rem 0 0.5rem 0"
-          initial="hidden"
-          animate="visible"
-          variants={{
-            hidden: { opacity: 0, translateX: -32 },
-            visible: {
-              opacity: 1,
-              translateX: 0,
-            },
-          }}
-          transition={{ duration: 0.4, delay: 0.3 }}
-        >
-          {frontMatter.title}
-        </HeadingStyle>
-        <div>
-          <CalendarIcon />
-          <p>{frontMatter.createdAt}</p>
-        </div>
+      <HeadingStyle
+        fgColor="green-100"
+        fontSize="3rem"
+        fontWeight={600}
+        margin="1rem 0 0.5rem 0"
+        initial="hidden"
+        animate="visible"
+        variants={{
+          hidden: { opacity: 0, translateX: -32 },
+          visible: {
+            opacity: 1,
+            translateX: 0,
+          },
+        }}
+        transition={{ duration: 0.4, delay: 0.3 }}
+      >
+        {frontMatter.title}
+      </HeadingStyle>
+      <div>
+        <CalendarIcon />
+        <p>{frontMatter.createdAt}</p>
       </div>
-      <HeroStyle>
-        <Hero
-          layoutId={`${frontMatter.slug}__hero`}
-          title={frontMatter.title}
-          heroSrc={`/img/${frontMatter.slug}/hero.jpg`}
-          heroCreditSource={frontMatter.heroCreditSource!}
-          heroCreditUserProfile={frontMatter.heroCreditUserProfile!}
-          heroCreditUserProfileUrl={frontMatter.heroCreditUserProfileUrl!}
-        />
-      </HeroStyle>
-
-      <MDXRemote {...source} components={MDXComponents} />
+      <Hero
+        layoutId={`${frontMatter.slug}__hero`}
+        title={frontMatter.title}
+        heroSrc={`/img/${frontMatter.slug}/hero.jpg`}
+        heroCreditSource={frontMatter.heroCreditSource!}
+        heroCreditUserProfile={frontMatter.heroCreditUserProfile!}
+        heroCreditUserProfileUrl={frontMatter.heroCreditUserProfileUrl!}
+      />
+      <Spacer height="2rem" />
+      <PostWrapper>
+        <MDXRemote {...source} components={MDXComponents} />
+      </PostWrapper>
 
       <ViewsCounter from={0} to={views} />
     </>

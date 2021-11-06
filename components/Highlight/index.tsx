@@ -2,7 +2,6 @@ import React from "react";
 import { PrismAsyncLight as Prism } from "react-syntax-highlighter";
 
 import {
-  PreContainer,
   FilenameHeader,
   ContainerStyle,
 } from "@components/Highlight/Hightlight.style";
@@ -29,7 +28,7 @@ const Highlight = ({
   children,
   className,
 }: HighlightProps) => {
-  const [value, copy] = useCopyToClipboard();
+  const { copy } = useCopyToClipboard();
 
   const ADDED = JSON.parse(added ?? "[]");
   const REMOVED = JSON.parse(removed ?? "[]");

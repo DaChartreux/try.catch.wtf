@@ -4,22 +4,41 @@ import Image from "next/image";
 import { ImageSectionStyle } from "@components/ImageSection/ImageSection.style";
 
 type ImageSectionProps = {
-  src: string;
+  baseUrl: string;
+  srcLight: string;
+  srcDark: string;
   title: string;
   width: number;
   height: number;
 };
 
-const ImageSection = ({ src, width, height, title }: ImageSectionProps) => (
+const ImageSection = ({
+  baseUrl,
+  srcLight,
+  width,
+  height,
+  title,
+  srcDark = srcLight,
+}: ImageSectionProps) => (
   <ImageSectionStyle>
-    <Image src={src} width={width} height={height} alt={title} />
-    {/* <Image
-        className="dark"
-        src={src}
+    <div className="light-image-section">
+      <Image
+        src={`${baseUrl}/${srcLight}`}
         width={width}
         height={height}
         alt={title}
-      /> */}
+        quality={80}
+      />
+    </div>
+    <div className="dark-image-section">
+      <Image
+        src={`${baseUrl}/${srcDark}`}
+        width={width}
+        height={height}
+        alt={title}
+        quality={80}
+      />
+    </div>
     <p>{title}</p>
   </ImageSectionStyle>
 );

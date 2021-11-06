@@ -156,7 +156,7 @@ const Navbar = () => {
           bgColor="fg-100"
           fgColor="fg-100"
         >
-          {true ? <SunIcon /> : <MoonIcon />}
+          {theme === APP_THEME.DARK ? <SunIcon /> : <MoonIcon />}
         </ButtonIcon>
       </MenuItemStyle>
     </NavContainer>

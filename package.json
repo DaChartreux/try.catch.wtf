@@ -1,5 +1,5 @@
 {
-  "name": "blog",
+  "name": "try.catch.wtf",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -34,6 +34,7 @@
     "@types/react-syntax-highlighter": "^13.5.2",
     "eslint": "7.32.0",
     "eslint-config-next": "11.1.2",
+    "eslint-plugin-react": "^7.26.1",
     "gray-matter": "^4.0.3",
     "next-mdx-remote": "^3.0.4",
     "next-remote-watch": "^1.0.0",

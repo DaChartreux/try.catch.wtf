@@ -3,7 +3,7 @@ import { useState } from "react";
 type CopiedValue = string | null;
 type CopyFn = (text: string) => Promise<boolean>; // Return success
 
-const useCopyToClipboard = (): [CopiedValue, CopyFn] => {
+const useCopyToClipboard = () => {
   const [copiedText, setCopiedText] = useState<CopiedValue>(null);
 
   const copy: CopyFn = async (text) => {
@@ -24,7 +24,7 @@ const useCopyToClipboard = (): [CopiedValue, CopyFn] => {
     }
   };
 
-  return [copiedText, copy];
+  return { copiedText, copy };
 };
 
 export default useCopyToClipboard;

@@ -12,10 +12,7 @@ import EyeIcon from "@components/icons/EyeIcon";
 
 import type { Post } from "@typings/data";
 
-type RecentPosts = Pick<
-  Post,
-  "title" | "description" | "categories" | "slug" | "createdAt"
->;
+type RecentPosts = Pick<Post, "title" | "slug" | "createdAt">;
 
 const PostPreview = ({ title, slug, createdAt }: RecentPosts) => (
   <Link href={`/blog/${slug}`} passHref>
