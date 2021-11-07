@@ -89,7 +89,6 @@ const Blog: NextPageWithLayout<BlogPropsType> = ({
         <meta name="description" content={description} />
         <meta property="og:description" content={description} />
       </Head>
-
       <Hero
         layoutId={`${slug}__hero`}
         title={title}
