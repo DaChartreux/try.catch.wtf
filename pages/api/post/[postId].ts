@@ -4,10 +4,10 @@ import { prisma } from "@lib/prisma";
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
-    const slug = req.query.slug.toString();
+    const postId = parseInt(req.query.postId.toString(), 10);
     const post = await prisma.posts.findUnique({
       where: {
-        slug,
+        id: postId,
       },
     });
 

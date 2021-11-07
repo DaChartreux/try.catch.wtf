@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import HeadingStyle from "@components/Heading";
+import Heading from "@components/Heading";
 import { useInView } from "@hooks/useInView";
 import {
   BlogAnchorHeadingStyle,
@@ -10,15 +10,8 @@ import HashIcon from "@components/icons/HashIcon";
 
 type BlogHeadingProps = {
   children: string;
-  fontWeight?: number;
-  fontSize?: string;
-};
-
-const textMotion = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-  },
+  fontWeight: number;
+  fontSize: string;
 };
 
 const slashMotion = {
@@ -33,12 +26,12 @@ const slashMotion = {
 };
 
 const BlogHeading = ({ fontWeight, fontSize, children }: BlogHeadingProps) => {
-  const { containerRef, isVisible } = useInView({
+  const { containerRef } = useInView({
     root: null,
     rootMargin: "0px",
     threshold: 1,
   });
-  const [isHovering, setIsHovering] = useState(false);
+  const [isHovering] = useState(false);
 
   return (
     <BlogAnchorHeadingStyle
@@ -54,21 +47,14 @@ const BlogHeading = ({ fontWeight, fontSize, children }: BlogHeadingProps) => {
       >
         <HashIcon />
       </BlogAnchorIconStyle>
-      <HeadingStyle
+      <Heading
         fgColor="primary-100"
-        fontSize={fontSize!}
+        fontSize={fontSize}
         fontWeight={fontWeight}
-        whileHover="hover"
-        initial={["hidden", "rest"]}
-        animate={isVisible && "visible"}
-        variants={textMotion}
-        transition={{ duration: 0.4 }}
         margin="2rem 0 1rem 0"
-        onHoverStart={() => setIsHovering(true)}
-        onHoverEnd={() => setIsHovering(false)}
       >
         {children}
-      </HeadingStyle>
+      </Heading>
     </BlogAnchorHeadingStyle>
   );
 };

@@ -6,6 +6,7 @@
   ],
   "plugins": ["@emotion"],
   "rules": {
-    "no-unused-vars": ["error", { "args": "none", "varsIgnorePattern": "^_" }]
+    "no-unused-vars": ["error", { "args": "none", "varsIgnorePattern": "^_" }],
+    "react/no-array-index-key": ["error"]
   }
 }

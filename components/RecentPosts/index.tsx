@@ -1,6 +1,6 @@
 import React from "react";
 
-import HeadingStyle from "@components/Heading";
+import Heading from "@components/Heading";
 import PostPreview from "@components/PostPreview";
 import { PostsGridStyle } from "@components/RecentPosts/RecentPosts.style";
 
@@ -12,14 +12,14 @@ type RecentPostsProps = {
 
 const RecentPosts = ({ posts }: RecentPostsProps) => (
   <>
-    <HeadingStyle
+    <Heading
       fgColor="primary-100"
       fontSize="1.25rem"
       fontWeight={600}
       margin="0 0 1rem 0"
     >
       RECENT
-    </HeadingStyle>
+    </Heading>
 
     <PostsGridStyle>
       {posts.map((post) => (
@@ -27,7 +27,7 @@ const RecentPosts = ({ posts }: RecentPostsProps) => (
           key={post.slug}
           slug={post.slug}
           title={post.title}
-          createdAt={post.createdAt}
+          updatedAt={post.updatedAt}
         />
       ))}
     </PostsGridStyle>

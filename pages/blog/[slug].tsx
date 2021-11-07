@@ -8,19 +8,20 @@ import { MDXRemote, MDXRemoteSerializeResult } from "next-mdx-remote";
 import { serialize } from "next-mdx-remote/serialize";
 import matter from "gray-matter";
 import styled from "@emotion/styled";
+import dayjs from "dayjs";
 
 import Hero from "@components/Hero";
 import Layout from "@components/Layout";
 import MDXComponents from "@components/MDXComponents";
-import HeadingStyle from "@components/Heading";
-import ViewsCounter from "@components/ViewsCounter";
-import CalendarIcon from "@components/icons/CalendarIcon";
+import Heading from "@components/Heading";
+import ViewsSection from "@components/ViewsSection";
+import Spacer from "@components/Spacer";
+import DateSection from "@components/DateSection";
+import { getPost } from "@utils/db";
 import { POSTS_PATH, postFilePaths } from "@utils/mdxUtils";
 
 import type { NextPageWithLayout } from "@typings/app";
 import type { Post, Views } from "@typings/data";
-import { getPost } from "@utils/db";
-import Spacer from "@components/Spacer";
 
 type BlogPropsType = {
   source: MDXRemoteSerializeResult<Record<string, unknown>>;
@@ -46,10 +47,17 @@ const PostWrapper = styled.div`
 
 const Blog: NextPageWithLayout<BlogPropsType> = ({
   source,
-  frontMatter,
+  frontMatter: {
+    id,
+    title,
+    slug,
+    description,
+    updatedAt,
+    heroCreditSource,
+    heroCreditUserProfile,
+    heroCreditUserProfileUrl,
+  },
 }: BlogPropsType) => {
-  const { id } = frontMatter;
-
   const [views, setViews] = useState(0);
 
   useEffect(() => {
@@ -69,63 +77,46 @@ const Blog: NextPageWithLayout<BlogPropsType> = ({
   return (
     <>
       <Head>
-        <title>{frontMatter.title}</title>
-        <meta name="image" content={`/api/linkPreview/${frontMatter.slug}`} />
-        <meta
-          property="og:image"
-          content={`/api/linkPreview/${frontMatter.slug}`}
-        />
+        <title>{title}</title>
+        <meta name="image" content={`/api/linkPreview/${id}`} />
+        <meta property="og:image" content={`/api/linkPreview/${id}`} />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://try.catch.wtf" />
-        <meta property="og:title" content={frontMatter.title} />
+        <meta property="og:title" content={title} />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="600" />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta
-          name="description"
-          content="How to use fonts with minimal side effects on lighthouse score"
-        />
-        <meta
-          property="og:description"
-          content="How to use fonts with minimal side effects on lighthouse score"
-        />
+        <meta name="description" content={description} />
+        <meta property="og:description" content={description} />
       </Head>
-      <HeadingStyle
-        fgColor="green-100"
-        fontSize="3rem"
-        fontWeight={600}
-        margin="1rem 0 0.5rem 0"
-        initial="hidden"
-        animate="visible"
-        variants={{
-          hidden: { opacity: 0, translateX: -32 },
-          visible: {
-            opacity: 1,
-            translateX: 0,
-          },
-        }}
-        transition={{ duration: 0.4, delay: 0.3 }}
-      >
-        {frontMatter.title}
-      </HeadingStyle>
-      <div>
-        <CalendarIcon />
-        <p>{frontMatter.createdAt}</p>
-      </div>
+
       <Hero
-        layoutId={`${frontMatter.slug}__hero`}
-        title={frontMatter.title}
-        heroSrc={`/img/${frontMatter.slug}/hero.jpg`}
-        heroCreditSource={frontMatter.heroCreditSource!}
-        heroCreditUserProfile={frontMatter.heroCreditUserProfile!}
-        heroCreditUserProfileUrl={frontMatter.heroCreditUserProfileUrl!}
+        layoutId={`${slug}__hero`}
+        title={title}
+        heroSrc={`/img/${slug}/hero.jpg`}
+        heroCreditSource={heroCreditSource!}
+        heroCreditUserProfile={heroCreditUserProfile!}
+        heroCreditUserProfileUrl={heroCreditUserProfileUrl!}
       />
       <Spacer height="2rem" />
+
       <PostWrapper>
+        <Heading
+          fgColor="green-100"
+          fontSize="2.25rem"
+          fontWeight={400}
+          margin="1rem 0 0.5rem 0"
+        >
+          {title}
+        </Heading>
+        <Spacer height="2rem" />
         <MDXRemote {...source} components={MDXComponents} />
       </PostWrapper>
 
-      <ViewsCounter from={0} to={views} />
+      <DateSection updatedAt={updatedAt.toString()} />
+      <ViewsSection from={0} to={views} />
+
+      <Spacer height="3rem" />
     </>
   );
 };
@@ -151,20 +142,10 @@ export const getStaticProps: GetStaticProps<BlogPropsType> = async ({
     props: {
       source: mdxSource,
       frontMatter: {
-        ...(data as Pick<
-          Post,
-          | "id"
-          | "title"
-          | "description"
-          | "categories"
-          | "createdAt"
-          | "isPublished"
-          | "heroCreditSource"
-          | "heroCreditUserProfile"
-          | "heroCreditUserProfileUrl"
-        >),
+        ...(data as Post),
         id: post.id,
         slug: params.slug,
+        updatedAt: dayjs(data.updatedAt).format("MMMM D, YYYY"),
       },
     },
   };

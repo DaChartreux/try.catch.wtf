@@ -1,35 +1,37 @@
 import React, { ReactNode } from "react";
-import { m } from "framer-motion";
 
 import { TagStyle } from "@components/Tag/Tag.style";
-import type { TagStyledProps } from "@components/Tag/Tag.style";
+import THEME from "@styles/theme";
+
+import type { ColorShade } from "@typings/theme";
+import type { TagStyleVars } from "@components/Tag/Tag.style";
 
 type TagProps = {
-  href: string;
   children: ReactNode;
+  bgColor: ColorShade;
+  href: string;
 };
 
-const Tag = ({ children, ...props }: TagProps & TagStyledProps) => (
-  <TagStyle
-    variants={{
-      hidden: { y: 20, opacity: 0 },
-      visible: {
-        y: 0,
-        opacity: 1,
-      },
-    }}
-    {...props}
-  >
-    <m.div
-      whileHover={{
-        scale: 1.06,
+const Tag = ({ children, bgColor }: TagProps) => {
+  const tagStyle: TagStyleVars = {
+    "--bg-color": THEME.colors[bgColor],
+  };
+
+  return (
+    <TagStyle
+      variants={{
+        hidden: { y: 20, opacity: 0 },
+        visible: {
+          y: 0,
+          opacity: 1,
+        },
       }}
-      whileTap={{
-        scale: 1.03,
-      }}
-    />
-    {children}
-  </TagStyle>
-);
+      style={tagStyle as any}
+    >
+      <div />
+      {children}
+    </TagStyle>
+  );
+};
 
 export default Tag;
