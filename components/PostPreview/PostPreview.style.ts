@@ -1,14 +1,13 @@
 import styled from "@emotion/styled";
 import { motion } from "framer-motion";
 
-import HeadingStyle from "@components/Heading";
+import { HeadingStyle } from "@components/Heading/Heading.style";
 import THEME from "@styles/theme";
 
-export const MotionHeroStyled = styled(motion.div)`
+export const MotionHeroStyle = styled(motion.div)`
   border-radius: 0.375rem;
   overflow: hidden;
   margin-bottom: 1rem;
-  height: 100%;
   width: 100%;
   aspect-ratio: 3 / 2;
 `;
@@ -25,6 +24,8 @@ export const PostFooter = styled.footer`
     justify-content: start;
 
     svg {
+      width: 1.5rem;
+      height: 1.5rem;
       transition: 200ms ease-in-out;
       color: hsla(${THEME.colors["fg-200"]}, 0.5);
     }
@@ -38,7 +39,7 @@ export const PostFooter = styled.footer`
   }
 `;
 
-export const PostPreviewStyled = styled.a`
+export const PostPreviewStyle = styled.a`
   cursor: pointer;
   padding: 0.75rem;
   border-width: 2px;

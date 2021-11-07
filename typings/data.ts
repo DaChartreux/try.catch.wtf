@@ -6,7 +6,7 @@ export type Post = {
   description: string;
   categories: string[];
   slug: string;
-  createdAt: string | Dayjs;
+  updatedAt: string | Dayjs;
   isPublished: boolean;
   heroCreditSource?: string;
   heroCreditUserProfile?: string;

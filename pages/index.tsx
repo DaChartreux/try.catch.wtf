@@ -96,7 +96,7 @@ export const getStaticProps: GetStaticProps<IndexProps> = async () => {
         "categories" | "description" | "id" | "slug" | "title" | "isPublished"
       >),
       slug,
-      createdAt: dayjs(data.createdAt).subtract(offset, "minute"),
+      updatedAt: dayjs(data.updatedAt).subtract(offset, "minute"),
     };
   });
 
@@ -110,12 +110,12 @@ export const getStaticProps: GetStaticProps<IndexProps> = async () => {
   const latestPosts: any[] = allPosts
     .filter((data: any) => data.isPublished)
     .sort((a, b) => {
-      return -(a.createdAt as Dayjs).diff(b.createdAt as Dayjs);
+      return -(a.updatedAt as Dayjs).diff(b.updatedAt as Dayjs);
     })
     .slice(0, 4)
     .map((data) => ({
       ...data,
-      createdAt: (data.createdAt as Dayjs).format("DD MMM"),
+      updatedAt: (data.updatedAt as Dayjs).format("DD MMM"),
     }))
     .reverse();
 

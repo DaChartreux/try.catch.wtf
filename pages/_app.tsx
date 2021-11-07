@@ -14,14 +14,16 @@ const App = ({ Component, pageProps }: AppPropsWithLayout) => {
   const getLayout = Component.getLayout ?? ((page) => page);
 
   return (
-    <AppThemeProvider>
-      <AnimateSharedLayout>
-        <Navbar />
-        <GlobalTheme />
-        {getLayout(<Component {...pageProps} />)}
-        <Footer />
-      </AnimateSharedLayout>
-    </AppThemeProvider>
+    <>
+      <GlobalTheme />
+      <AppThemeProvider>
+        <AnimateSharedLayout>
+          <Navbar />
+          {getLayout(<Component {...pageProps} />)}
+          <Footer />
+        </AnimateSharedLayout>
+      </AppThemeProvider>
+    </>
   );
 };
 

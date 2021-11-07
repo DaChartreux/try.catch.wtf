@@ -8,19 +8,20 @@ import { MDXRemote, MDXRemoteSerializeResult } from "next-mdx-remote";
 import { serialize } from "next-mdx-remote/serialize";
 import matter from "gray-matter";
 import styled from "@emotion/styled";
+import dayjs from "dayjs";
 
 import Hero from "@components/Hero";
 import Layout from "@components/Layout";
 import MDXComponents from "@components/MDXComponents";
-import HeadingStyle from "@components/Heading";
-import ViewsCounter from "@components/ViewsCounter";
-import CalendarIcon from "@components/icons/CalendarIcon";
+import Heading from "@components/Heading";
+import ViewsSection from "@components/ViewsSection";
+import Spacer from "@components/Spacer";
+import DateSection from "@components/DateSection";
+import { getPost } from "@utils/db";
 import { POSTS_PATH, postFilePaths } from "@utils/mdxUtils";
 
 import type { NextPageWithLayout } from "@typings/app";
 import type { Post, Views } from "@typings/data";
-import { getPost } from "@utils/db";
-import Spacer from "@components/Spacer";
 
 type BlogPropsType = {
   source: MDXRemoteSerializeResult<Record<string, unknown>>;
@@ -51,7 +52,7 @@ const Blog: NextPageWithLayout<BlogPropsType> = ({
     title,
     slug,
     description,
-    createdAt,
+    updatedAt,
     heroCreditSource,
     heroCreditUserProfile,
     heroCreditUserProfileUrl,
@@ -88,28 +89,6 @@ const Blog: NextPageWithLayout<BlogPropsType> = ({
         <meta name="description" content={description} />
         <meta property="og:description" content={description} />
       </Head>
-      <HeadingStyle
-        fgColor="green-100"
-        fontSize="3rem"
-        fontWeight={600}
-        margin="1rem 0 0.5rem 0"
-        initial="hidden"
-        animate="visible"
-        variants={{
-          hidden: { opacity: 0, translateX: -32 },
-          visible: {
-            opacity: 1,
-            translateX: 0,
-          },
-        }}
-        transition={{ duration: 0.4, delay: 0.3 }}
-      >
-        {title}
-      </HeadingStyle>
-      <div>
-        <CalendarIcon />
-        <p>{createdAt}</p>
-      </div>
       <Hero
         layoutId={`${slug}__hero`}
         title={title}
@@ -119,11 +98,24 @@ const Blog: NextPageWithLayout<BlogPropsType> = ({
         heroCreditUserProfileUrl={heroCreditUserProfileUrl!}
       />
       <Spacer height="2rem" />
+
       <PostWrapper>
+        <Heading
+          fgColor="green-100"
+          fontSize="2.25rem"
+          fontWeight={400}
+          margin="1rem 0 0.5rem 0"
+        >
+          {title}
+        </Heading>
+        <Spacer height="2rem" />
         <MDXRemote {...source} components={MDXComponents} />
       </PostWrapper>
 
-      <ViewsCounter from={0} to={views} />
+      <DateSection updatedAt={updatedAt.toString()} />
+      <ViewsSection from={0} to={views} />
+
+      <Spacer height="3rem" />
     </>
   );
 };
@@ -149,20 +141,10 @@ export const getStaticProps: GetStaticProps<BlogPropsType> = async ({
     props: {
       source: mdxSource,
       frontMatter: {
-        ...(data as Pick<
-          Post,
-          | "id"
-          | "title"
-          | "description"
-          | "categories"
-          | "createdAt"
-          | "isPublished"
-          | "heroCreditSource"
-          | "heroCreditUserProfile"
-          | "heroCreditUserProfileUrl"
-        >),
+        ...(data as Post),
         id: post.id,
         slug: params.slug,
+        updatedAt: dayjs(data.updatedAt).format("MMMM D, YYYY"),
       },
     },
   };

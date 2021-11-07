@@ -3,7 +3,8 @@ import dayjs from "dayjs";
 import fetch from "node-fetch";
 
 import { captureScreenshot } from "@lib/puppeteer";
-import { Post, Views } from "@typings/data";
+
+import type { Post, Views } from "@typings/data";
 
 const HTML_TEMPLATE = `
 <!DOCTYPE html>
@@ -100,7 +101,7 @@ const HTML_TEMPLATE = `
             <svg xmlns="http://www.w3.org/2000/svg" class="icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
             </svg>
-            <span class="text" style="font-size: 2rem">{{createdAt}}</span>
+            <span class="text" style="font-size: 2rem">{{updatedAt}}</span>
           </div>
         </div>
         <div>
@@ -149,7 +150,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       .replace("{{description}}", post.description)
       .replace("{{viewsCount}}", post.views.toString())
       .replace("{{slug}}", post.slug)
-      .replace("{{createdAt}}", dayjs(post.createdAt).format("DD MMM, YYYY"));
+      .replace("{{updatedAt}}", dayjs(post.updatedAt).format("DD MMM, YYYY"));
 
     const image = await captureScreenshot(html);
 

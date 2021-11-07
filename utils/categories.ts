@@ -2,7 +2,7 @@ import type { CategoryString } from "@typings/data";
 import type { ColorShade } from "@typings/theme";
 
 type Category = {
-  [key in CategoryString]: {
+  [_key in CategoryString]: {
     category: string;
     color: ColorShade;
   };
@@ -17,7 +17,7 @@ export const CATEGORIES: Category = {
     category: "Performance",
     color: "green-300",
   },
-  "frontend": {
+  frontend: {
     category: "Frontend",
     color: "red-300",
   },

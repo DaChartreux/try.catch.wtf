@@ -26,9 +26,8 @@ const Hero = ({
   <ImageContainerStyle>
     <HeroCreditStyle
       className="overlay"
-      whileHover={{ opacity: [null, 0.15, 0.8, 1] }}
+      whileHover={{ opacity: 1 }}
       initial={{ opacity: 0 }}
-      transition={{ duration: 0.2 }}
     >
       <div style={{ display: "flex" }}>
         <p>
@@ -40,10 +39,7 @@ const Hero = ({
         </p>
       </div>
     </HeroCreditStyle>
-    <motion.div
-      layoutId={layoutId}
-      transition={{ duration: 0.4, ease: "easeInOut" }}
-    >
+    <motion.div layoutId={layoutId}>
       <Image
         src={heroSrc}
         quality={60}

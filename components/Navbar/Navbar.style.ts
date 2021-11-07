@@ -1,20 +1,17 @@
 import styled from "@emotion/styled";
-import { css } from "@emotion/react";
 import { motion } from "framer-motion";
 
 import THEME from "@styles/theme";
 
-import type { ColorShade } from "@typings/theme";
-
-type NavContainerStyles = {
-  bgColor: ColorShade;
+export type LinkStylesVars = {
+  "--fg-color": string;
 };
 
-type LinkStyledProps = {
-  fgColor: ColorShade;
+export type NavContainerStylesVars = {
+  "--bg-color": string;
 };
 
-export const NavContainer = styled(motion.div)<NavContainerStyles>`
+export const NavContainer = styled(motion.div)`
   position: fixed;
   top: 0;
   left: 0;
@@ -22,7 +19,7 @@ export const NavContainer = styled(motion.div)<NavContainerStyles>`
   z-index: 2;
   padding: 0 2rem;
   backdrop-filter: blur(0.5rem);
-  background-color: hsla(${({ bgColor }) => THEME.colors[bgColor]}, 0.85);
+  background-color: hsla(var(--bg-color), 0.85);
   transition: background-color 200ms ease-in-out;
 
   @media (max-width: 1280px) {
@@ -64,31 +61,29 @@ export const HomeLinkStyle = styled.a`
   text-decoration: none;
 `;
 
-export const LinkStyle = styled.a<LinkStyledProps>`
+export const LinkStyle = styled.a`
   font-weight: 600;
   position: relative;
   height: fit-content;
   margin-inline-start: 1rem;
   text-decoration: none;
   cursor: pointer;
+  color: hsl(var(--fg-color));
 
-  ${({ fgColor }) => css`
-    color: hsl(${THEME.colors[fgColor]});
+  &:hover {
+    color: hsl(var(--fg-color));
+  }
 
-    &:hover {
-      color: hsl(${THEME.colors[fgColor]});
-    }
-
-    &:active {
-      color: hsl(${THEME.colors[fgColor]});
-    }
-  `}
+  &:active {
+    color: hsl(var(--fg-color));
+  }
 `;
 
 export const MenuItemStyle = styled(motion.div)`
   height: 4rem;
   display: flex;
   align-items: center;
+  margin: 0 0 0 1.5rem;
 
   p {
     font-weight: 600;

@@ -11,6 +11,8 @@ import ButtonIcon from "@components/ButtonIcon";
 import CopyIcon from "@components/icons/CopyIcon";
 import useCopyToClipboard from "@hooks/useCopyToClipboard";
 
+import type { ContainerStyleVars } from "@components/Highlight/Hightlight.style";
+
 type HighlightProps = {
   fileName: string;
   added: string;
@@ -33,10 +35,14 @@ const Highlight = ({
   const ADDED = JSON.parse(added ?? "[]");
   const REMOVED = JSON.parse(removed ?? "[]");
 
+  const containerStyle: ContainerStyleVars = {
+    "--border-radius": fileName ? "0 0 0.375rem 0.375rem" : "0.375rem",
+  };
+
   return (
     <>
       {!!fileName && <FilenameHeader>{fileName}</FilenameHeader>}
-      <ContainerStyle hasFilename={!!fileName}>
+      <ContainerStyle style={containerStyle as any}>
         <div className="icon">
           <ButtonIcon
             bgColor="bg-100"
