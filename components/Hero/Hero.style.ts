@@ -9,11 +9,12 @@ export const ImageContainerStyle = styled.div`
   overflow: hidden;
 `;
 
-export const HeroCreditStyle = styled(motion.div)`
+export const HeroCreditStyle = styled(motion.figure)`
   position: absolute;
   display: flex;
   justify-content: center;
   align-items: center;
+  margin: 0;
   top: 0;
   left: 0;
   right: 0;

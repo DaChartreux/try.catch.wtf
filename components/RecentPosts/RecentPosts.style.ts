@@ -16,9 +16,6 @@ export const PostsGridStyle = styled.div`
   }
 
   @media (max-width: 768px) {
-  }
-
-  @media (max-width: 640px) {
     grid-template-columns: repeat(1, minmax(0, 1fr));
   }
 `;
