@@ -40,9 +40,7 @@ const MDXComponents: MDXComponentsType = {
       {children}
     </Heading>
   ),
-  blockquote: ({ children }) => (
-    <Blockquote type="info">{children}</Blockquote>
-  ),
+  blockquote: ({ children }) => <Blockquote type="info">{children}</Blockquote>,
   p: ({ children }) => <Paragraph>{children}</Paragraph>,
   ol: (props: any) => <OrderedList {...props} />,
   ul: (props: any) => <OrderedList {...props} />,

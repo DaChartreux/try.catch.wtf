@@ -1,7 +1,7 @@
 import React from "react";
-import { LazyMotion, domAnimation, m } from "framer-motion";
+import { motion } from "framer-motion";
 
-import HeadingStyle from "@components/Heading";
+import Heading from "@components/Heading";
 import Tag from "@components/Tag";
 import { CATEGORIES } from "@utils/categories";
 
@@ -12,41 +12,40 @@ type CategoriesProps = {
 };
 
 const Categories = ({ categories }: CategoriesProps) => (
-  <LazyMotion features={domAnimation}>
-    <HeadingStyle
+  <>
+    <Heading
       fgColor="primary-100"
       fontSize="1.25rem"
       fontWeight={600}
       margin="0 0 1rem 0"
     >
       CATEGORIES
-    </HeadingStyle>
-    <m.div
+    </Heading>
+    <motion.div
       variants={{
         hidden: { opacity: 0 },
         visible: {
           opacity: 1,
           transition: {
             delayChildren: 0.3,
-            staggerChildren: 0.02,
+            staggerChildren: 0.05,
           },
         },
       }}
       initial="hidden"
       animate="visible"
     >
-      {categories.map((category, i) => (
+      {categories.map((category) => (
         <Tag
-          key={i}
+          key={category}
           href={category}
           bgColor={CATEGORIES[category].color}
-          fgColor="white"
         >
           {CATEGORIES[category].category}
         </Tag>
       ))}
-    </m.div>
-  </LazyMotion>
+    </motion.div>
+  </>
 );
 
 export default Categories;

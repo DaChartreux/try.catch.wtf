@@ -1,9 +1,9 @@
 import React, { useRef, useEffect } from "react";
 import { animate } from "framer-motion";
 import EyeIcon from "@components/icons/EyeIcon";
-import { ViewsContainerStyle } from "@components/ViewsCounter/ViewsCounter.style";
+import { ViewsContainerStyle } from "@components/ViewsSection/ViewsSection.style";
 
-const ViewsCounter = ({ from, to }: { from: number; to: number }) => {
+const ViewsSection = ({ from, to }: { from: number; to: number }) => {
   const nodeRef = useRef<HTMLParagraphElement>(null);
 
   useEffect(() => {
@@ -31,4 +31,4 @@ const ViewsCounter = ({ from, to }: { from: number; to: number }) => {
   );
 };
 
-export default ViewsCounter;
+export default ViewsSection;

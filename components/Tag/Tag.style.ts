@@ -1,14 +1,11 @@
-import { m } from "framer-motion";
+import { motion } from "framer-motion";
 import styled from "@emotion/styled";
-import { css } from "@emotion/react";
-import THEME from "@styles/theme";
 
-export type TagStyledProps = {
-  bgColor: keyof typeof THEME["colors"];
-  fgColor: string;
+export type TagStyleVars = {
+  "--bg-color": string;
 };
 
-export const TagStyle = styled(m.a)<TagStyledProps>`
+export const TagStyle = styled(motion.a)`
   position: relative;
   display: inline-block;
   padding: 0.25rem 0.5rem;
@@ -16,6 +13,7 @@ export const TagStyle = styled(m.a)<TagStyledProps>`
   font-size: 0.75rem;
   font-weight: 600;
   text-decoration: none;
+  color: hsl(var(--bg-color));
 
   div {
     position: absolute;
@@ -27,26 +25,21 @@ export const TagStyle = styled(m.a)<TagStyledProps>`
     border-style: solid;
     border-radius: 0.375rem;
     transition: all 200ms ease-in-out;
+    border-color: hsl(var(--bg-color));
+    background-color: hsla(var(--bg-color), 0.2);
   }
 
-  ${({ bgColor }) => css`
-    color: hsl(${THEME.colors[bgColor]});
-
+  &:hover {
     div {
-      border-color: hsl(${THEME.colors[bgColor]});
-      background-color: hsla(${THEME.colors[bgColor]}, 0.2);
+      transform: scale(1.06);
+      background-color: hsla(var(--bg-color), 0.3);
     }
+  }
 
-    &:hover {
-      div {
-        background-color: hsla(${THEME.colors[bgColor]}, 0.3);
-      }
+  &:active {
+    div {
+      transform: scale(1.03);
+      background-color: hsla(var(--bg-color), 0.4);
     }
-
-    &:active {
-      div {
-        background-color: hsla(${THEME.colors[bgColor]}, 0.4);
-      }
-    }
-  `};
+  }
 `;

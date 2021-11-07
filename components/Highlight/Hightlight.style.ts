@@ -2,6 +2,10 @@ import styled from "@emotion/styled";
 
 import THEME from "@styles/theme";
 
+export type ContainerStyleVars = {
+  "--border-radius": string;
+};
+
 export const PreContainer = styled.div`
   display: flex;
   position: relative;
@@ -17,11 +21,10 @@ export const PreContainer = styled.div`
   }
 `;
 
-export const ContainerStyle = styled.div<{ hasFilename: boolean }>`
+export const ContainerStyle = styled.div`
   background-color: hsla(${THEME.colors["fg-100"]}, 0.04);
   font-size: 1rem;
-  border-radius: ${({ hasFilename }) =>
-    hasFilename ? "0 0 0.375rem 0.375rem" : "0.375rem"};
+  border-radius: var(--border-radius);
   overflow: hidden;
   margin: 1rem -1rem;
 
