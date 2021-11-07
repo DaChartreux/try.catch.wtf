@@ -89,6 +89,17 @@ const Blog: NextPageWithLayout<BlogPropsType> = ({
         <meta name="description" content={description} />
         <meta property="og:description" content={description} />
       </Head>
+
+      <Heading
+        fgColor="green-100"
+        fontSize="2.25rem"
+        fontWeight={400}
+        margin="1rem 0 0.5rem 0"
+      >
+        {title}
+      </Heading>
+      <Spacer height="2rem" />
+
       <Hero
         layoutId={`${slug}__hero`}
         title={title}
@@ -97,17 +108,8 @@ const Blog: NextPageWithLayout<BlogPropsType> = ({
         heroCreditUserProfile={heroCreditUserProfile!}
         heroCreditUserProfileUrl={heroCreditUserProfileUrl!}
       />
-      <Spacer height="2rem" />
 
       <PostWrapper>
-        <Heading
-          fgColor="green-100"
-          fontSize="2.25rem"
-          fontWeight={400}
-          margin="1rem 0 0.5rem 0"
-        >
-          {title}
-        </Heading>
         <Spacer height="2rem" />
         <MDXRemote {...source} components={MDXComponents} />
       </PostWrapper>

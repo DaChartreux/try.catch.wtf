@@ -4,10 +4,10 @@ import { motion } from "framer-motion";
 import { HeadingStyle } from "@components/Heading/Heading.style";
 import THEME from "@styles/theme";
 
-export const MotionHeroStyle = styled(motion.div)`
+export const MotionHeroStyle = styled(motion.figure)`
   border-radius: 0.375rem;
   overflow: hidden;
-  margin-bottom: 1rem;
+  margin: 0 0 1rem 0;
   width: 100%;
   aspect-ratio: 3 / 2;
 `;
