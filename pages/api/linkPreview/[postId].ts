@@ -174,7 +174,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     const image = await captureScreenshot(puppeteerPageResp.value, html);
 
     res.setHeader("Content-type", "image/png");
-    res.setHeader("Cache-Control", "s-maxage=1, stale-while-revalidate=59");
+    res.setHeader("Cache-Control", "s-maxage=60, stale-while-revalidate=600");
     res.send(image);
   } catch (e) {
     console.log(e);
