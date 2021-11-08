@@ -2,7 +2,7 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import dayjs from "dayjs";
 import fetch from "node-fetch";
 
-import { captureScreenshot } from "@lib/puppeteer";
+import { captureScreenshot, launchPuppeteer } from "@lib/puppeteer";
 
 import type { Post, Views } from "@typings/data";
 
@@ -138,8 +138,27 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
   try {
     const { postId } = req.query;
-    const response = await fetch(`${baseUrl}/api/post/${postId}`);
-    const post = (await response.json()) as Post & Views;
+
+    const fetchPromise = fetch(`${baseUrl}/api/post/${postId}`);
+    const puppeteerLaunchPromise = launchPuppeteer();
+
+    const [fetchResp, puppeteerPageResp] = await Promise.allSettled([
+      fetchPromise,
+      puppeteerLaunchPromise,
+    ]);
+
+    if (
+      fetchResp.status === "rejected" ||
+      puppeteerPageResp.status === "rejected"
+    ) {
+      console.log(fetchResp.status === "rejected" && fetchResp.reason);
+      console.log(
+        puppeteerPageResp.status === "rejected" && puppeteerPageResp.reason,
+      );
+      return res.send(400);
+    }
+
+    const post = (await fetchResp.value.json()) as Post & Views;
 
     if (post === null) {
       return res.status(404).send("post not found");
@@ -152,7 +171,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       .replace("{{slug}}", post.slug)
       .replace("{{updatedAt}}", dayjs(post.updatedAt).format("DD MMM, YYYY"));
 
-    const image = await captureScreenshot(html);
+    const image = await captureScreenshot(puppeteerPageResp.value, html);
 
     res.setHeader("Content-type", "image/png");
     res.setHeader("Cache-Control", "s-maxage=1, stale-while-revalidate=59");
