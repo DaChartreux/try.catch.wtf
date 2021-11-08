@@ -23,23 +23,23 @@ const Hero = ({
   heroCreditUserProfileUrl,
   layoutId,
 }: HeroProps) => (
-  <ImageContainerStyle>
-    <HeroCreditStyle
-      className="overlay"
-      whileHover={{ opacity: 1 }}
-      initial={{ opacity: 0 }}
-    >
-      <div style={{ display: "flex" }}>
-        <p>
-          Photo by{" "}
-          <a href={heroCreditUserProfileUrl} target="_blank" rel="noreferrer">
-            {heroCreditUserProfile}
-          </a>{" "}
-          on {heroCreditSource}
-        </p>
-      </div>
-    </HeroCreditStyle>
-    <motion.div layoutId={layoutId}>
+  <motion.div layoutId={layoutId}>
+    <ImageContainerStyle>
+      <HeroCreditStyle
+        className="overlay"
+        whileHover={{ opacity: 1 }}
+        initial={{ opacity: 0 }}
+      >
+        <div style={{ display: "flex" }}>
+          <p>
+            Photo by{" "}
+            <a href={heroCreditUserProfileUrl} target="_blank" rel="noreferrer">
+              {heroCreditUserProfile}
+            </a>{" "}
+            on {heroCreditSource}
+          </p>
+        </div>
+      </HeroCreditStyle>
       <Image
         src={heroSrc}
         quality={60}
@@ -49,8 +49,8 @@ const Hero = ({
         objectFit="cover"
         alt="Hero Image"
       />
-    </motion.div>
-  </ImageContainerStyle>
+    </ImageContainerStyle>
+  </motion.div>
 );
 
 export default Hero;
