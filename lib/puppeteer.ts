@@ -3,7 +3,7 @@ import core from "puppeteer-core";
 
 let _page: core.Page | null = null;
 
-const launchPuppeteer = async () => {
+export const launchPuppeteer = async () => {
   if (_page) {
     return _page;
   }
@@ -28,9 +28,7 @@ const launchPuppeteer = async () => {
   return _page;
 };
 
-export const captureScreenshot = async (html: string) => {
-  const page = await launchPuppeteer();
-
+export const captureScreenshot = async (page: core.Page, html: string) => {
   await page.setViewport({ width: 1200, height: 600 });
   await page.setContent(html, { waitUntil: "networkidle0" });
 

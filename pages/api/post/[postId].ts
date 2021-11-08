@@ -21,6 +21,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       },
     });
 
+    res.setHeader("Cache-Control", "s-maxage=10, stale-while-revalidate=60");
     res.send({ ...post, views });
   } catch (e) {
     console.log(e);
