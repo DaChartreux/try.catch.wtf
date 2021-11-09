@@ -109,9 +109,7 @@ export const getStaticProps: GetStaticProps<IndexProps> = async () => {
 
   const latestPosts: any[] = allPosts
     .filter((data: any) => data.isPublished)
-    .sort((a, b) => {
-      return -(a.updatedAt as Dayjs).diff(b.updatedAt as Dayjs);
-    })
+    .sort((a, b) => (a.updatedAt as Dayjs).diff(b.updatedAt as Dayjs))
     .slice(0, 4)
     .map((data) => ({
       ...data,

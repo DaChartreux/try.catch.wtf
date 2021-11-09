@@ -10,7 +10,6 @@ import matter from "gray-matter";
 import styled from "@emotion/styled";
 import dayjs from "dayjs";
 
-import Hero from "@components/Hero";
 import Layout from "@components/Layout";
 import MDXComponents from "@components/MDXComponents";
 import Heading from "@components/Heading";
@@ -22,6 +21,9 @@ import { POSTS_PATH, postFilePaths } from "@utils/mdxUtils";
 
 import type { NextPageWithLayout } from "@typings/app";
 import type { Post, Views } from "@typings/data";
+import dynamic from "next/dynamic";
+
+const Hero = dynamic(() => import("@components/Hero"), { ssr: true });
 
 type BlogPropsType = {
   source: MDXRemoteSerializeResult<Record<string, unknown>>;
@@ -98,6 +100,7 @@ const Blog: NextPageWithLayout<BlogPropsType> = ({
       >
         {title}
       </Heading>
+      {description}
       <Spacer height="2rem" />
 
       <Hero
@@ -109,10 +112,13 @@ const Blog: NextPageWithLayout<BlogPropsType> = ({
         heroCreditUserProfileUrl={heroCreditUserProfileUrl!}
       />
 
+      <Spacer height="2rem" />
+
       <PostWrapper>
-        <Spacer height="2rem" />
         <MDXRemote {...source} components={MDXComponents} />
       </PostWrapper>
+
+      <Spacer height="2rem" />
 
       <DateSection updatedAt={updatedAt.toString()} />
       <ViewsSection from={0} to={views} />

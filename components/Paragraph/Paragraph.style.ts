@@ -4,7 +4,7 @@ import THEME from "@styles/theme";
 
 export const ParagraphStyle = styled.p`
   margin: 0 0 1.5rem 0;
-  color: hsla(${THEME.colors["fg-200"]}, 0.85);
+  color: hsl(${THEME.colors["fg-100"]});
   font-size: 1.25rem;
   font-weight: 500;
   line-height: 1.6;
