@@ -17,7 +17,7 @@ const App = ({ Component, pageProps }: AppPropsWithLayout) => {
     <>
       <GlobalTheme />
       <AppThemeProvider>
-        <AnimateSharedLayout type="switch">
+        <AnimateSharedLayout>
           <Navbar />
           {getLayout(<Component {...pageProps} />)}
           <Footer />
