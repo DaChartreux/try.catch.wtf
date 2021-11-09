@@ -1,17 +1,17 @@
 ---
 title: Optimizing fonts for the web
-description: Optimize fonts for web applications with minimal affect on UI/UX and lighthouse scores.
+description: Optimize fonts for web applications with minimal side effects on UI/UX and lighthouse scores.
 heroCreditUserProfile: Brett Jordan
 heroCreditUserProfileUrl: https://unsplash.com/@brett_jordan?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText
 heroCreditSource: Unsplash
-updatedAt: 05 Nov 2021
+updatedAt: 9 Nov 2021
 tags: ["web", "frontend", "performance"]
 isPublished: true
 ---
 
-Adding fonts to your site can make it look better. But they can also affect the performance. In this post, I will share how to use fonts without taking away a huge bite off your lighthouse scores. I also assume that you NEED to use the font, and you cannot get away without using it. So let's get started.
+Adding fonts to your site can make it look better. And they come with some side effects leading to degraded performance. In this post, I will share how to use fonts without taking away a huge bite of your lighthouse scores 😤.
 
-# Potential impacts of fonts
+But before we jump into it, let's analyze some of these side effects.
 
 - ### Delayed text rendering
 
@@ -23,15 +23,19 @@ Adding fonts to your site can make it look better. But they can also affect the 
 
 What can we do to fix these issues 🤔?
 
-# Prepping the font to serve
+## Getting the font ready to serve
 
 Before we go ahead with anything, let's see how we can optimally serve our font files as fast as possible. If you are using a 3rd party font provider (like Google Fonts), you cannot do much in this case. However, if you are serving the fonts yourself, make sure to serve them (or any static assets) over a CDN and HTTP/2.
 
-A small font file will always be early to the party 🥳. Keeping that in mind, let's try to reduce the size of our font(s).
+A small font file will always be early to the party 🥳. Downloading multiple font styles (eg. weight, slant) will also hinder the UX. Wouldn't it be great if we could get away without downloading these other styles of the font and use only 1 font to rule them all 😬?
 
 ### Synthetic weights
 
-Designers hate this simple trick 😡. Instead of downloading multiple weights of the same font, we can load a regular variant (400 weight) and rely on the browser to synthetically create other weights 😳. But why do designers hate this trick? It seems to be working perfectly fine, right? In the image below, the red text is the bold variant of Roboto font, and the blue variant is created synthetically from the normal variant. The difference might look subtle, but they can affect the UI and UX.
+SHH 🤫! Designers hate this simple trick 🤬.
+
+Instead of downloading multiple weights of the same font, we can load a regular variant (400 weight) and rely on the browser to synthetically create other weights. If the browser can create synthetic variants, then why do designers hate this trick? It seems to be working perfectly fine, right?
+
+In the image below, the red text is the bold variant (500 weight) of [Jost\*](https://indestructibletype.com/Jost.html) font, and the blue text is created synthetically from the regular variant (400 weight). The difference might look subtle, but they can impair the UI and UX.
 
 <ImageSection
   baseUrl="/img/optimizing-fonts-for-the-web"
@@ -39,16 +43,14 @@ Designers hate this simple trick 😡. Instead of downloading multiple weights o
   srcDark="dark-synthetic-weight.png"
   width={548}
   height={237}
-  title={
-    "Red text is Jost font, 700 weight. Blue text is Jost font, 400 variant, with synthetic 700 weight"
-  }
+  title={"Jost font synthetic 700 weight vs actual 700 weight"}
 />
 
-So we cannot get away with loading multiple font variants? 😔
+If this doesn't bother you (or your designers), you can go ahead and use synthetic styles.
 
 ### Variable fonts
 
-A variable font has multiple styles like weight, width, slant, optical size, and italics (called axis) of the fonts. The font creator can create several axes, reducing the number of variants you need to download. For this case, we will use the weight axis. If you want to learn more about the other axes or variable fonts, [web.dev](https://web.dev/variable-fonts/) has a great article on it.
+A variable font has multiple styles like weight, width, slant, optical size, and italics (called axis) of the fonts. The font creator can create several axes, reducing the number of styles you need to download. For this case, we will use the weight axis. If you want to learn more about the other axes or variable fonts, [web.dev](https://web.dev/variable-fonts/) has a great article on it.
 
 <ImageSection
   baseUrl="/img/optimizing-fonts-for-the-web"
@@ -56,18 +58,16 @@ A variable font has multiple styles like weight, width, slant, optical size, and
   srcDark="dark-variable-font-weight.png"
   width={548}
   height={237}
-  title={
-    "Red text is Jost font, 700 weight. Blue text is Jost variable font with weight as one of its axes"
-  }
+  title={"Jost variable font 700 weight vs actual 700 weight"}
 />
+
+> You can use [Variable Fonts](https://v-fonts.com/) for finding and trying variable fonts
 
 ### Font subsetting
 
-Font subsetting is the process of taking a font file and reducing the number of characters (or character sets). For example, let's say you have a font with Japanese characters like `月`. You are serving a page that is in English. It is unlikely you will ever use these Japanese characters. So you can subset your font to contain only simple Latin characters.
+Font subsetting is the process of taking a font file and reducing the number of characters (or character sets). For example, let's say you have a font with Japanese characters like `月`. You are serving a page that is in English. It is unlikely that you will render Japanese characters. So we can remove them from our font and make a profit!
 
-That will naturally reduce the size of the font file. Use tools like [glyphhanger](https://github.com/zachleat/glyphhanger) or [subfont](https://github.com/Munter/subfont) to subset fonts.
-
-Let's subset `Jost-400-Book.ttf`. You can download it from [here](https://indestructibletype.com/Jost.html).
+Let's subset `Jost-400-Book.ttf` (`88.7 kb`) from [Jost \*](https://indestructibletype.com/Jost.html) using [glyphhanger](https://github.com/zachleat/glyphhanger).
 
 ```shell
 # install glyphhanger
@@ -80,7 +80,7 @@ pip install fonttools
 glyphhanger --LATIN --subset=Jost-400-Book.ttf
 ```
 
-The above script results in a TTF file (`Jost-400-Book-subset.ttf`) of size `40.5 kb` from `88.7 kb`! Already a reduction of 54%!
+The above script results in a `Jost-400-Book-subset.ttf` (`40.5 kb`) file. Already a reduction of 54% 😱!
 
 > There are online tools like [Charset checker](https://www.alphabet-type.com/tools/charset-checker) to check the charset of fonts. You can use this to verify if the subsetted font matches your required charset or not.
 
@@ -88,7 +88,7 @@ The above script results in a TTF file (`Jost-400-Book-subset.ttf`) of size `40.
 
 WOFF2 is a compressed font format that can compress a TTF font.
 
-Let's use our subset font (`Jost-400-Book-subset.ttf`) and compress it to woff2.
+Let's use our subset font `Jost-400-Book-subset.ttf` (`40.5 kb`) file and compress it to woff2.
 
 ```shell
 # clone woff2
@@ -104,15 +104,15 @@ make clean all
 ./woff2_compress ~/Jost-400-Book-subset.ttf
 ```
 
-This results in a woff2 file (`Jost-400-Book-subset.woff2`) of size `15.3 kb` from `40.5 kb`! A whopping decrease of 62% and 82% decrease compared to the original font file `Jost-400-Book.ttf`!
+This results in a `Jost-400-Book-subset.woff2` (`15.3 kb`) file. A whopping decrease of 62% compared to the subset font (`Jost-400-Book-subset.ttf`) and an 82% decrease compared to the original font (`Jost-400-Book.ttf`) 😱!
 
 > If you are using `glyphhanger` for font subsetting, you can also compress to woff2 directly in a single command!
 >
 > `glyphhanger --LATIN --subset=Jost-400-Book.ttf --formats=woff2`
 
-# Loading the fonts
+## Loading the fonts
 
-Let's see how we can load and use a font.
+Now that we have reduced the font file size, let's see how we can load the font.
 
 ```css
 @font-face {
@@ -128,20 +128,24 @@ Let's see how we can load and use a font.
 }
 ```
 
+This specifies that a font located at `/fonts/Jost/Jost-400.woff2`, of `woff2` type, with `400` weight, and `normal` style is referenced as `Jost`. Now we can use our font anywhere by setting `font-family: Jost;`. Browsers download fonts only if a styling on the page references them. In this case, the browser will only download the Jost font if the page has an element with class `.custom-font`.
+
 The `@font-face` rule changes a bit when loading variable fonts.
 
 ```css
 @font-face {
-  font-family: Jost;
+  font-family: Jost VF;
   font-weight: 300 800; /* specify weight range of the font */
   font-display: swap;
   font-style: normal;
   src: url("/fonts/Jost/Jost-VF.woff2") format("woff2 supports variations"), url("/fonts/Jost/Jost-VF.woff2")
       format("woff2-variations");
 }
-```
 
-This specifies that a font located at `/fonts/Jost/Jost-400.woff2`, of `woff2` type, with `400` weight, and `normal` style is referenced as `Jost`. Now we can use our font anywhere by setting `font-family: Jost;`. Browsers download fonts only if a styling on the page references them. In this case, the browser will only download the Jost font if the page has an element with class `.custom-font`.
+.custom-font {
+  font-family: Jost VF;
+}
+```
 
 The `font-display` property tells the browser when to render the font once it is loaded. It accepts the following values:
 
@@ -159,9 +163,7 @@ The fallback font will be used immediately. Once the custom font downloads, it s
   srcDark="dark-swap-1.png"
   width={927}
   height={253}
-  title={
-    "Fallback font rendered immediately, swapped with font once it downloads"
-  }
+  title="Timeline"
 />
 
 ### `block`
@@ -174,9 +176,7 @@ Displays invisible text for a. Once the custom font downloads, it swaps the font
   srcDark="dark-block-1.png"
   width={927}
   height={378}
-  title={
-    "Text rendered in fallback font with invisible ink. Font not yet downloaded, so fallback font is rendered and swapped with font after it downloads."
-  }
+  title="Success timeline 1"
 />
 
 <ImageSection
@@ -185,9 +185,7 @@ Displays invisible text for a. Once the custom font downloads, it swaps the font
   srcDark="dark-block-2.png"
   width={927}
   height={278}
-  title={
-    "Font downloaded (or was available from cache) before swap period, visibile text rendered."
-  }
+  title="Success timeline 2"
 />
 
 ### `fallback`
@@ -200,9 +198,7 @@ Blocks rendering for a short time (100ms). If the font is still not downloaded, 
   srcDark="dark-fallback-1.png"
   width={929}
   height={379}
-  title={
-    "Text rendered in fallback font with invisible ink. Font not yet downloaded font after block period, so fallback font rendered in visible ink. Font downloaded in swap period and rendered."
-  }
+  title="Success timeline 1"
 />
 
 <ImageSection
@@ -211,9 +207,7 @@ Blocks rendering for a short time (100ms). If the font is still not downloaded, 
   srcDark="dark-fallback-2.png"
   width={929}
   height={279}
-  title={
-    "Text rendered in fallback font with invisible ink. Font downloaded before swap period, and rendered in visible ink."
-  }
+  title="Success timeline 2"
 />
 
 <ImageSection
@@ -222,16 +216,14 @@ Blocks rendering for a short time (100ms). If the font is still not downloaded, 
   srcDark="dark-fallback-3.png"
   width={929}
   height={404}
-  title={
-    "Text rendered in fallback font with invisible ink. Font not yet downloaded font after block period, so fallback font rendered in visible ink. Font not yet downloaded in swap period, continue using fallback font."
-  }
+  title="Failure timeline"
 />
 
 ### `optional`
 
 Like `fallback`, it blocks for a while and displays the fallback if the custom font is not yet downloaded. But, the browser decides whether to swap the downloaded custom font depending on the connection speed.
 
-# Preloading?
+## Preloading?
 
 Sometimes, the absence of fonts can make your page unusable. It might be a no-brainer to load them asap because you know you WILL use them. We can `preload` fonts by adding a `<link>` in the `<head>` with `preload` hint. This way, instead of the font to be discovered via stylesheet and downloaded, the browser will download the font at the earliest.
 
@@ -273,9 +265,9 @@ Note that links with `prefetch` and `preconnect` hints are executed as the brows
 
 > `preconnect` for fonts needs a `crossorigin` attribute because, unlike stylesheets, font files are served over [CORS connection](https://www.w3.org/TR/css-fonts-3/#font-fetching-requirements).
 
-# Conclusion
+## Conclusion
 
-How does all this fix the 2 issues we discussed in the begining?
+How does all this fix the 2 issues we discussed in the beginning?
 
 - ### Faster text rendering
 
@@ -284,3 +276,5 @@ How does all this fix the 2 issues we discussed in the begining?
 - ### Layout shifts
 
   If the custom font is not a top priority, use `font-display: optional`. This guarantees no layout shifts. But if the custom font is a top priority, use `font-display: swap` with the above optimizations for the font delivery.
+
+Hope you find this post helpful! SA-YO-NA-RA! 👋😽
