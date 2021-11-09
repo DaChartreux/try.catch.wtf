@@ -16,7 +16,7 @@ const Categories = ({ categories }: CategoriesProps) => (
     <Heading
       fgColor="primary-100"
       fontSize="1.25rem"
-      fontWeight={600}
+      fontWeight={520}
       margin="0 0 1rem 0"
     >
       CATEGORIES
