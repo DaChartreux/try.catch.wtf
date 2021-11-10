@@ -39,8 +39,8 @@ const PostPreview = ({ title, slug, updatedAt }: RecentPosts) => (
       </Heading>
       <PostFooter>
         <span>
-          <EyeIcon />
-          <p>1.2k (dummy data)</p>
+          {/* <EyeIcon />
+          <p>1.2k (dummy data)</p> */}
         </span>
         <span>
           <p>{updatedAt}</p>
