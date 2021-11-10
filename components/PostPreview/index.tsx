@@ -8,7 +8,7 @@ import {
   PostFooter,
   PostPreviewStyle,
 } from "@components/PostPreview/PostPreview.style";
-import EyeIcon from "@components/icons/EyeIcon";
+// import EyeIcon from "@components/icons/EyeIcon";
 
 import type { Post } from "@typings/data";
 
