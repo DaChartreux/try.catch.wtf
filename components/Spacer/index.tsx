@@ -1,8 +1,11 @@
 import React from "react";
 
-import { SpacerStyle } from "@components/Spacer/Spacer.style";
+import style from "./Spacer.module.css";
 
-import type { SpacerStyleVars } from "@components/Spacer/Spacer.style";
+type SpacerStyleVars = {
+  "--height": string;
+  "--width": string;
+};
 
 type SpacerProps = {
   width?: string;
@@ -10,12 +13,12 @@ type SpacerProps = {
 };
 
 const Spacer = ({ height, width }: SpacerProps) => {
-  const style: SpacerStyleVars = {
+  const styleVars: SpacerStyleVars = {
     "--height": height!,
     "--width": width!,
   };
 
-  return <SpacerStyle style={style as any} />;
+  return <div className={style.spacer} style={styleVars as any} />;
 };
 
 Spacer.defaulProps = {

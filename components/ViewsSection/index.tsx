@@ -1,7 +1,9 @@
 import React, { useRef, useEffect } from "react";
 import { animate } from "framer-motion";
+
 import EyeIcon from "@components/icons/EyeIcon";
-import { ViewsContainerStyle } from "@components/ViewsSection/ViewsSection.style";
+
+import style from "./ViewsSection.module.css";
 
 const ViewsSection = ({ from, to }: { from: number; to: number }) => {
   const nodeRef = useRef<HTMLParagraphElement>(null);
@@ -24,10 +26,10 @@ const ViewsSection = ({ from, to }: { from: number; to: number }) => {
   }, [from, to]);
 
   return (
-    <ViewsContainerStyle>
+    <div className={style.container}>
       <EyeIcon />
       <p ref={nodeRef} />
-    </ViewsContainerStyle>
+    </div>
   );
 };
 

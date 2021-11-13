@@ -4,7 +4,6 @@
     "eslint:recommended",
     "plugin:react/recommended"
   ],
-  "plugins": ["@emotion"],
   "rules": {
     "no-unused-vars": ["error", { "args": "none", "varsIgnorePattern": "^_" }],
     "react/no-array-index-key": ["error"]

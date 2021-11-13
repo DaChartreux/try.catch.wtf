@@ -1,10 +1,9 @@
 import React, { ReactNode } from "react";
 
-import { HeadingStyle } from "@components/Heading/Heading.style";
 import THEME from "@styles/theme";
-
 import type { ColorShade } from "@typings/theme";
-import type { HeadingStyleVars } from "@components/Heading/Heading.style";
+
+import style from "./Heading.module.css";
 
 type HeadingProps = {
   children: ReactNode;
@@ -14,6 +13,13 @@ type HeadingProps = {
   margin: string;
 };
 
+type HeadingStyleVars = {
+  "--fg-color": string;
+  "--font-size": string;
+  "--font-weight": number;
+  "--margin": string;
+};
+
 const Heading = ({
   children,
   fgColor,
@@ -21,14 +27,18 @@ const Heading = ({
   fontWeight,
   margin,
 }: HeadingProps) => {
-  const headingStyle: HeadingStyleVars = {
+  const headingStyleVars: HeadingStyleVars = {
     "--fg-color": THEME.colors[fgColor],
     "--font-size": fontSize,
     "--font-weight": fontWeight,
     "--margin": margin,
   };
 
-  return <HeadingStyle style={headingStyle as any}>{children}</HeadingStyle>;
+  return (
+    <h1 className={style.heading} style={headingStyleVars as any}>
+      {children}
+    </h1>
+  );
 };
 
 export default Heading;

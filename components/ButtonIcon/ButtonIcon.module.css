@@ -1,0 +1,25 @@
+.buttonIcon {
+  width: 2.5rem;
+  height: 2.5rem;
+  padding: 0.5rem;
+  transition: all 200ms ease-in-out;
+  border-radius: 0.375rem;
+  outline: none;
+  background-color: hsla(var(--btn-bg) / 0.1);
+  color: hsla(var(--btn-fg) / 0.7);
+  cursor: pointer;
+
+  svg {
+    transition: all 200ms ease-in-out;
+  }
+
+  &:hover {
+    background-color: hsla(var(--btn-bg) / 0.15);
+    color: hsl(var(--btn-fg));
+  }
+
+  &:active {
+    background-color: hsla(var(--btn-bg) / 0.2);
+    color: hsl(var(--btn-fg));
+  }
+}

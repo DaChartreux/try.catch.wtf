@@ -1,17 +1,17 @@
 import React from "react";
 import { PrismAsyncLight as Prism } from "react-syntax-highlighter";
 
-import {
-  FilenameHeader,
-  ContainerStyle,
-} from "@components/Highlight/Hightlight.style";
 import solarized from "@components/Highlight/solarized";
 import CodesandboxIcon from "@components/icons/CodesandboxIcon";
 import ButtonIcon from "@components/ButtonIcon";
 import CopyIcon from "@components/icons/CopyIcon";
 import useCopyToClipboard from "@hooks/useCopyToClipboard";
 
-import type { ContainerStyleVars } from "@components/Highlight/Hightlight.style";
+import style from "./Highlight.module.css";
+
+type ContainerStyleVars = {
+  "--border-radius": string;
+};
 
 type HighlightProps = {
   fileName: string;
@@ -41,8 +41,8 @@ const Highlight = ({
 
   return (
     <>
-      {!!fileName && <FilenameHeader>{fileName}</FilenameHeader>}
-      <ContainerStyle style={containerStyle as any}>
+      {!!fileName && <div className={style.filenameHeader}>{fileName}</div>}
+      <div className={style.container} style={containerStyle as any}>
         <div className="icon">
           <ButtonIcon
             bgColor="bg-100"
@@ -83,7 +83,7 @@ const Highlight = ({
         >
           {children.split("\n").slice(0, -1).join("\n")}
         </Prism>
-      </ContainerStyle>
+      </div>
     </>
   );
 };

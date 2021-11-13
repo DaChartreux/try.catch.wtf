@@ -1,0 +1,30 @@
+.imageContainerStyle {
+  position: relative;
+  overflow: hidden;
+  border-radius: 1rem;
+}
+
+.heroCreditStyle {
+  display: flex;
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  right: 0;
+  left: 0;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  background-color: hsla(var(--color-bg-100) / 0.4);
+  backdrop-filter: blur(3rem);
+
+  a {
+    color: hsl(var(--color-fg-100));
+  }
+
+  p {
+    margin: auto;
+    color: hsl(var(--color-fg-100));
+  }
+}

@@ -1,0 +1,22 @@
+.blogAnchorHeading {
+  position: relative;
+  scroll-margin-top: 5rem;
+  text-decoration: none;
+
+  div {
+    opacity: 0;
+  }
+}
+
+.blogAnchorIcon {
+  position: absolute;
+  right: 0.5rem;
+  margin-top: 0.25rem;
+
+  svg {
+    width: 1.5rem;
+    height: 1.5rem;
+    color: hsl(var(--color-primary-100));
+    line-height: 1.2;
+  }
+}

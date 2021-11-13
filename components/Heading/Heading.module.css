@@ -1,0 +1,9 @@
+.heading {
+  width: fit-content;
+  margin: var(--margin);
+  color: hsl(var(--fg-color));
+  font-size: var(--font-size);
+  font-weight: var(--font-weight);
+  letter-spacing: -0.025em;
+  line-height: 1.2;
+}

@@ -1,9 +1,9 @@
 import React from "react";
 
-import { ParagraphStyle } from "./Paragraph.style";
+import style from "./Paragraph.module.css";
 
 const Paragraph = (props: any) => (
-  <ParagraphStyle>{props.children}</ParagraphStyle>
+  <p className={style.paragraph}>{props.children}</p>
 );
 
 export default Paragraph;

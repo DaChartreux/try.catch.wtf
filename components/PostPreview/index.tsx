@@ -1,23 +1,23 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { motion } from "framer-motion";
 
 import Heading from "@components/Heading";
-import {
-  MotionHeroStyle,
-  PostFooter,
-  PostPreviewStyle,
-} from "@components/PostPreview/PostPreview.style";
-// import EyeIcon from "@components/icons/EyeIcon";
 
 import type { Post } from "@typings/data";
+
+import style from "./PostPreview.module.css";
 
 type RecentPosts = Pick<Post, "title" | "slug" | "updatedAt">;
 
 const PostPreview = ({ title, slug, updatedAt }: RecentPosts) => (
   <Link href={`/blog/${slug}`} passHref>
-    <PostPreviewStyle>
-      <MotionHeroStyle layoutId={`${slug}__hero`}>
+    <div className={style.postPreviewStyle}>
+      <motion.figure
+        className={style.motionHeroStyle}
+        layoutId={`${slug}__hero`}
+      >
         <Image
           src={`/img/${slug}/hero.jpg`}
           quality={60}
@@ -28,7 +28,7 @@ const PostPreview = ({ title, slug, updatedAt }: RecentPosts) => (
           alt="hero"
           priority
         />
-      </MotionHeroStyle>
+      </motion.figure>
       <Heading
         fgColor="primary-100"
         fontSize="1.375rem"
@@ -37,7 +37,7 @@ const PostPreview = ({ title, slug, updatedAt }: RecentPosts) => (
       >
         {title}
       </Heading>
-      <PostFooter>
+      <footer className={style.postFooter}>
         <span>
           {/* <EyeIcon />
           <p>1.2k (dummy data)</p> */}
@@ -45,8 +45,8 @@ const PostPreview = ({ title, slug, updatedAt }: RecentPosts) => (
         <span>
           <p>{updatedAt}</p>
         </span>
-      </PostFooter>
-    </PostPreviewStyle>
+      </footer>
+    </div>
   </Link>
 );
 

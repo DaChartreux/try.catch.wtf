@@ -1,10 +1,15 @@
 import React, { ReactNode } from "react";
+import { motion } from "framer-motion";
 
-import { TagStyle } from "@components/Tag/Tag.style";
 import THEME from "@styles/theme";
 
 import type { ColorShade } from "@typings/theme";
-import type { TagStyleVars } from "@components/Tag/Tag.style";
+
+import style from "./Tag.module.css";
+
+type TagStyleVars = {
+  "--bg-color": string;
+};
 
 type TagProps = {
   children: ReactNode;
@@ -18,7 +23,8 @@ const Tag = ({ children, bgColor }: TagProps) => {
   };
 
   return (
-    <TagStyle
+    <motion.div
+      className={style.tagStyle}
       variants={{
         hidden: { y: 20, opacity: 0 },
         visible: {
@@ -30,7 +36,7 @@ const Tag = ({ children, bgColor }: TagProps) => {
     >
       <div />
       {children}
-    </TagStyle>
+    </motion.div>
   );
 };
 

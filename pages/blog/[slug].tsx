@@ -7,10 +7,8 @@ import Head from "next/head";
 import { MDXRemote, MDXRemoteSerializeResult } from "next-mdx-remote";
 import { serialize } from "next-mdx-remote/serialize";
 import matter from "gray-matter";
-import styled from "@emotion/styled";
 import dayjs from "dayjs";
 
-import Layout from "@components/Layout";
 import MDXComponents from "@components/MDXComponents";
 import Heading from "@components/Heading";
 import ViewsSection from "@components/ViewsSection";
@@ -23,29 +21,14 @@ import type { NextPageWithLayout } from "@typings/app";
 import type { Post, Views } from "@typings/data";
 import dynamic from "next/dynamic";
 
+import style from "./Blog.module.css";
+
 const Hero = dynamic(() => import("@components/Hero"), { ssr: true });
 
 type BlogPropsType = {
   source: MDXRemoteSerializeResult<Record<string, unknown>>;
   frontMatter: Post;
 };
-
-const LayoutWrapper = styled(Layout)`
-  padding: 0 2rem;
-
-  @media (max-width: 640px) {
-    padding: 0 1rem;
-  }
-`;
-
-const PostWrapper = styled.div`
-  max-width: 1000px;
-  margin: auto;
-
-  @media (max-width: 640px) {
-    padding: 0 1rem;
-  }
-`;
 
 const Blog: NextPageWithLayout<BlogPropsType> = ({
   source,
@@ -114,9 +97,9 @@ const Blog: NextPageWithLayout<BlogPropsType> = ({
 
       <Spacer height="2rem" />
 
-      <PostWrapper>
+      <div className={style.postWrapper}>
         <MDXRemote {...source} components={MDXComponents} />
-      </PostWrapper>
+      </div>
 
       <Spacer height="2rem" />
 
@@ -128,7 +111,9 @@ const Blog: NextPageWithLayout<BlogPropsType> = ({
   );
 };
 
-Blog.getLayout = (page: ReactElement) => <LayoutWrapper>{page}</LayoutWrapper>;
+Blog.getLayout = (page: ReactElement) => (
+  <main className={style.layout}>{page}</main>
+);
 
 export const getStaticProps: GetStaticProps<BlogPropsType> = async ({
   params,
