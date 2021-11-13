@@ -1,9 +1,9 @@
 .item {
-  color: hsl(var(--color-fg-100) 0.85);
+  color: hsla(var(--color-fg-100) / 0.85);
   font-size: 1.125rem;
 
   &::marker {
-    color: hsl(var(--color-fg-100) 0.5);
+    color: hsla(var(--color-fg-100) / 0.5);
     font-size: 1rem;
   }
 }

@@ -6,7 +6,7 @@
   left: 0;
   padding: 0 2rem;
   transition: background-color 200ms ease-in-out;
-  background-color: hsl(var(--bg-color) 0.85);
+  background-color: hsla(var(--bg-color) / 0.85);
   backdrop-filter: blur(0.5rem);
 
   @media (max-width: 1280px) {
@@ -27,7 +27,7 @@
   height: 5rem;
   margin: auto;
   padding: 0 2rem;
-  border-bottom: 2px hsl(var(--color-fg-100) 0.08) solid;
+  border-bottom: 2px hsla(var(--color-fg-100) / 0.08) solid;
 
   @media (max-width: 640px) {
     height: 5rem;

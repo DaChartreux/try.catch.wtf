@@ -5,6 +5,9 @@
   ],
   "rules": {
     "alpha-value-notation": "number",
+    "at-rule-name-case": "lower",
+    "at-rule-name-space-after": "always",
+    "at-rule-semicolon-newline-after": "always",
     "selector-class-pattern": "[a-z]+((d)|([A-Z0-9][a-z0-9]+))*([A-Z])?"
   }
 }
