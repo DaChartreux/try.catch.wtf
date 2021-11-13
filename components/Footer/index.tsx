@@ -1,24 +1,21 @@
 import React from "react";
 
-import {
-  FooterWrapper,
-  FooterTopWrapper,
-  FooterBottomWrapper,
-} from "@components/Footer/Footer.style";
 import GithubIcon from "@components/icons/GithubIcon";
 import TwitterIcon from "@components/icons/TwitterIcon";
 import ButtonIcon from "@components/ButtonIcon";
 import Logo from "@components/Logo";
 
+import style from "./Footer.module.css";
+
 const Footer = () => {
   return (
-    <FooterWrapper>
-      <FooterTopWrapper>
+    <footer className={style.footerWrapper}>
+      <div className={style.footerTopWrapper}>
         <Logo />
-        <div className="tagline">
+        <div className={style.tagline}>
           <p>Keep catching!</p>
         </div>
-        <div className="links">
+        <div className={style.links}>
           <a
             href="https://github.com/cheemzkun"
             target="_blank"
@@ -38,14 +35,14 @@ const Footer = () => {
             </ButtonIcon>
           </a>
         </div>
-      </FooterTopWrapper>
-      <FooterBottomWrapper>
+      </div>
+      <div className={style.footerBottomWrapper}>
         <p>
           © 2021 - present catch.wtf.
           <br /> All Rights Reserved; I guess <code>¯\_(ツ)_/¯</code>
         </p>
-      </FooterBottomWrapper>
-    </FooterWrapper>
+      </div>
+    </footer>
   );
 };
 

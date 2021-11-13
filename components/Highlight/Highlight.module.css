@@ -1,0 +1,41 @@
+.preContainer {
+  display: flex;
+  position: relative;
+  box-sizing: border-box;
+  flex-direction: column;
+  max-width: fill-available;
+  margin: 0 0 1.5rem;
+
+  .icon {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+}
+
+.container {
+  margin: 1rem -1rem;
+  overflow: hidden;
+  border-radius: var(--border-radius);
+  background-color: hsl(var(--color-fg-100) 0.04);
+  font-size: 1rem;
+
+  pre {
+    padding: 0;
+  }
+}
+
+.filenameHeader {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+  border-radius: 0.375rem 0.375rem 0 0;
+  background-color: hsl(var(--color-fg-100) 0.06);
+  font-family: monospace;
+
+  svg {
+    width: 1.125rem;
+    height: 1.125rem;
+    stroke-width: 2px;
+  }
+}

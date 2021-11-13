@@ -2,9 +2,10 @@ import React from "react";
 
 import Heading from "@components/Heading";
 import PostPreview from "@components/PostPreview";
-import { PostsGridStyle } from "@components/RecentPosts/RecentPosts.style";
 
 import type { Post } from "@typings/data";
+
+import style from "./RecentPosts.module.css";
 
 type RecentPostsProps = {
   posts: Post[];
@@ -21,7 +22,7 @@ const RecentPosts = ({ posts }: RecentPostsProps) => (
       RECENT
     </Heading>
 
-    <PostsGridStyle>
+    <div className={style.grid}>
       {posts.map((post) => (
         <PostPreview
           key={post.slug}
@@ -30,7 +31,7 @@ const RecentPosts = ({ posts }: RecentPostsProps) => (
           updatedAt={post.updatedAt}
         />
       ))}
-    </PostsGridStyle>
+    </div>
   </>
 );
 

@@ -1,0 +1,33 @@
+.layout {
+  display: grid;
+  box-sizing: border-box;
+  grid-template:
+    "recent categories"
+    "recent test";
+  grid-template-columns: 3fr 1fr;
+  grid-template-rows: auto 1fr;
+  padding: 0 2rem;
+  gap: 3rem;
+
+  @media (max-width: 1024px) {
+    grid-template-columns: 4fr 1fr;
+  }
+
+  @media (max-width: 640px) {
+    grid-template:
+      "recent"
+      "recent"
+      "categories";
+    grid-template-columns: auto;
+    grid-template-rows: auto;
+    padding: 0 1rem;
+  }
+}
+
+.categories {
+  grid-area: categories;
+}
+
+.recentPosts {
+  grid-area: recent;
+}

@@ -1,0 +1,31 @@
+.container {
+  position: relative;
+  box-sizing: border-box;
+  margin: 0 0 1rem;
+  padding: 2rem 1.5rem 2rem 2rem;
+  border: 2px solid hsl(var(--color-info-fg));
+  border-radius: 0.5rem;
+  background-color: hsl(var(--color-info-fg) 0.2);
+
+  p {
+    margin: 0;
+    color: hsl(var(--color-info-fg));
+  }
+
+  .quote-source {
+    color: hsl(var(--color-info-fg));
+    font-size: 1rem;
+  }
+}
+
+.icon {
+  position: absolute;
+  top: 1rem;
+  left: -1.375rem;
+  width: 2.5rem;
+  height: 2.5rem;
+  padding: 0.5rem;
+  border-radius: 50%;
+  background-color: hsl(var(--color-info-fg));
+  color: hsl(var(--color-bg-100) 0.8);
+}

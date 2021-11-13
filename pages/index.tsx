@@ -7,15 +7,15 @@ import type { GetStaticProps } from "next";
 import Head from "next/head";
 import dynamic from "next/dynamic";
 import dayjs, { Dayjs } from "dayjs";
-import styled from "@emotion/styled";
 import matter from "gray-matter";
 
-import Layout from "@components/Layout";
 import { postFilePaths, POSTS_PATH } from "@utils/mdxUtils";
 import { updatePosts } from "@utils/db";
 
 import type { NextPageWithLayout } from "@typings/app";
 import type { Post } from "@typings/data";
+
+import style from "./index.module.css";
 
 const Categories = dynamic(() => import("@components/Categories"), {
   ssr: true,
@@ -28,58 +28,26 @@ type IndexProps = {
   latestPosts: Post[];
 };
 
-const LayoutWrapper = styled(Layout)`
-  padding: 0 2rem;
-  box-sizing: border-box;
-  display: grid;
-  grid-template-columns: 3fr 1fr;
-  grid-template-rows: auto 1fr;
-  grid-template-areas:
-    "recent categories"
-    "recent test";
-  gap: 3rem;
-
-  @media (max-width: 1024px) {
-    grid-template-columns: 4fr 1fr;
-  }
-
-  @media (max-width: 640px) {
-    padding: 0 1rem;
-    grid-template-columns: auto;
-    grid-template-rows: auto;
-    grid-template-areas:
-      "recent"
-      "recent"
-      "categories";
-  }
-`;
-
-const CategoriesWrapper = styled.div`
-  grid-area: categories;
-`;
-
-const RecentPostsWrapper = styled.div`
-  grid-area: recent;
-`;
-
 const Index: NextPageWithLayout<IndexProps> = ({ latestPosts }: IndexProps) => {
   return (
     <>
       <Head>
         <title>Try... Catch</title>
       </Head>
-      <CategoriesWrapper>
+      <div className={style.categories}>
         <Categories categories={["web", "performance", "frontend"]} />
-      </CategoriesWrapper>
+      </div>
 
-      <RecentPostsWrapper>
+      <div className={style.recentPosts}>
         <RecentPosts posts={latestPosts} />
-      </RecentPostsWrapper>
+      </div>
     </>
   );
 };
 
-Index.getLayout = (page: ReactElement) => <LayoutWrapper>{page}</LayoutWrapper>;
+Index.getLayout = (page: ReactElement) => (
+  <main className={style.layout}>{page}</main>
+);
 
 export const getStaticProps: GetStaticProps<IndexProps> = async () => {
   const offset = new Date().getTimezoneOffset();

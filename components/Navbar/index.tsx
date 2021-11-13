@@ -1,18 +1,11 @@
 import React, { useCallback, useState } from "react";
 import Link from "next/link";
-import { Variants } from "framer-motion";
+import { motion, Variants } from "framer-motion";
 
 import MoonIcon from "@components/icons/MoonIcon";
 import SunIcon from "@components/icons/SunIcon";
 import ButtonIcon from "@components/ButtonIcon";
-import {
-  NavContainer,
-  NavInnerContainer,
-  HomeLinkStyle,
-  NavStyle,
-  LinkStyle,
-  MenuItemStyle,
-} from "@components/Navbar/Navbar.style";
+
 import MenuIcon from "@components/icons/MenuIcon";
 import useOnClickOutside from "@hooks/useClickOutside";
 import { APP_THEME, useAppTheme } from "@context/AppThemeContext";
@@ -20,10 +13,15 @@ import { useViewport } from "@hooks/useViewPort";
 import Logo from "@components/Logo";
 import THEME from "@styles/theme";
 
-import type {
-  NavContainerStylesVars,
-  LinkStylesVars,
-} from "@components/Navbar/Navbar.style";
+import style from "./Navbar.module.css";
+
+type LinkStylesVars = {
+  "--fg-color": string;
+};
+
+type NavContainerStylesVars = {
+  "--bg-color": string;
+};
 
 const Navbar = () => {
   const handleClickOutside = () => {
@@ -70,7 +68,8 @@ const Navbar = () => {
 
   return (
     <>
-      <NavContainer
+      <motion.div
+        className={style.navContainer}
         ref={ref}
         initial="initial"
         animate={navVariant}
@@ -82,24 +81,28 @@ const Navbar = () => {
         }}
         style={navContainerStyle as any}
       >
-        <NavInnerContainer>
+        <div className={style.navInnerContainer}>
           <Link href="/" passHref>
-            <HomeLinkStyle>
+            <a className={style.homeLinkStyle}>
               <Logo />
-            </HomeLinkStyle>
+            </a>
           </Link>
           {width > 640 && (
-            <NavStyle>
+            <nav className={style.navStyle}>
               <ButtonIcon onClick={cb} bgColor="fg-100" fgColor="fg-100">
                 {theme === APP_THEME.DARK ? <SunIcon /> : <MoonIcon />}
               </ButtonIcon>
               <Link href="/" passHref>
-                <LinkStyle style={linkStyle as any}>Blog</LinkStyle>
+                <a className={style.linkStyle} style={linkStyle as any}>
+                  Blog
+                </a>
               </Link>
               <Link href="/" passHref>
-                <LinkStyle style={linkStyle as any}>About</LinkStyle>
+                <a className={style.linkStyle} style={linkStyle as any}>
+                  About
+                </a>
               </Link>
-            </NavStyle>
+            </nav>
           )}
           {width <= 640 && (
             <ButtonIcon
@@ -118,10 +121,11 @@ const Navbar = () => {
               <MenuIcon />
             </ButtonIcon>
           )}
-        </NavInnerContainer>
+        </div>
         {width <= 640 && (
           <>
-            <MenuItemStyle
+            <motion.div
+              className={style.menuItemStyle}
               variants={{
                 initial: { y: -20, display: "none" },
                 close: { y: -20, display: "none" },
@@ -132,8 +136,9 @@ const Navbar = () => {
               }}
             >
               <p>Blog</p>
-            </MenuItemStyle>
-            <MenuItemStyle
+            </motion.div>
+            <motion.div
+              className={style.menuItemStyle}
               variants={{
                 initial: { y: -20, display: "none" },
                 close: { y: -20, display: "none" },
@@ -144,8 +149,9 @@ const Navbar = () => {
               }}
             >
               <p>About</p>
-            </MenuItemStyle>
-            <MenuItemStyle
+            </motion.div>
+            <motion.div
+              className={style.menuItemStyle}
               variants={{
                 initial: { y: -20, display: "none" },
                 close: { y: -20, display: "none" },
@@ -166,10 +172,10 @@ const Navbar = () => {
               >
                 {theme === APP_THEME.DARK ? <SunIcon /> : <MoonIcon />}
               </ButtonIcon>
-            </MenuItemStyle>
+            </motion.div>
           </>
         )}
-      </NavContainer>
+      </motion.div>
     </>
   );
 };

@@ -2,10 +2,12 @@ import React from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 
-import {
-  ImageContainerStyle,
-  HeroCreditStyle,
-} from "@components/Hero/Hero.style";
+// import {
+//   ImageContainerStyle,
+//   HeroCreditStyle,
+// } from "@components/Hero/Hero.style";
+
+import style from "./Hero.module.css";
 
 type HeroProps = {
   heroSrc: string;
@@ -25,9 +27,9 @@ const Hero = ({
 }: HeroProps) => (
   <div style={{ margin: "0 2rem" }}>
     <motion.div layoutId={layoutId}>
-      <ImageContainerStyle>
-        <HeroCreditStyle
-          className="overlay"
+      <div className={style.imageContainerStyle}>
+        <motion.figure
+          className={style.heroCreditStyle}
           whileHover={{ opacity: 1 }}
           initial={{ opacity: 0 }}
         >
@@ -44,7 +46,7 @@ const Hero = ({
               on {heroCreditSource}
             </p>
           </div>
-        </HeroCreditStyle>
+        </motion.figure>
         <Image
           src={heroSrc}
           quality={60}
@@ -54,7 +56,7 @@ const Hero = ({
           objectFit="cover"
           alt="Hero Image"
         />
-      </ImageContainerStyle>
+      </div>
     </motion.div>
   </div>
 );

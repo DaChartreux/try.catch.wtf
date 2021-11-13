@@ -1,12 +1,11 @@
 import React, { useState } from "react";
+import { motion } from "framer-motion";
 
 import Heading from "@components/Heading";
-import { useInView } from "@hooks/useInView";
-import {
-  BlogAnchorHeadingStyle,
-  BlogAnchorIconStyle,
-} from "@components/SectionHeading/SectionHeading.style";
 import HashIcon from "@components/icons/HashIcon";
+import { useInView } from "@hooks/useInView";
+
+import style from "./SectionHeading.module.css";
 
 type BlogHeadingProps = {
   children: string;
@@ -34,19 +33,21 @@ const BlogHeading = ({ fontWeight, fontSize, children }: BlogHeadingProps) => {
   const [isHovering] = useState(false);
 
   return (
-    <BlogAnchorHeadingStyle
+    <motion.a
+      className={style.blogAnchorHeading}
       initial="rest"
       animate="rest"
       ref={containerRef}
       id={children.toLowerCase().replace(/ /g, "-")}
       href={`#${children.toLowerCase().replace(/ /g, "-")}`}
     >
-      <BlogAnchorIconStyle
+      <motion.div
+        className={style.anchorIcon}
         variants={slashMotion}
         animate={isHovering ? "hover" : "rest"}
       >
         <HashIcon />
-      </BlogAnchorIconStyle>
+      </motion.div>
       <Heading
         fgColor="primary-100"
         fontSize={fontSize}
@@ -55,7 +56,7 @@ const BlogHeading = ({ fontWeight, fontSize, children }: BlogHeadingProps) => {
       >
         {children}
       </Heading>
-    </BlogAnchorHeadingStyle>
+    </motion.a>
   );
 };
 

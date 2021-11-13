@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
 
-import { ImageSectionStyle } from "@components/ImageSection/ImageSection.style";
+import style from "./ImageSection.module.css";
 
 type ImageSectionProps = {
   baseUrl: string;
@@ -20,7 +20,7 @@ const ImageSection = ({
   title,
   srcDark = srcLight,
 }: ImageSectionProps) => (
-  <ImageSectionStyle>
+  <div className={style.imageSection}>
     <div className="light-image-section">
       <Image
         src={`${baseUrl}/${srcLight}`}
@@ -40,6 +40,6 @@ const ImageSection = ({
       />
     </div>
     <p>{title}</p>
-  </ImageSectionStyle>
+  </div>
 );
 export default ImageSection;

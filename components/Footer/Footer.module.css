@@ -1,0 +1,42 @@
+.footerWrapper {
+  box-sizing: border-box;
+  padding: 2rem;
+  background-color: hsl(var(--color-primary-200));
+  color: black;
+}
+
+.footerTopWrapper {
+  box-sizing: border-box;
+  max-width: 1200px;
+  height: 10rem;
+  margin: auto;
+  border-bottom: 1px solid hsl(var(--color-bg-100));
+  color: hsl(var(--color-bg-100));
+
+  .tagline {
+    font-weight: 440;
+
+    p {
+      margin: 0 0 2rem;
+    }
+  }
+
+  .links {
+    a {
+      button {
+        margin-right: 1rem;
+      }
+
+      svg {
+        width: 1.2rem;
+      }
+    }
+  }
+}
+
+.footerBottomWrapper {
+  box-sizing: border-box;
+  max-width: 1200px;
+  margin: 0 auto;
+  color: hsl(var(--color-bg-100));
+}
